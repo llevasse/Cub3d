@@ -67,7 +67,6 @@ fclean:			clean
 				@echo "$(RED)Deleting cub3d executable..."
 				@rm -f $(NAME)
 				@make fclean -C $(LIBFT_PATH)
-				@make fclean -C $(MLX_PATH)
 				@echo "$(GREEN)Done\n"
 
 re:				fclean all
