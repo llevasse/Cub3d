@@ -6,7 +6,7 @@
 /*   By: llevasse <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/18 23:42:30 by llevasse          #+#    #+#             */
-/*   Updated: 2023/09/18 23:44:21 by llevasse         ###   ########.fr       */
+/*   Updated: 2023/09/18 23:54:25 by llevasse         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,6 +16,7 @@
 # include "cub3d.h"
 
 # define MEM_ERR "Error while allocating memory.\n"
+# define WALL_OPEN_ERR "Error in open wall texture file.\n"
 # define MISS_F ".cub file is missing.\n"
 
 #endif
