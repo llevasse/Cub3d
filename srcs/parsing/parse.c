@@ -6,7 +6,7 @@
 /*   By: llevasse <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/18 21:50:20 by llevasse          #+#    #+#             */
-/*   Updated: 2023/09/18 23:50:13 by llevasse         ###   ########.fr       */
+/*   Updated: 2023/09/19 00:57:12 by llevasse         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,6 +20,8 @@ t_map	*parse(int map_fd)
 	t_map	*map;
 
 	element_got = 0;
+	if (map_fd == -1)
+		return ((void)ft_putstr_fd(CUB_OPEN_ERR, 2), NULL);
 	map = malloc(sizeof(struct s_map));
 	if (!map)
 		return ((void)ft_putstr_fd(MEM_ERR, 2), NULL);
