@@ -6,7 +6,7 @@
 /*   By: llevasse <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/18 22:02:47 by llevasse          #+#    #+#             */
-/*   Updated: 2023/09/18 22:05:04 by llevasse         ###   ########.fr       */
+/*   Updated: 2023/09/18 23:01:55 by llevasse         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,5 +14,12 @@
 
 int	main(int argc, char **argv)
 {
+	t_map	*map;
 
+	if (argc != 2)
+		return (1);
+	map = parse(open(argv[1], O_RDONLY));
+	if (!map)
+		return (1);
+	return (0);
 }

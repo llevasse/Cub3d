@@ -6,14 +6,14 @@
 /*   By: llevasse <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/18 21:52:44 by llevasse          #+#    #+#             */
-/*   Updated: 2023/09/18 22:02:15 by llevasse         ###   ########.fr       */
+/*   Updated: 2023/09/18 22:59:38 by llevasse         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #ifndef STRUCT_H
 # define STRUCT_H
 
-# include "cub3d"
+# include "cub3d.h"
 
 typedef struct s_map
 {
