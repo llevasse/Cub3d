@@ -1,32 +1,36 @@
 #---COMMON_VAR-----------------------------------
-NAME		=	cub3d
-CC			=	cc
-FLAGS		=	-Wall -Werror -Wextra
-RM			=	rm -rf
-RED			=	\033[0;31m
-GREEN		=	\033[0;32m
-YELLOW		=	\033[0;33m
-NC			=	\033[0m
+NAME			=	cub3d
+CC				=	cc
+FLAGS			=	-Wall -Werror -Wextra
+MLX_FLAGS		=	-lmlx -lXext -lX11
+RM				=	rm -rf
+RED				=	\033[0;31m
+GREEN			=	\033[0;32m
+YELLOW			=	\033[0;33m
+NC				=	\033[0m
 #---LIBFT_VAR-------------------------------------
-LIBFT_PATH	=	libft/
-LIBFT_NAME	=	libft.a
-LIBFT		=	$(addprefix $(LIBFT_PATH), $(LIBFT_NAME))
-#---MINISHELL_VAR----------------------------------
-SRC			=	
-OBJS_DIR	=	.OBJS/
-OBJS		=	$(addprefix $(OBJS_DIR), $(SRC:.c=.o))
-HEADER_DIR	=	headers/
-HEADER_FILE	=	headers/cub3d.h \
+LIBFT_PATH		=	libft/
+LIBFT_NAME		=	libft.a
+LIBFT			=	$(addprefix $(LIBFT_PATH), $(LIBFT_NAME))
+#---CUB_VAR---------------------------------------
+SRC				=	
+OBJS_DIR		=	.OBJS/
+OBJS			=	$(addprefix $(OBJS_DIR), $(SRC:.c=.o))
+HEADER_DIR		=	headers/
+HEADER_FILE		=	headers/cub3d.h \
 
+#---MINILIBX-------------------------------------
+MLX_PATH		=	minilibx
+MINILIBX		=	$(MLX_PATH)/libmlx.a
 #---RULES----------------------------------------
 
 $(NAME):		$(OBJS_DIR) $(LIBFT) Makefile $(HEADER_FILE) $(OBJS)
-				@$(CC) $(FLAGS) -g -I $(HEADER_DIR) $(OBJS) -lm $(LIBFT) -o $@
+				@$(CC) $(FLAGS) -g -I $(HEADER_DIR) -I $(MLX_PATH) $(OBJS) -lm $(MLX_FLAGS) $(LIBFT) -o $@
 				@echo "\33[2K\r$(GREEN)Cub3d compiled :D$(NC)"
 
 
 $(OBJS_DIR)%.o:	%.c $(HEADER_FILE)
-				@$(CC) $(FLAGS) -g -I $(HEADER_DIR) -lm -c $< -o $@
+				@$(CC) $(FLAGS) -g -I $(HEADER_DIR) -I $(MLX_PATH) -lm $(MLX_FLAGS) -c $< -o $@
 				@echo -n "\33[2K\r$(YELLOW)Compiled $<"
 
 $(OBJS_DIR):
@@ -43,9 +47,13 @@ $(LIBFT):
 				@make -sC $(LIBFT_PATH)
 				@echo "$(GREEN)LIBFT created\n$(NC)"
 
+$(MINILIBX):
+				@make -sC minilibx
+
 clean:
 				@echo "$(RED)Deleting Obj file in $(LIBFT_PATH)...\n"
 				@make clean -sC $(LIBFT_PATH)
+				@make clean -sC $(MLX_PATH)
 				@echo "$(GREEN)Done\n"
 				@echo "$(RED)Deleting cub3d object...\n"
 				@$(RM) $(OBJS_DIR)
@@ -55,6 +63,7 @@ fclean:			clean
 				@echo "$(RED)Deleting cub3d executable..."
 				@rm -f $(NAME)
 				@make fclean -C $(LIBFT_PATH)
+				@make fclean -C $(MLX_PATH)
 				@echo "$(GREEN)Done\n"
 
 re:				fclean all
