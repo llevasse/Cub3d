@@ -6,7 +6,7 @@
 /*   By: llevasse <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/18 21:50:20 by llevasse          #+#    #+#             */
-/*   Updated: 2023/09/18 23:21:46 by llevasse         ###   ########.fr       */
+/*   Updated: 2023/09/18 23:47:25 by llevasse         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,7 +24,7 @@ t_map	*parse(int map_fd)
 	element_got = 0;
 	map = malloc(sizeof(struct s_map));
 	if (!map)
-		return (NULL);
+		return ((void)ft_putstr_fd(MEM_ERR, 2), NULL);
 	set_map_null(map);
 	while (element_got < 6 && get_wall(map_fd, map) == 1)
 		element_got++;

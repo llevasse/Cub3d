@@ -19,7 +19,8 @@ OBJS_DIR		=	.OBJS/
 OBJS			=	$(addprefix $(OBJS_DIR), $(SRC:.c=.o))
 HEADER_DIR		=	headers/
 HEADER_FILE		=	headers/cub3d.h \
-					headers/struct.h
+					headers/struct.h \
+					headers/err.h
 #---MINILIBX-------------------------------------
 MLX_PATH		=	minilibx
 MINILIBX		=	$(MLX_PATH)/libmlx.a
