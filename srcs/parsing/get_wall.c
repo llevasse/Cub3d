@@ -6,7 +6,7 @@
 /*   By: llevasse <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/18 23:48:52 by llevasse          #+#    #+#             */
-/*   Updated: 2023/09/18 23:55:27 by llevasse         ###   ########.fr       */
+/*   Updated: 2023/09/19 00:54:00 by llevasse         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -53,5 +53,5 @@ int	get_wall(int map_fd, t_map *map)
 		return ((void)(map->f_rgb = get_rgb_value(str + 3)), 1);
 	if (!ft_strncmp("C ", str, 2) && map->c_rgb == -1)
 		return ((void)(map->c_rgb = get_rgb_value(str + 3)), 1);
-	return (0);
+	return ((void)ft_putstr_fd(INVALID_CUB, 2), 0);
 }
