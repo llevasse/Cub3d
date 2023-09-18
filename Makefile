@@ -13,11 +13,13 @@ LIBFT_PATH		=	libft/
 LIBFT_NAME		=	libft.a
 LIBFT			=	$(addprefix $(LIBFT_PATH), $(LIBFT_NAME))
 #---CUB_VAR---------------------------------------
-SRC				=	
+SRC				=	main.c \
+					parse.c	
 OBJS_DIR		=	.OBJS/
 OBJS			=	$(addprefix $(OBJS_DIR), $(SRC:.c=.o))
 HEADER_DIR		=	headers/
 HEADER_FILE		=	headers/cub3d.h \
+					headers/struct.h
 
 #---MINILIBX-------------------------------------
 MLX_PATH		=	minilibx
