@@ -6,7 +6,7 @@
 /*   By: llevasse <llevasse@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/12 13:10:28 by llevasse          #+#    #+#             */
-/*   Updated: 2023/08/17 10:40:59 by llevasse         ###   ########.fr       */
+/*   Updated: 2023/09/18 23:11:58 by llevasse         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -36,6 +36,7 @@ char				*ft_strjoin(char *s1, char *s2);
 void				ft_striteri(char *s, void (*f)(unsigned int, char *));
 char				*ft_str_nb_base(unsigned int nb, const char *base);
 void				ft_str_revert(char *str);
+char				*ft_strsep(char **p_str, const char *delim);
 
 void				*ft_memset(void *b, int c, size_t len);
 void				*ft_memmove(void *dest, const void *src, size_t n);

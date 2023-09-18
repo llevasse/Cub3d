@@ -6,7 +6,7 @@
 #    By: llevasse <llevasse@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2022/11/21 16:33:32 by leo               #+#    #+#              #
-#    Updated: 2023/08/17 10:39:00 by llevasse         ###   ########.fr        #
+#    Updated: 2023/09/18 23:12:57 by llevasse         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -34,7 +34,8 @@ STR_FILES		=	str/ft_strchr.c \
 					str/ft_tolower.c \
 					str/ft_strjoin.c \
 					str/ft_strlen.c \
-					str/ft_str_revert.c
+					str/ft_str_revert.c \
+					./str/ft_strsep.c
 PRINTING_FILES	=	print/ft_putstr_fd.c \
 					print/ft_putnbr_fd.c \
 					print/ft_putchar_fd.c \
