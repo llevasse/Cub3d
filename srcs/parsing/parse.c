@@ -6,7 +6,7 @@
 /*   By: llevasse <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/18 21:50:20 by llevasse          #+#    #+#             */
-/*   Updated: 2023/09/18 23:02:58 by llevasse         ###   ########.fr       */
+/*   Updated: 2023/09/18 23:21:46 by llevasse         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -31,6 +31,18 @@ t_map	*parse(int map_fd)
 	return (map);
 }
 
+static int	get_rgb_value(char *s)
+{
+	int	r;
+	int	g;
+	int	b;
+
+	r = ft_atoi(ft_strsep(&s, ","));
+	g = ft_atoi(ft_strsep(&s, ","));
+	b = ft_atoi(ft_strsep(&s, ","));
+	return ((r * 256 * 256) + (g * 256) + b);
+}
+
 static int	get_wall(int map_fd, t_map *map)
 {
 	char	*str;
@@ -48,6 +60,10 @@ static int	get_wall(int map_fd, t_map *map)
 		return ((void)(map->west_fd = open(str + 3, O_RDONLY)), 1);
 	if (!ft_strncmp("EA ", str, 3) && map->east_fd == -1)
 		return ((void)(map->east_fd = open(str + 3, O_RDONLY)), 1);
+	if (!ft_strncmp("F ", str, 2) && map->f_rgb == -1)
+		return ((void)(map->f_rgb = get_rgb_value(str + 3)), 1);
+	if (!ft_strncmp("C ", str, 2) && map->c_rgb == -1)
+		return ((void)(map->c_rgb = get_rgb_value(str + 3)), 1);
 	return (0);
 }
 
