@@ -13,25 +13,24 @@ LIBFT_PATH		=	libft/
 LIBFT_NAME		=	libft.a
 LIBFT			=	$(addprefix $(LIBFT_PATH), $(LIBFT_NAME))
 #---CUB_VAR---------------------------------------
-SRC				=	main.c \
-					parse.c	
+SRC				=	srcs/main.c \
+					srcs/parse.c	
 OBJS_DIR		=	.OBJS/
 OBJS			=	$(addprefix $(OBJS_DIR), $(SRC:.c=.o))
 HEADER_DIR		=	headers/
 HEADER_FILE		=	headers/cub3d.h \
 					headers/struct.h
-
 #---MINILIBX-------------------------------------
 MLX_PATH		=	minilibx
 MINILIBX		=	$(MLX_PATH)/libmlx.a
 #---RULES----------------------------------------
 
-$(NAME):		$(OBJS_DIR) $(LIBFT) Makefile $(HEADER_FILE) $(OBJS)
+$(NAME):		$(MINILIBX) $(OBJS_DIR) $(LIBFT) Makefile $(HEADER_FILE) $(OBJS)
 				@$(CC) $(FLAGS) -g -I $(HEADER_DIR) -I $(MLX_PATH) $(OBJS) -lm $(MLX_FLAGS) $(LIBFT) -o $@
 				@echo "\33[2K\r$(GREEN)Cub3d compiled :D$(NC)"
 
 
-$(OBJS_DIR)%.o:	%.c $(HEADER_FILE)
+$(OBJS_DIR)%.o:	%.c $(MINILIBX) $(HEADER_FILE)
 				@$(CC) $(FLAGS) -g -I $(HEADER_DIR) -I $(MLX_PATH) -lm $(MLX_FLAGS) -c $< -o $@
 				@echo -n "\33[2K\r$(YELLOW)Compiled $<"
 
