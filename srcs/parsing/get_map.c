@@ -6,13 +6,14 @@
 /*   By: llevasse <llevasse@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/19 12:01:04 by llevasse          #+#    #+#             */
-/*   Updated: 2023/09/19 20:57:17 by llevasse         ###   ########.fr       */
+/*   Updated: 2023/09/19 21:31:37 by llevasse         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "cub3d.h"
 
 static int	check_closed(char *map_str, t_map *map);
+static int	search_player_presence(char *map);
 
 int	get_map(int map_fd, t_map *map)
 {
@@ -36,8 +37,29 @@ int	get_map(int map_fd, t_map *map)
 		ft_add_garbage(&map->garbage, str);
 		tmp = get_next_line(map_fd);
 	}
+	if (!search_player_presence(str))
+		return (0);
 	ft_printf("map :\n%s\n", str);
 	ft_printf("Is the map closed : %d\n", check_closed(str, map));
+	return (1);
+}
+
+static int	search_player_presence(char *map)
+{
+	int	i;
+	int	nb;
+	
+	i = 0;
+	nb = 0;
+	while (map[i])
+	{
+		if (ft_is_in_str("NSEW", map[i++]))
+			nb++;	
+	}
+	if (nb > 1)
+		return ((ft_putstr_fd(TMP, 2)), 0);
+	if (nb == 0)
+		return ((ft_putstr_fd(NO_PLAYER, 2)), 0);
 	return (1);
 }
 

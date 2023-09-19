@@ -6,7 +6,7 @@
 /*   By: llevasse <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/18 23:42:30 by llevasse          #+#    #+#             */
-/*   Updated: 2023/09/19 11:38:39 by llevasse         ###   ########.fr       */
+/*   Updated: 2023/09/19 21:30:19 by llevasse         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,5 +23,7 @@
 # define CUB_OPEN_ERR "Error\nError in opening cub file.\n"
 # define MISS_F "Error\n.cub file is missing.\n"
 # define INVALID_CUB "Error\n.cub file is invalid.\n"
+# define TMP "Error\nToo many player in the map file.\n"
+# define NO_PLAYER "Error\nThere is no player in the map file.\n"
 
 #endif
