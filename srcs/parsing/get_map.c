@@ -6,7 +6,7 @@
 /*   By: llevasse <llevasse@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/19 12:01:04 by llevasse          #+#    #+#             */
-/*   Updated: 2023/09/19 15:24:28 by llevasse         ###   ########.fr       */
+/*   Updated: 2023/09/19 16:14:51 by llevasse         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,6 +21,7 @@ int	get_map(int map_fd, t_map *map)
 	tmp = get_next_line(map_fd);
 	while (tmp)
 	{
+		ft_add_garbage(&map->garbage, tmp);
 		while (tmp && is_line_empty(tmp))
 		{
 			tmp = get_next_line(map_fd);
@@ -30,7 +31,8 @@ int	get_map(int map_fd, t_map *map)
 		if (!tmp)
 			break ;
 		str = ft_strjoin(str, tmp);
-		ft_add_garbage(&map->garbage, tmp);
+		ft_add_garbage(&map->garbage, str);
+		tmp = get_next_line(map_fd);
 	}
 	return (1);
 }
