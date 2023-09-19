@@ -6,7 +6,7 @@
 /*   By: tdutel <tdutel@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/18 21:43:29 by llevasse          #+#    #+#             */
-/*   Updated: 2023/09/19 22:36:45 by llevasse         ###   ########.fr       */
+/*   Updated: 2023/09/19 23:10:59 by llevasse         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -29,5 +29,7 @@ int		get_map(int map_fd, t_map *map);
 int		get_wall(int map_fd, t_map *map);
 int		check_closed(char *map_str, t_map *map);
 int		is_line_empty(char *str);
+int		close_window(t_game *cub);
+int		handle_input(int keysym, t_game *cub);
 
 #endif
