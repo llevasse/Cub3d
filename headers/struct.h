@@ -6,7 +6,7 @@
 /*   By: llevasse <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/18 21:52:44 by llevasse          #+#    #+#             */
-/*   Updated: 2023/09/19 15:04:40 by llevasse         ###   ########.fr       */
+/*   Updated: 2023/09/19 15:10:17 by llevasse         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,13 +17,14 @@
 
 typedef struct s_map
 {
-	int		north_fd;
-	int		south_fd;
-	int		east_fd;
-	int		west_fd;
-	int		f_rgb;		//floor rgb value
-	int		c_rgb;		//ceiling rgb value
-	double	player_rotation;
+	int					north_fd;
+	int					south_fd;
+	int					east_fd;
+	int					west_fd;
+	int					f_rgb;		//floor rgb value
+	int					c_rgb;		//ceiling rgb value
+	double				player_rotation;
+	struct s_garbage	*garbage;
 }				t_map;
 
 typedef struct s_garbage

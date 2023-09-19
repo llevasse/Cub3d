@@ -6,7 +6,7 @@
 /*   By: llevasse <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/18 21:50:20 by llevasse          #+#    #+#             */
-/*   Updated: 2023/09/19 12:08:04 by llevasse         ###   ########.fr       */
+/*   Updated: 2023/09/19 15:13:05 by llevasse         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,9 +26,10 @@ t_map	*parse(int map_fd)
 	if (!map)
 		return ((void)ft_putstr_fd(MEM_ERR, 2), NULL);
 	set_map_null(map);
+	ft_add_garbage(&map->garbage, map);
 	while (element_got < 6 && get_wall(map_fd, map) == 1)
 		element_got++;
-	if (!get_map(map_fd))
+	if (element_got != 6 || !get_map(map_fd))
 		return (NULL);
 	return (map);
 }
@@ -56,4 +57,5 @@ static void	set_map_null(t_map *map)
 	map->f_rgb = -1;
 	map->c_rgb = -1;
 	map->player_rotation = -1;
+	map->garbage = 0x0;
 }
