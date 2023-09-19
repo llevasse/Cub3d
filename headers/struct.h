@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   struct.h                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: llevasse <marvin@42.fr>                    +#+  +:+       +#+        */
+/*   By: tdutel <tdutel@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/18 21:52:44 by llevasse          #+#    #+#             */
-/*   Updated: 2023/09/19 15:10:17 by llevasse         ###   ########.fr       */
+/*   Updated: 2023/09/19 22:08:13 by llevasse         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -37,5 +37,12 @@ t_garbage	*ft_new_garbage(void *address);
 void		ft_add_garbage(t_garbage **lst, void *addr);
 void		malloc_failed(t_garbage *garbage);
 void		free_garbage(t_garbage	*garbage);
+
+typedef struct s_game
+{
+	void	*mlx_ptr;
+	void	*win_ptr;
+	t_map	map;
+}				t_game;
 
 #endif

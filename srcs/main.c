@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   main.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: llevasse <marvin@42.fr>                    +#+  +:+       +#+        */
+/*   By: tdutel <tdutel@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/18 22:02:47 by llevasse          #+#    #+#             */
-/*   Updated: 2023/09/19 15:13:50 by llevasse         ###   ########.fr       */
+/*   Updated: 2023/09/19 22:10:42 by llevasse         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,6 +14,7 @@
 
 int	main(int argc, char **argv)
 {
+	t_game	cub;
 	t_map	*map;
 
 	if (argc != 2)
@@ -23,6 +24,11 @@ int	main(int argc, char **argv)
 	map = parse(open(argv[1], O_RDONLY));
 	if (!map)
 		return (1);
+	cub.mlx_ptr = mlx_init();
+	cub.win_ptr = mlx_new_window(cub.mlx_ptr, 1024, 512, "cub3D");
+	while (1)
+		;
+	mlx_destroy_display(cub.mlx_ptr);
+	free(cub.mlx_ptr);
 	free_garbage(map->garbage);
-	return (0);
 }
