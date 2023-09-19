@@ -6,7 +6,7 @@
 /*   By: tdutel <tdutel@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/18 21:43:29 by llevasse          #+#    #+#             */
-/*   Updated: 2023/09/20 00:45:12 by llevasse         ###   ########.fr       */
+/*   Updated: 2023/09/20 00:48:41 by llevasse         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -39,7 +39,7 @@ int		close_window(t_game *cub);
 int		handle_input(int keysym, t_game *cub);
 
 void	img_pix_put(t_img *img, int x, int y, int colour);
-void	render(t_game *cub);
+int		render(t_game *cub);
 void	paint_minimap_bg(t_game *cub);
 
 #endif
