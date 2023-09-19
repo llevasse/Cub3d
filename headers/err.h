@@ -6,7 +6,7 @@
 /*   By: llevasse <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/18 23:42:30 by llevasse          #+#    #+#             */
-/*   Updated: 2023/09/19 21:53:47 by llevasse         ###   ########.fr       */
+/*   Updated: 2023/09/19 22:19:04 by llevasse         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,6 +15,7 @@
 
 # include "cub3d.h"
 
+# define MLX_ERR "Error\nError in mlx_init().\n"
 # define MEM_ERR "Error\nError while allocating memory.\n"
 # define N_WALL_OPEN_ERR "Error\nError in opening north wall texture file.\n"
 # define S_WALL_OPEN_ERR "Error\nError in opening south wall texture file.\n"
