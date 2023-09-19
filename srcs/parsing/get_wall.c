@@ -6,7 +6,7 @@
 /*   By: llevasse <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/18 23:48:52 by llevasse          #+#    #+#             */
-/*   Updated: 2023/09/19 15:19:29 by llevasse         ###   ########.fr       */
+/*   Updated: 2023/09/19 15:30:35 by llevasse         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,7 +26,7 @@ static int	get_rgb_value(char *s)
 
 static int	do_open(char *s, int *fd, int face)
 {
-	*fd = open(s, O_RDONLY);
+	*fd = open(ft_strsep(&s, "\n"), O_RDONLY);
 	if (*fd == -1 && face == 0)
 		return ((void)ft_putstr_fd(N_WALL_OPEN_ERR, 2), 0);
 	if (*fd == -1 && face == 1)
