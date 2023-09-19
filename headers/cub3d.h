@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   cub3d.h                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: llevasse <marvin@42.fr>                    +#+  +:+       +#+        */
+/*   By: tdutel <tdutel@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/18 21:43:29 by llevasse          #+#    #+#             */
-/*   Updated: 2023/09/18 23:50:20 by llevasse         ###   ########.fr       */
+/*   Updated: 2023/09/19 16:11:53 by tdutel           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,7 +16,7 @@
 # include "../libft/libft.h"
 # include "struct.h"
 # include "err.h"
-# include "mlx.h"
+# include "../minilibx/mlx.h"
 # include <X11/X.h>
 # include <X11/keysym.h>
 # include <fcntl.h>

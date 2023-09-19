@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   struct.h                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: llevasse <marvin@42.fr>                    +#+  +:+       +#+        */
+/*   By: tdutel <tdutel@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/18 21:52:44 by llevasse          #+#    #+#             */
-/*   Updated: 2023/09/18 22:59:38 by llevasse         ###   ########.fr       */
+/*   Updated: 2023/09/19 16:17:21 by tdutel           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,5 +25,12 @@ typedef struct s_map
 	int		c_rgb;		//ceiling rgb value
 	double	player_rotation;
 }				t_map;
+
+typedef struct s_game
+{
+	void	*mlx_ptr;
+	void	*win_ptr;
+	t_map	map;
+}				t_game;
 
 #endif
