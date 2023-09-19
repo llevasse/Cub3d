@@ -6,7 +6,7 @@
 /*   By: llevasse <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/18 21:50:20 by llevasse          #+#    #+#             */
-/*   Updated: 2023/09/19 15:21:28 by llevasse         ###   ########.fr       */
+/*   Updated: 2023/09/19 22:38:45 by llevasse         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,7 +14,7 @@
 
 static void	set_map_null(t_map *map);
 
-t_map	*parse(int map_fd)
+t_map	*parse(int map_fd, t_game *cub)
 {
 	int		element_got;
 	t_map	*map;
@@ -23,10 +23,9 @@ t_map	*parse(int map_fd)
 	if (map_fd == -1)
 		return ((void)ft_putstr_fd(CUB_OPEN_ERR, 2), NULL);
 	map = malloc(sizeof(struct s_map));
-	if (!map)
-		return ((void)ft_putstr_fd(MEM_ERR, 2), NULL);
+	ft_add_garbage(&cub->garbage, map);
 	set_map_null(map);
-	ft_add_garbage(&map->garbage, map);
+	map->garbage = cub->garbage;
 	while (element_got < 6 && get_wall(map_fd, map) == 1)
 		element_got++;
 	if (element_got != 6 || !get_map(map_fd, map))
@@ -57,5 +56,4 @@ static void	set_map_null(t_map *map)
 	map->f_rgb = -1;
 	map->c_rgb = -1;
 	map->player_rotation = -1;
-	map->garbage = NULL;
 }

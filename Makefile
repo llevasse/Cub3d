@@ -1,5 +1,5 @@
 #---COMMON_VAR-----------------------------------
-NAME			=	cub3d
+NAME			=	cub3D
 CC				=	cc
 RM				=	rm -rf
 
@@ -16,6 +16,7 @@ LIBFT_LIB		=	-L $(LIBFT_PATH) -l ft
 
 #---CUB_VAR---------------------------------------
 SRC				=	srcs/main.c \
+					srcs/init.c \
 					srcs/parsing/parse.c \
 					srcs/garbage_collector.c \
 					srcs/parsing/get_map.c \
