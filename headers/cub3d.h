@@ -6,7 +6,7 @@
 /*   By: tdutel <tdutel@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/18 21:43:29 by llevasse          #+#    #+#             */
-/*   Updated: 2023/09/19 23:10:59 by llevasse         ###   ########.fr       */
+/*   Updated: 2023/09/20 00:19:29 by llevasse         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,6 +22,12 @@
 # include <fcntl.h>
 # include <math.h>
 # include <errno.h>
+
+# define WINDOW_WIDTH	1024
+# define WINDOW_HEIGHT	512
+
+# define MINIMAP_W_RGB	0xff
+# define MINIMAP_RGB	0x00ff
 
 t_game	*init_cub(char **argv);
 t_map	*parse(int map_fd, t_game *cub);

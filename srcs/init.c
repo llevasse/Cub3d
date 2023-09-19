@@ -6,7 +6,7 @@
 /*   By: llevasse <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/19 22:29:27 by llevasse          #+#    #+#             */
-/*   Updated: 2023/09/19 23:13:57 by llevasse         ###   ########.fr       */
+/*   Updated: 2023/09/20 00:17:09 by llevasse         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -29,7 +29,7 @@ t_game	*init_cub(char **argv)
 		return ((void)ft_putstr_fd(MLX_ERR, 2), NULL);
 	}
 	ft_add_garbage(&cub->garbage, cub->mlx_ptr);
-	cub->win_ptr = mlx_new_window(cub->mlx_ptr, 1024, 512, "cub3D");
+	cub->win_ptr = mlx_new_window(cub->mlx_ptr, WINDOW_WIDTH, WINDOW_HEIGHT, "cub3D");
 	if (!cub->win_ptr)
 		ft_add_garbage(&cub->garbage, NULL);
 	mlx_hook(cub->win_ptr, KeyPress, KeyPressMask, &handle_input, cub);
