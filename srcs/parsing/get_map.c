@@ -6,7 +6,7 @@
 /*   By: llevasse <llevasse@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/19 12:01:04 by llevasse          #+#    #+#             */
-/*   Updated: 2023/09/19 21:31:37 by llevasse         ###   ########.fr       */
+/*   Updated: 2023/09/19 21:54:29 by llevasse         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -37,10 +37,8 @@ int	get_map(int map_fd, t_map *map)
 		ft_add_garbage(&map->garbage, str);
 		tmp = get_next_line(map_fd);
 	}
-	if (!search_player_presence(str))
+	if (!search_player_presence(str) || !check_closed(str, map))
 		return (0);
-	ft_printf("map :\n%s\n", str);
-	ft_printf("Is the map closed : %d\n", check_closed(str, map));
 	return (1);
 }
 
@@ -136,10 +134,10 @@ int	check_closed(char *map_str, t_map *map)
 		while (j < len)
 		{
 			if (!is_line_v_closed(split_map, j++, i))
-				return (0);
+				return ((void)ft_putstr_fd(OPEN_MAP, 2), 0);
 		}
 		if (!is_line_h_closed(split_map[i++]))
-			return (0);
+			return ((void)ft_putstr_fd(OPEN_MAP, 2), 0);
 	}
 	return (1);
 }
