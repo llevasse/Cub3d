@@ -6,7 +6,7 @@
 /*   By: llevasse <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/18 21:52:44 by llevasse          #+#    #+#             */
-/*   Updated: 2023/09/18 22:59:38 by llevasse         ###   ########.fr       */
+/*   Updated: 2023/09/19 15:04:40 by llevasse         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,5 +25,16 @@ typedef struct s_map
 	int		c_rgb;		//ceiling rgb value
 	double	player_rotation;
 }				t_map;
+
+typedef struct s_garbage
+{
+	void				*addr;
+	struct s_garbage	*next;
+}	t_garbage;
+
+t_garbage	*ft_new_garbage(void *address);
+void		ft_add_garbage(t_garbage **lst, void *addr);
+void		malloc_failed(t_garbage *garbage);
+void		free_garbage(t_garbage	*garbage);
 
 #endif
