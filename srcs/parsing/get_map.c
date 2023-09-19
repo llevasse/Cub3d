@@ -6,13 +6,13 @@
 /*   By: llevasse <llevasse@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/19 12:01:04 by llevasse          #+#    #+#             */
-/*   Updated: 2023/09/19 12:11:19 by llevasse         ###   ########.fr       */
+/*   Updated: 2023/09/19 14:50:45 by llevasse         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "cub3d.h"
 
-int	get_map(int map_file_fd)
+int	get_map(int map_fd)
 {
 	char	*str;
 	char	*tmp;
@@ -27,4 +27,5 @@ int	get_map(int map_file_fd)
 			break ;
 		str = ft_strjoin(str, tmp);
 	}
+	return (1);
 }
