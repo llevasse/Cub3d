@@ -15,6 +15,7 @@ LIBFT			=	$(addprefix $(LIBFT_PATH), $(LIBFT_NAME))
 #---CUB_VAR---------------------------------------
 SRC				=	srcs/main.c \
 					srcs/parsing/parse.c \
+					srcs/parsing/get_map.c \
 					srcs/parsing/get_wall.c	
 OBJS_DIR		=	.OBJS/
 OBJS			=	$(addprefix $(OBJS_DIR), $(SRC:.c=.o))

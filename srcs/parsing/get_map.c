@@ -1,27 +1,30 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   main.c                                             :+:      :+:    :+:   */
+/*   get_map.c                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: llevasse <marvin@42.fr>                    +#+  +:+       +#+        */
+/*   By: llevasse <llevasse@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2023/09/18 22:02:47 by llevasse          #+#    #+#             */
-/*   Updated: 2023/09/19 12:08:11 by llevasse         ###   ########.fr       */
+/*   Created: 2023/09/19 12:01:04 by llevasse          #+#    #+#             */
+/*   Updated: 2023/09/19 12:11:19 by llevasse         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "cub3d.h"
 
-int	main(int argc, char **argv)
+int	get_map(int map_file_fd)
 {
-	t_map	*map;
+	char	*str;
+	char	*tmp;
 
-	if (argc != 2)
-		return (1);
-	if (!ft_strnstr(argv[1], ".cub", ft_strlen(argv[1])))
-		return ((void)ft_putstr_fd(MISS_F, 2), 1);
-	map = parse(open(argv[1], O_RDONLY));
-	if (!map)
-		return (1);
-	return (0);
+	str = "";
+	tmp = get_next_line(map_fd);
+	while (tmp)
+	{
+		while (tmp && is_line_empty(tmp))
+			tmp = get_next_line(map_fd);
+		if (!tmp)
+			break ;
+		str = ft_strjoin(str, tmp);
+	}
 }

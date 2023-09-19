@@ -6,7 +6,7 @@
 /*   By: llevasse <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/18 21:50:20 by llevasse          #+#    #+#             */
-/*   Updated: 2023/09/19 00:57:12 by llevasse         ###   ########.fr       */
+/*   Updated: 2023/09/19 12:08:04 by llevasse         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -28,6 +28,8 @@ t_map	*parse(int map_fd)
 	set_map_null(map);
 	while (element_got < 6 && get_wall(map_fd, map) == 1)
 		element_got++;
+	if (!get_map(map_fd))
+		return (NULL);
 	return (map);
 }
 

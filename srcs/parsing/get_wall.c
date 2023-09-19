@@ -6,7 +6,7 @@
 /*   By: llevasse <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/18 23:48:52 by llevasse          #+#    #+#             */
-/*   Updated: 2023/09/19 11:40:13 by llevasse         ###   ########.fr       */
+/*   Updated: 2023/09/19 12:03:36 by llevasse         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,9 +18,9 @@ static int	get_rgb_value(char *s)
 	int	g;
 	int	b;
 
-	r = ft_atoi(ft_strsep(&s, ","));
-	g = ft_atoi(ft_strsep(&s, ","));
-	b = ft_atoi(ft_strsep(&s, ","));
+	r = ft_atoi(ft_strsep(&s, ", \t"));
+	g = ft_atoi(ft_strsep(&s, ", \t"));
+	b = ft_atoi(ft_strsep(&s, ", \t"));
 	return ((r * 256 * 256) + (g * 256) + b);
 }
 
