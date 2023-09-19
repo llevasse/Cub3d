@@ -22,7 +22,9 @@ SRC				=	srcs/main.c \
 					srcs/garbage_collector.c \
 					srcs/parsing/get_map.c \
 					srcs/parsing/is_map_closed.c \
-					srcs/parsing/get_wall.c	
+					srcs/parsing/get_wall.c	\
+					srcs/render/render.c \
+					srcs/render/minimap.c
 
 OBJS_DIR		=	.OBJS/
 OBJS			=	$(addprefix $(OBJS_DIR), $(SRC:.c=.o))

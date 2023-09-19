@@ -6,7 +6,7 @@
 /*   By: llevasse <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/19 22:29:27 by llevasse          #+#    #+#             */
-/*   Updated: 2023/09/20 00:17:09 by llevasse         ###   ########.fr       */
+/*   Updated: 2023/09/20 00:39:27 by llevasse         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -32,6 +32,9 @@ t_game	*init_cub(char **argv)
 	cub->win_ptr = mlx_new_window(cub->mlx_ptr, WINDOW_WIDTH, WINDOW_HEIGHT, "cub3D");
 	if (!cub->win_ptr)
 		ft_add_garbage(&cub->garbage, NULL);
+	cub->img.mlx_img = mlx_new_image(cub->mlx_ptr, WINDOW_WIDTH, WINDOW_HEIGHT);
+	cub->img.addr = mlx_get_data_addr(cub->img.mlx_img, &cub->img.bpp,
+			&cub->img.line_len, &cub->img.endian);
 	mlx_hook(cub->win_ptr, KeyPress, KeyPressMask, &handle_input, cub);
 	mlx_hook(cub->win_ptr, 17, 0, &close_window, cub);
 	mlx_loop(cub->mlx_ptr);
