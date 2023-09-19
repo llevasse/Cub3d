@@ -6,7 +6,7 @@
 /*   By: llevasse <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/18 21:43:29 by llevasse          #+#    #+#             */
-/*   Updated: 2023/09/19 14:50:12 by llevasse         ###   ########.fr       */
+/*   Updated: 2023/09/19 15:18:28 by llevasse         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,7 +24,7 @@
 # include <errno.h>
 
 t_map	*parse(int map_fd);
-int		get_map(int map_fd);
+int		get_map(int map_fd, t_map *map);
 int		get_wall(int map_fd, t_map *map);
 int		is_line_empty(char *str);
 

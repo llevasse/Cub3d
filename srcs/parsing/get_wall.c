@@ -6,7 +6,7 @@
 /*   By: llevasse <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/18 23:48:52 by llevasse          #+#    #+#             */
-/*   Updated: 2023/09/19 12:03:36 by llevasse         ###   ########.fr       */
+/*   Updated: 2023/09/19 15:19:29 by llevasse         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -43,8 +43,12 @@ int	get_wall(int map_fd, t_map *map)
 	char	*str;
 
 	str = get_next_line(map_fd);
+	ft_add_garbage(&map->garbage, str);
 	while (str && is_line_empty(str))
+	{
 		str = get_next_line(map_fd);
+		ft_add_garbage(&map->garbage, str);
+	}
 	if (!str)
 		return (0);
 	if (!ft_strncmp("NO ", str, 3) && map->north_fd == -1)
