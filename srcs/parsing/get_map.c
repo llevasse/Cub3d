@@ -6,7 +6,7 @@
 /*   By: llevasse <llevasse@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/19 12:01:04 by llevasse          #+#    #+#             */
-/*   Updated: 2023/09/19 16:51:10 by llevasse         ###   ########.fr       */
+/*   Updated: 2023/09/19 20:57:17 by llevasse         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -71,17 +71,51 @@ int	is_line_h_closed(char *line)
 	return (1);
 }
 
+int	is_line_v_closed(char **tab, int x, int entry_y)
+{
+	int	y;
+	int	closed;
+
+	closed = 0;
+	y = entry_y;
+	if (tab[y][x] != '0')
+		return (1);
+	while (y >= 0 && !closed)
+	{
+		if ((int)ft_strlen(tab[y]) >= x && tab[y][x] == '1')
+			closed++;
+		y--;
+	}
+	y = entry_y;
+	while (y < get_tab_len(tab))
+	{
+		if ((int)ft_strlen(tab[y]) >= x && tab[y][x] == '1' && closed)
+			return (closed);
+		y++;
+	}
+	return (0);
+}
+
 int	check_closed(char *map_str, t_map *map)
 {
 	char	**split_map;
 	int		i;
+	int		j;
+	int		len;
 
 	i = 0;
 	split_map = ft_split(map_str, '\n');
 	ft_add_garbage(&map->garbage, split_map);
 	while (i < get_tab_len(split_map))
 	{
+		j = 0;
+		len = ft_strlen(split_map[i]);
 		ft_add_garbage(&map->garbage, split_map[i]);
+		while (j < len)
+		{
+			if (!is_line_v_closed(split_map, j++, i))
+				return (0);
+		}
 		if (!is_line_h_closed(split_map[i++]))
 			return (0);
 	}
