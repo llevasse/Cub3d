@@ -6,28 +6,11 @@
 /*   By: llevasse <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/20 00:28:00 by llevasse          #+#    #+#             */
-/*   Updated: 2023/09/20 15:51:39 by llevasse         ###   ########.fr       */
+/*   Updated: 2023/09/20 22:17:15 by llevasse         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "cub3d.h"
-
-void	paint_minimap_bg(t_cub *cub)
-{
-	int	x;
-	int	y;
-
-	y = 0;
-	if (!cub->win_ptr)
-		return ;
-	while (y < MINIMAP_HEIGHT)
-	{
-		x = 0;
-		while (x < MINIMAP_WIDTH)
-			img_pix_put(&cub->minimap->img, x++, y, cub->map->f_rgb);
-		y++;
-	}
-}
 
 void	draw_square(t_minimap *map, int x, int y, int colour)
 {
@@ -50,7 +33,6 @@ void	draw_minimap(t_cub *cub)
 	int			len;
 	t_minimap	*map;
 
-	//paint_minimap_bg(cub);
 	y = 0;
 	map = cub->minimap;
 	while (y < map->nb_line)
@@ -60,12 +42,12 @@ void	draw_minimap(t_cub *cub)
 		while (x < len)
 		{
 			if (map->map[y][x] == '0')
-				draw_square(map, x * map->block_w, y * map->block_h, cub->map->f_rgb);
+				draw_square(map, x * map->block_w, y * map->block_h, MINIMAP_RGB);
 			else if (map->map[y][x] == '1')
-				draw_square(map, x * map->block_w, y * map->block_h, cub->map->c_rgb);
-//			ft_printf("%d:%d : %c\n", x, y, map->map[y][x]);
+				draw_square(map, x * map->block_w, y * map->block_h, MINIMAP_W_RGB);
 			x++;
 		}
 		y++;
 	}
+	draw_square(map, cub->player.px, cub->player.py, PLAYER_RGB);
 }

@@ -6,7 +6,7 @@
 /*   By: tdutel <tdutel@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/18 21:43:29 by llevasse          #+#    #+#             */
-/*   Updated: 2023/09/20 16:21:37 by llevasse         ###   ########.fr       */
+/*   Updated: 2023/09/20 22:20:11 by llevasse         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -28,11 +28,13 @@
 
 # define MINIMAP_WIDTH	WINDOW_WIDTH/3
 # define MINIMAP_HEIGHT	WINDOW_HEIGHT/3
-# define MINIMAP_W_RGB	0xff
+# define MINIMAP_W_RGB	0xff0000
 # define MINIMAP_RGB	0x00ff00
+# define PLAYER_RGB		0x0000ff
 
 void	init_cub(t_cub *cub, char **argv);
 void	init_minimap(t_cub *cub);
+void	init_player(t_cub *cub);
 t_map	*parse(int map_fd, t_cub *cub);
 int		get_map(int map_fd, t_map *map, t_cub *cub);
 int		get_wall(int map_fd, t_map *map);
