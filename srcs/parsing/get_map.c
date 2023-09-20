@@ -6,7 +6,7 @@
 /*   By: llevasse <llevasse@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/19 12:01:04 by llevasse          #+#    #+#             */
-/*   Updated: 2023/09/19 21:57:27 by llevasse         ###   ########.fr       */
+/*   Updated: 2023/09/20 13:51:26 by llevasse         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,7 +14,7 @@
 
 static int	search_player_presence(char *map);
 
-int	get_map(int map_fd, t_map *map)
+int	get_map(int map_fd, t_map *map, t_game *cub)
 {
 	char	*str;
 	char	*tmp;
@@ -36,7 +36,7 @@ int	get_map(int map_fd, t_map *map)
 		ft_add_garbage(&map->garbage, str);
 		tmp = get_next_line(map_fd);
 	}
-	if (!search_player_presence(str) || !check_closed(str, map))
+	if (!search_player_presence(str) || !check_closed(str, map, cub))
 		return (0);
 	return (1);
 }

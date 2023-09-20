@@ -6,7 +6,7 @@
 /*   By: llevasse <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/19 21:56:14 by llevasse          #+#    #+#             */
-/*   Updated: 2023/09/19 21:59:33 by llevasse         ###   ########.fr       */
+/*   Updated: 2023/09/20 13:51:11 by llevasse         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,7 +16,7 @@ int	get_tab_len(char **tab);
 int	is_line_v_closed(char **tab, int x, int entry_y);
 int	is_line_h_closed(char *line);
 
-int	check_closed(char *map_str, t_map *map)
+int	check_closed(char *map_str, t_map *map, t_game *cub)
 {
 	char	**split_map;
 	int		i;
@@ -39,6 +39,7 @@ int	check_closed(char *map_str, t_map *map)
 		if (!is_line_h_closed(split_map[i++]))
 			return ((void)ft_putstr_fd(OPEN_MAP, 2), 0);
 	}
+	cub->minimap->map = split_map; 
 	return (1);
 }
 
