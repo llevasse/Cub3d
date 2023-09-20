@@ -1,42 +1,19 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   main2.c                                            :+:      :+:    :+:   */
+/*   interaction.c                                      :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: tdutel <tdutel@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2023/09/20 16:15:33 by tdutel            #+#    #+#             */
-/*   Updated: 2023/09/20 16:36:30 by tdutel           ###   ########.fr       */
+/*   Created: 2023/09/20 16:37:55 by tdutel            #+#    #+#             */
+/*   Updated: 2023/09/20 16:40:14 by tdutel           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "cub3d.h"
+#include "cub_init.h.h"
 
-// int	main(int argc, char **argv)
-// {
-// 	t_map	*map;
-// 	void	*ptr;
 
-// 	ptr = mlx_init();
-// 	if (argc != 2)
-// 		return (1);
-// 	if (!ft_strnstr(argv[1], ".cub", ft_strlen(argv[1])))
-// 		return ((void)ft_putstr_fd(MISS_F, 2), 1);
-// 	map = parse(open(argv[1], O_RDONLY));
-// 	if (!map)
-// 		return (1);
-// 	return (0);
-// }
 
-#define PLAYER "assets/player.xpm"
-#define DOT "assets/dot.xpm"
-#define WALL "assets/wall.xpm"
-#define FLOOR "assets/floor.xpm"
-
-//-----------------------------MAP----------------------------------------------
-#define MAPX  8      //map width
-#define MAPY  8      //map height
-#define MAPS 64      //map cube size
 
 void	drawMap2D(t_game cub)
 {
@@ -82,9 +59,6 @@ void	drawMap2D(t_game cub)
 		y++;
 	}
 }
-
-void	redisplay(int key, t_game *cub);
-int		exit_prog(t_game *cub);
 
 int	main(void)
 {
