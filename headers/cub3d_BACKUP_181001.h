@@ -6,7 +6,11 @@
 /*   By: tdutel <tdutel@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/18 21:43:29 by llevasse          #+#    #+#             */
-/*   Updated: 2023/09/20 16:21:37 by llevasse         ###   ########.fr       */
+<<<<<<< HEAD
+/*   Updated: 2023/09/20 15:35:12 by llevasse         ###   ########.fr       */
+=======
+/*   Updated: 2023/09/20 11:41:20 by tdutel           ###   ########.fr       */
+>>>>>>> origin/tim
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,8 +27,8 @@
 # include <math.h>
 # include <errno.h>
 
-# define WINDOW_WIDTH	1024*2
-# define WINDOW_HEIGHT	512*2
+# define WINDOW_WIDTH	1024
+# define WINDOW_HEIGHT	512
 
 # define MINIMAP_WIDTH	WINDOW_WIDTH/3
 # define MINIMAP_HEIGHT	WINDOW_HEIGHT/3

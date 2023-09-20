@@ -6,7 +6,7 @@
 /*   By: tdutel <tdutel@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/18 21:52:44 by llevasse          #+#    #+#             */
-/*   Updated: 2023/09/20 14:40:37 by llevasse         ###   ########.fr       */
+/*   Updated: 2023/09/20 16:23:34 by llevasse         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -52,14 +52,29 @@ typedef struct s_minimap
 	struct s_img		img;
 }				t_minimap;
 
+typedef struct s_player
+{
+	float	px;
+	float	py;
+
+}				t_player;
+
+typedef struct s_image
+{
+	void	*img_ptr;
+	int		width;
+	int		height;
+}				t_image;
+
 typedef struct s_game
 {
 	void				*mlx_ptr;
 	void				*win_ptr;
-	struct s_img		img;
+	struct s_image		img;
 	struct s_map		*map;
 	struct s_minimap	*minimap;
 	struct s_garbage	*garbage;
+	t_player			player;
 }				t_game;
 
 t_garbage	*ft_new_garbage(void *address);
