@@ -6,7 +6,7 @@
 /*   By: tdutel <tdutel@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/18 21:43:29 by llevasse          #+#    #+#             */
-/*   Updated: 2023/09/21 01:07:45 by llevasse         ###   ########.fr       */
+/*   Updated: 2023/09/21 01:23:19 by llevasse         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -33,6 +33,8 @@
 # define MINIMAP_W_RGB	0xff0000
 # define MINIMAP_RGB	0x00ff00
 # define PLAYER_RGB		0x0000ff
+
+# define PLAYER_OFFSET	5
 
 void	init_cub(t_cub *cub, char **argv);
 void	init_minimap(t_cub *cub);

@@ -6,7 +6,7 @@
 /*   By: llevasse <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/19 23:04:28 by llevasse          #+#    #+#             */
-/*   Updated: 2023/09/21 01:15:23 by llevasse         ###   ########.fr       */
+/*   Updated: 2023/09/21 01:23:40 by llevasse         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,12 +16,12 @@ int	handle_input(int keysym, t_cub *cub)
 {
 	int	offset;
 
-	offset = 5;
+	offset = PLAYER_OFFSET;
 	if (keysym == XK_s && !check_collision(cub, 0, &offset))
 		return (cub->player.py += offset);
 	if (keysym == XK_d && !check_collision(cub, 1, &offset))
 		return (cub->player.px += offset);
-	offset = -5;
+	offset = -PLAYER_OFFSET;
 	if (keysym == XK_w && !check_collision(cub, 0, &offset))
 		return (cub->player.py += offset);
 	if (keysym == XK_a && !check_collision(cub, 1, &offset))
