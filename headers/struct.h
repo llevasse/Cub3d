@@ -6,7 +6,7 @@
 /*   By: tdutel <tdutel@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/18 21:52:44 by llevasse          #+#    #+#             */
-/*   Updated: 2023/09/20 13:51:41 by llevasse         ###   ########.fr       */
+/*   Updated: 2023/09/20 14:14:27 by llevasse         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,7 +25,7 @@ typedef struct s_map
 	int					c_rgb;		//ceiling rgb value
 	double				player_rotation;
 	struct s_garbage	*garbage;
-}				t_map;
+	}				t_map;
 
 typedef struct s_garbage
 {

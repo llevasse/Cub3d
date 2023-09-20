@@ -6,7 +6,7 @@
 /*   By: llevasse <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/19 22:29:27 by llevasse          #+#    #+#             */
-/*   Updated: 2023/09/20 13:52:30 by llevasse         ###   ########.fr       */
+/*   Updated: 2023/09/20 14:17:34 by llevasse         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -28,6 +28,6 @@ void	init_cub(t_game *cub, char **argv)
 	cub->win_ptr = mlx_new_window(cub->mlx_ptr, WINDOW_WIDTH, WINDOW_HEIGHT, "cub3D");
 	if (!cub->win_ptr)
 		ft_add_garbage(&cub->garbage, NULL);
-	cub->minimap->img.mlx_img = mlx_new_image(cub->mlx_ptr, WINDOW_WIDTH, WINDOW_HEIGHT);
+	cub->minimap->img.mlx_img = mlx_new_image(cub->mlx_ptr, MINIMAP_WIDTH, MINIMAP_HEIGHT);
 	cub->minimap->img.addr = mlx_get_data_addr(cub->minimap->img.mlx_img, &cub->minimap->img.bpp, &cub->minimap->img.line_len, &cub->minimap->img.endian);
 }

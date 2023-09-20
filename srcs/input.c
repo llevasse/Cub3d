@@ -6,7 +6,7 @@
 /*   By: llevasse <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/19 23:04:28 by llevasse          #+#    #+#             */
-/*   Updated: 2023/09/19 23:11:49 by llevasse         ###   ########.fr       */
+/*   Updated: 2023/09/20 14:19:31 by llevasse         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,6 +22,8 @@ int	handle_input(int keysym, t_game *cub)
 int	close_window(t_game *cub)
 {
 	mlx_destroy_window(cub->mlx_ptr, cub->win_ptr);
+	if (cub->minimap->img.mlx_img)
+		mlx_destroy_image(cub->mlx_ptr, cub->minimap->img.mlx_img);
 	mlx_destroy_display(cub->mlx_ptr);
 	free_garbage(cub->garbage);
 	exit(0);
