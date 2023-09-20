@@ -6,7 +6,7 @@
 /*   By: tdutel <tdutel@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/18 21:52:44 by llevasse          #+#    #+#             */
-/*   Updated: 2023/09/19 16:17:21 by tdutel           ###   ########.fr       */
+/*   Updated: 2023/09/20 15:31:49 by tdutel           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,11 +26,27 @@ typedef struct s_map
 	double	player_rotation;
 }				t_map;
 
+typedef struct s_player
+{
+	float	px;
+	float	py;
+
+}				t_player;
+
+typedef struct s_image
+{
+	void	*img_ptr;
+	int		width;
+	int		height;
+}				t_image;
+
 typedef struct s_game
 {
-	void	*mlx_ptr;
-	void	*win_ptr;
-	t_map	map;
+	void		*mlx_ptr;
+	void		*win_ptr;
+	t_image		img;
+	t_map		map;
+	t_player	player;
 }				t_game;
 
 #endif

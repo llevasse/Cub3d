@@ -6,7 +6,7 @@
 /*   By: tdutel <tdutel@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/18 21:43:29 by llevasse          #+#    #+#             */
-/*   Updated: 2023/09/19 16:11:53 by tdutel           ###   ########.fr       */
+/*   Updated: 2023/09/20 11:41:20 by tdutel           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,5 +26,23 @@
 t_map	*parse(int map_fd);
 int		get_wall(int map_fd, t_map *map);
 int		is_line_empty(char *str);
+
+int		key_event(int key, t_game *param);
+
+# define ON_DESTROY 17
+# define ON_KEYDOWN 2
+
+enum {
+	w = 119,
+	a = 97,
+	s = 115,
+	d = 100,
+	left = 65361,
+	right = 65363,
+	down = 65364,
+	up = 65362,
+	esc = 65307,
+	q = 113,
+};
 
 #endif
