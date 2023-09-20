@@ -6,7 +6,7 @@
 /*   By: tdutel <tdutel@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/18 21:43:29 by llevasse          #+#    #+#             */
-/*   Updated: 2023/09/20 12:45:19 by llevasse         ###   ########.fr       */
+/*   Updated: 2023/09/20 12:52:31 by llevasse         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -27,7 +27,7 @@
 # define WINDOW_HEIGHT	512
 
 # define MINIMAP_W_RGB	0xff
-# define MINIMAP_RGB	0x00ff
+# define MINIMAP_RGB	0x00ff00
 
 void	init_cub(t_game *cub, char **argv);
 t_map	*parse(int map_fd, t_game *cub);
