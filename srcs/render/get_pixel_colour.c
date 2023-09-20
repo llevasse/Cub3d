@@ -6,7 +6,7 @@
 /*   By: llevasse <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/20 22:45:53 by llevasse          #+#    #+#             */
-/*   Updated: 2023/09/21 00:59:55 by llevasse         ###   ########.fr       */
+/*   Updated: 2023/09/21 01:01:07 by llevasse         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -41,6 +41,5 @@ int	get_pixel_colour(t_img *img, int x, int y)
 		g *= ((*(pixel++)) & 0xFF) + 1;
 		r *= ((*(pixel++)) & 0xFF) + 1; //should work fine
 	}
-	ft_printf("rgb at %d.%d : %i/%d/%d\n",x,y, r - 1,g - 1,b -1);
 	return (((r - 1) * 256 * 256) + ((g - 1) * 256) + (b - 1));
 }
