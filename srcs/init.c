@@ -6,7 +6,7 @@
 /*   By: llevasse <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/19 22:29:27 by llevasse          #+#    #+#             */
-/*   Updated: 2023/09/20 14:17:34 by llevasse         ###   ########.fr       */
+/*   Updated: 2023/09/20 15:32:28 by llevasse         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -30,4 +30,20 @@ void	init_cub(t_game *cub, char **argv)
 		ft_add_garbage(&cub->garbage, NULL);
 	cub->minimap->img.mlx_img = mlx_new_image(cub->mlx_ptr, MINIMAP_WIDTH, MINIMAP_HEIGHT);
 	cub->minimap->img.addr = mlx_get_data_addr(cub->minimap->img.mlx_img, &cub->minimap->img.bpp, &cub->minimap->img.line_len, &cub->minimap->img.endian);
+}
+
+void	init_minimap(t_game *cub)
+{
+	int	i;
+
+	cub->minimap->nb_line = get_tab_len(cub->minimap->map);
+	i = 0;
+	cub->minimap->map_width = 0;
+	while (i < cub->minimap->nb_line)
+	{
+		if ((int)ft_strlen(cub->minimap->map[i++]) > cub->minimap->map_width)
+			cub->minimap->map_width = ft_strlen(cub->minimap->map[i - 1]);
+	}
+	cub->minimap->block_w = MINIMAP_WIDTH/cub->minimap->map_width;
+	cub->minimap->block_h = MINIMAP_HEIGHT/cub->minimap->nb_line;
 }

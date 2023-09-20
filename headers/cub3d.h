@@ -6,7 +6,7 @@
 /*   By: tdutel <tdutel@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/18 21:43:29 by llevasse          #+#    #+#             */
-/*   Updated: 2023/09/20 13:59:58 by llevasse         ###   ########.fr       */
+/*   Updated: 2023/09/20 15:31:35 by llevasse         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -32,6 +32,7 @@
 # define MINIMAP_RGB	0x00ff00
 
 void	init_cub(t_game *cub, char **argv);
+void	init_minimap(t_game *cub);
 t_map	*parse(int map_fd, t_game *cub);
 int		get_map(int map_fd, t_map *map, t_game *cub);
 int		get_wall(int map_fd, t_map *map);
@@ -39,6 +40,7 @@ int		check_closed(char *map_str, t_map *map, t_game *cub);
 int		is_line_empty(char *str);
 int		close_window(t_game *cub);
 int		handle_input(int keysym, t_game *cub);
+int		get_tab_len(char **tab);
 
 void	img_pix_put(t_img *img, int x, int y, int colour);
 int		render(t_game *cub);

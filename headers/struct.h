@@ -6,7 +6,7 @@
 /*   By: tdutel <tdutel@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/18 21:52:44 by llevasse          #+#    #+#             */
-/*   Updated: 2023/09/20 14:14:27 by llevasse         ###   ########.fr       */
+/*   Updated: 2023/09/20 14:40:37 by llevasse         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -45,6 +45,8 @@ typedef struct s_img
 typedef struct s_minimap
 {
 	char				**map;
+	int					nb_line;
+	int					map_width;
 	int					block_w;
 	int					block_h;
 	struct s_img		img;

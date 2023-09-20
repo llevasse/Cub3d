@@ -6,13 +6,12 @@
 /*   By: llevasse <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/19 21:56:14 by llevasse          #+#    #+#             */
-/*   Updated: 2023/09/20 13:51:11 by llevasse         ###   ########.fr       */
+/*   Updated: 2023/09/20 15:31:08 by llevasse         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "cub3d.h"
 
-int	get_tab_len(char **tab);
 int	is_line_v_closed(char **tab, int x, int entry_y);
 int	is_line_h_closed(char *line);
 
