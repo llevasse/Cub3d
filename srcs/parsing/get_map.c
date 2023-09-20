@@ -14,7 +14,7 @@
 
 static int	search_player_presence(char *map);
 
-int	get_map(int map_fd, t_map *map, t_game *cub)
+int	get_map(int map_fd, t_map *map, t_cub *cub)
 {
 	char	*str;
 	char	*tmp;

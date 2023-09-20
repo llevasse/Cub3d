@@ -12,7 +12,7 @@
 
 #include "cub3d.h"
 
-int	render(t_game *cub)
+int	render(t_cub *cub)
 {
 	draw_minimap(cub);
 	mlx_put_image_to_window(cub->mlx_ptr, cub->win_ptr, cub->minimap->img.mlx_img, 0, 0);

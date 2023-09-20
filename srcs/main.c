@@ -14,7 +14,7 @@
 
 int	main(int argc, char **argv)
 {
-	t_game	cub;
+	t_cub	cub;
 
 	if (argc != 2)
 		return (1);

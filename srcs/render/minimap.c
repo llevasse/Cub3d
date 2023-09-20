@@ -12,7 +12,7 @@
 
 #include "cub3d.h"
 
-void	paint_minimap_bg(t_game *cub)
+void	paint_minimap_bg(t_cub *cub)
 {
 	int	x;
 	int	y;
@@ -43,7 +43,7 @@ void	draw_square(t_minimap *map, int x, int y, int colour)
 	}
 }
 
-void	draw_minimap(t_game *cub)
+void	draw_minimap(t_cub *cub)
 {
 	int			x;
 	int			y;

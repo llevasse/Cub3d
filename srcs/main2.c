@@ -38,7 +38,7 @@
 #define MAPY  8      //map height
 #define MAPS 64      //map cube size
 
-void	drawMap2D(t_game cub)
+void	drawMap2D(t_cub cub)
 {
 	int	x;
 	int	y;
@@ -83,12 +83,12 @@ void	drawMap2D(t_game cub)
 	}
 }
 
-void	redisplay(int key, t_game *cub);
-int		exit_prog(t_game *cub);
+void	redisplay(int key, t_cub *cub);
+int		exit_prog(t_cub *cub);
 
 int	main(void)
 {
-	t_game	cub;
+	t_cub	cub;
 	void	*tmp;
 
 	cub.mlx_ptr = mlx_init();
@@ -107,7 +107,7 @@ int	main(void)
 	return (0);
 }
 
-int	key_event(int key, t_game *cub)
+int	key_event(int key, t_cub *cub)
 {
 	ft_printf("%d\n", key);
 	if (key == esc)
@@ -117,7 +117,7 @@ int	key_event(int key, t_game *cub)
 	return (0);
 }
 
-int	exit_prog(t_game *cub)
+int	exit_prog(t_cub *cub)
 {
 	mlx_destroy_image(cub->mlx_ptr, cub->img.img_ptr);
 	mlx_destroy_display(cub->mlx_ptr);
@@ -128,7 +128,7 @@ int	exit_prog(t_game *cub)
 	return (0);
 }
 
-void	redisplay(int key, t_game *cub)
+void	redisplay(int key, t_cub *cub)
 {
 	if (key == a)
 		cub->player.px -= 0.5;

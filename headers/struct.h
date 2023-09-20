@@ -6,7 +6,7 @@
 /*   By: tdutel <tdutel@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/18 21:52:44 by llevasse          #+#    #+#             */
-/*   Updated: 2023/09/20 16:23:34 by llevasse         ###   ########.fr       */
+/*   Updated: 2023/09/20 21:34:33 by llevasse         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -56,7 +56,6 @@ typedef struct s_player
 {
 	float	px;
 	float	py;
-
 }				t_player;
 
 typedef struct s_image
@@ -66,7 +65,7 @@ typedef struct s_image
 	int		height;
 }				t_image;
 
-typedef struct s_game
+typedef struct s_cub
 {
 	void				*mlx_ptr;
 	void				*win_ptr;
@@ -75,7 +74,7 @@ typedef struct s_game
 	struct s_minimap	*minimap;
 	struct s_garbage	*garbage;
 	t_player			player;
-}				t_game;
+}				t_cub;
 
 t_garbage	*ft_new_garbage(void *address);
 void		ft_add_garbage(t_garbage **lst, void *addr);

@@ -12,7 +12,7 @@
 
 #include "cub3d.h"
 
-void	init_cub(t_game *cub, char **argv)
+void	init_cub(t_cub *cub, char **argv)
 {
 	cub->garbage = 0x0;
 	cub->minimap = malloc(sizeof(struct s_minimap));
@@ -33,7 +33,7 @@ void	init_cub(t_game *cub, char **argv)
 	cub->minimap->img.addr = mlx_get_data_addr(cub->minimap->img.mlx_img, &cub->minimap->img.bpp, &cub->minimap->img.line_len, &cub->minimap->img.endian);
 }
 
-void	init_minimap(t_game *cub)
+void	init_minimap(t_cub *cub)
 {
 	int	i;
 
