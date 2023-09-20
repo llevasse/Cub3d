@@ -6,7 +6,7 @@
 /*   By: tdutel <tdutel@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/18 21:43:29 by llevasse          #+#    #+#             */
-/*   Updated: 2023/09/20 23:12:19 by llevasse         ###   ########.fr       */
+/*   Updated: 2023/09/21 00:56:12 by llevasse         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,6 +22,8 @@
 # include <fcntl.h>
 # include <math.h>
 # include <errno.h>
+
+# include <stdio.h> //debug.
 
 # define WINDOW_WIDTH	1024*2
 # define WINDOW_HEIGHT	512*2

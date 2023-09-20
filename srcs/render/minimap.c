@@ -6,7 +6,7 @@
 /*   By: llevasse <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/20 00:28:00 by llevasse          #+#    #+#             */
-/*   Updated: 2023/09/20 23:14:59 by llevasse         ###   ########.fr       */
+/*   Updated: 2023/09/21 00:32:50 by llevasse         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -35,6 +35,8 @@ void	draw_minimap(t_cub *cub)
 
 	y = 0;
 	map = cub->minimap;
+	img_pix_put(&map->img, 0, 0, 0x010203);
+	get_pixel_colour(&map->img, 0, 0);
 	while (y < map->nb_line)
 	{
 		x = 0;
@@ -60,26 +62,26 @@ int	check_collision(t_minimap *map, int px, int py)
 	
 	if (px < 0 || py < 0 || px > MINIMAP_WIDTH || py > MINIMAP_HEIGHT)
 		return (0);
-	x = px - 1;
-	y = py - 1;
-	while (x < px + map->block_w + 1)
+	x = px;
+	y = py;
+	while (x < px + map->block_w)
 	{
 		if (get_pixel_colour(&map->img, x++, y) == MINIMAP_W_RGB)
 			return (1);
 	}
-	while (y < py + map->block_h + 1)
+	while (y < py + map->block_h)
 	{
 		if (get_pixel_colour(&map->img, x, y++) == MINIMAP_W_RGB)
 			return (1);
 	}
-	x = px - 1;
-	y = py - 1;
-	while (y < py + map->block_h + 1)
+	x = px;
+	y = py;
+	while (y < py + map->block_h)
 	{
 		if (get_pixel_colour(&map->img, x, y++) == MINIMAP_W_RGB)
 			return (1);
 	}
-	while (x < px + map->block_w + 1)
+	while (x < px + map->block_w)
 	{
 		if (get_pixel_colour(&map->img, x++, y) == MINIMAP_W_RGB)
 			return (1);
