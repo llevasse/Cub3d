@@ -6,7 +6,7 @@
 /*   By: llevasse <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/20 00:28:00 by llevasse          #+#    #+#             */
-/*   Updated: 2023/09/20 22:23:06 by llevasse         ###   ########.fr       */
+/*   Updated: 2023/09/20 23:14:59 by llevasse         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -50,4 +50,39 @@ void	draw_minimap(t_cub *cub)
 		y++;
 	}
 	draw_square(map, cub->player.px, cub->player.py, PLAYER_RGB);
+}
+
+// return 1 if player collides with wall
+int	check_collision(t_minimap *map, int px, int py)
+{
+	int	x;
+	int	y;
+	
+	if (px < 0 || py < 0 || px > MINIMAP_WIDTH || py > MINIMAP_HEIGHT)
+		return (0);
+	x = px - 1;
+	y = py - 1;
+	while (x < px + map->block_w + 1)
+	{
+		if (get_pixel_colour(&map->img, x++, y) == MINIMAP_W_RGB)
+			return (1);
+	}
+	while (y < py + map->block_h + 1)
+	{
+		if (get_pixel_colour(&map->img, x, y++) == MINIMAP_W_RGB)
+			return (1);
+	}
+	x = px - 1;
+	y = py - 1;
+	while (y < py + map->block_h + 1)
+	{
+		if (get_pixel_colour(&map->img, x, y++) == MINIMAP_W_RGB)
+			return (1);
+	}
+	while (x < px + map->block_w + 1)
+	{
+		if (get_pixel_colour(&map->img, x++, y) == MINIMAP_W_RGB)
+			return (1);
+	}
+	return (0);
 }
