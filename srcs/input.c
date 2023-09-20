@@ -6,7 +6,7 @@
 /*   By: llevasse <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/19 23:04:28 by llevasse          #+#    #+#             */
-/*   Updated: 2023/09/20 14:19:31 by llevasse         ###   ########.fr       */
+/*   Updated: 2023/09/20 22:33:51 by llevasse         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,6 +14,14 @@
 
 int	handle_input(int keysym, t_cub *cub)
 {
+	if (keysym == XK_W || keysym == XK_w)
+		return (cub->player.py -= 5);
+	if (keysym == XK_S || keysym == XK_s)
+		return (cub->player.py += 5);
+	if (keysym == XK_D || keysym == XK_d)
+		return (cub->player.px += 5);
+	if (keysym == XK_A || keysym == XK_a)
+		return (cub->player.px -= 5);
 	if (keysym == XK_Escape)
 		return (close_window(cub), 0);
 	return (0);
