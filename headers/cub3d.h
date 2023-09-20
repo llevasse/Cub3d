@@ -6,7 +6,7 @@
 /*   By: tdutel <tdutel@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/18 21:43:29 by llevasse          #+#    #+#             */
-/*   Updated: 2023/09/20 15:31:35 by llevasse         ###   ########.fr       */
+/*   Updated: 2023/09/20 15:35:12 by llevasse         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -44,6 +44,7 @@ int		get_tab_len(char **tab);
 
 void	img_pix_put(t_img *img, int x, int y, int colour);
 int		render(t_game *cub);
+void	draw_minimap(t_game *cub);
 void	paint_minimap_bg(t_game *cub);
 
 #endif
