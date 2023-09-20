@@ -6,7 +6,7 @@
 /*   By: tdutel <tdutel@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/18 21:43:29 by llevasse          #+#    #+#             */
-/*   Updated: 2023/09/20 00:48:41 by llevasse         ###   ########.fr       */
+/*   Updated: 2023/09/20 12:45:19 by llevasse         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -29,7 +29,7 @@
 # define MINIMAP_W_RGB	0xff
 # define MINIMAP_RGB	0x00ff
 
-t_game	*init_cub(char **argv);
+void	init_cub(t_game *cub, char **argv);
 t_map	*parse(int map_fd, t_game *cub);
 int		get_map(int map_fd, t_map *map);
 int		get_wall(int map_fd, t_map *map);
