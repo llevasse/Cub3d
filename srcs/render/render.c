@@ -6,7 +6,7 @@
 /*   By: llevasse <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/20 00:40:14 by llevasse          #+#    #+#             */
-/*   Updated: 2023/09/20 12:47:12 by llevasse         ###   ########.fr       */
+/*   Updated: 2023/09/20 13:40:54 by llevasse         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,7 +15,7 @@
 int	render(t_game *cub)
 {
 	paint_minimap_bg(cub);
-	mlx_put_image_to_window(cub->mlx_ptr, cub->win_ptr, cub->img.mlx_img, 0, 0);
+	mlx_put_image_to_window(cub->mlx_ptr, cub->win_ptr, cub->minimap_img.mlx_img, 0, 0);
 	return (0);
 }
 

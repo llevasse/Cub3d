@@ -6,7 +6,7 @@
 /*   By: tdutel <tdutel@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/18 21:52:44 by llevasse          #+#    #+#             */
-/*   Updated: 2023/09/20 00:43:53 by llevasse         ###   ########.fr       */
+/*   Updated: 2023/09/20 13:03:53 by llevasse         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -47,6 +47,7 @@ typedef struct s_game
 	void				*mlx_ptr;
 	void				*win_ptr;
 	struct s_img		img;
+	struct s_img		minimap_img;
 	struct s_map		*map;
 	struct s_garbage	*garbage;
 }				t_game;
