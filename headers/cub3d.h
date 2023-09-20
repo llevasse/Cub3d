@@ -6,7 +6,7 @@
 /*   By: tdutel <tdutel@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/18 21:43:29 by llevasse          #+#    #+#             */
-/*   Updated: 2023/09/21 00:56:12 by llevasse         ###   ########.fr       */
+/*   Updated: 2023/09/21 01:07:45 by llevasse         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -51,7 +51,7 @@ int		render(t_cub *cub);
 void	draw_minimap(t_cub *cub);
 void	paint_minimap_bg(t_cub *cub);
 int		get_pixel_colour(t_img *img, int x, int y);
-int		check_collision(t_minimap *map, int px, int py);
+int		check_collision(t_cub *cub, int is_x, int *offset);
 
 int		key_event(int key, t_cub *param);
 
