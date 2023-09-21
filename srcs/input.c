@@ -6,7 +6,7 @@
 /*   By: tdutel <tdutel@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/19 23:04:28 by llevasse          #+#    #+#             */
-/*   Updated: 2023/09/21 23:58:44 by llevasse         ###   ########.fr       */
+/*   Updated: 2023/09/22 00:19:27 by llevasse         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,15 +17,15 @@ int	handle_input(int keysym, t_cub *cub)
 	int	offset;
 
 	offset = PLAYER_OFFSET;
-	if (keysym == XK_s && !check_collision(cub, 0, &offset))
+	if (keysym == XK_w/* && !check_collision(cub, 0, &offset)*/)
 		set_player_new_pos(cub, 0, offset);
-	if (keysym == XK_d && !check_collision(cub, 1, &offset))
+	if (keysym == XK_d/* && !check_collision(cub, 1, &offset)*/)
 		set_player_new_pos(cub, 90, offset);
 	offset = -PLAYER_OFFSET;
-	if (keysym == XK_w && !check_collision(cub, 0, &offset))
+	if (keysym == XK_s/* && !check_collision(cub, 0, &offset)*/)
 		set_player_new_pos(cub, 0, offset);
-	if (keysym == XK_a && !check_collision(cub, 1, &offset))
-		set_player_new_pos(cub, -90, offset);
+	if (keysym == XK_a/* && !check_collision(cub, 1, &offset)*/)
+		set_player_new_pos(cub, 90, offset);
 	if (keysym == XK_Escape)
 		return (close_window(cub), offset);
 	rotate_input(keysym, cub);
@@ -44,12 +44,13 @@ int	no_higher(int nb, int highest, int lowest)
 
 void	set_player_new_pos(t_cub *cub, int angle, int distance)
 {
-	int	new_x;
-	int	new_y;
-	int	new_angle;
+	float	new_x;
+	float	new_y;
+	int		new_angle;
 
 	new_angle = no_higher(cub->player.pa + angle, 360, 0);
 
+	printf("angle : %d\n", new_angle);
 	new_x = cub->player.px + distance * cos(new_angle * RADIAN); 
 	new_y = cub->player.py + distance * sin(new_angle * RADIAN); 
 	cub->player.px = new_x;

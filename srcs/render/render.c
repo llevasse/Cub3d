@@ -6,7 +6,7 @@
 /*   By: llevasse <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/20 00:40:14 by llevasse          #+#    #+#             */
-/*   Updated: 2023/09/21 23:41:13 by llevasse         ###   ########.fr       */
+/*   Updated: 2023/09/22 00:01:47 by llevasse         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,7 +15,6 @@
 int	render(t_cub *cub)
 {
 	draw_minimap(cub);
-	drawRays3D(*cub);
 	mlx_put_image_to_window(cub->mlx_ptr, cub->win_ptr, cub->minimap->img.mlx_img, 0, 0);
 	return (0);
 }
