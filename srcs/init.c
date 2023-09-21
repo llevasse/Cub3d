@@ -6,7 +6,7 @@
 /*   By: tdutel <tdutel@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/19 22:29:27 by llevasse          #+#    #+#             */
-/*   Updated: 2023/09/21 21:28:15 by llevasse         ###   ########.fr       */
+/*   Updated: 2023/09/21 21:40:48 by llevasse         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -37,8 +37,8 @@ void	init_minimap(t_cub *cub)
 	int	divider;
 
 	cub->minimap->nb_line = get_tab_len(cub->minimap->map);
-	init_map_value(cub);
 	cub->minimap->mapy = cub->minimap->nb_line;
+	init_map_value(cub);
 	i = 0;
 	cub->minimap->map_width = 0;
 	while (i < cub->minimap->nb_line)
@@ -47,7 +47,7 @@ void	init_minimap(t_cub *cub)
 			cub->minimap->map_width = ft_strlen(cub->minimap->map[i - 1]);
 	}
 	divider = cub->minimap->nb_line;
-	if (MINIMAP_WIDTH > MINIMAP_HEIGHT)
+	if (MINIMAP_WIDTH < MINIMAP_HEIGHT)
 		divider = cub->minimap->map_width;
 	cub->minimap->block_w = MINIMAP_WIDTH/divider;
 	cub->minimap->block_h = MINIMAP_HEIGHT/divider;
@@ -85,8 +85,9 @@ void	init_map_value(t_cub *cub)
 	int	i;
 
 	i = 0;
-	cub->minimap->mapy = cub->minimap->nb_line;
-	cub->minimap->mapx = malloc(sizeof(int) * (cub->minimap->mapy)); //TODO : garbage collector (ya til + 1 pour alloc de int ?)
+	cub->minimap->mapx = malloc(sizeof(int) * (cub->minimap->mapy));
+	ft_add_garbage(&cub->garbage, cub->minimap->mapx);
+	cub->minimap->maps = 0;
 	while (i < cub->minimap->mapy)
 	{
 		cub->minimap->mapx[i] = ft_strlen(cub->minimap->map[i]) - 1;
