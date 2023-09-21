@@ -6,7 +6,7 @@
 /*   By: tdutel <tdutel@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/18 21:52:44 by llevasse          #+#    #+#             */
-/*   Updated: 2023/09/21 14:32:34 by tdutel           ###   ########.fr       */
+/*   Updated: 2023/09/21 15:20:31 by tdutel           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -50,7 +50,6 @@ typedef struct s_minimap
 	int					block_w;
 	int					block_h;
 	struct s_img		img;
-	char				*map_cpy;
 	int					*mapx;
 	int					mapy;
 	int					maps;

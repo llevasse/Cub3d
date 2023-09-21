@@ -6,7 +6,7 @@
 /*   By: tdutel <tdutel@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/19 23:04:28 by llevasse          #+#    #+#             */
-/*   Updated: 2023/09/21 14:52:33 by tdutel           ###   ########.fr       */
+/*   Updated: 2023/09/21 15:30:48 by tdutel           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -37,8 +37,8 @@ int	handle_input(int keysym, t_cub *cub)
 	if (keysym == XK_Escape)
 		return (close_window(cub), offset);
 	rotate_input(keysym, cub);
-	// drawRays3D(*cub);
-	draw_line(*cub, cub->player.px + cub->player.pdx * 5, cub->player.py + cub->player.pdy * 5);
+	drawRays3D(*cub);
+	// draw_line(*cub, cub->player.px + cub->player.pdx * 5, cub->player.py + cub->player.pdy * 5);
 	return (0);
 }
 
@@ -114,7 +114,7 @@ void	draw_line(t_cub cub, int x2, int y2)
 	nb.px = cub.player.px + 10;
 	nb.py = cub.player.py + 10;
 	nb.pa = 0;
-	while(nb.pa <= steps + 50)
+	while(nb.pa <= steps + 100)
 	{
 		mlx_pixel_put(cub.mlx_ptr, cub.win_ptr, (int)nb.px, (int)nb.py, 0x222222);
 		nb.px += nb.pdx;
@@ -136,7 +136,9 @@ void	drawRays3D(t_cub cub)
 		var.aTan = -1 / tan(var.ra);
 		if (var.ra > PI)
 		{
+			printf("ry = %f\n", var.ry);
 			var.ry = (((int)cub.player.py >> 6) << 6) - 0.0001;
+			printf("ry = %f\n", var.ry);
 			var.rx = (cub.player.py - var.ry) * var.aTan + cub.player.px;
 			var.yo = -cub.minimap->maps;
 			var.xo = -var.yo * var.aTan;
@@ -154,12 +156,14 @@ void	drawRays3D(t_cub cub)
 			var.ry = cub.player.py;
 			var.dof = cub.minimap->mapy;
 		}
+		printf("raPI\n");
 		while (var.dof < cub.minimap->mapy)
 		{
 			var.mx = (int)(var.rx) >> 6;
 			var.my = (int)(var.ry) >> 6;
+			printf("my = %d\n", cub.minimap->mapx[var.dof]);
 			var.mp = var.my * cub.minimap->mapx[var.dof] + var.mx;
-			if ((var.mp < cub.minimap->maps) && (cub.minimap->map_cpy[var.mp] == '1'))
+			if ((var.mp < cub.minimap->maps) && (cub.minimap->map[var.dof][var.mp % cub.minimap->mapy] == '1'))
 				var.dof = cub.minimap->mapy;
 			else
 			{
