@@ -6,7 +6,7 @@
 /*   By: tdutel <tdutel@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/18 21:43:29 by llevasse          #+#    #+#             */
-/*   Updated: 2023/09/21 10:39:22 by tdutel           ###   ########.fr       */
+/*   Updated: 2023/09/21 11:01:19 by tdutel           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,8 +25,8 @@
 
 # include <stdio.h> //debug.
 
-# define WINDOW_WIDTH	1024*4
-# define WINDOW_HEIGHT	512*4
+# define WINDOW_WIDTH	1024*2
+# define WINDOW_HEIGHT	512*2
 
 # define MINIMAP_WIDTH	WINDOW_WIDTH/3
 # define MINIMAP_HEIGHT	WINDOW_HEIGHT/3
