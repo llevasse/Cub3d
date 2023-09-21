@@ -6,7 +6,7 @@
 /*   By: tdutel <tdutel@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/18 21:43:29 by llevasse          #+#    #+#             */
-/*   Updated: 2023/09/21 12:20:39 by tdutel           ###   ########.fr       */
+/*   Updated: 2023/09/21 14:50:58 by tdutel           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -57,6 +57,10 @@ void	draw_minimap(t_cub *cub);
 int		get_pixel_colour(t_img *img, int x, int y);
 int		check_collision(t_cub *cub, int is_x, int *offset);
 
+
+void	init_map_value(t_cub *cub);
 int		rotate_input(int keysym, t_cub *cub);
+void	draw_line(t_cub cub, int x2, int y2);
+void	drawRays3D(t_cub cub);
 
 #endif

@@ -6,7 +6,7 @@
 /*   By: tdutel <tdutel@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/19 22:29:27 by llevasse          #+#    #+#             */
-/*   Updated: 2023/09/21 12:28:03 by tdutel           ###   ########.fr       */
+/*   Updated: 2023/09/21 14:48:21 by tdutel           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -36,6 +36,8 @@ void	init_minimap(t_cub *cub)
 	int	i;
 
 	cub->minimap->nb_line = get_tab_len(cub->minimap->map);
+	init_map_value(cub);
+	cub->minimap->mapy = cub->minimap->nb_line;
 	i = 0;
 	cub->minimap->map_width = 0;
 	while (i < cub->minimap->nb_line)
@@ -72,4 +74,20 @@ void	init_player(t_cub *cub)
 	}
 	cub->player.pdx = cos(cub->player.pa) * 5;	//init player delta x
 	cub->player.pdy = sin(cub->player.pa) * 5;	//init player delta y
+}
+
+void	init_map_value(t_cub *cub)
+{
+	int	i;
+
+	i = 0;
+	cub->minimap->mapy = cub->minimap->nb_line;
+	cub->minimap->mapx = malloc(sizeof(int) * (cub->minimap->mapy)); //TODO : garbage collector (ya til + 1 pour alloc de int ?)
+	while (i < cub->minimap->mapy)
+	{
+		cub->minimap->mapx[i] = ft_strlen(cub->minimap->map[i]) - 1;
+		cub->minimap->maps += cub->minimap->mapx[i];
+		printf("mapx[%d] = %d \t maps = %d\n", i, cub->minimap->mapx[i], cub->minimap->maps);
+		i++;
+	}
 }

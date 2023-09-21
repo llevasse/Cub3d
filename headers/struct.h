@@ -6,7 +6,7 @@
 /*   By: tdutel <tdutel@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/18 21:52:44 by llevasse          #+#    #+#             */
-/*   Updated: 2023/09/21 11:42:23 by tdutel           ###   ########.fr       */
+/*   Updated: 2023/09/21 14:32:34 by tdutel           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -50,6 +50,10 @@ typedef struct s_minimap
 	int					block_w;
 	int					block_h;
 	struct s_img		img;
+	char				*map_cpy;
+	int					*mapx;
+	int					mapy;
+	int					maps;
 }				t_minimap;
 
 typedef struct s_player
@@ -76,5 +80,24 @@ t_garbage	*ft_new_garbage(void *address);
 void		ft_add_garbage(t_garbage **lst, void *addr);
 void		malloc_failed(t_garbage *garbage);
 void		free_garbage(t_garbage	*garbage);
+
+
+
+//-----math-----------------------------
+
+typedef struct s_math
+{
+	int		r;
+	int		mx;
+	int		my;
+	int		mp;
+	int		dof;
+	float	rx;
+	float	ry;
+	float	ra;
+	float	xo;
+	float	yo;
+	float	aTan;
+}				t_math;
 
 #endif
