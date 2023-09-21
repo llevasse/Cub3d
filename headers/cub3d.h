@@ -6,7 +6,7 @@
 /*   By: tdutel <tdutel@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/18 21:43:29 by llevasse          #+#    #+#             */
-/*   Updated: 2023/09/21 15:23:56 by tdutel           ###   ########.fr       */
+/*   Updated: 2023/09/21 23:56:48 by llevasse         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -37,6 +37,7 @@
 # define PLAYER_OFFSET	5
 
 # define PI 3.1415926535
+# define RADIAN PI/180
 
 void	init_cub(t_cub *cub, char **argv);
 void	init_minimap(t_cub *cub);
@@ -59,6 +60,7 @@ int		check_collision(t_cub *cub, int is_x, int *offset);
 
 
 void	init_map_value(t_cub *cub);
+void	set_player_new_pos(t_cub *cub, int angle, int distance);
 int		rotate_input(int keysym, t_cub *cub);
 void	draw_line(t_cub cub, int x2, int y2);
 void	drawRays3D(t_cub cub);

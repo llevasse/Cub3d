@@ -6,7 +6,7 @@
 /*   By: tdutel <tdutel@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/19 23:04:28 by llevasse          #+#    #+#             */
-/*   Updated: 2023/09/21 23:30:35 by llevasse         ###   ########.fr       */
+/*   Updated: 2023/09/21 23:58:44 by llevasse         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,28 +18,42 @@ int	handle_input(int keysym, t_cub *cub)
 
 	offset = PLAYER_OFFSET;
 	if (keysym == XK_s && !check_collision(cub, 0, &offset))
-	{
-		cub->player.px -= cub->player.pdx;
-		cub->player.py -= cub->player.pdy;
-		// return (cub->player.py += offset);
-	}
+		set_player_new_pos(cub, 0, offset);
 	if (keysym == XK_d && !check_collision(cub, 1, &offset))
-		return (cub->player.px += offset);						//a trouver formule math
+		set_player_new_pos(cub, 90, offset);
 	offset = -PLAYER_OFFSET;
 	if (keysym == XK_w && !check_collision(cub, 0, &offset))
-	{
-		cub->player.px += cub->player.pdx;
-		cub->player.py += cub->player.pdy;
-		// return (cub->player.py += offset);
-	}
+		set_player_new_pos(cub, 0, offset);
 	if (keysym == XK_a && !check_collision(cub, 1, &offset))
-		return (cub->player.px += offset);						//a trouver formule math
+		set_player_new_pos(cub, -90, offset);
 	if (keysym == XK_Escape)
 		return (close_window(cub), offset);
 	rotate_input(keysym, cub);
-	drawRays3D(*cub);
 	// draw_line(*cub, cub->player.px + cub->player.pdx * 5, cub->player.py + cub->player.pdy * 5);
 	return (0);
+}
+
+int	no_higher(int nb, int highest, int lowest)
+{
+	if (nb < lowest)
+		return (no_higher(nb + highest, highest, lowest));
+	if (nb > highest)
+		return (no_higher(nb - highest, highest, lowest));
+	return (nb);
+}
+
+void	set_player_new_pos(t_cub *cub, int angle, int distance)
+{
+	int	new_x;
+	int	new_y;
+	int	new_angle;
+
+	new_angle = no_higher(cub->player.pa + angle, 360, 0);
+
+	new_x = cub->player.px + distance * cos(new_angle * RADIAN); 
+	new_y = cub->player.py + distance * sin(new_angle * RADIAN); 
+	cub->player.px = new_x;
+	cub->player.py = new_y;
 }
 
 int	close_window(t_cub *cub)
@@ -59,21 +73,9 @@ int	close_window(t_cub *cub)
 int	rotate_input(int keysym, t_cub *cub)
 {
 	if (keysym == XK_Left)
-	{
-		cub->player.pa -= 1;
-		if (cub->player.pa < 0)
-			cub->player.pa += 2 * PI;
-		cub->player.pdx = cos(cub->player.pa) * 5;
-		cub->player.pdy = sin(cub->player.pa) * 5;
-	}
+		cub->player.pa = no_higher(cub->player.pa - 1, 360, 0);
 	if (keysym == XK_Right)
-	{
-		cub->player.pa += 1;
-		if (cub->player.pa > 2 * PI)
-			cub->player.pa -= 2 * PI;
-		cub->player.pdx = cos(cub->player.pa) * 5;
-		cub->player.pdy = sin(cub->player.pa) * 5;
-	}
+		cub->player.pa = no_higher(cub->player.pa + 1, 360, 0);
 	if (keysym == XK_Up)
 	{
 		cub->player.px += cub->player.pdx;
@@ -108,7 +110,8 @@ void	draw_line(t_cub cub, int x2, int y2)
 	nb.pa = 0;
 	while(nb.pa <= steps + 100)
 	{
-		mlx_pixel_put(cub.mlx_ptr, cub.win_ptr, (int)nb.px, (int)nb.py, 0x222222);
+		img_pix_put(&cub.minimap->img, (int)nb.px, (int)nb.py, 0x222222);
+//		mlx_pixel_put(cub.mlx_ptr, cub.win_ptr, (int)nb.px, (int)nb.py, 0x222222);
 		nb.px += nb.pdx;
 		nb.py += nb.pdy;
 		nb.pa += 1;
