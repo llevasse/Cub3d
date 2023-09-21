@@ -6,7 +6,7 @@
 /*   By: llevasse <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/21 01:32:27 by llevasse          #+#    #+#             */
-/*   Updated: 2023/09/21 01:38:28 by llevasse         ###   ########.fr       */
+/*   Updated: 2023/09/21 10:06:46 by llevasse         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -39,7 +39,7 @@ int	check_collision(t_cub *cub, int is_x, int *offset)
 		return (1);
 	if (get_pixel_colour(&cub->minimap->img, x, y) == MINIMAP_W_RGB)
 		return (check_w_smaller_mov(cub, is_x, offset));
-	if (get_pixel_colour(&cub->minimap->img, x + cub->minimap->block_w/2, y) == MINIMAP_W_RGB)
+	if (get_pixel_colour(&cub->minimap->img, x + cub->minimap->block_h/2, y) == MINIMAP_W_RGB)
 		return (check_w_smaller_mov(cub, is_x, offset));
 	if (get_pixel_colour(&cub->minimap->img, x, y + cub->minimap->block_h/2) == MINIMAP_W_RGB)
 		return (check_w_smaller_mov(cub, is_x, offset));

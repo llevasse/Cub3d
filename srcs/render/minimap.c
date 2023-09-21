@@ -6,7 +6,7 @@
 /*   By: llevasse <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/20 00:28:00 by llevasse          #+#    #+#             */
-/*   Updated: 2023/09/21 01:38:08 by llevasse         ###   ########.fr       */
+/*   Updated: 2023/09/21 10:19:49 by llevasse         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,6 +16,7 @@ void	draw_square(t_minimap *map, int x, int y, int colour)
 {
 	int	y_b;
 	int	x_b;
+
 	y_b = 0;
 	while (y + y_b < MINIMAP_HEIGHT && y_b < map->block_h)
 	{
@@ -30,11 +31,12 @@ void	draw_player(t_minimap *map, int x, int y, int colour)
 {
 	int	y_b;
 	int	x_b;
+
 	y_b = 0;
 	while (y + y_b < MINIMAP_HEIGHT && y_b < map->block_h/2)
 	{
 		x_b = 0;
-		while (x + x_b < MINIMAP_WIDTH && x_b < map->block_w/2)
+		while (x + x_b < MINIMAP_WIDTH && x_b < map->block_h/2)
 			img_pix_put(&map->img, x + x_b++, y + y_b, colour);
 		y_b++;
 	}
