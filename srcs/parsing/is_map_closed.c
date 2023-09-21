@@ -15,7 +15,7 @@
 int	is_line_v_closed(char **tab, int x, int entry_y);
 int	is_line_h_closed(char *line);
 
-int	check_closed(char *map_str, t_map *map, t_game *cub)
+int	check_closed(char *map_str, t_map *map, t_cub *cub)
 {
 	char	**split_map;
 	int		i;

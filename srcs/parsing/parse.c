@@ -14,7 +14,7 @@
 
 static void	set_map_null(t_map *map);
 
-t_map	*parse(int map_fd, t_game *cub)
+t_map	*parse(int map_fd, t_cub *cub)
 {
 	int		element_got;
 	t_map	*map;
