@@ -6,7 +6,7 @@
 /*   By: tdutel <tdutel@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/18 21:52:44 by llevasse          #+#    #+#             */
-/*   Updated: 2023/09/21 10:48:53 by tdutel           ###   ########.fr       */
+/*   Updated: 2023/09/21 11:42:23 by tdutel           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -56,6 +56,9 @@ typedef struct s_player
 {
 	float	px;
 	float	py;
+	float	pdx;	//player delta x
+	float	pdy;	//player delta y
+	float	pa;		//player angle
 }				t_player;
 
 
