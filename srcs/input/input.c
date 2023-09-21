@@ -6,7 +6,7 @@
 /*   By: tdutel <tdutel@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/19 23:04:28 by llevasse          #+#    #+#             */
-/*   Updated: 2023/09/22 00:19:27 by llevasse         ###   ########.fr       */
+/*   Updated: 2023/09/22 00:56:26 by llevasse         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,44 +17,20 @@ int	handle_input(int keysym, t_cub *cub)
 	int	offset;
 
 	offset = PLAYER_OFFSET;
-	if (keysym == XK_w/* && !check_collision(cub, 0, &offset)*/)
+	if (keysym == XK_w && !check_collision(cub, 0, &offset))
 		set_player_new_pos(cub, 0, offset);
-	if (keysym == XK_d/* && !check_collision(cub, 1, &offset)*/)
+	if (keysym == XK_d && !check_collision(cub, 90, &offset))
 		set_player_new_pos(cub, 90, offset);
 	offset = -PLAYER_OFFSET;
-	if (keysym == XK_s/* && !check_collision(cub, 0, &offset)*/)
+	if (keysym == XK_s && !check_collision(cub, 0, &offset))
 		set_player_new_pos(cub, 0, offset);
-	if (keysym == XK_a/* && !check_collision(cub, 1, &offset)*/)
+	if (keysym == XK_a && !check_collision(cub, 90, &offset))
 		set_player_new_pos(cub, 90, offset);
 	if (keysym == XK_Escape)
 		return (close_window(cub), offset);
 	rotate_input(keysym, cub);
 	// draw_line(*cub, cub->player.px + cub->player.pdx * 5, cub->player.py + cub->player.pdy * 5);
 	return (0);
-}
-
-int	no_higher(int nb, int highest, int lowest)
-{
-	if (nb < lowest)
-		return (no_higher(nb + highest, highest, lowest));
-	if (nb > highest)
-		return (no_higher(nb - highest, highest, lowest));
-	return (nb);
-}
-
-void	set_player_new_pos(t_cub *cub, int angle, int distance)
-{
-	float	new_x;
-	float	new_y;
-	int		new_angle;
-
-	new_angle = no_higher(cub->player.pa + angle, 360, 0);
-
-	printf("angle : %d\n", new_angle);
-	new_x = cub->player.px + distance * cos(new_angle * RADIAN); 
-	new_y = cub->player.py + distance * sin(new_angle * RADIAN); 
-	cub->player.px = new_x;
-	cub->player.py = new_y;
 }
 
 int	close_window(t_cub *cub)
@@ -74,9 +50,9 @@ int	close_window(t_cub *cub)
 int	rotate_input(int keysym, t_cub *cub)
 {
 	if (keysym == XK_Left)
-		cub->player.pa = no_higher(cub->player.pa - 1, 360, 0);
+		cub->player.pa--;
 	if (keysym == XK_Right)
-		cub->player.pa = no_higher(cub->player.pa + 1, 360, 0);
+		cub->player.pa++;
 	if (keysym == XK_Up)
 	{
 		cub->player.px += cub->player.pdx;

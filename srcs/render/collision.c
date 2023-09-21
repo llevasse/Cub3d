@@ -6,7 +6,7 @@
 /*   By: tdutel <tdutel@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/21 01:32:27 by llevasse          #+#    #+#             */
-/*   Updated: 2023/09/21 13:25:31 by tdutel           ###   ########.fr       */
+/*   Updated: 2023/09/22 01:02:44 by llevasse         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,26 +22,22 @@ int	check_w_smaller_mov(t_cub *cub, int is_x, int *offset)
 }
 
 // return 1 if player collides with wall
-int	check_collision(t_cub *cub, int is_x, int *offset)
+int	check_collision(t_cub *cub, int angle, int *offset)
 {
-	int	x;
-	int	y;
-	
-	x = cub->player.px;
-	y = cub->player.py;
+	float	x;
+	float	y;
+
+	x = 0;	
+	y = get_player_new_pos(cub, angle, *offset, &x);
 	if (*offset == 0)
 		return (0);
-	if (is_x)
-		x += *offset;
-	else
-		y += *offset;
 	if (x < 0 || y < 0 || x > MINIMAP_WIDTH || y > MINIMAP_HEIGHT)
 		return (1);
 	if (get_pixel_colour(&cub->minimap->img, x, y) == MINIMAP_W_RGB)
-		return (check_w_smaller_mov(cub, is_x, offset));
+		return (check_w_smaller_mov(cub, angle, offset));
 	if (get_pixel_colour(&cub->minimap->img, x + cub->minimap->block_h/2, y) == MINIMAP_W_RGB)
-		return (check_w_smaller_mov(cub, is_x, offset));
+		return (check_w_smaller_mov(cub, angle, offset));
 	if (get_pixel_colour(&cub->minimap->img, x, y + cub->minimap->block_h/2) == MINIMAP_W_RGB)
-		return (check_w_smaller_mov(cub, is_x, offset));
+		return (check_w_smaller_mov(cub, angle, offset));
 	return (0);
 }

@@ -17,7 +17,6 @@ LIBFT_LIB		=	-L $(LIBFT_PATH) -l ft
 #---CUB_VAR---------------------------------------
 SRC				=	srcs/main.c \
 					srcs/init.c \
-					srcs/input.c \
 					srcs/parsing/parse.c \
 					srcs/garbage_collector.c \
 					srcs/parsing/get_map.c \
@@ -26,7 +25,9 @@ SRC				=	srcs/main.c \
 					srcs/render/render.c \
 					srcs/render/minimap.c \
 					srcs/render/collision.c \
-					srcs/render/get_pixel_colour.c
+					srcs/render/get_pixel_colour.c \
+					srcs/input/input.c \
+					srcs/input/set_player_pos.c
 
 OBJS_DIR		=	.OBJS/
 OBJS			=	$(addprefix $(OBJS_DIR), $(SRC:.c=.o))
