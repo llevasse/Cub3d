@@ -6,7 +6,7 @@
 /*   By: tdutel <tdutel@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/19 22:29:27 by llevasse          #+#    #+#             */
-/*   Updated: 2023/09/21 12:19:17 by tdutel           ###   ########.fr       */
+/*   Updated: 2023/09/21 12:28:03 by tdutel           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -29,8 +29,6 @@ void	init_cub(t_cub *cub, char **argv)
 		ft_add_garbage(&cub->garbage, NULL);
 	cub->minimap->img.mlx_img = mlx_new_image(cub->mlx_ptr, MINIMAP_WIDTH, MINIMAP_HEIGHT);
 	cub->minimap->img.addr = mlx_get_data_addr(cub->minimap->img.mlx_img, &cub->minimap->img.bpp, &cub->minimap->img.line_len, &cub->minimap->img.endian);
-	cub->player.pdx = cos(cub->player.pa) * 5;	//init player delta x
-	cub->player.pdy = sin(cub->player.pa) * 5;	//init player delta y
 }
 
 void	init_minimap(t_cub *cub)
@@ -72,4 +70,6 @@ void	init_player(t_cub *cub)
 		}
 		i++;
 	}
+	cub->player.pdx = cos(cub->player.pa) * 5;	//init player delta x
+	cub->player.pdy = sin(cub->player.pa) * 5;	//init player delta y
 }
