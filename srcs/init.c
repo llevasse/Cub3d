@@ -6,7 +6,7 @@
 /*   By: tdutel <tdutel@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/19 22:29:27 by llevasse          #+#    #+#             */
-/*   Updated: 2023/09/21 21:42:53 by llevasse         ###   ########.fr       */
+/*   Updated: 2023/09/21 21:45:09 by llevasse         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -68,7 +68,6 @@ void	init_player(t_cub *cub)
 		{
 			if (ft_is_in_str("NSEW", cub->minimap->map[i][j++]))
 			{
-				printf("block_h %d, block_w %d\n", cub->minimap->block_h, cub->minimap->block_w);
 				cub->player.px = ((j - 1) * cub->minimap->block_w);
 				cub->player.py = (i * cub->minimap->block_h);
 				break ;
@@ -76,7 +75,7 @@ void	init_player(t_cub *cub)
 		}
 		i++;
 	}
-	cub->player.pa = 1;
+	cub->player.pa = 90;
 	cub->player.pdx = cos(cub->player.pa) * 5;	//init player delta x
 	cub->player.pdy = sin(cub->player.pa) * 5;	//init player delta y
 }
