@@ -6,7 +6,7 @@
 /*   By: tdutel <tdutel@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/19 22:29:27 by llevasse          #+#    #+#             */
-/*   Updated: 2023/09/21 14:48:21 by tdutel           ###   ########.fr       */
+/*   Updated: 2023/09/21 21:28:15 by llevasse         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -34,6 +34,7 @@ void	init_cub(t_cub *cub, char **argv)
 void	init_minimap(t_cub *cub)
 {
 	int	i;
+	int	divider;
 
 	cub->minimap->nb_line = get_tab_len(cub->minimap->map);
 	init_map_value(cub);
@@ -45,8 +46,11 @@ void	init_minimap(t_cub *cub)
 		if ((int)ft_strlen(cub->minimap->map[i++]) > cub->minimap->map_width)
 			cub->minimap->map_width = ft_strlen(cub->minimap->map[i - 1]);
 	}
-	cub->minimap->block_w = MINIMAP_WIDTH/cub->minimap->map_width;
-	cub->minimap->block_h = MINIMAP_HEIGHT/cub->minimap->nb_line;
+	divider = cub->minimap->nb_line;
+	if (MINIMAP_WIDTH > MINIMAP_HEIGHT)
+		divider = cub->minimap->map_width;
+	cub->minimap->block_w = MINIMAP_WIDTH/divider;
+	cub->minimap->block_h = MINIMAP_HEIGHT/divider;
 }
 
 void	init_player(t_cub *cub)
