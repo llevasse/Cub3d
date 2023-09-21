@@ -49,7 +49,7 @@ MLX_LIB			=	-L $(MLX_PATH) -l mlx_Linux
 # ----
 FLAGS			=	-Wall -Werror -Wextra -g3
 INCLUDES		=	$(MLX_INCLUDES) $(BASE_INCLUDE) $(LIBFT_INCLUDE)
-LIBS			=	$(MLX_FLAGS) $(MLX_LIB) $(LIBFT_LIB) 
+LIBS			=	$(MLX_LIB) $(LIBFT_LIB) $(MLX_FLAGS)
 
 #---RULES----------------------------------------
 
