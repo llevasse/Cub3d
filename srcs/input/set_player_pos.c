@@ -6,7 +6,7 @@
 /*   By: llevasse <llevasse@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/22 00:36:13 by llevasse          #+#    #+#             */
-/*   Updated: 2023/09/22 01:02:18 by llevasse         ###   ########.fr       */
+/*   Updated: 2023/09/22 01:30:41 by llevasse         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,21 +21,29 @@ int	no_higher(int nb, int highest, int lowest)
 	return (nb);
 }
 
+
+/*@brief Set player new position given distance
+ *@param *cub Pointer to cub
+ *@param angle Should always pass 0 unless need an offset (like when going left or right)
+ *@param distance Distance of which to put the new point from the old one
+ */
 void	set_player_new_pos(t_cub *cub, int angle, int distance)
 {
-	float	new_x;
-	float	new_y;
 	int		new_angle;
 
-	new_angle = no_higher(cub->player.pa + angle, 360, 0);
+	new_angle = no_higher(cub->player.pa + angle, 360, 0);			//just make sure that the angle is not out of bound
 
-	printf("angle : %d\n", new_angle);
-	new_x = cub->player.px + distance * cos(new_angle * RADIAN); 
-	new_y = cub->player.py + distance * sin(new_angle * RADIAN); 
-	cub->player.px = new_x;
-	cub->player.py = new_y;
+	cub->player.px = cub->player.px + distance * cos(new_angle * RADIAN); 
+	cub->player.py = cub->player.py + distance * sin(new_angle * RADIAN); 
 }
 
+/*@brief Get player new position given distance
+ *@param *cub Pointer to cub
+ *@param angle Should always pass 0 unless need an offset (like when going left or right)
+ *@param distance Distance of which to put the new point from the old one
+ *@param *x Pointer to a float var
+ *@return Return value of new y pos
+ */
 float	get_player_new_pos(t_cub *cub, int angle, int distance, float *x)
 {
 	int		new_angle;
