@@ -6,7 +6,7 @@
 /*   By: tdutel <tdutel@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/21 01:32:27 by llevasse          #+#    #+#             */
-/*   Updated: 2023/09/22 12:36:32 by llevasse         ###   ########.fr       */
+/*   Updated: 2023/09/23 00:18:08 by llevasse         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,6 +26,7 @@ int	check_collision(t_cub *cub, int angle, float *offset)
 {
 	float	x;
 	float	y;
+	int		w;
 
 	x = 0;	
 	y = get_player_new_pos(cub, angle, *offset, &x);		//get new possition without setting them to the player
@@ -33,11 +34,14 @@ int	check_collision(t_cub *cub, int angle, float *offset)
 		return (0);
 	if (x < 0 || y < 0 || x > MINIMAP_WIDTH || y > MINIMAP_HEIGHT)
 		return (1);
-	if (get_pixel_colour(&cub->minimap->img, x, y) == MINIMAP_W_RGB)
+	w = cub->minimap->block_h / 4;
+	if (get_pixel_colour(&cub->minimap->img, x - w, y - w) == MINIMAP_W_RGB)
 		return (check_w_smaller_mov(cub, angle, offset));
-	if (get_pixel_colour(&cub->minimap->img, x + cub->minimap->block_h/2, y) == MINIMAP_W_RGB)
+	if (get_pixel_colour(&cub->minimap->img, x + w, y - w) == MINIMAP_W_RGB)
 		return (check_w_smaller_mov(cub, angle, offset));
-	if (get_pixel_colour(&cub->minimap->img, x, y + cub->minimap->block_h/2) == MINIMAP_W_RGB)
+	if (get_pixel_colour(&cub->minimap->img, x - w, y + w) == MINIMAP_W_RGB)
+		return (check_w_smaller_mov(cub, angle, offset));
+	if (get_pixel_colour(&cub->minimap->img, x + w, y + w)== MINIMAP_W_RGB)
 		return (check_w_smaller_mov(cub, angle, offset));
 	return (0);
 }
