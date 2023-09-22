@@ -6,13 +6,13 @@
 /*   By: tdutel <tdutel@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/21 01:32:27 by llevasse          #+#    #+#             */
-/*   Updated: 2023/09/22 11:34:46 by llevasse         ###   ########.fr       */
+/*   Updated: 2023/09/22 12:36:32 by llevasse         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "cub3d.h"
 
-int	check_w_smaller_mov(t_cub *cub, int angle, int *offset)
+int	check_w_smaller_mov(t_cub *cub, int angle, float *offset)
 {
 	if (*offset >= 0)
 		*offset -= 1;
@@ -22,7 +22,7 @@ int	check_w_smaller_mov(t_cub *cub, int angle, int *offset)
 }
 
 // return 1 if player collides with wall
-int	check_collision(t_cub *cub, int angle, int *offset)
+int	check_collision(t_cub *cub, int angle, float *offset)
 {
 	float	x;
 	float	y;

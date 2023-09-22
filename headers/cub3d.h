@@ -6,7 +6,7 @@
 /*   By: tdutel <tdutel@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/18 21:43:29 by llevasse          #+#    #+#             */
-/*   Updated: 2023/09/22 12:17:44 by llevasse         ###   ########.fr       */
+/*   Updated: 2023/09/22 12:36:20 by llevasse         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -61,12 +61,12 @@ int		render(t_cub *cub);
 void	draw_minimap(t_cub *cub);
 // void	paint_minimap_bg(t_cub *cub);
 int		get_pixel_colour(t_img *img, int x, int y);
-int		check_collision(t_cub *cub, int angle, int *offset);
+int		check_collision(t_cub *cub, int angle, float *offset);
 
 
 void	init_map_value(t_cub *cub);
-void	set_player_new_pos(t_cub *cub, int angle, int distance);
-float	get_player_new_pos(t_cub *cub, int angle, int distance, float *x);
+void	set_player_new_pos(t_cub *cub, int angle, float distance);
+float	get_player_new_pos(t_cub *cub, int angle, float distance, float *x);
 int		rotate_input(int keysym, t_cub *cub);
 void	draw_line(t_cub cub, int x2, int y2);
 void	drawRays3D(t_cub cub);

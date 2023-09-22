@@ -6,7 +6,7 @@
 /*   By: llevasse <llevasse@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/22 00:36:13 by llevasse          #+#    #+#             */
-/*   Updated: 2023/09/22 01:30:41 by llevasse         ###   ########.fr       */
+/*   Updated: 2023/09/22 12:35:23 by llevasse         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -27,7 +27,7 @@ int	no_higher(int nb, int highest, int lowest)
  *@param angle Should always pass 0 unless need an offset (like when going left or right)
  *@param distance Distance of which to put the new point from the old one
  */
-void	set_player_new_pos(t_cub *cub, int angle, int distance)
+void	set_player_new_pos(t_cub *cub, int angle, float distance)
 {
 	int		new_angle;
 
@@ -44,7 +44,7 @@ void	set_player_new_pos(t_cub *cub, int angle, int distance)
  *@param *x Pointer to a float var
  *@return Return value of new y pos
  */
-float	get_player_new_pos(t_cub *cub, int angle, int distance, float *x)
+float	get_player_new_pos(t_cub *cub, int angle, float distance, float *x)
 {
 	int		new_angle;
 

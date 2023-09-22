@@ -6,7 +6,7 @@
 /*   By: tdutel <tdutel@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/19 23:04:28 by llevasse          #+#    #+#             */
-/*   Updated: 2023/09/22 00:56:26 by llevasse         ###   ########.fr       */
+/*   Updated: 2023/09/22 12:36:55 by llevasse         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,9 +14,9 @@
 
 int	handle_input(int keysym, t_cub *cub)
 {
-	int	offset;
+	float	offset;
 
-	offset = PLAYER_OFFSET;
+	offset = 0.1 * cub->minimap->block_w;
 	if (keysym == XK_w && !check_collision(cub, 0, &offset))
 		set_player_new_pos(cub, 0, offset);
 	if (keysym == XK_d && !check_collision(cub, 90, &offset))
