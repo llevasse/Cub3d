@@ -6,7 +6,7 @@
 /*   By: llevasse <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/20 00:28:00 by llevasse          #+#    #+#             */
-/*   Updated: 2023/09/22 19:56:00 by llevasse         ###   ########.fr       */
+/*   Updated: 2023/09/22 20:13:16 by llevasse         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -47,6 +47,7 @@ void	draw_minimap(t_cub *cub)
 	float		x;
 	float		y;
 	float		len;
+	float		end_fov;
 	t_minimap	*map;
 
 	y = 0;
@@ -65,7 +66,15 @@ void	draw_minimap(t_cub *cub)
 		}
 		y++;
 	}
-	y = get_player_new_pos(cub, cub->player.pa, 10, &x);
-	draw_line(*cub, x, y);
+	len = no_higher(cub->player.pa - (PLAYER_FOV/2), 360, 0);
+	end_fov = no_higher(cub->player.pa + (PLAYER_FOV/2), 360, 0);
+	while (len != end_fov)
+	{
+		y = get_player_new_pos(cub, len, 10, &x);
+		printf("draw from  (%d:%d) to (%d:%d)\n", (int)cub->player.px, (int)cub->player.py, (int)x, (int)y);
+		draw_line(*cub, (int)x, (int)y);
+		len = no_higher(len + 1, 360, 0);
+		printf("FOV : %f/%f\n", len, end_fov);
+	}
 	draw_player(map, cub->player.px, cub->player.py, PLAYER_RGB);
 }
