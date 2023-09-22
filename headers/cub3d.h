@@ -6,7 +6,7 @@
 /*   By: tdutel <tdutel@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/18 21:43:29 by llevasse          #+#    #+#             */
-/*   Updated: 2023/09/22 22:14:17 by llevasse         ###   ########.fr       */
+/*   Updated: 2023/09/22 22:25:07 by llevasse         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,6 +18,7 @@
 # include "err.h"
 # include "render.h"
 # include "init.h"
+# include "input.h"
 # include "../minilibx/mlx.h"
 
 # include <X11/X.h>
@@ -52,15 +53,8 @@ int		get_map(int map_fd, t_map *map, t_cub *cub);
 int		get_wall(int map_fd, t_map *map);
 int		check_closed(char *map_str, t_map *map, t_cub *cub);
 int		is_line_empty(char *str);
-int		close_window(t_cub *cub);
-int		handle_input(int keysym, t_cub *cub);
 int		get_tab_len(char **tab);
 
 // void	paint_minimap_bg(t_cub *cub);
-
-int		no_higher(int nb, int highest, int lowest);
-void	set_player_new_pos(t_cub *cub, int angle, float distance);
-float	get_player_new_pos(t_cub *cub, int angle, float distance, float *x);
-int		rotate_input(int keysym, t_cub *cub);
 
 #endif
