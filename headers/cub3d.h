@@ -6,7 +6,7 @@
 /*   By: tdutel <tdutel@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/18 21:43:29 by llevasse          #+#    #+#             */
-/*   Updated: 2023/09/22 22:07:31 by llevasse         ###   ########.fr       */
+/*   Updated: 2023/09/22 22:14:17 by llevasse         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,7 +17,9 @@
 # include "struct.h"
 # include "err.h"
 # include "render.h"
+# include "init.h"
 # include "../minilibx/mlx.h"
+
 # include <X11/X.h>
 # include <X11/keysym.h>
 # include <fcntl.h>
@@ -45,10 +47,6 @@
 # define PI 3.1415926535
 # define RADIAN PI/180
 
-void	init_cub(t_cub *cub, char **argv);
-void	init_minimap(t_cub *cub);
-void	init_player(t_cub *cub);
-int		get_player_start_orientation(char c);
 t_map	*parse(int map_fd, t_cub *cub);
 int		get_map(int map_fd, t_map *map, t_cub *cub);
 int		get_wall(int map_fd, t_map *map);
@@ -60,8 +58,6 @@ int		get_tab_len(char **tab);
 
 // void	paint_minimap_bg(t_cub *cub);
 
-
-void	init_map_value(t_cub *cub);
 int		no_higher(int nb, int highest, int lowest);
 void	set_player_new_pos(t_cub *cub, int angle, float distance);
 float	get_player_new_pos(t_cub *cub, int angle, float distance, float *x);
