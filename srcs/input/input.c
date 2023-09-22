@@ -6,7 +6,7 @@
 /*   By: tdutel <tdutel@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/19 23:04:28 by llevasse          #+#    #+#             */
-/*   Updated: 2023/09/22 19:29:36 by llevasse         ###   ########.fr       */
+/*   Updated: 2023/09/22 20:24:07 by llevasse         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,12 +17,12 @@ int	handle_input(int keysym, t_cub *cub)
 	float	offset;
 
 	offset = 0.1 * cub->minimap->block_w;
-	if (keysym == XK_w && !check_collision(cub, 0, &offset))
+	if ((keysym == XK_w || keysym == XK_Up) && !check_collision(cub, 0, &offset))
 		set_player_new_pos(cub, 0, offset);
 	if (keysym == XK_d && !check_collision(cub, 90, &offset))
 		set_player_new_pos(cub, 90, offset);
 	offset *= -1;
-	if (keysym == XK_s && !check_collision(cub, 0, &offset))
+	if ((keysym == XK_s || keysym == XK_Down) && !check_collision(cub, 0, &offset))
 		set_player_new_pos(cub, 0, offset);
 	if (keysym == XK_a && !check_collision(cub, 90, &offset))
 		set_player_new_pos(cub, 90, offset);
@@ -52,15 +52,5 @@ int	rotate_input(int keysym, t_cub *cub)
 		cub->player.pa--;
 	if (keysym == XK_Right)
 		cub->player.pa++;
-	if (keysym == XK_Up)
-	{
-		cub->player.px += cub->player.pdx;
-		cub->player.py += cub->player.pdy;
-	}
-	if (keysym == XK_Down)
-	{
-		cub->player.px -= cub->player.pdx;
-		cub->player.py -= cub->player.pdy;
-	}
 	return (0);
 }
