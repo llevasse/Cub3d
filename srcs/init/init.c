@@ -6,7 +6,7 @@
 /*   By: tdutel <tdutel@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/19 22:29:27 by llevasse          #+#    #+#             */
-/*   Updated: 2023/09/22 11:38:12 by llevasse         ###   ########.fr       */
+/*   Updated: 2023/09/22 11:47:27 by llevasse         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,6 +18,8 @@ void	init_cub(t_cub *cub, char **argv)
 	cub->minimap = malloc(sizeof(struct s_minimap));
 	ft_add_garbage(&cub->garbage, cub->minimap);
 	cub->map = parse(open(argv[1], O_RDONLY), cub);
+	if (!cub->map)
+		return ;
 	init_minimap(cub);
 	init_player(cub);
 	cub->mlx_ptr = mlx_init();
