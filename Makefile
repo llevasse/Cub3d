@@ -26,6 +26,7 @@ SRC				=	srcs/main.c \
 					srcs/render/render.c \
 					srcs/render/line.c \
 					srcs/render/minimap.c \
+					srcs/render/draw_fov.c \
 					srcs/render/collision.c \
 					srcs/render/get_pixel_colour.c \
 					srcs/input/input.c \

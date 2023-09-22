@@ -6,7 +6,7 @@
 /*   By: tdutel <tdutel@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/18 21:43:29 by llevasse          #+#    #+#             */
-/*   Updated: 2023/09/22 20:03:16 by llevasse         ###   ########.fr       */
+/*   Updated: 2023/09/22 21:50:35 by llevasse         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,8 +25,8 @@
 
 # include <stdio.h> //debug.
 
-# define WINDOW_WIDTH	1024
-# define WINDOW_HEIGHT	512
+# define WINDOW_WIDTH	1024*2
+# define WINDOW_HEIGHT	512*2
 
 # define MINIMAP_WIDTH	WINDOW_WIDTH/2
 # define MINIMAP_HEIGHT	WINDOW_HEIGHT/2
@@ -60,6 +60,7 @@ int		get_tab_len(char **tab);
 void	img_pix_put(t_img *img, int x, int y, int colour);
 int		render(t_cub *cub);
 void	draw_minimap(t_cub *cub);
+void	draw_fov(t_cub *cub);
 // void	paint_minimap_bg(t_cub *cub);
 int		get_pixel_colour(t_img *img, int x, int y);
 int		check_collision(t_cub *cub, int angle, float *offset);
