@@ -24,6 +24,7 @@ SRC				=	srcs/main.c \
 					srcs/parsing/is_map_closed.c \
 					srcs/parsing/get_wall.c	\
 					srcs/render/render.c \
+					srcs/render/line.c \
 					srcs/render/minimap.c \
 					srcs/render/collision.c \
 					srcs/render/get_pixel_colour.c \
