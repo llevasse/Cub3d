@@ -6,7 +6,7 @@
 /*   By: llevasse <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/20 00:28:00 by llevasse          #+#    #+#             */
-/*   Updated: 2023/09/22 21:51:26 by llevasse         ###   ########.fr       */
+/*   Updated: 2023/09/23 00:02:40 by llevasse         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -33,6 +33,8 @@ void	draw_player(t_minimap *map, int x, int y, int colour)
 	int	x_b;
 
 	y_b = 0;
+	x -= map->block_w/4;
+	y -= map->block_h/4;
 	while (y + y_b < MINIMAP_HEIGHT && y_b < map->block_h/2)
 	{
 		x_b = 0;
