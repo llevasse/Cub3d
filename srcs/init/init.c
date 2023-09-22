@@ -6,7 +6,7 @@
 /*   By: tdutel <tdutel@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/19 22:29:27 by llevasse          #+#    #+#             */
-/*   Updated: 2023/09/22 11:34:56 by llevasse         ###   ########.fr       */
+/*   Updated: 2023/09/22 11:38:12 by llevasse         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -51,31 +51,6 @@ void	init_minimap(t_cub *cub)
 		divider = cub->minimap->map_width;
 	cub->minimap->block_w = MINIMAP_WIDTH/divider;
 	cub->minimap->block_h = MINIMAP_HEIGHT/divider;
-}
-
-void	init_player(t_cub *cub)
-{
-	int	i;
-	int	j;
-	int	len;
-
-	i = 0;
-	while (i < cub->minimap->nb_line)
-	{
-		j = 0;
-		len = ft_strlen(cub->minimap->map[i]);
-		while (j < len)
-		{
-			if (ft_is_in_str("NSEW", cub->minimap->map[i][j++]))
-			{
-				cub->player.px = ((j - 1) * cub->minimap->block_w);
-				cub->player.py = (i * cub->minimap->block_h);
-				break ;
-			}
-		}
-		i++;
-	}
-	cub->player.pa = 270;
 }
 
 void	init_map_value(t_cub *cub)

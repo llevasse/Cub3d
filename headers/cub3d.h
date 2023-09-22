@@ -6,7 +6,7 @@
 /*   By: tdutel <tdutel@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/18 21:43:29 by llevasse          #+#    #+#             */
-/*   Updated: 2023/09/22 11:33:39 by llevasse         ###   ########.fr       */
+/*   Updated: 2023/09/22 11:41:20 by llevasse         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -42,6 +42,7 @@
 void	init_cub(t_cub *cub, char **argv);
 void	init_minimap(t_cub *cub);
 void	init_player(t_cub *cub);
+int		get_player_start_orientation(char c);
 t_map	*parse(int map_fd, t_cub *cub);
 int		get_map(int map_fd, t_map *map, t_cub *cub);
 int		get_wall(int map_fd, t_map *map);
