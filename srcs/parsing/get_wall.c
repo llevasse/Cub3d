@@ -6,7 +6,7 @@
 /*   By: llevasse <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/18 23:48:52 by llevasse          #+#    #+#             */
-/*   Updated: 2023/09/20 12:50:36 by llevasse         ###   ########.fr       */
+/*   Updated: 2023/09/22 12:07:02 by llevasse         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,7 +26,10 @@ static int	get_rgb_value(char *s)
 
 static int	do_open(char *s, int *fd, int face)
 {
-	*fd = open(ft_strsep(&s, "\n"), O_RDONLY);
+	while (*s && ft_isspace(*s))
+		s++;
+	printf("open : |%s|\n", s);
+	*fd = open(ft_strsep(&s, "\n \t"), O_RDONLY);
 	if (*fd == -1 && face == 0)
 		return ((void)ft_putstr_fd(N_WALL_OPEN_ERR, 2), 0);
 	if (*fd == -1 && face == 1)
@@ -51,6 +54,8 @@ int	get_wall(int map_fd, t_map *map)
 	}
 	if (!str)
 		return (0);
+	while (*str && ft_isspace(*str))
+		str++;
 	if (!ft_strncmp("NO ", str, 3) && map->north_fd == -1)
 		return (do_open(str + 3, &map->north_fd, 0));
 	if (!ft_strncmp("SO ", str, 3) && map->south_fd == -1)
@@ -59,9 +64,9 @@ int	get_wall(int map_fd, t_map *map)
 		return (do_open(str + 3, &map->west_fd, 2));
 	if (!ft_strncmp("EA ", str, 3) && map->east_fd == -1)
 		return (do_open(str + 3, &map->east_fd, 3));
-	if (!ft_strncmp("F ", str, 2) && map->f_rgb == -1)
+	if ((!ft_strncmp("F ", str, 2) || !ft_strncmp("F\t", str, 2)) && map->f_rgb == -1)
 		return ((void)(map->f_rgb = get_rgb_value(str + 2)), 1);
-	if (!ft_strncmp("C ", str, 2) && map->c_rgb == -1)
+	if ((!ft_strncmp("C ", str, 2) || !ft_strncmp("C\t", str, 2)) && map->c_rgb == -1)
 		return ((void)(map->c_rgb = get_rgb_value(str + 2)), 1);
 	return ((void)ft_putstr_fd(INVALID_CUB, 2), 0);
 }
