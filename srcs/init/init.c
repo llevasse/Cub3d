@@ -6,7 +6,7 @@
 /*   By: tdutel <tdutel@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/19 22:29:27 by llevasse          #+#    #+#             */
-/*   Updated: 2023/09/22 11:47:27 by llevasse         ###   ########.fr       */
+/*   Updated: 2023/09/22 12:19:42 by llevasse         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -48,9 +48,9 @@ void	init_minimap(t_cub *cub)
 		if ((int)ft_strlen(cub->minimap->map[i++]) > cub->minimap->map_width)
 			cub->minimap->map_width = ft_strlen(cub->minimap->map[i - 1]);
 	}
-	divider = cub->minimap->nb_line;
+	divider = cub->minimap->map_width;
 	if (MINIMAP_WIDTH < MINIMAP_HEIGHT)
-		divider = cub->minimap->map_width;
+		divider = cub->minimap->nb_line;
 	cub->minimap->block_w = MINIMAP_WIDTH/divider;
 	cub->minimap->block_h = MINIMAP_HEIGHT/divider;
 }
