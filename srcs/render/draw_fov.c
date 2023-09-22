@@ -6,7 +6,7 @@
 /*   By: llevasse <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/22 21:44:52 by llevasse          #+#    #+#             */
-/*   Updated: 2023/09/22 21:51:58 by llevasse         ###   ########.fr       */
+/*   Updated: 2023/09/22 23:20:11 by llevasse         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,15 +19,13 @@ void	draw_fov(t_cub *cub)
 	float	y;
 	float	x;
 
-	fov_angle = no_higher(cub->player.pa - (PLAYER_FOV/2), 360, 0);
-	fov_end_a = fov_angle + PLAYER_FOV;
+	fov_angle = no_higher(cub->player.pa + (PLAYER_FOV/4), 360, 0);
+	fov_end_a = no_higher(fov_angle + PLAYER_FOV, 360, 0);
 	x = 0;
 	while (fov_angle != fov_end_a)
 	{
-		y = get_player_new_pos(cub, fov_angle, 10, &x);
-		printf("draw from  (%d:%d) to (%d:%d)\n", (int)cub->player.px, (int)cub->player.py, (int)x, (int)y);
+		y = get_player_new_pos(cub, fov_angle, MINIMAP_HEIGHT * 10, &x);
 		draw_line(*cub, (int)x, (int)y);
 		fov_angle = no_higher(fov_angle + 1, 360, 0);
-		printf("FOV : %f/%f\n", fov_angle, fov_end_a);
 	}
 }

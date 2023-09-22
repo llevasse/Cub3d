@@ -6,13 +6,13 @@
 /*   By: llevasse <llevasse@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/22 00:36:13 by llevasse          #+#    #+#             */
-/*   Updated: 2023/09/22 12:35:23 by llevasse         ###   ########.fr       */
+/*   Updated: 2023/09/22 23:11:20 by llevasse         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "cub3d.h"
 
-int	no_higher(int nb, int highest, int lowest)
+float	no_higher(float nb, float highest, float lowest)
 {
 	if (nb < lowest)
 		return (no_higher(nb + highest, highest, lowest));
