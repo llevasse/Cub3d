@@ -37,6 +37,7 @@ OBJS			=	$(addprefix $(OBJS_DIR), $(SRC:.c=.o))
 
 HEADER_DIR		=	headers/
 HEADER_FILE		=	headers/cub3d.h \
+					headers/render.h \
 					headers/struct.h \
 					headers/key_event.h \
 					headers/err.h
