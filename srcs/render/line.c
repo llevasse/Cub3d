@@ -6,7 +6,7 @@
 /*   By: llevasse <llevasse@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/19 23:04:28 by llevasse          #+#    #+#             */
-/*   Updated: 2023/09/22 19:55:23 by llevasse         ###   ########.fr       */
+/*   Updated: 2023/09/22 20:21:40 by llevasse         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -31,7 +31,8 @@ void	draw_line(t_cub cub, int x2, int y2)
 	nb.px = cub.player.px;
 	nb.py = cub.player.py;
 	nb.pa = 0;
-	while(nb.pa <= steps + 100 && get_pixel_colour(&cub.minimap->img, nb.px, nb.py) == MINIMAP_RGB)
+	while(nb.pa <= steps + 100 && (get_pixel_colour(&cub.minimap->img, nb.px, nb.py) == MINIMAP_RGB || \
+				get_pixel_colour(&cub.minimap->img, nb.px, nb.py) == 0x222222))
 	{
 		img_pix_put(&cub.minimap->img, (int)nb.px, (int)nb.py, 0x222222);
 		nb.px += nb.pdx;
