@@ -6,7 +6,7 @@
 /*   By: tdutel <tdutel@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/18 21:43:29 by llevasse          #+#    #+#             */
-/*   Updated: 2023/09/22 22:25:07 by llevasse         ###   ########.fr       */
+/*   Updated: 2023/09/23 00:25:15 by llevasse         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -41,7 +41,7 @@
 # define MINIMAP_W_RGB	0xff0000
 # define MINIMAP_RGB	0x00ff00
 # define PLAYER_RGB		0x0000ff
-# define PLAYER_FOV		120
+# define PLAYER_FOV		80
 
 # define PLAYER_OFFSET	5
 

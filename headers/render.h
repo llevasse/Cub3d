@@ -6,7 +6,7 @@
 /*   By: llevasse <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/22 22:05:00 by llevasse          #+#    #+#             */
-/*   Updated: 2023/09/22 22:07:53 by llevasse         ###   ########.fr       */
+/*   Updated: 2023/09/23 00:52:29 by llevasse         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,7 +18,7 @@ int		render(t_cub *cub);
 void	img_pix_put(t_img *img, int x, int y, int colour);
 
 //srcs/render/line.c:
-void	draw_line(t_cub cub, int x2, int y2);
+void	draw_line(t_cub cub, int x2, int y2, int colour);
 void	drawRays3D(t_cub cub);
 
 //srcs/render/minimap.c:
