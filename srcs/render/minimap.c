@@ -6,7 +6,7 @@
 /*   By: llevasse <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/20 00:28:00 by llevasse          #+#    #+#             */
-/*   Updated: 2023/09/22 19:46:55 by llevasse         ###   ########.fr       */
+/*   Updated: 2023/09/22 19:56:00 by llevasse         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -65,7 +65,7 @@ void	draw_minimap(t_cub *cub)
 		}
 		y++;
 	}
-	draw_player(map, cub->player.px, cub->player.py, PLAYER_RGB);
 	y = get_player_new_pos(cub, cub->player.pa, 10, &x);
 	draw_line(*cub, x, y);
+	draw_player(map, cub->player.px, cub->player.py, PLAYER_RGB);
 }
