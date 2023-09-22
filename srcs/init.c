@@ -6,7 +6,7 @@
 /*   By: tdutel <tdutel@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/19 22:29:27 by llevasse          #+#    #+#             */
-/*   Updated: 2023/09/22 00:05:39 by llevasse         ###   ########.fr       */
+/*   Updated: 2023/09/22 11:34:56 by llevasse         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -75,7 +75,7 @@ void	init_player(t_cub *cub)
 		}
 		i++;
 	}
-	cub->player.pa = 0;
+	cub->player.pa = 270;
 }
 
 void	init_map_value(t_cub *cub)
