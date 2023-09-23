@@ -6,7 +6,7 @@
 /*   By: llevasse <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/22 21:44:52 by llevasse          #+#    #+#             */
-/*   Updated: 2023/09/23 17:06:23 by llevasse         ###   ########.fr       */
+/*   Updated: 2023/09/23 21:52:40 by llevasse         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -30,7 +30,7 @@ void	draw_fov(t_cub *cub)
 		false_line = get_line(p, p2);
 		while (false_line.steps-- > 0)
 		{
-			draw_line(*cub, (int)p.x, (int)p.y, 0x222222);
+			draw_line(*cub, (int)p.x, (int)p.y, PLAYER_RGB);
 			p.x += false_line.x_step;
 			p.y += false_line.y_step;
 		}

@@ -6,7 +6,7 @@
 /*   By: llevasse <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/20 00:28:00 by llevasse          #+#    #+#             */
-/*   Updated: 2023/09/23 00:02:40 by llevasse         ###   ########.fr       */
+/*   Updated: 2023/09/23 21:53:15 by llevasse         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -68,5 +68,4 @@ void	draw_minimap(t_cub *cub)
 		y++;
 	}
 	draw_fov(cub);
-	draw_player(map, cub->player.px, cub->player.py, PLAYER_RGB);
 }
