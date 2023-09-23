@@ -6,7 +6,7 @@
 /*   By: llevasse <llevasse@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/19 23:04:28 by llevasse          #+#    #+#             */
-/*   Updated: 2023/09/24 00:08:03 by llevasse         ###   ########.fr       */
+/*   Updated: 2023/09/24 00:34:07 by llevasse         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -29,7 +29,7 @@ t_line	get_line(t_point p_a, t_point p_b)
 }
 
 // Fonction pour tracer une ligne avec la minilibX
-void	draw_line(t_cub cub, int x2, int y2, int colour)
+int	draw_line(t_cub cub, int x2, int y2, int colour)
 {
 	int			dx;
 	int			dy;
@@ -38,22 +38,24 @@ void	draw_line(t_cub cub, int x2, int y2, int colour)
 
 	dx = x2 - cub.player.px;		//get X distance of two points
 	dy = y2 - cub.player.py;		//get Y distance of two points
+	steps = abs(dy);
 	if (abs(dx) > abs(dy))
 		steps = abs(dx);
-	else
-		steps = abs(dy);
 	nb.pdx = (float) dx / steps;	//get steps for the X axis
 	nb.pdy = (float) dy / steps;	//get steps for the Y axis
 	nb.px = cub.player.px;
 	nb.py = cub.player.py;
 	nb.pa = 0;
-	while(nb.pa <= steps + 100 && (get_pixel_colour(&cub.img, nb.px, nb.py) != MMAP_W_RGB))
+	while(nb.pa <= steps/* + 100 */&& (get_pixel_colour(&cub.img, nb.px, nb.py) != MMAP_W_RGB))
 	{
 		img_pix_put(&cub.img, (int)nb.px, (int)nb.py, colour);
 		nb.px += nb.pdx;
 		nb.py += nb.pdy;
 		nb.pa += 1;
 	}
+	printf("(%.0f;%.0f) is %.0f pixels away from (%.0f;%.0f)\n", nb.px, nb.py,
+		sqrt(pow(nb.py - cub.player.py, 2) + pow(nb.px - cub.player.px, 2)), cub.player.px, cub.player.py);
+	return (sqrt(pow(nb.py - cub.player.py,2) + pow(nb.px - cub.player.px, 2)));
 }
 
 void	drawRays3D(t_cub cub)
