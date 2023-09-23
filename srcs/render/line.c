@@ -6,7 +6,7 @@
 /*   By: llevasse <llevasse@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/19 23:04:28 by llevasse          #+#    #+#             */
-/*   Updated: 2023/09/23 00:55:04 by llevasse         ###   ########.fr       */
+/*   Updated: 2023/09/23 15:50:28 by llevasse         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,14 +20,14 @@ void	draw_line(t_cub cub, int x2, int y2, int colour)
 	int			steps;
 	t_player	nb;
 
-	dx = x2 - cub.player.px;
-	dy = y2 - cub.player.py;
+	dx = x2 - cub.player.px;		//get X distance of two points
+	dy = y2 - cub.player.py;		//get Y distance of two points
 	if (abs(dx) > abs(dy))
 		steps = abs(dx);
 	else
 		steps = abs(dy);
-	nb.pdx = (float) dx / steps;
-	nb.pdy = (float) dy / steps;
+	nb.pdx = (float) dx / steps;	//get steps for the X axis
+	nb.pdy = (float) dy / steps;	//get steps for the Y axis
 	nb.px = cub.player.px;
 	nb.py = cub.player.py;
 	nb.pa = 0;

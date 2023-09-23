@@ -6,7 +6,7 @@
 /*   By: tdutel <tdutel@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/18 21:52:44 by llevasse          #+#    #+#             */
-/*   Updated: 2023/09/21 15:20:31 by tdutel           ###   ########.fr       */
+/*   Updated: 2023/09/23 15:53:04 by llevasse         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -74,6 +74,12 @@ typedef struct s_cub
 	struct s_garbage	*garbage;
 	t_player			player;
 }				t_cub;
+
+typedef struct s_point
+{
+	float	x;
+	float	y;
+}				t_point;
 
 t_garbage	*ft_new_garbage(void *address);
 void		ft_add_garbage(t_garbage **lst, void *addr);

@@ -6,7 +6,7 @@
 /*   By: llevasse <llevasse@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/22 00:36:13 by llevasse          #+#    #+#             */
-/*   Updated: 2023/09/22 23:11:20 by llevasse         ###   ########.fr       */
+/*   Updated: 2023/09/23 15:58:14 by llevasse         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -44,12 +44,12 @@ void	set_player_new_pos(t_cub *cub, int angle, float distance)
  *@param *x Pointer to a float var
  *@return Return value of new y pos
  */
-float	get_player_new_pos(t_cub *cub, int angle, float distance, float *x)
+void	get_player_new_pos(t_cub *cub, int angle, float dist, t_point *p)
 {
 	int		new_angle;
 
 	new_angle = no_higher(cub->player.pa + angle, 360, 0);
 
-	*x = cub->player.px + distance * cos(new_angle * RADIAN); 
-	return (cub->player.py + distance * sin(new_angle * RADIAN)); 
+	p->x = cub->player.px + dist * cos(new_angle * RADIAN); 
+	p->y = cub->player.py + dist * sin(new_angle * RADIAN); 
 }
