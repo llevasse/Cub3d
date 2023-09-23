@@ -6,7 +6,7 @@
 /*   By: tdutel <tdutel@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/19 22:29:27 by llevasse          #+#    #+#             */
-/*   Updated: 2023/09/23 23:44:37 by llevasse         ###   ########.fr       */
+/*   Updated: 2023/09/24 00:05:59 by llevasse         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -34,16 +34,9 @@ void	init_cub(t_cub *cub, char **argv)
 
 void	init_images(t_cub *cub)
 {
-	cub->mmap->img.mlx_img = mlx_new_image(cub->mlx_ptr, MMAP_W, MMAP_H);
-	cub->mmap->img.addr = mlx_get_data_addr(cub->mmap->img.mlx_img,
-			&cub->mmap->img.bpp, &cub->mmap->img.line_len,
-			&cub->mmap->img.endian);
-	cub->bg.mlx_img = mlx_new_image(cub->mlx_ptr, WINDOW_W, WINDOW_H);
-	cub->bg.addr = mlx_get_data_addr(cub->bg.mlx_img, &cub->bg.bpp,
-			&cub->bg.line_len, &cub->bg.endian);
-	cub->walls.mlx_img = mlx_new_image(cub->mlx_ptr, WINDOW_W, WINDOW_H);
-	cub->walls.addr = mlx_get_data_addr(cub->walls.mlx_img,
-			&cub->walls.bpp, &cub->walls.line_len, &cub->walls.endian);
+	cub->img.mlx_img = mlx_new_image(cub->mlx_ptr, WINDOW_W, WINDOW_H);
+	cub->img.addr = mlx_get_data_addr(cub->img.mlx_img,
+			&cub->img.bpp, &cub->img.line_len, &cub->img.endian);
 }
 
 void	init_minimap(t_cub *cub)

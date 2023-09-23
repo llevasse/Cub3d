@@ -6,7 +6,7 @@
 /*   By: llevasse <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/22 22:05:00 by llevasse          #+#    #+#             */
-/*   Updated: 2023/09/23 23:56:03 by llevasse         ###   ########.fr       */
+/*   Updated: 2023/09/24 00:11:32 by llevasse         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,8 +24,8 @@ void	draw_line(t_cub cub, int x2, int y2, int colour);
 void	drawRays3D(t_cub cub);
 
 //srcs/render/minimap.c:
-void	draw_square(t_minimap *map, int x, int y, int colour);
-void	draw_player(t_minimap *map, int x, int y, int colour);
+void	draw_square(t_cub *cub, int x, int y, int colour);
+void	draw_player(t_cub *cub, int x, int y, int colour);
 void	draw_minimap(t_cub *cub);
 
 //srcs/render/get_pixel_colour.c:

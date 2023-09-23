@@ -6,7 +6,7 @@
 /*   By: tdutel <tdutel@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/21 01:32:27 by llevasse          #+#    #+#             */
-/*   Updated: 2023/09/23 22:06:20 by llevasse         ###   ########.fr       */
+/*   Updated: 2023/09/24 00:12:03 by llevasse         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -35,11 +35,11 @@ int	check_collision(t_cub *cub, int angle, float *offset)
 		return (1);
 	px = cub->player.px;
 	py = cub->player.py;
-	if (get_pixel_colour(&cub->mmap->img, new_p.x, new_p.y) == MMAP_W_RGB)
+	if (get_pixel_colour(&cub->img, new_p.x, new_p.y) == MMAP_W_RGB)
 	{
-		if (get_pixel_colour(&cub->mmap->img, new_p.x, py) != MMAP_W_RGB)
+		if (get_pixel_colour(&cub->img, new_p.x, py) != MMAP_W_RGB)
 			cub->player.px = new_p.x;
-		else if (get_pixel_colour(&cub->mmap->img, px, new_p.y) != MMAP_W_RGB)
+		else if (get_pixel_colour(&cub->img, px, new_p.y) != MMAP_W_RGB)
 			cub->player.py = new_p.y;
 		else
 			return (check_w_smaller_mov(cub, angle, offset));

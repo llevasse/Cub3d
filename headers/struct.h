@@ -6,7 +6,7 @@
 /*   By: tdutel <tdutel@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/18 21:52:44 by llevasse          #+#    #+#             */
-/*   Updated: 2023/09/23 23:34:54 by llevasse         ###   ########.fr       */
+/*   Updated: 2023/09/24 00:04:20 by llevasse         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -49,7 +49,6 @@ typedef struct s_minimap
 	int					map_width;
 	int					block_w;
 	int					block_h;
-	struct s_img		img;
 	int					*mapx;
 	int					mapy;
 	int					maps;
@@ -70,8 +69,7 @@ typedef struct s_cub
 	void				*mlx_ptr;
 	void				*win_ptr;
 	struct s_map		*map;
-	struct s_img		bg;
-	struct s_img		walls;
+	struct s_img		img;
 	struct s_minimap	*mmap;
 	struct s_garbage	*garbage;
 	t_player			player;

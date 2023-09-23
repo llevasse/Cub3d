@@ -6,7 +6,7 @@
 /*   By: llevasse <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/20 00:40:14 by llevasse          #+#    #+#             */
-/*   Updated: 2023/09/23 23:56:19 by llevasse         ###   ########.fr       */
+/*   Updated: 2023/09/24 00:06:32 by llevasse         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,8 +16,7 @@ int	render(t_cub *cub)
 {
 	paint_bg(cub);
 	draw_minimap(cub);
-	mlx_put_image_to_window(cub->mlx_ptr, cub->win_ptr, cub->bg.mlx_img, 0, 0);
-	mlx_put_image_to_window(cub->mlx_ptr, cub->win_ptr, cub->mmap->img.mlx_img, 0, 0);
+	mlx_put_image_to_window(cub->mlx_ptr, cub->win_ptr, cub->img.mlx_img, 0, 0);
 	return (0);
 }
 
@@ -54,9 +53,9 @@ void	paint_bg(t_cub *cub)
 		while (x < WINDOW_W)
 		{
 			if (y < WINDOW_H / 2)
-				img_pix_put(&cub->bg, x++, y, cub->map->c_rgb);
+				img_pix_put(&cub->img, x++, y, cub->map->c_rgb);
 			else
-				img_pix_put(&cub->bg, x++, y, cub->map->f_rgb);
+				img_pix_put(&cub->img, x++, y, cub->map->f_rgb);
 		}
 		y++;
 	}
