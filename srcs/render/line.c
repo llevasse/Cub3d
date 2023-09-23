@@ -6,11 +6,27 @@
 /*   By: llevasse <llevasse@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/19 23:04:28 by llevasse          #+#    #+#             */
-/*   Updated: 2023/09/23 15:50:28 by llevasse         ###   ########.fr       */
+/*   Updated: 2023/09/23 16:14:50 by llevasse         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "cub3d.h"
+
+t_line	get_line(t_point p_a, t_point p_b)
+{
+	t_line	line;
+
+	line.p_a = p_a;
+	line.p_b = p_b;
+	line.dx = p_b.x - p_a.x;
+	line.dy = p_b.y - p_a.y;
+	line.steps = fabsf(line.dy);
+	if (fabsf(line.dx) > fabsf(line.dy))
+		line.steps = fabsf(line.dx);
+	line.x_step = (float)line.dx / line.steps;
+	line.y_step = (float)line.dy / line.steps;
+	return (line);
+}
 
 // Fonction pour tracer une ligne avec la minilibX
 void	draw_line(t_cub cub, int x2, int y2, int colour)

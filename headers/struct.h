@@ -6,7 +6,7 @@
 /*   By: tdutel <tdutel@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/18 21:52:44 by llevasse          #+#    #+#             */
-/*   Updated: 2023/09/23 15:53:04 by llevasse         ###   ########.fr       */
+/*   Updated: 2023/09/23 16:12:09 by llevasse         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -77,9 +77,20 @@ typedef struct s_cub
 
 typedef struct s_point
 {
-	float	x;
-	float	y;
+	float				x;
+	float				y;
 }				t_point;
+
+typedef struct s_line
+{
+	t_point				p_a;
+	t_point				p_b;
+	float				dx;
+	float				dy;
+	float				x_step;
+	float				y_step;
+	int					steps;
+}				t_line;
 
 t_garbage	*ft_new_garbage(void *address);
 void		ft_add_garbage(t_garbage **lst, void *addr);
