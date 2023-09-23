@@ -6,7 +6,7 @@
 /*   By: llevasse <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/22 21:44:52 by llevasse          #+#    #+#             */
-/*   Updated: 2023/09/23 16:35:41 by llevasse         ###   ########.fr       */
+/*   Updated: 2023/09/23 16:40:26 by llevasse         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,7 +24,7 @@ void	draw_fov(t_cub *cub)
 	fov_angle = no_higher((cub->player.pa - (PLAYER_FOV/2)), 360, 0);
 	fov_end_a = no_higher(fov_angle + PLAYER_FOV, 360, 0);
 	colour = PLAYER_RGB;
-	while (no_higher(fov_angle + 1, 360, 0) != fov_end_a)
+	while (fov_angle != fov_end_a)
 	{
 		get_player_new_pos(cub, fov_angle, MINIMAP_HEIGHT * 10, &p);
 		fov_angle = no_higher(fov_angle + 1, 360, 0);
