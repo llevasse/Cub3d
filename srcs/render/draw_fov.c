@@ -24,9 +24,9 @@ void	draw_fov(t_cub *cub)
 	fov_end_a = no_higher(fov_angle + PLAYER_FOV, 360, 0);
 	while (fov_angle != fov_end_a)
 	{
-		get_player_new_pos(cub, fov_angle, MMAP_HEIGHT * 10, &p);
+		get_player_new_pos(cub, fov_angle, MMAP_H * 10, &p);
 		fov_angle = no_higher(fov_angle + 1, 360, 0);
-		get_player_new_pos(cub, fov_angle, MMAP_HEIGHT * 10, &p2);
+		get_player_new_pos(cub, fov_angle, MMAP_H * 10, &p2);
 		false_line = get_line(p, p2);
 		while (false_line.steps-- > 0)
 		{

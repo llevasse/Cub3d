@@ -6,7 +6,7 @@
 /*   By: llevasse <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/22 22:13:25 by llevasse          #+#    #+#             */
-/*   Updated: 2023/09/22 22:14:40 by llevasse         ###   ########.fr       */
+/*   Updated: 2023/09/23 23:46:20 by llevasse         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,4 +19,5 @@ int		get_player_start_orientation(char c);
 //srcs/init/init.c:
 void	init_cub(t_cub *cub, char **argv);
 void	init_minimap(t_cub *cub);
+void	init_images(t_cub *cub);
 void	init_map_value(t_cub *cub);

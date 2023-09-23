@@ -38,7 +38,7 @@ int	check_closed(char *map_str, t_map *map, t_cub *cub)
 		if (!is_line_h_closed(split_map[i++]))
 			return ((void)ft_putstr_fd(OPEN_MAP, 2), 0);
 	}
-	cub->minimap->map = split_map; 
+	cub->mmap->map = split_map; 
 	return (1);
 }
 

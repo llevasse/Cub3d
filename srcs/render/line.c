@@ -47,10 +47,10 @@ void	draw_line(t_cub cub, int x2, int y2, int colour)
 	nb.px = cub.player.px;
 	nb.py = cub.player.py;
 	nb.pa = 0;
-	while(nb.pa <= steps + 100 && (get_pixel_colour(&cub.minimap->img, nb.px, nb.py) != MMAP_W_RGB)/* || \
-				get_pixel_colour(&cub.minimap->img, nb.px, nb.py) == colour)*/)
+	while(nb.pa <= steps + 100 && (get_pixel_colour(&cub.mmap->img, nb.px, nb.py) != MMAP_W_RGB)/* || \
+				get_pixel_colour(&cub.mmap->img, nb.px, nb.py) == colour)*/)
 	{
-		img_pix_put(&cub.minimap->img, (int)nb.px, (int)nb.py, colour);
+		img_pix_put(&cub.mmap->img, (int)nb.px, (int)nb.py, colour);
 		nb.px += nb.pdx;
 		nb.py += nb.pdy;
 		nb.pa += 1;
@@ -73,31 +73,31 @@ void	drawRays3D(t_cub cub)
 			var.ry = (((int)cub.player.py >> 6) << 6) - 0.0001;
 			printf("ry = %f\n", var.ry);
 			var.rx = (cub.player.py - var.ry) * var.aTan + cub.player.px;
-			var.yo = -cub.minimap->maps;
+			var.yo = -cub.mmap->maps;
 			var.xo = -var.yo * var.aTan;
 		}
 		if (var.ra < PI)
 		{
-			var.ry = (((int)cub.player.py >> 6) << 6) + cub.minimap->maps;
+			var.ry = (((int)cub.player.py >> 6) << 6) + cub.mmap->maps;
 			var.rx = (cub.player.py - var.ry) * var.aTan + cub.player.px;
-			var.yo = cub.minimap->maps;
+			var.yo = cub.mmap->maps;
 			var.xo = -var.yo * var.aTan;
 		}
 		if (var.ra == 0 || var.ra == PI)
 		{
 			var.rx = cub.player.px;
 			var.ry = cub.player.py;
-			var.dof = cub.minimap->mapy;
+			var.dof = cub.mmap->mapy;
 		}
 		printf("raPI\n");
-		while (var.dof < cub.minimap->mapy)
+		while (var.dof < cub.mmap->mapy)
 		{
 			var.mx = (int)(var.rx) >> 6;
 			var.my = (int)(var.ry) >> 6;
-			printf("my = %d\n", cub.minimap->mapx[var.dof]);
-			var.mp = var.my * cub.minimap->mapx[var.dof] + var.mx;
-			if ((var.mp < cub.minimap->maps) && (cub.minimap->map[var.dof][var.mp % cub.minimap->mapy] == '1'))
-				var.dof = cub.minimap->mapy;
+			printf("my = %d\n", cub.mmap->mapx[var.dof]);
+			var.mp = var.my * cub.mmap->mapx[var.dof] + var.mx;
+			if ((var.mp < cub.mmap->maps) && (cub.mmap->map[var.dof][var.mp % cub.mmap->mapy] == '1'))
+				var.dof = cub.mmap->mapy;
 			else
 			{
 				var.rx += var.xo;

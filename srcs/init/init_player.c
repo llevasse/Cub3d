@@ -19,23 +19,23 @@ void	init_player(t_cub *cub)
 	int	len;
 
 	i = 0;
-	while (i < cub->minimap->nb_line)
+	while (i < cub->mmap->nb_line)
 	{
 		j = 0;
-		len = ft_strlen(cub->minimap->map[i]);
+		len = ft_strlen(cub->mmap->map[i]);
 		while (j < len)
 		{
-			if (ft_is_in_str("NSEW", cub->minimap->map[i][j++]))
+			if (ft_is_in_str("NSEW", cub->mmap->map[i][j++]))
 			{
-				cub->player.pa = get_player_start_orientation(cub->minimap->map[i][j - 1]);
-				cub->player.px = ((j - 1) * cub->minimap->block_h);
-				cub->player.py = (i * cub->minimap->block_h);
+				cub->player.pa = get_player_start_orientation(cub->mmap->map[i][j - 1]);
+				cub->player.px = ((j - 1) * cub->mmap->block_h);
+				cub->player.py = (i * cub->mmap->block_h);
 			}
 		}
 		i++;
 	}
-	cub->player.px += cub->minimap->block_h / 2;
-	cub->player.py += cub->minimap->block_h / 2;
+	cub->player.px += cub->mmap->block_h / 2;
+	cub->player.py += cub->mmap->block_h / 2;
 }
 
 int	get_player_start_orientation(char c)

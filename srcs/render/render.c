@@ -15,7 +15,7 @@
 int	render(t_cub *cub)
 {
 	draw_minimap(cub);
-	mlx_put_image_to_window(cub->mlx_ptr, cub->win_ptr, cub->minimap->img.mlx_img, 0, 0);
+	mlx_put_image_to_window(cub->mlx_ptr, cub->win_ptr, cub->mmap->img.mlx_img, 0, 0);
 	return (0);
 }
 
@@ -24,7 +24,7 @@ void	img_pix_put(t_img *img, int x, int y, int colour)
 	char	*pixel;
 	int		i;
 
-	if (x < 0 || x > WINDOW_WIDTH || y < 0 || y > WINDOW_HEIGHT)
+	if (x < 0 || x > WINDOW_W || y < 0 || y > WINDOW_H)
 		return ;
 	i = img->bpp - 8;
 	pixel = img->addr + (y * img->line_len + x * (img->bpp / 8));

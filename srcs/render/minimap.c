@@ -18,10 +18,10 @@ void	draw_square(t_minimap *map, int x, int y, int colour)
 	int	x_b;
 
 	y_b = 0;
-	while (y + y_b < MMAP_HEIGHT && y_b < map->block_h)
+	while (y + y_b < MMAP_H && y_b < map->block_h)
 	{
 		x_b = 0;
-		while (x + x_b < MMAP_WIDTH && x_b < map->block_w)
+		while (x + x_b < MMAP_W && x_b < map->block_w)
 			img_pix_put(&map->img, x + x_b++, y + y_b, colour);
 		y_b++;
 	}
@@ -35,10 +35,10 @@ void	draw_player(t_minimap *map, int x, int y, int colour)
 	y_b = 0;
 	x -= map->block_w/4;
 	y -= map->block_h/4;
-	while (y + y_b < MMAP_HEIGHT && y_b < map->block_h/2)
+	while (y + y_b < MMAP_H && y_b < map->block_h/2)
 	{
 		x_b = 0;
-		while (x + x_b < MMAP_WIDTH && x_b < map->block_h/2)
+		while (x + x_b < MMAP_W && x_b < map->block_h/2)
 			img_pix_put(&map->img, x + x_b++, y + y_b, colour);
 		y_b++;
 	}
@@ -52,7 +52,7 @@ void	draw_minimap(t_cub *cub)
 	t_minimap	*map;
 
 	y = 0;
-	map = cub->minimap;
+	map = cub->mmap;
 	while (y < map->nb_line)
 	{
 		x = 0;

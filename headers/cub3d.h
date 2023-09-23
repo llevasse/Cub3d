@@ -29,14 +29,14 @@
 
 # include <stdio.h> //debug.
 
-# define WINDOW_WIDTH	1024*2
-# define WINDOW_HEIGHT	512*2
+# define WINDOW_W	1024*2
+# define WINDOW_H	512*2
 
-# define MMAP_WIDTH	WINDOW_WIDTH/3
-# define MMAP_HEIGHT	WINDOW_HEIGHT/3
-# if MMAP_WIDTH > MMAP_HEIGHT
-#	undef MMAP_WIDTH
-#	define MMAP_WIDTH MMAP_HEIGHT
+# define MMAP_W	WINDOW_W/3
+# define MMAP_H	WINDOW_H/3
+# if MMAP_W > MMAP_H
+#	undef MMAP_W
+#	define MMAP_W MMAP_H
 # endif
 # define MMAP_W_RGB	0xff0000
 # define MMAP_RGB	0x00ff00

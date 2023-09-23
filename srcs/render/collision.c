@@ -31,15 +31,15 @@ int	check_collision(t_cub *cub, int angle, float *offset)
 	float	py;
 
 	get_player_new_pos(cub, angle, *offset, &new_p);
-	if (new_p.x < 0 || new_p.y < 0 || new_p.x > MMAP_WIDTH || new_p.y > MMAP_HEIGHT)
+	if (new_p.x < 0 || new_p.y < 0 || new_p.x > MMAP_W || new_p.y > MMAP_H)
 		return (1);
 	px = cub->player.px;
 	py = cub->player.py;
-	if (get_pixel_colour(&cub->minimap->img, new_p.x, new_p.y) == MMAP_W_RGB)
+	if (get_pixel_colour(&cub->mmap->img, new_p.x, new_p.y) == MMAP_W_RGB)
 	{
-		if (get_pixel_colour(&cub->minimap->img, new_p.x, py) != MMAP_W_RGB)
+		if (get_pixel_colour(&cub->mmap->img, new_p.x, py) != MMAP_W_RGB)
 			cub->player.px = new_p.x;
-		else if (get_pixel_colour(&cub->minimap->img, px, new_p.y) != MMAP_W_RGB)
+		else if (get_pixel_colour(&cub->mmap->img, px, new_p.y) != MMAP_W_RGB)
 			cub->player.py = new_p.y;
 		else
 			return (check_w_smaller_mov(cub, angle, offset));
