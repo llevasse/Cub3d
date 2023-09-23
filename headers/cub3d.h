@@ -6,7 +6,7 @@
 /*   By: tdutel <tdutel@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/18 21:43:29 by llevasse          #+#    #+#             */
-/*   Updated: 2023/09/23 00:25:15 by llevasse         ###   ########.fr       */
+/*   Updated: 2023/09/23 16:44:52 by llevasse         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -32,8 +32,8 @@
 # define WINDOW_WIDTH	1024*2
 # define WINDOW_HEIGHT	512*2
 
-# define MINIMAP_WIDTH	WINDOW_WIDTH/2
-# define MINIMAP_HEIGHT	WINDOW_HEIGHT/2
+# define MINIMAP_WIDTH	WINDOW_WIDTH/1
+# define MINIMAP_HEIGHT	WINDOW_HEIGHT/1
 # if MINIMAP_WIDTH > MINIMAP_HEIGHT
 #	undef MINIMAP_WIDTH
 #	define MINIMAP_WIDTH MINIMAP_HEIGHT
