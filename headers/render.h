@@ -6,7 +6,7 @@
 /*   By: llevasse <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/22 22:05:00 by llevasse          #+#    #+#             */
-/*   Updated: 2023/09/23 16:14:00 by llevasse         ###   ########.fr       */
+/*   Updated: 2023/09/23 23:56:03 by llevasse         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,6 +16,7 @@
 //srcs/render/render.c:
 int		render(t_cub *cub);
 void	img_pix_put(t_img *img, int x, int y, int colour);
+void	paint_bg(t_cub *cub);
 
 //srcs/render/line.c:
 t_line	get_line(t_point p_a, t_point p_b);
