@@ -6,7 +6,7 @@
 /*   By: llevasse <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/22 21:44:52 by llevasse          #+#    #+#             */
-/*   Updated: 2023/09/23 00:58:16 by llevasse         ###   ########.fr       */
+/*   Updated: 2023/09/23 15:45:53 by llevasse         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,10 +20,8 @@ void	draw_fov(t_cub *cub)
 	float	x;
 	int		ite;
 	
-	//fov_angle = no_higher((cub->player.pa - (PLAYER_FOV/2)), 360, 0);
-	fov_angle = (cub->player.pa - (PLAYER_FOV/2));
-	//fov_end_a = no_higher(fov_angle + PLAYER_FOV, 360, 0);
-	fov_end_a = fov_angle + PLAYER_FOV;
+	fov_angle = no_higher((cub->player.pa - (PLAYER_FOV/2)), 360, 0);
+	fov_end_a = no_higher(fov_angle + PLAYER_FOV, 360, 0);
 	x = 0;
 	ite = 0;
 	while (fov_angle != fov_end_a)
