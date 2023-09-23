@@ -29,7 +29,7 @@ void	init_cub(t_cub *cub, char **argv)
 	cub->win_ptr = mlx_new_window(cub->mlx_ptr, WINDOW_WIDTH, WINDOW_HEIGHT, "cub3D");
 	if (!cub->win_ptr)
 		ft_add_garbage(&cub->garbage, NULL);
-	cub->minimap->img.mlx_img = mlx_new_image(cub->mlx_ptr, MINIMAP_WIDTH, MINIMAP_HEIGHT);
+	cub->minimap->img.mlx_img = mlx_new_image(cub->mlx_ptr, MMAP_WIDTH, MMAP_HEIGHT);
 	cub->minimap->img.addr = mlx_get_data_addr(cub->minimap->img.mlx_img, &cub->minimap->img.bpp, &cub->minimap->img.line_len, &cub->minimap->img.endian);
 }
 
@@ -49,10 +49,10 @@ void	init_minimap(t_cub *cub)
 			cub->minimap->map_width = ft_strlen(cub->minimap->map[i - 1]);
 	}
 	divider = cub->minimap->map_width;
-	if (MINIMAP_WIDTH < MINIMAP_HEIGHT)
+	if (MMAP_WIDTH < MMAP_HEIGHT)
 		divider = cub->minimap->nb_line;
-	cub->minimap->block_w = MINIMAP_WIDTH/divider;
-	cub->minimap->block_h = MINIMAP_HEIGHT/divider;
+	cub->minimap->block_w = MMAP_WIDTH/divider;
+	cub->minimap->block_h = MMAP_HEIGHT/divider;
 }
 
 void	init_map_value(t_cub *cub)

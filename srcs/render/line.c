@@ -47,7 +47,7 @@ void	draw_line(t_cub cub, int x2, int y2, int colour)
 	nb.px = cub.player.px;
 	nb.py = cub.player.py;
 	nb.pa = 0;
-	while(nb.pa <= steps + 100 && (get_pixel_colour(&cub.minimap->img, nb.px, nb.py) != MINIMAP_W_RGB)/* || \
+	while(nb.pa <= steps + 100 && (get_pixel_colour(&cub.minimap->img, nb.px, nb.py) != MMAP_W_RGB)/* || \
 				get_pixel_colour(&cub.minimap->img, nb.px, nb.py) == colour)*/)
 	{
 		img_pix_put(&cub.minimap->img, (int)nb.px, (int)nb.py, colour);

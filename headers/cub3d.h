@@ -6,7 +6,7 @@
 /*   By: tdutel <tdutel@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/18 21:43:29 by llevasse          #+#    #+#             */
-/*   Updated: 2023/09/23 16:44:52 by llevasse         ###   ########.fr       */
+/*   Updated: 2023/09/23 22:10:23 by llevasse         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -32,14 +32,14 @@
 # define WINDOW_WIDTH	1024*2
 # define WINDOW_HEIGHT	512*2
 
-# define MINIMAP_WIDTH	WINDOW_WIDTH/1
-# define MINIMAP_HEIGHT	WINDOW_HEIGHT/1
-# if MINIMAP_WIDTH > MINIMAP_HEIGHT
-#	undef MINIMAP_WIDTH
-#	define MINIMAP_WIDTH MINIMAP_HEIGHT
+# define MMAP_WIDTH	WINDOW_WIDTH/3
+# define MMAP_HEIGHT	WINDOW_HEIGHT/3
+# if MMAP_WIDTH > MMAP_HEIGHT
+#	undef MMAP_WIDTH
+#	define MMAP_WIDTH MMAP_HEIGHT
 # endif
-# define MINIMAP_W_RGB	0xff0000
-# define MINIMAP_RGB	0x00ff00
+# define MMAP_W_RGB	0xff0000
+# define MMAP_RGB	0x00ff00
 # define PLAYER_RGB		0x0000ff
 # define PLAYER_FOV		80
 
