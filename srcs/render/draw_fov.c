@@ -6,7 +6,7 @@
 /*   By: llevasse <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/22 21:44:52 by llevasse          #+#    #+#             */
-/*   Updated: 2023/09/24 22:42:16 by llevasse         ###   ########.fr       */
+/*   Updated: 2023/09/25 00:10:38 by llevasse         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,22 +16,24 @@ void	draw_fov(t_cub *cub)
 {
 	t_fov	fov;
 	float	x;
+	float	ca;
 
 	fov = get_fov(cub);
+	ca = fov.cur_angle;
 	x = 0;
-	while (fov.cur_angle != fov.end_angle)
+	while (ca != fov.end_angle)
 	{
-		get_player_new_pos(cub, fov.cur_angle, MMAP_H * 10, &fov.p);
-		fov.cur_angle = no_higher(fov.cur_angle + 1, 360, 0);
-		get_player_new_pos(cub, fov.cur_angle, MMAP_H * 10, &fov.p2);
+		get_player_new_pos(cub, ca, MMAP_H * 10, &fov.p);
+		get_player_new_pos(cub, ca + 1, MMAP_H * 10, &fov.p2);
 		fov.false_line = get_line(fov.p, fov.p2);
 		while (fov.false_line.steps-- > 0)
 		{
-			cast(cub, draw_line(*cub, fov.p.x, fov.p.y, PLAYER_RGB), x);
+			cast(cub, draw_line(*cub, fov.p.x, fov.p.y, PLAYER_RGB), x, ca);
 			fov.p.x += fov.false_line.x_step;
 			fov.p.y += fov.false_line.y_step;
 			x += fov.field_step;
 		}
+		ca = no_higher(ca + 1, 360, 0);
 	}
 }
 

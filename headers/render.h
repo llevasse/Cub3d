@@ -6,7 +6,7 @@
 /*   By: llevasse <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/22 22:05:00 by llevasse          #+#    #+#             */
-/*   Updated: 2023/09/24 22:33:31 by llevasse         ###   ########.fr       */
+/*   Updated: 2023/09/24 23:22:45 by llevasse         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -40,6 +40,6 @@ void	draw_fov(t_cub *cub);
 t_fov	get_fov(t_cub *cub);
 
 //srcs/render/casting.c
-void	cast(t_cub *cub, int dist, int x);
+void	cast(t_cub *cub, int dist, int x, float ca);
 
 #endif
