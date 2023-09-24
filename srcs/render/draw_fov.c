@@ -6,7 +6,7 @@
 /*   By: llevasse <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/22 21:44:52 by llevasse          #+#    #+#             */
-/*   Updated: 2023/09/24 17:03:29 by llevasse         ###   ########.fr       */
+/*   Updated: 2023/09/24 22:33:47 by llevasse         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,8 +15,10 @@
 void	draw_fov(t_cub *cub)
 {
 	t_fov	fov;
+	float	x;
 
 	fov = get_fov(cub);
+	x = 0;
 	while (fov.cur_angle != fov.end_angle)
 	{
 		get_player_new_pos(cub, fov.cur_angle, MMAP_H * 10, &fov.p);
@@ -25,9 +27,10 @@ void	draw_fov(t_cub *cub)
 		fov.false_line = get_line(fov.p, fov.p2);
 		while (fov.false_line.steps-- > 0)
 		{
-			draw_line(*cub, (int)fov.p.x, (int)fov.p.y, PLAYER_RGB);
+			cast(cub, draw_line(*cub, fov.p.x, fov.p.y, PLAYER_RGB), x);
 			fov.p.x += fov.false_line.x_step;
 			fov.p.y += fov.false_line.y_step;
+			x += fov.field_step;
 		}
 	}
 }
@@ -52,7 +55,7 @@ t_fov	get_fov(t_cub *cub)
 	get_player_new_pos(cub, fov.beg_angle, MMAP_H * 10, &fov.leftest);
 	get_player_new_pos(cub, fov.end_angle, MMAP_H * 10, &fov.rightest);
 	fov.field_dist = get_dist_betw_points(fov.leftest, fov.rightest);
-	fov.field_step = fov.field_dist / WINDOW_W;
-	printf("%f per steps (%f/%d)\n", fov.field_step, fov.field_dist, WINDOW_W);
+	fov.field_step = WINDOW_W / fov.field_dist;
+//	printf("%f per steps (%f/%d)\n", fov.field_step, fov.field_dist, WINDOW_W);
 	return (fov);
 }
