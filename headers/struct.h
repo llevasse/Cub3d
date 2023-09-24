@@ -6,7 +6,7 @@
 /*   By: tdutel <tdutel@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/18 21:52:44 by llevasse          #+#    #+#             */
-/*   Updated: 2023/09/24 00:04:20 by llevasse         ###   ########.fr       */
+/*   Updated: 2023/09/24 16:48:16 by llevasse         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -91,6 +91,21 @@ typedef struct s_line
 	float				y_step;
 	int					steps;
 }				t_line;
+
+typedef struct s_fov
+{
+	t_point				player;
+	t_point				leftest;
+	t_point				rightest;
+	t_point				p;
+	t_point				p2;
+	t_line				false_line;
+	float				field_dist;		//distance between leftest point and rightest point
+	float				beg_angle;
+	float				cur_angle;
+	float				end_angle;
+	float				ray_step;
+}				t_fov;
 
 t_garbage	*ft_new_garbage(void *address);
 void		ft_add_garbage(t_garbage **lst, void *addr);

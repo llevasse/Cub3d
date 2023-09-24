@@ -6,7 +6,7 @@
 /*   By: llevasse <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/22 22:05:00 by llevasse          #+#    #+#             */
-/*   Updated: 2023/09/24 00:24:33 by llevasse         ###   ########.fr       */
+/*   Updated: 2023/09/24 16:48:49 by llevasse         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -37,4 +37,5 @@ int		check_collision(t_cub *cub, int angle, float *offset);
 
 //srcs/render/draw_fov.c:
 void	draw_fov(t_cub *cub);
+t_fov	get_fov(t_cub *cub);
 #endif
