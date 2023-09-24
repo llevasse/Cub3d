@@ -6,7 +6,7 @@
 /*   By: llevasse <llevasse@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/19 23:04:28 by llevasse          #+#    #+#             */
-/*   Updated: 2023/09/24 00:34:07 by llevasse         ###   ########.fr       */
+/*   Updated: 2023/09/24 17:00:14 by llevasse         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -53,8 +53,8 @@ int	draw_line(t_cub cub, int x2, int y2, int colour)
 		nb.py += nb.pdy;
 		nb.pa += 1;
 	}
-	printf("(%.0f;%.0f) is %.0f pixels away from (%.0f;%.0f)\n", nb.px, nb.py,
-		sqrt(pow(nb.py - cub.player.py, 2) + pow(nb.px - cub.player.px, 2)), cub.player.px, cub.player.py);
+//	printf("(%.0f;%.0f) is %.0f pixels away from (%.0f;%.0f)\n", nb.px, nb.py,
+//		sqrt(pow(nb.py - cub.player.py, 2) + pow(nb.px - cub.player.px, 2)), cub.player.px, cub.player.py);
 	return (sqrt(pow(nb.py - cub.player.py,2) + pow(nb.px - cub.player.px, 2)));
 }
 

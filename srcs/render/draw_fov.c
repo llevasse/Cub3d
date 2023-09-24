@@ -6,7 +6,7 @@
 /*   By: llevasse <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/22 21:44:52 by llevasse          #+#    #+#             */
-/*   Updated: 2023/09/24 16:49:18 by llevasse         ###   ########.fr       */
+/*   Updated: 2023/09/24 17:03:29 by llevasse         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -52,5 +52,7 @@ t_fov	get_fov(t_cub *cub)
 	get_player_new_pos(cub, fov.beg_angle, MMAP_H * 10, &fov.leftest);
 	get_player_new_pos(cub, fov.end_angle, MMAP_H * 10, &fov.rightest);
 	fov.field_dist = get_dist_betw_points(fov.leftest, fov.rightest);
+	fov.field_step = fov.field_dist / WINDOW_W;
+	printf("%f per steps (%f/%d)\n", fov.field_step, fov.field_dist, WINDOW_W);
 	return (fov);
 }

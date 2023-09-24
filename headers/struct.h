@@ -6,7 +6,7 @@
 /*   By: tdutel <tdutel@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/18 21:52:44 by llevasse          #+#    #+#             */
-/*   Updated: 2023/09/24 16:48:16 by llevasse         ###   ########.fr       */
+/*   Updated: 2023/09/24 16:59:04 by llevasse         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -101,6 +101,7 @@ typedef struct s_fov
 	t_point				p2;
 	t_line				false_line;
 	float				field_dist;		//distance between leftest point and rightest point
+	float				field_step;		//field_dist / WINDOW_WIDTH
 	float				beg_angle;
 	float				cur_angle;
 	float				end_angle;
