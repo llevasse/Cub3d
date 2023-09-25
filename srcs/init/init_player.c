@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   init_player.c                                      :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: llevasse <llevasse@student.42.fr>          +#+  +:+       +#+        */
+/*   By: tdutel <tdutel@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/22 11:37:45 by llevasse          #+#    #+#             */
-/*   Updated: 2023/09/22 23:57:33 by llevasse         ###   ########.fr       */
+/*   Updated: 2023/09/25 15:06:01 by tdutel           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -38,15 +38,15 @@ void	init_player(t_cub *cub)
 	cub->player.py += cub->mmap->block_h / 2;
 }
 
-int	get_player_start_orientation(char c)
+float	get_player_start_orientation(char c)
 {
 	if (c == 'E')
 		return (0);
 	if (c == 'S')
-		return (90);
+		return (PI / 2);
 	if (c == 'W')
-		return (180);
+		return (PI);
 	if (c == 'N')
-		return (270);
+		return (3 * PI / 2);
 	return (0);
 }

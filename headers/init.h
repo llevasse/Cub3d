@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   init.h                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: llevasse <marvin@42.fr>                    +#+  +:+       +#+        */
+/*   By: tdutel <tdutel@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/22 22:13:25 by llevasse          #+#    #+#             */
-/*   Updated: 2023/09/23 23:46:20 by llevasse         ###   ########.fr       */
+/*   Updated: 2023/09/25 13:54:50 by tdutel           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,7 +14,7 @@
 
 //srcs/init/init_player.c:
 void	init_player(t_cub *cub);
-int		get_player_start_orientation(char c);
+float		get_player_start_orientation(char c);
 
 //srcs/init/init.c:
 void	init_cub(t_cub *cub, char **argv);

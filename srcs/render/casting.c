@@ -3,20 +3,20 @@
 /*                                                        :::      ::::::::   */
 /*   casting.c                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: llevasse <marvin@42.fr>                    +#+  +:+       +#+        */
+/*   By: tdutel <tdutel@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/24 22:25:17 by llevasse          #+#    #+#             */
-/*   Updated: 2023/09/25 00:50:04 by llevasse         ###   ########.fr       */
+/*   Updated: 2023/09/25 15:08:04 by tdutel           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "cub3d.h"
 
-float	get_fisheye(t_cub *cub, float ca)
+float	get_fisheye(t_cub cub, float ca)
 {
 	float	fisheye;
 
-	fisheye = cub->player.pa - ca;
+	fisheye = cub.player.pa * RADIAN - ca * RADIAN;
 	if (fisheye < 0)
 		fisheye += 2 * PI;
 	if (fisheye > 2 * PI)
@@ -31,7 +31,7 @@ void	cast(t_cub *cub, int dist, int x, float ca)
 	int		height;
 
 	ca = no_higher(ca, 360, 0);
-//	dist *= cos(get_fisheye(cub, ca));
+	dist *= cos(get_fisheye(*cub, ca));
 	if (dist == 0)
 		dist = 1;
 	height = (cub->mmap->block_h * WINDOW_H) / dist;
@@ -46,6 +46,6 @@ void	cast(t_cub *cub, int dist, int x, float ca)
 		if (get_pixel_colour(&cub->img, x, high_y) != MMAP_W_RGB && \
 			get_pixel_colour(&cub->img, x, high_y) != MMAP_RGB)
 			img_pix_put(&cub->img, x, high_y, 0x222222);
-		high_y++;		
+		high_y++;
 	}
 }
