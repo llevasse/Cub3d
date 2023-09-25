@@ -6,7 +6,7 @@
 /*   By: llevasse <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/22 21:44:52 by llevasse          #+#    #+#             */
-/*   Updated: 2023/09/25 00:10:38 by llevasse         ###   ########.fr       */
+/*   Updated: 2023/09/25 23:19:32 by llevasse         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,12 +16,12 @@ void	draw_fov(t_cub *cub)
 {
 	t_fov	fov;
 	float	x;
-	float	ca;
+	float	ca;				//angle of casted ray
 
 	fov = get_fov(cub);
-	ca = fov.cur_angle;
+	ca = fov.cur_angle;		//get leftest angle of fow
 	x = 0;
-	while (ca != fov.end_angle)
+	while (ca != fov.end_angle)	//stop when current angle of ray is equal to the rightest angle of fov
 	{
 		get_player_new_pos(cub, ca, MMAP_H * 10, &fov.p);
 		get_player_new_pos(cub, ca + 1, MMAP_H * 10, &fov.p2);
@@ -33,7 +33,7 @@ void	draw_fov(t_cub *cub)
 			fov.p.y += fov.false_line.y_step;
 			x += fov.field_step;
 		}
-		ca = no_higher(ca + 1, 360, 0);
+		ca = no_higher(ca + 1, 360, 0);	//increase angle to the right
 	}
 }
 
@@ -51,8 +51,8 @@ t_fov	get_fov(t_cub *cub)
 {
 	t_fov	fov;
 
-	fov.beg_angle = no_higher(-(PLAYER_FOV / 2), 360, 0);
-	fov.end_angle = no_higher(fov.beg_angle + PLAYER_FOV, 360, 0);
+	fov.beg_angle = no_higher(-(PLAYER_FOV / 2), 360, 0);	//angle of begining of fov
+	fov.end_angle = no_higher(fov.beg_angle + PLAYER_FOV, 360, 0);	//angle of end of fov
 	fov.cur_angle = fov.beg_angle;
 	get_player_new_pos(cub, fov.beg_angle, MMAP_H * 10, &fov.leftest);
 	get_player_new_pos(cub, fov.end_angle, MMAP_H * 10, &fov.rightest);

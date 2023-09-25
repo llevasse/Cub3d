@@ -6,7 +6,7 @@
 /*   By: llevasse <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/20 00:40:14 by llevasse          #+#    #+#             */
-/*   Updated: 2023/09/24 00:06:32 by llevasse         ###   ########.fr       */
+/*   Updated: 2023/09/25 23:23:17 by llevasse         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -47,16 +47,18 @@ void	paint_bg(t_cub *cub)
 	y = 0;
 	if (!cub->win_ptr)
 		return ;
+	while (y < WINDOW_H / 2)
+	{
+		x = 0;
+		while (x < WINDOW_W)
+			img_pix_put(&cub->img, x++, y, cub->map->c_rgb);
+		y++;
+	}
 	while (y < WINDOW_H)
 	{
 		x = 0;
 		while (x < WINDOW_W)
-		{
-			if (y < WINDOW_H / 2)
-				img_pix_put(&cub->img, x++, y, cub->map->c_rgb);
-			else
-				img_pix_put(&cub->img, x++, y, cub->map->f_rgb);
-		}
+			img_pix_put(&cub->img, x++, y, cub->map->f_rgb);
 		y++;
 	}
 }
