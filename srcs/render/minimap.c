@@ -6,7 +6,7 @@
 /*   By: llevasse <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/20 00:28:00 by llevasse          #+#    #+#             */
-/*   Updated: 2023/09/25 23:45:40 by llevasse         ###   ########.fr       */
+/*   Updated: 2023/09/26 16:30:47 by llevasse         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -59,7 +59,7 @@ void	draw_minimap(t_cub *cub)
 		len = ft_strlen(map->map[(int)y]);
 		while (x < len)
 		{
-			if (ft_is_in_str("0NSEW", map->map[(int)y][(int)x]))
+			if (ft_is_in_str("0NSEWA", map->map[(int)y][(int)x]))
 				draw_square(cub, x * map->block_w, y * map->block_h, MMAP_RGB);
 			else if (map->map[(int)y][(int)x] == '1')
 				draw_square(cub, x * map->block_w, y * map->block_h, MMAP_W_RGB);
