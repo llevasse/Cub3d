@@ -6,7 +6,7 @@
 /*   By: llevasse <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/18 21:50:20 by llevasse          #+#    #+#             */
-/*   Updated: 2023/09/20 13:49:02 by llevasse         ###   ########.fr       */
+/*   Updated: 2023/09/26 00:40:25 by llevasse         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -29,7 +29,8 @@ t_map	*parse(int map_fd, t_cub *cub)
 	while (element_got < 6 && get_wall(map_fd, map) == 1)
 		element_got++;
 	if (element_got != 6 || !get_map(map_fd, map, cub))
-		return (free_garbage(map->garbage), NULL);
+		return (close_walls(map), free_garbage(map->garbage), close(map_fd), NULL);
+	close(map_fd);
 	return (map);
 }
 
@@ -45,6 +46,18 @@ int	is_line_empty(char *str)
 		i++;
 	}
 	return (1);
+}
+
+void	close_walls(t_map *map)
+{
+	if (map->north_fd != -1)
+		close(map->north_fd);
+	if (map->south_fd != -1)
+		close(map->south_fd);
+	if (map->east_fd != -1)
+		close(map->east_fd);
+	if (map->west_fd != -1)
+		close(map->west_fd);
 }
 
 static void	set_map_null(t_map *map)

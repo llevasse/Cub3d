@@ -6,7 +6,7 @@
 /*   By: llevasse <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/18 23:48:52 by llevasse          #+#    #+#             */
-/*   Updated: 2023/09/22 12:18:42 by llevasse         ###   ########.fr       */
+/*   Updated: 2023/09/25 23:59:45 by llevasse         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -28,6 +28,7 @@ static int	do_open(char *s, int *fd, int face)
 {
 	while (*s && ft_isspace(*s))
 		s++;
+	printf("open |%s|\n", s);
 	*fd = open(ft_strsep(&s, "\n \t"), O_RDONLY);
 	if (*fd == -1 && face == 0)
 		return ((void)ft_putstr_fd(N_WALL_OPEN_ERR, 2), 0);
@@ -43,6 +44,7 @@ static int	do_open(char *s, int *fd, int face)
 int	get_wall(int map_fd, t_map *map)
 {
 	char	*str;
+	char	*id;
 
 	str = get_next_line(map_fd);
 	ft_add_garbage(&map->garbage, str);
@@ -55,17 +57,18 @@ int	get_wall(int map_fd, t_map *map)
 		return (0);
 	while (*str && ft_isspace(*str))
 		str++;
-	if (!ft_strncmp("NO ", str, 3) && map->north_fd == -1)
-		return (do_open(str + 3, &map->north_fd, 0));
-	if (!ft_strncmp("SO ", str, 3) && map->south_fd == -1)
-		return (do_open(str + 3, &map->south_fd, 1));
-	if (!ft_strncmp("WE ", str, 3) && map->west_fd == -1)
-		return (do_open(str + 3, &map->west_fd, 2));
-	if (!ft_strncmp("EA ", str, 3) && map->east_fd == -1)
-		return (do_open(str + 3, &map->east_fd, 3));
-	if ((!ft_strncmp("F ", str, 2) || !ft_strncmp("F\t", str, 2)) && map->f_rgb == -1)
-		return ((void)(map->f_rgb = get_rgb_value(str + 2)), 1);
-	if ((!ft_strncmp("C ", str, 2) || !ft_strncmp("C\t", str, 2)) && map->c_rgb == -1)
-		return ((void)(map->c_rgb = get_rgb_value(str + 2)), 1);
+	id = ft_strsep(&str, " \t");
+	if (!ft_strcmp("NO", id) && map->north_fd == -1)
+		return (do_open(str, &map->north_fd, 0));
+	if (!ft_strcmp("SO", id) && map->south_fd == -1)
+		return (do_open(str, &map->south_fd, 1));
+	if (!ft_strcmp("WE", id) && map->west_fd == -1)
+		return (do_open(str, &map->west_fd, 2));
+	if (!ft_strcmp("EA", id) && map->east_fd == -1)
+		return (do_open(str, &map->east_fd, 3));
+	if (!ft_strcmp("F", id) && map->f_rgb == -1)
+		return ((void)(map->f_rgb = get_rgb_value(str)), 1);
+	if (!ft_strcmp("C", id) && map->c_rgb == -1)
+		return ((void)(map->c_rgb = get_rgb_value(str)), 1);
 	return ((void)ft_putstr_fd(INVALID_CUB, 2), 0);
 }
