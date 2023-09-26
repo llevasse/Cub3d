@@ -6,7 +6,7 @@
 /*   By: llevasse <llevasse@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/19 12:01:04 by llevasse          #+#    #+#             */
-/*   Updated: 2023/09/26 03:06:40 by llevasse         ###   ########.fr       */
+/*   Updated: 2023/09/26 09:56:52 by llevasse         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -66,6 +66,7 @@ static int	search_player_presence(t_map *map, t_cub *cub, char *s)
 				nb++;
 			}
 		}
+		y++;
 	}
 	if (nb > 1)
 		return ((ft_putstr_fd(TMP, 2)), 0);
