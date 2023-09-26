@@ -6,7 +6,7 @@
 /*   By: llevasse <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/19 21:56:14 by llevasse          #+#    #+#             */
-/*   Updated: 2023/09/26 10:06:25 by llevasse         ###   ########.fr       */
+/*   Updated: 2023/09/26 10:37:39 by llevasse         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,6 +17,7 @@ static int	check_left(t_cub *cub, int x, int y);
 
 int	check_closed(t_cub *cub, int x, int y)
 {	
+	printf("player (%d:%d)\n", x, y);
 	if (!check_left(cub, x, y) || !check_right(cub, x, y))
 	{
 		ft_putstr_fd(OPEN_MAP, 2);
@@ -27,7 +28,8 @@ int	check_closed(t_cub *cub, int x, int y)
 
 static int	check_left(t_cub *cub, int x, int y)
 {
-	printf("check (%d:%d)\n", x, y);
+	if (y == 6)
+		printf("check (%d:%d)\n", x, y);
 	if (y < 0 || x < 0)
 		return (0);
 	if (x > (int)ft_strlen(cub->mmap->map[y]))
@@ -36,14 +38,16 @@ static int	check_left(t_cub *cub, int x, int y)
 		return (1);
 	if (!ft_is_in_str("0NSEW", cub->mmap->map[y][x]))
 		return (0);
-	if (!check_left(cub, x - 1, y) || !check_left(cub, x, y - 1))
+	if (!check_left(cub, x - 1, y) || !check_left(cub, x - 1, y - 1) || \
+		!check_left(cub, x - 1, y + 1))
 		return (0);
 	return (1);
 }
 
 static int	check_right(t_cub *cub, int x, int y)
 {
-	printf("check (%d:%d)\n", x, y);
+	if (y == 6)
+		printf("check (%d:%d)\n", x, y);
 	if (y < 0 || x < 0)
 		return (0);
 	if (x > (int)ft_strlen(cub->mmap->map[y]))
@@ -52,7 +56,8 @@ static int	check_right(t_cub *cub, int x, int y)
 		return (1);
 	if (!ft_is_in_str("0NSEW", cub->mmap->map[y][x]))
 		return (0);
-	if (!check_right(cub, x + 1, y) || !check_right(cub, x, y + 1))
+	if (!check_right(cub, x + 1, y) || !check_right(cub, x + 1, y - 1) || \
+		!check_right(cub, x + 1, y + 1))
 		return (0);
 	return (1);
 }
