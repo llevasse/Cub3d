@@ -6,7 +6,7 @@
 /*   By: tdutel <tdutel@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/19 23:04:28 by llevasse          #+#    #+#             */
-/*   Updated: 2023/09/26 00:37:00 by llevasse         ###   ########.fr       */
+/*   Updated: 2023/09/26 11:59:25 by tdutel           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,20 +14,17 @@
 
 int	handle_input(int keysym, t_cub *cub)
 {
-	float	offset;
 
-	offset = 0.1 * cub->mmap->block_w;
-	if ((keysym == XK_w || keysym == XK_Up) && !check_collision(cub, 0, &offset))
-		set_player_new_pos(cub, 0, offset);
-	if (keysym == XK_d && !check_collision(cub, 90, &offset))
-		set_player_new_pos(cub, 90, offset);
-	offset *= -1;
-	if ((keysym == XK_s || keysym == XK_Down) && !check_collision(cub, 0, &offset))
-		set_player_new_pos(cub, 0, offset);
-	if (keysym == XK_a && !check_collision(cub, 90, &offset))
-		set_player_new_pos(cub, 90, offset);
+	if ((keysym == XK_w || keysym == XK_Up) && !check_collision(cub, 0))
+		set_player_new_pos(cub, 0);
+	if (keysym == XK_d && !check_collision(cub, 90))
+		set_player_new_pos(cub, 90);
+	if ((keysym == XK_s || keysym == XK_Down) && !check_collision(cub, 0))
+		set_player_new_pos(cub, 0);
+	if (keysym == XK_a && !check_collision(cub, 90))
+		set_player_new_pos(cub, 90);
 	if (keysym == XK_Escape)
-		return (close_window(cub), offset);
+		return (close_window(cub), 1);
 	rotate_input(keysym, cub);
 	return (0);
 }

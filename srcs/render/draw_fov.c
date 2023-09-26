@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   draw_fov.c                                         :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: llevasse <marvin@42.fr>                    +#+  +:+       +#+        */
+/*   By: tdutel <tdutel@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/22 21:44:52 by llevasse          #+#    #+#             */
-/*   Updated: 2023/09/25 23:19:32 by llevasse         ###   ########.fr       */
+/*   Updated: 2023/09/26 12:01:24 by tdutel           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,8 +23,8 @@ void	draw_fov(t_cub *cub)
 	x = 0;
 	while (ca != fov.end_angle)	//stop when current angle of ray is equal to the rightest angle of fov
 	{
-		get_player_new_pos(cub, ca, MMAP_H * 10, &fov.p);
-		get_player_new_pos(cub, ca + 1, MMAP_H * 10, &fov.p2);
+		get_player_new_pos(cub, ca, &fov.p);
+		get_player_new_pos(cub, ca + 1, &fov.p2);
 		fov.false_line = get_line(fov.p, fov.p2);
 		while (fov.false_line.steps-- > 0)
 		{
@@ -54,8 +54,8 @@ t_fov	get_fov(t_cub *cub)
 	fov.beg_angle = no_higher(-(PLAYER_FOV / 2), 360, 0);	//angle of begining of fov
 	fov.end_angle = no_higher(fov.beg_angle + PLAYER_FOV, 360, 0);	//angle of end of fov
 	fov.cur_angle = fov.beg_angle;
-	get_player_new_pos(cub, fov.beg_angle, MMAP_H * 10, &fov.leftest);
-	get_player_new_pos(cub, fov.end_angle, MMAP_H * 10, &fov.rightest);
+	get_player_new_pos(cub, fov.beg_angle, &fov.leftest);
+	get_player_new_pos(cub, fov.end_angle, &fov.rightest);
 	fov.field_dist = get_dist_betw_points(fov.leftest, fov.rightest);
 	fov.field_step = WINDOW_W / fov.field_dist;
 //	printf("%f per steps (%f/%d)\n", fov.field_step, fov.field_dist, WINDOW_W);

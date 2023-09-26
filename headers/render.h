@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   render.h                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: llevasse <marvin@42.fr>                    +#+  +:+       +#+        */
+/*   By: tdutel <tdutel@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/22 22:05:00 by llevasse          #+#    #+#             */
-/*   Updated: 2023/09/24 23:22:45 by llevasse         ###   ########.fr       */
+/*   Updated: 2023/09/26 12:01:45 by tdutel           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -32,8 +32,8 @@ void	draw_minimap(t_cub *cub);
 int		get_pixel_colour(t_img *img, int x, int y);
 
 //srcs/render/collision.c:
-int		check_w_smaller_mov(t_cub *cub, int angle, float *offset);
-int		check_collision(t_cub *cub, int angle, float *offset);
+int		check_w_smaller_mov(t_cub *cub, int angle);
+int		check_collision(t_cub *cub, int angle);
 
 //srcs/render/draw_fov.c:
 void	draw_fov(t_cub *cub);
