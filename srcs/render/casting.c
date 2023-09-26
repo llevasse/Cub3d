@@ -6,7 +6,7 @@
 /*   By: llevasse <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/24 22:25:17 by llevasse          #+#    #+#             */
-/*   Updated: 2023/09/25 23:09:24 by llevasse         ###   ########.fr       */
+/*   Updated: 2023/09/26 23:45:50 by llevasse         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -45,7 +45,7 @@ void	cast(t_cub *cub, int dist, int x, float ca)
 	while (high_y < low_y)
 	{
 		colour = get_pixel_colour(&cub->img, x, high_y);
-		if (colour != MMAP_W_RGB && colour != MMAP_RGB)
+		if (colour != MMAP_W_RGB && colour != MMAP_RGB && colour != PLAYER_RGB)
 			img_pix_put(&cub->img, x, high_y, 0x222222);
 		high_y++;
 	}
