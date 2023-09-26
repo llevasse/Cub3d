@@ -6,13 +6,13 @@
 /*   By: tdutel <tdutel@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/24 22:25:17 by llevasse          #+#    #+#             */
-/*   Updated: 2023/09/26 07:06:11 by tdutel           ###   ########.fr       */
+/*   Updated: 2023/09/26 11:41:25 by tdutel           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "cub3d.h"
 
-float	get_fisheye(t_cub cub, float ca)
+float	get_fisheye(t_cub *cub, float ca)
 {
 	float	fisheye;
 
@@ -32,7 +32,7 @@ void	cast(t_cub *cub, int dist, int x, float ca)
 	int		colour;
 
 	ca = no_higher(ca, 360, 0);		//angle of ray
-//	dist *= cos(get_fisheye(cub, ca));
+	dist *= cos(get_fisheye(cub, ca) * RADIAN);
 	if (dist == 0)
 		dist = 1;
 	height = (cub->mmap->block_h * WINDOW_H) / dist;

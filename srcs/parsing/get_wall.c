@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   get_wall.c                                         :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: llevasse <marvin@42.fr>                    +#+  +:+       +#+        */
+/*   By: tdutel <tdutel@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/18 23:48:52 by llevasse          #+#    #+#             */
-/*   Updated: 2023/09/25 23:59:45 by llevasse         ###   ########.fr       */
+/*   Updated: 2023/09/26 11:11:12 by tdutel           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -29,7 +29,7 @@ static int	do_open(char *s, int *fd, int face)
 	while (*s && ft_isspace(*s))
 		s++;
 	printf("open |%s|\n", s);
-	*fd = open(ft_strsep(&s, "\n \t"), O_RDONLY);
+	*fd = open(ft_strsep(&s, "\n \r \t"), O_RDONLY);
 	if (*fd == -1 && face == 0)
 		return ((void)ft_putstr_fd(N_WALL_OPEN_ERR, 2), 0);
 	if (*fd == -1 && face == 1)

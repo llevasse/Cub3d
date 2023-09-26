@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   set_player_pos.c                                   :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: llevasse <llevasse@student.42.fr>          +#+  +:+       +#+        */
+/*   By: tdutel <tdutel@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/22 00:36:13 by llevasse          #+#    #+#             */
-/*   Updated: 2023/09/23 15:58:14 by llevasse         ###   ########.fr       */
+/*   Updated: 2023/09/26 11:48:24 by tdutel           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,9 +14,12 @@
 
 float	no_higher(float nb, float highest, float lowest)
 {
+	nb *= RADIAN;
+	lowest *= RADIAN;
+	highest *= RADIAN;
 	if (nb < lowest)
 		return (no_higher(nb + highest, highest, lowest));
-	if (nb > highest)
+	if (nb > highest * RADIAN)
 		return (no_higher(nb - highest, highest, lowest));
 	return (nb);
 }
