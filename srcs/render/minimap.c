@@ -6,7 +6,7 @@
 /*   By: llevasse <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/20 00:28:00 by llevasse          #+#    #+#             */
-/*   Updated: 2023/09/26 16:30:47 by llevasse         ###   ########.fr       */
+/*   Updated: 2023/09/26 23:32:02 by llevasse         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -27,23 +27,6 @@ void	draw_square(t_cub *cub, int x, int y, int colour)
 	}
 }
 
-void	draw_player(t_cub *cub, int x, int y, int colour)
-{
-	int	y_b;
-	int	x_b;
-
-	y_b = 0;
-	x -= cub->mmap->block_w/4;
-	y -= cub->mmap->block_h/4;
-	while (y_b < cub->mmap->block_h/2)
-	{
-		x_b = 0;
-		while (x_b < cub->mmap->block_h/2)
-			img_pix_put(&cub->img, x + x_b++, y + y_b, colour);
-		y_b++;
-	}
-}
-
 void	draw_minimap(t_cub *cub)
 {
 	float		x;
@@ -59,7 +42,7 @@ void	draw_minimap(t_cub *cub)
 		len = ft_strlen(map->map[(int)y]);
 		while (x < len)
 		{
-			if (ft_is_in_str("0NSEWA", map->map[(int)y][(int)x]))
+			if (ft_is_in_str("0NSEW", map->map[(int)y][(int)x]))
 				draw_square(cub, x * map->block_w, y * map->block_h, MMAP_RGB);
 			else if (map->map[(int)y][(int)x] == '1')
 				draw_square(cub, x * map->block_w, y * map->block_h, MMAP_W_RGB);

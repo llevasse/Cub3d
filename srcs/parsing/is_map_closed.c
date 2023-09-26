@@ -6,7 +6,7 @@
 /*   By: llevasse <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/19 21:56:14 by llevasse          #+#    #+#             */
-/*   Updated: 2023/09/26 20:20:23 by llevasse         ###   ########.fr       */
+/*   Updated: 2023/09/26 23:27:14 by llevasse         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,7 +16,6 @@ static int	fload(t_cub *cub, int x, int y);
 
 int	check_closed(t_cub *cub, int x, int y)
 {	
-	printf("player : %d:%d\n", x, y);
 	if (!fload(cub, x, y))
 	{
 		ft_putstr_fd(OPEN_MAP, 2);

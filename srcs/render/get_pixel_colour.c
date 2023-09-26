@@ -6,7 +6,7 @@
 /*   By: llevasse <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/20 22:45:53 by llevasse          #+#    #+#             */
-/*   Updated: 2023/09/26 22:58:46 by llevasse         ###   ########.fr       */
+/*   Updated: 2023/09/26 23:20:24 by llevasse         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,7 +24,6 @@ int	get_pixel_colour(t_img *img, int x, int y)
 	g = 1;
 	b = 1;
 	i = img->bpp - 8;
-	//printf("get colour at %d:%d\n", x, y);
 	pixel = img->addr + (y * img->line_len + x * (img->bpp / 8));
 	if (img->endian != 0)
 	{
