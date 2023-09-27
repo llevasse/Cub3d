@@ -6,7 +6,7 @@
 /*   By: llevasse <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/22 21:44:52 by llevasse          #+#    #+#             */
-/*   Updated: 2023/09/27 22:58:37 by llevasse         ###   ########.fr       */
+/*   Updated: 2023/09/27 23:48:01 by llevasse         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -65,6 +65,6 @@ t_fov	get_fov(t_cub *cub)
 	fov.field_dist = get_dist_betw_points(fov.leftest, fov.rightest);
 	fov.field_step = ((float)PLAYER_FOV / WINDOW_W);
 	fov.field_dist = (PLAYER_FOV / fov.field_dist);
-	printf("field step : %f | field dist : %f\n", fov.field_step, fov.field_dist); 
+//	printf("field step : %f | field dist : %f\n", fov.field_step, fov.field_dist); 
 	return (fov);
 }

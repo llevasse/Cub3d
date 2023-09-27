@@ -6,7 +6,7 @@
 /*   By: llevasse <llevasse@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/19 23:04:28 by llevasse          #+#    #+#             */
-/*   Updated: 2023/09/27 12:05:54 by llevasse         ###   ########.fr       */
+/*   Updated: 2023/09/27 23:53:14 by llevasse         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -50,10 +50,12 @@ int	draw_line(t_cub cub, int x2, int y2, int colour)
 	while (nb.pa <= steps && nb.px >= 0 && nb.px <= WINDOW_W && \
 		   	nb.py >= 0 && nb.py <= WINDOW_H)
 	{
-		pix_colour = get_pixel_colour(&cub.img, nb.px, nb.py);
-		//if (pix_colour == MMAP_W_RGB)
-		if (pix_colour != MMAP_RGB && pix_colour != PLAYER_RGB)		//tempory fix for map3.cub
-			break ;
+		if ((int)nb.px % cub.mmap->block_w == 0 || (int)nb.py % cub.mmap->block_h == 0)
+		{	//to yse get_pixel_colour() less
+			pix_colour = get_pixel_colour(&cub.img, nb.px, nb.py);
+			if (pix_colour != MMAP_RGB && pix_colour != PLAYER_RGB)
+				break ;
+		}
 		img_pix_put(&cub.img, (int)nb.px, (int)nb.py, colour);
 		nb.px += nb.pdx;
 		nb.py += nb.pdy;
@@ -83,10 +85,12 @@ int	get_line_dist(t_cub cub, int x2, int y2)
 	while (nb.pa <= steps && nb.px >= 0 && nb.px <= WINDOW_W && \
 		   	nb.py >= 0 && nb.py <= WINDOW_H)
 	{
-		pix_colour = get_pixel_colour(&cub.img, nb.px, nb.py);
-		//if (pix_colour == MMAP_W_RGB)
-		if (pix_colour != MMAP_RGB && pix_colour != PLAYER_RGB)		//tempory fix for map3.cub
-			break ;
+		if ((int)nb.px % cub.mmap->block_w == 0 || (int)nb.py % cub.mmap->block_h == 0)
+		{	//to yse get_pixel_colour() less
+			pix_colour = get_pixel_colour(&cub.img, nb.px, nb.py);
+			if (pix_colour != MMAP_RGB && pix_colour != PLAYER_RGB)
+				break ;
+		}
 		nb.px += nb.pdx;
 		nb.py += nb.pdy;
 		nb.pa += 1;
