@@ -6,7 +6,7 @@
 /*   By: tdutel <tdutel@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/18 21:43:29 by llevasse          #+#    #+#             */
-/*   Updated: 2023/09/26 00:35:09 by llevasse         ###   ########.fr       */
+/*   Updated: 2023/09/27 12:39:32 by tdutel           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -47,6 +47,7 @@
 
 # define PI 3.1415926535
 # define RADIAN PI/180
+# define DEGRE 180/PI
 
 t_map	*parse(int map_fd, t_cub *cub);
 int		get_map(int map_fd, t_map *map, t_cub *cub);

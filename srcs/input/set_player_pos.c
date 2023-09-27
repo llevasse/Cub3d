@@ -6,7 +6,7 @@
 /*   By: tdutel <tdutel@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/22 00:36:13 by llevasse          #+#    #+#             */
-/*   Updated: 2023/09/26 11:48:24 by tdutel           ###   ########.fr       */
+/*   Updated: 2023/09/27 12:45:35 by tdutel           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,7 +19,7 @@ float	no_higher(float nb, float highest, float lowest)
 	highest *= RADIAN;
 	if (nb < lowest)
 		return (no_higher(nb + highest, highest, lowest));
-	if (nb > highest * RADIAN)
+	if (nb > highest)
 		return (no_higher(nb - highest, highest, lowest));
 	return (nb);
 }
@@ -35,9 +35,11 @@ void	set_player_new_pos(t_cub *cub, int angle, float distance)
 	int		new_angle;
 
 	new_angle = no_higher(cub->player.pa + angle, 360, 0);			//just make sure that the angle is not out of bound
-
+	ft_printf("aaa%d\n", new_angle);
 	cub->player.px = cub->player.px + distance * cos(new_angle * RADIAN); 
+	ft_printf("%d\n", cub->player.px);
 	cub->player.py = cub->player.py + distance * sin(new_angle * RADIAN); 
+	ft_printf("%d\n", cub->player.py);
 }
 
 /*@brief Get player new position given distance
