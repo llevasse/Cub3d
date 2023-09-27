@@ -6,7 +6,7 @@
 /*   By: llevasse <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/22 21:44:52 by llevasse          #+#    #+#             */
-/*   Updated: 2023/09/27 22:52:06 by llevasse         ###   ########.fr       */
+/*   Updated: 2023/09/27 22:58:37 by llevasse         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -30,7 +30,6 @@ void	draw_fov(t_cub *cub)
 		fov.false_line = get_line(fov.p, fov.p2);
 		while (fov.false_line.steps-- > 0)
 		{
-//			printf("draw on column : %f\n", x);
 			cast(cub, draw_line(*cub, fov.p.x, fov.p.y, PLAYER_RGB), x, ca);
 			fov.p.x += fov.false_line.x_step;
 			fov.p.y += fov.false_line.y_step;
