@@ -6,7 +6,7 @@
 /*   By: llevasse <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/22 21:44:52 by llevasse          #+#    #+#             */
-/*   Updated: 2023/09/27 23:59:45 by llevasse         ###   ########.fr       */
+/*   Updated: 2023/09/28 15:06:24 by llevasse         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,6 +18,7 @@ void	draw_fov(t_cub *cub)
 	float	x;
 	float	ca;				//angle of casted ray
 	float	gained_angle;
+	float	temp;
 
 	fov = get_fov(cub);
 	ca = fov.cur_angle;		//get leftest angle of fow
@@ -28,14 +29,21 @@ void	draw_fov(t_cub *cub)
 		get_player_new_pos(cub, ca, MMAP_H * 5, &fov.p);
 		get_player_new_pos(cub, ca + fov.field_step, MMAP_H * 5, &fov.p2);
 		fov.false_line = get_line(fov.p, fov.p2);
-		while (fov.false_line.steps-- > 0)
+		/*while (fov.false_line.steps-- > 0)
 		{
 			cast(cub, draw_line(*cub, fov.p.x, fov.p.y, PLAYER_RGB), x, ca);
 			fov.p.x += fov.false_line.x_step;
 			fov.p.y += fov.false_line.y_step;
 			x += 1;
+		}*/
+		temp = ca + 1;
+		while (ca < temp)
+		{
+			cast(cub, draw_line(*cub, fov.p.x, fov.p.y, PLAYER_RGB), x, ca);
+			x += 1;
+			ca += fov.field_step;
 		}
-		ca = no_higher(ca + fov.field_step, 360, 0);	//increase angle to the right
+		ca = no_higher(ca, 360, 0);	//increase angle to the right
 		gained_angle += fov.field_step;
 	}
 }
@@ -64,6 +72,7 @@ t_fov	get_fov(t_cub *cub)
 	get_player_new_pos(cub, fov.end_angle, get_line_dist(*cub, fov.rightest.x, fov.rightest.y), &fov.rightest);
 	fov.field_dist = get_dist_betw_points(fov.leftest, fov.rightest);
 	fov.field_step = ((float)PLAYER_FOV / WINDOW_W);
-//	printf("field step : %f | field dist : %f\n", fov.field_step, fov.field_dist); 
+	fov.field_dist = (PLAYER_FOV / fov.field_dist);
+	printf("field step : %f | field dist : %f\n", fov.field_step, fov.field_dist); 
 	return (fov);
 }

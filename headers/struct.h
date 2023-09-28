@@ -6,7 +6,7 @@
 /*   By: tdutel <tdutel@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/18 21:52:44 by llevasse          #+#    #+#             */
-/*   Updated: 2023/09/28 00:05:40 by llevasse         ###   ########.fr       */
+/*   Updated: 2023/09/27 12:32:40 by llevasse         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -47,8 +47,6 @@ typedef struct s_minimap
 	char				**map;
 	int					nb_line;
 	int					map_width;
-	int					map_h_px;
-	int					map_w_px;
 	int					block_w;
 	int					block_h;
 	int					*mapx;

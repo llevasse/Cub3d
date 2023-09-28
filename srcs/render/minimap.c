@@ -6,7 +6,7 @@
 /*   By: llevasse <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/20 00:28:00 by llevasse          #+#    #+#             */
-/*   Updated: 2023/09/28 00:29:08 by llevasse         ###   ########.fr       */
+/*   Updated: 2023/09/26 23:32:02 by llevasse         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,18 +18,13 @@ void	draw_square(t_cub *cub, int x, int y, int colour)
 	int	x_b;
 
 	y_b = 0;
-	while (y_b <= cub->mmap->block_h)
+	while (y_b < cub->mmap->block_h)
 	{
 		x_b = 0;
-		while (x_b <= cub->mmap->block_w)
-		{
-			printf("print pxl at (%d:%d)\n", x + x_b, y + y_b);
-			printf("square size (%d:%d)\n", x_b, y_b);
+		while (x_b < cub->mmap->block_w)
 			img_pix_put(&cub->img, x + x_b++, y + y_b, colour);
-		}
 		y_b++;
 	}
-//	exit(0);
 }
 
 void	draw_minimap(t_cub *cub)

@@ -6,7 +6,7 @@
 /*   By: tdutel <tdutel@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/19 22:29:27 by llevasse          #+#    #+#             */
-/*   Updated: 2023/09/28 00:06:35 by llevasse         ###   ########.fr       */
+/*   Updated: 2023/09/24 00:05:59 by llevasse         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -59,8 +59,6 @@ void	init_minimap(t_cub *cub)
 		divider = cub->mmap->nb_line;
 	cub->mmap->block_w = MMAP_W / divider;
 	cub->mmap->block_h = MMAP_H / divider;
-	cub->mmap->map_w_px = cub->mmap->map_width * cub->mmap->block_w;
-	cub->mmap->map_h_px = cub->mmap->nb_line * cub->mmap->block_h;
 }
 
 void	init_map_value(t_cub *cub)
