@@ -6,7 +6,7 @@
 /*   By: llevasse <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/22 21:44:52 by llevasse          #+#    #+#             */
-/*   Updated: 2023/09/28 15:06:24 by llevasse         ###   ########.fr       */
+/*   Updated: 2023/09/28 15:09:17 by llevasse         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,7 +24,7 @@ void	draw_fov(t_cub *cub)
 	ca = fov.cur_angle;		//get leftest angle of fow
 	x = 0;
 	gained_angle = 0;
-	while (gained_angle <= PLAYER_FOV)	//stop when current angle of ray is equal to the rightest angle of fov
+	while (gained_angle < PLAYER_FOV)	//stop when current angle of ray is equal to the rightest angle of fov
 	{
 		get_player_new_pos(cub, ca, MMAP_H * 5, &fov.p);
 		get_player_new_pos(cub, ca + fov.field_step, MMAP_H * 5, &fov.p2);
@@ -44,7 +44,7 @@ void	draw_fov(t_cub *cub)
 			ca += fov.field_step;
 		}
 		ca = no_higher(ca, 360, 0);	//increase angle to the right
-		gained_angle += fov.field_step;
+		gained_angle += 1;
 	}
 }
 
