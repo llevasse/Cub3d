@@ -6,7 +6,7 @@
 /*   By: llevasse <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/22 21:44:52 by llevasse          #+#    #+#             */
-/*   Updated: 2023/09/28 23:03:39 by llevasse         ###   ########.fr       */
+/*   Updated: 2023/09/28 23:08:37 by llevasse         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -28,17 +28,16 @@ void	draw_fov(t_cub *cub)
 	{
 		get_player_new_pos(cub, ca, MMAP_H * 5, &fov.p);
 		temp_x = x + ((WINDOW_W / PLAYER_FOV) * fov.field_step);
-		while (x < temp_x)
+		while (x < temp_x)	//draw value of one cast as a column on window
 		{
 			cast(cub, draw_line(*cub, fov.p.x, fov.p.y, PLAYER_RGB), x, ca);
 			x += 1;
 		}
-		ca += fov.field_step;
 		gained_angle += fov.field_step;
-		ca = no_higher(ca, 360, 0);	//increase angle to the right
+		ca = no_higher(ca + fov.field_step, 360, 0);	//increase angle to the right
 		get_player_new_pos(cub, ca, MMAP_H * 5, &fov.p2);
 		fov.false_line = get_line(fov.p, fov.p2);
-		while (fov.false_line.steps-- > 0)
+		while (fov.false_line.steps-- > 0)				//fill 'radar' on minimap
 		{
 			draw_line(*cub, fov.p.x, fov.p.y, PLAYER_RGB);
 			fov.p.x += fov.false_line.x_step;
