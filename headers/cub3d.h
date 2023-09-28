@@ -6,7 +6,7 @@
 /*   By: tdutel <tdutel@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/18 21:43:29 by llevasse          #+#    #+#             */
-/*   Updated: 2023/09/28 14:54:14 by llevasse         ###   ########.fr       */
+/*   Updated: 2023/09/28 21:02:07 by llevasse         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -29,8 +29,8 @@
 
 # include <stdio.h> //debug.
 
-# define WINDOW_W	1024*1
-# define WINDOW_H	512*1
+# define WINDOW_W	1024*2
+# define WINDOW_H	512*2
 
 # define MMAP_W	WINDOW_W/3
 # define MMAP_H	WINDOW_H/3

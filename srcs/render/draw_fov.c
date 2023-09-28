@@ -6,7 +6,7 @@
 /*   By: llevasse <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/22 21:44:52 by llevasse          #+#    #+#             */
-/*   Updated: 2023/09/28 15:50:28 by llevasse         ###   ########.fr       */
+/*   Updated: 2023/09/28 21:07:00 by llevasse         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,7 +24,7 @@ void	draw_fov(t_cub *cub)
 	ca = fov.cur_angle;		//get leftest angle of fow
 	x = 0;
 	gained_angle = 0;
-	printf("player angle : %f\n", cub->player.pa);
+	printf("player pos : %f:%f\n", cub->player.px, cub->player.py);
 	while (gained_angle < PLAYER_FOV)	//stop when current angle of ray is equal to the rightest angle of fov
 	{
 		get_player_new_pos(cub, ca, MMAP_H * 5, &fov.p);
@@ -34,6 +34,7 @@ void	draw_fov(t_cub *cub)
 			cast(cub, draw_line(*cub, fov.p.x, fov.p.y, PLAYER_RGB), x, ca);
 			x += 1;
 			ca += fov.field_step;
+			gained_angle += fov.field_step;
 		}
 		ca = no_higher(ca, 360, 0);	//increase angle to the right
 		get_player_new_pos(cub, ca, MMAP_H * 5, &fov.p2);
@@ -44,7 +45,6 @@ void	draw_fov(t_cub *cub)
 			fov.p.x += fov.false_line.x_step;
 			fov.p.y += fov.false_line.y_step;
 		}
-		gained_angle += 1;
 	}
 }
 
@@ -73,5 +73,6 @@ t_fov	get_fov(t_cub *cub)
 	fov.field_dist = get_dist_betw_points(fov.leftest, fov.rightest);
 	fov.field_step = ((float)PLAYER_FOV / WINDOW_W);
 	fov.field_dist = (PLAYER_FOV / fov.field_dist);
+	printf("field dist : %f\n", fov.field_dist);
 	return (fov);
 }
