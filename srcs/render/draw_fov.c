@@ -6,7 +6,7 @@
 /*   By: llevasse <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/22 21:44:52 by llevasse          #+#    #+#             */
-/*   Updated: 2023/09/28 22:57:13 by llevasse         ###   ########.fr       */
+/*   Updated: 2023/09/28 23:03:39 by llevasse         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,7 +18,6 @@ void	draw_fov(t_cub *cub)
 	float	x;
 	float	ca;				//angle of casted ray
 	float	gained_angle;
-	float	temp;
 	float	temp_x;
 
 	fov = get_fov(cub);
@@ -28,18 +27,14 @@ void	draw_fov(t_cub *cub)
 	while (gained_angle < PLAYER_FOV)	//stop when current angle of ray is equal to the rightest angle of fov
 	{
 		get_player_new_pos(cub, ca, MMAP_H * 5, &fov.p);
-		temp = ca + 1;
-		while (ca < temp)
+		temp_x = x + ((WINDOW_W / PLAYER_FOV) * fov.field_step);
+		while (x < temp_x)
 		{
-			temp_x = x + ((WINDOW_W / PLAYER_FOV) * fov.field_step);
-			while (x < temp_x)
-			{
-				cast(cub, draw_line(*cub, fov.p.x, fov.p.y, PLAYER_RGB), x, ca);
-				x += 1;
-			}
-			ca += fov.field_step;
-			gained_angle += fov.field_step;
+			cast(cub, draw_line(*cub, fov.p.x, fov.p.y, PLAYER_RGB), x, ca);
+			x += 1;
 		}
+		ca += fov.field_step;
+		gained_angle += fov.field_step;
 		ca = no_higher(ca, 360, 0);	//increase angle to the right
 		get_player_new_pos(cub, ca, MMAP_H * 5, &fov.p2);
 		fov.false_line = get_line(fov.p, fov.p2);
