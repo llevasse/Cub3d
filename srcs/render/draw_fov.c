@@ -6,7 +6,7 @@
 /*   By: llevasse <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/22 21:44:52 by llevasse          #+#    #+#             */
-/*   Updated: 2023/09/28 21:07:00 by llevasse         ###   ########.fr       */
+/*   Updated: 2023/09/28 22:57:13 by llevasse         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,20 +19,24 @@ void	draw_fov(t_cub *cub)
 	float	ca;				//angle of casted ray
 	float	gained_angle;
 	float	temp;
+	float	temp_x;
 
 	fov = get_fov(cub);
 	ca = fov.cur_angle;		//get leftest angle of fow
 	x = 0;
 	gained_angle = 0;
-	printf("player pos : %f:%f\n", cub->player.px, cub->player.py);
 	while (gained_angle < PLAYER_FOV)	//stop when current angle of ray is equal to the rightest angle of fov
 	{
 		get_player_new_pos(cub, ca, MMAP_H * 5, &fov.p);
 		temp = ca + 1;
 		while (ca < temp)
 		{
-			cast(cub, draw_line(*cub, fov.p.x, fov.p.y, PLAYER_RGB), x, ca);
-			x += 1;
+			temp_x = x + ((WINDOW_W / PLAYER_FOV) * fov.field_step);
+			while (x < temp_x)
+			{
+				cast(cub, draw_line(*cub, fov.p.x, fov.p.y, PLAYER_RGB), x, ca);
+				x += 1;
+			}
 			ca += fov.field_step;
 			gained_angle += fov.field_step;
 		}
@@ -66,13 +70,7 @@ t_fov	get_fov(t_cub *cub)
 	fov.beg_angle = no_higher(-(PLAYER_FOV / 2), 360, 0);	//angle of begining of fov
 	fov.end_angle = no_higher(fov.beg_angle + PLAYER_FOV, 360, 0);	//angle of end of fov
 	fov.cur_angle = fov.beg_angle;
-	get_player_new_pos(cub, fov.beg_angle, WINDOW_H, &fov.leftest);
-	get_player_new_pos(cub, fov.end_angle, WINDOW_W, &fov.rightest);
-	get_player_new_pos(cub, fov.beg_angle, get_line_dist(*cub, fov.leftest.x, fov.leftest.y), &fov.leftest);
-	get_player_new_pos(cub, fov.end_angle, get_line_dist(*cub, fov.rightest.x, fov.rightest.y), &fov.rightest);
-	fov.field_dist = get_dist_betw_points(fov.leftest, fov.rightest);
 	fov.field_step = ((float)PLAYER_FOV / WINDOW_W);
-	fov.field_dist = (PLAYER_FOV / fov.field_dist);
-	printf("field dist : %f\n", fov.field_dist);
+	(void)cub;
 	return (fov);
 }
