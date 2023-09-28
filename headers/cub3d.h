@@ -6,7 +6,11 @@
 /*   By: tdutel <tdutel@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/18 21:43:29 by llevasse          #+#    #+#             */
+<<<<<<< HEAD
 /*   Updated: 2023/09/27 12:39:32 by tdutel           ###   ########.fr       */
+=======
+/*   Updated: 2023/09/27 11:44:57 by llevasse         ###   ########.fr       */
+>>>>>>> origin/master
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -53,7 +57,7 @@ t_map	*parse(int map_fd, t_cub *cub);
 int		get_map(int map_fd, t_map *map, t_cub *cub);
 void	close_walls(t_map *map);
 int		get_wall(int map_fd, t_map *map);
-int		check_closed(char *map_str, t_map *map, t_cub *cub);
+int		check_closed(t_cub *cub, int x, int y);
 int		is_line_empty(char *str);
 int		get_tab_len(char **tab);
 

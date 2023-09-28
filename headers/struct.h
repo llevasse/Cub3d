@@ -6,7 +6,7 @@
 /*   By: tdutel <tdutel@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/18 21:52:44 by llevasse          #+#    #+#             */
-/*   Updated: 2023/09/24 16:59:04 by llevasse         ###   ########.fr       */
+/*   Updated: 2023/09/27 12:32:40 by llevasse         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -106,6 +106,7 @@ typedef struct s_fov
 	float				cur_angle;
 	float				end_angle;
 	float				ray_step;
+	float				player_dist;
 }				t_fov;
 
 t_garbage	*ft_new_garbage(void *address);

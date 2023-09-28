@@ -6,7 +6,7 @@
 /*   By: llevasse <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/22 22:05:00 by llevasse          #+#    #+#             */
-/*   Updated: 2023/09/24 23:22:45 by llevasse         ###   ########.fr       */
+/*   Updated: 2023/09/27 12:04:28 by llevasse         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,6 +20,7 @@ void	paint_bg(t_cub *cub);
 
 //srcs/render/line.c:
 t_line	get_line(t_point p_a, t_point p_b);
+int		get_line_dist(t_cub cub, int x2, int y2);
 int		draw_line(t_cub cub, int x2, int y2, int colour);
 void	drawRays3D(t_cub cub);
 
