@@ -6,7 +6,7 @@
 /*   By: llevasse <llevasse@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/19 23:04:28 by llevasse          #+#    #+#             */
-/*   Updated: 2023/09/27 12:05:54 by llevasse         ###   ########.fr       */
+/*   Updated: 2023/09/29 00:02:36 by llevasse         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -34,7 +34,6 @@ int	draw_line(t_cub cub, int x2, int y2, int colour)
 	int			dx;
 	int			dy;
 	int			steps;
-	int			pix_colour;
 	t_player	nb;
 
 	dx = x2 - cub.player.px;		//get X distance of two points
@@ -50,9 +49,7 @@ int	draw_line(t_cub cub, int x2, int y2, int colour)
 	while (nb.pa <= steps && nb.px >= 0 && nb.px <= WINDOW_W && \
 		   	nb.py >= 0 && nb.py <= WINDOW_H)
 	{
-		pix_colour = get_pixel_colour(&cub.img, nb.px, nb.py);
-		//if (pix_colour == MMAP_W_RGB)
-		if (pix_colour != MMAP_RGB && pix_colour != PLAYER_RGB)		//tempory fix for map3.cub
+		if (cub.mmap->map[(int)nb.py / cub.mmap->block_h][(int)nb.px / cub.mmap->block_w] == '1')
 			break ;
 		img_pix_put(&cub.img, (int)nb.px, (int)nb.py, colour);
 		nb.px += nb.pdx;
