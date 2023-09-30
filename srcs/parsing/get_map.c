@@ -6,7 +6,7 @@
 /*   By: llevasse <llevasse@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/19 12:01:04 by llevasse          #+#    #+#             */
-/*   Updated: 2023/09/26 09:56:52 by llevasse         ###   ########.fr       */
+/*   Updated: 2023/09/30 23:55:45 by llevasse         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -41,6 +41,17 @@ int	get_map(int map_fd, t_map *map, t_cub *cub)
 	return (1);
 }
 
+int	check_player_in_string(t_point *p, int y, int x, char *str)
+{
+	if (ft_is_in_str("NSEW", str[x]))
+	{
+		p->x = x - 1;
+		p->y = y;
+		return (1);
+	}
+	return (0);
+}
+
 static int	search_player_presence(t_map *map, t_cub *cub, char *s)
 {
 	t_point	p;
@@ -58,14 +69,7 @@ static int	search_player_presence(t_map *map, t_cub *cub, char *s)
 		ft_add_garbage(&map->garbage, split[y]);
 		x = 0;
 		while (split[y][x])
-		{
-			if (ft_is_in_str("NSEW", split[y][x++]))
-			{
-				p.x = x - 1;
-				p.y = y;
-				nb++;
-			}
-		}
+			nb += check_player_in_string(&p, y, x++, split[y]);
 		y++;
 	}
 	if (nb > 1)
