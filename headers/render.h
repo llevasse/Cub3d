@@ -6,7 +6,7 @@
 /*   By: llevasse <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/22 22:05:00 by llevasse          #+#    #+#             */
-/*   Updated: 2023/09/30 23:12:10 by llevasse         ###   ########.fr       */
+/*   Updated: 2023/09/30 23:39:50 by llevasse         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,8 +20,8 @@ void	paint_bg(t_cub *cub);
 
 //srcs/render/line.c:
 t_line	get_line(t_point p_a, t_point p_b);
-int		get_line_dist(t_cub cub, int x2, int y2);
-int		draw_line(t_cub cub, int x2, int y2, int colour);
+int		get_line_dist(t_cub cub, t_point dest_p);
+int		draw_line(t_cub cub, t_point dest_p, int colour);
 void	drawRays3D(t_cub cub);
 
 //srcs/render/minimap.c:

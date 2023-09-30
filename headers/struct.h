@@ -6,7 +6,7 @@
 /*   By: tdutel <tdutel@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/18 21:52:44 by llevasse          #+#    #+#             */
-/*   Updated: 2023/09/30 23:08:25 by llevasse         ###   ########.fr       */
+/*   Updated: 2023/09/30 23:33:06 by llevasse         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -54,27 +54,6 @@ typedef struct s_minimap
 	int					maps;
 }				t_minimap;
 
-typedef struct s_player
-{
-	float	px;
-	float	py;
-	float	pdx;	//player delta x
-	float	pdy;	//player delta y
-	float	pa;		//player angle
-}				t_player;
-
-
-typedef struct s_cub
-{
-	void				*mlx_ptr;
-	void				*win_ptr;
-	struct s_map		*map;
-	struct s_img		img;
-	struct s_minimap	*mmap;
-	struct s_garbage	*garbage;
-	t_player			player;
-}				t_cub;
-
 typedef struct s_point
 {
 	float				x;
@@ -91,6 +70,27 @@ typedef struct s_line
 	float				y_step;
 	int					steps;
 }				t_line;
+
+typedef struct s_player
+{
+	float			px;
+	float			py;
+	float			pdx;	//player delta x
+	float			pdy;	//player delta y
+	float			pa;		//player angle
+	struct s_point	p;
+}				t_player;
+
+typedef struct s_cub
+{
+	void				*mlx_ptr;
+	void				*win_ptr;
+	struct s_map		*map;
+	struct s_img		img;
+	struct s_minimap	*mmap;
+	struct s_garbage	*garbage;
+	t_player			player;
+}				t_cub;
 
 typedef struct s_fov
 {
