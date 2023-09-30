@@ -6,7 +6,7 @@
 /*   By: llevasse <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/19 21:56:14 by llevasse          #+#    #+#             */
-/*   Updated: 2023/09/26 23:27:14 by llevasse         ###   ########.fr       */
+/*   Updated: 2023/10/01 00:10:09 by llevasse         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,7 +15,7 @@
 static int	fload(t_cub *cub, int x, int y);
 
 int	check_closed(t_cub *cub, int x, int y)
-{	
+{
 	if (!fload(cub, x, y))
 	{
 		ft_putstr_fd(OPEN_MAP, 2);
@@ -36,7 +36,7 @@ int	check_closed(t_cub *cub, int x, int y)
 	return (1);
 }
 
-static int fload(t_cub *cub, int x, int y)
+static int	fload(t_cub *cub, int x, int y)
 {
 	if (y < 0 || x < 0)
 		return (0);

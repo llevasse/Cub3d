@@ -6,7 +6,7 @@
 /*   By: llevasse <llevasse@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/19 23:04:28 by llevasse          #+#    #+#             */
-/*   Updated: 2023/09/29 00:17:21 by llevasse         ###   ########.fr       */
+/*   Updated: 2023/09/30 23:39:24 by llevasse         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -28,28 +28,29 @@ t_line	get_line(t_point p_a, t_point p_b)
 	return (line);
 }
 
-// Fonction pour tracer une ligne avec la minilibX
-int	draw_line(t_cub cub, int x2, int y2, int colour)
+t_point	get_player_point(float x, float y)
 {
-	int			dx;
-	int			dy;
-	int			steps;
+	t_point	p;
+
+	p.x = x;
+	p.y = y;
+	return (p);
+}
+
+// Fonction pour tracer une ligne avec la minilibX
+int	draw_line(t_cub cub, t_point dest_p, int colour)
+{
+	t_line		line;
 	int			pos_x;
 	int			pos_y;
 	t_player	nb;
 
-	dx = x2 - cub.player.px;		//get X distance of two points
-	dy = y2 - cub.player.py;		//get Y distance of two points
-	steps = abs(dy);
-	if (abs(dx) > abs(dy))
-		steps = abs(dx);
-	nb.pdx = (float) dx / steps;	//get steps for the X axis
-	nb.pdy = (float) dy / steps;	//get steps for the Y axis
+	line = get_line(get_player_point(cub.player.px, cub.player.py), dest_p);
 	nb.px = cub.player.px;
 	nb.py = cub.player.py;
 	nb.pa = 0;
-	while (nb.pa <= steps && nb.px >= 0 && nb.px <= WINDOW_W && \
-		   	nb.py >= 0 && nb.py <= WINDOW_H)
+	while (nb.pa <= line.steps && nb.px >= 0 && nb.px <= WINDOW_W && \
+			nb.py >= 0 && nb.py <= WINDOW_H)
 	{
 		pos_x = (int)(nb.px / cub.mmap->block_w);
 		pos_y = (int)(nb.py / cub.mmap->block_h);
@@ -58,46 +59,41 @@ int	draw_line(t_cub cub, int x2, int y2, int colour)
 		if (!ft_is_in_str("NSEW0", cub.mmap->map[pos_y][pos_x]))
 			break ;
 		img_pix_put(&cub.img, (int)nb.px, (int)nb.py, colour);
-		nb.px += nb.pdx;
-		nb.py += nb.pdy;
+		nb.px += line.x_step;
+		nb.py += line.y_step;
 		nb.pa += 1;
 	}
-	return (sqrt(pow(nb.py - cub.player.py,2) + pow(nb.px - cub.player.px, 2)));
+	return (sqrt(pow(nb.py - cub.player.py, 2) + pow(nb.px - cub.player.px, 2)));
 }
 
-int	get_line_dist(t_cub cub, int x2, int y2)
+int	get_line_dist(t_cub cub, t_point dest_p)
 {
-	int			dx;
-	int			dy;
-	int			steps;
-	int			pix_colour;
+	t_line		line;
+	int			pos_x;
+	int			pos_y;
 	t_player	nb;
 
-	dx = x2 - cub.player.px;		//get X distance of two points
-	dy = y2 - cub.player.py;		//get Y distance of two points
-	steps = abs(dy);
-	if (abs(dx) > abs(dy))
-		steps = abs(dx);
-	nb.pdx = (float) dx / steps;	//get steps for the X axis
-	nb.pdy = (float) dy / steps;	//get steps for the Y axis
+	line = get_line(get_player_point(cub.player.px, cub.player.py), dest_p);
 	nb.px = cub.player.px;
 	nb.py = cub.player.py;
 	nb.pa = 0;
-	while (nb.pa <= steps && nb.px >= 0 && nb.px <= WINDOW_W && \
-		   	nb.py >= 0 && nb.py <= WINDOW_H)
+	while (nb.pa <= line.steps && nb.px >= 0 && nb.px <= WINDOW_W && \
+			nb.py >= 0 && nb.py <= WINDOW_H)
 	{
-		pix_colour = get_pixel_colour(&cub.img, nb.px, nb.py);
-		//if (pix_colour == MMAP_W_RGB)
-		if (pix_colour != MMAP_RGB && pix_colour != PLAYER_RGB)		//tempory fix for map3.cub
+		pos_x = (int)(nb.px / cub.mmap->block_w);
+		pos_y = (int)(nb.py / cub.mmap->block_h);
+		if (pos_y >= cub.mmap->nb_line)
 			break ;
-		nb.px += nb.pdx;
-		nb.py += nb.pdy;
+		if (!ft_is_in_str("NSEW0", cub.mmap->map[pos_y][pos_x]))
+			break ;
+		nb.px += line.x_step;
+		nb.py += line.y_step;
 		nb.pa += 1;
 	}
-	return (sqrt(pow(nb.py - cub.player.py,2) + pow(nb.px - cub.player.px, 2)));
+	return (sqrt(pow(nb.py - cub.player.py, 2) + pow(nb.px - cub.player.px, 2)));
 }
 
-void	drawRays3D(t_cub cub)
+/*void	drawRays3D(t_cub cub)
 {
 	t_math	var;
 
@@ -148,4 +144,4 @@ void	drawRays3D(t_cub cub)
 		draw_line(cub, var.rx, var.ry, 0x222222);
 		var.r++;
 	}
-}
+}*/

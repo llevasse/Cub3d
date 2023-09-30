@@ -6,7 +6,7 @@
 /*   By: llevasse <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/18 23:48:52 by llevasse          #+#    #+#             */
-/*   Updated: 2023/09/26 14:34:47 by llevasse         ###   ########.fr       */
+/*   Updated: 2023/10/01 00:08:23 by llevasse         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -40,10 +40,9 @@ static int	do_open(char *s, int *fd, int face)
 	return (1);
 }
 
-int	get_wall(int map_fd, t_map *map)
+static char	*get_str_line(int map_fd, t_map *map)
 {
 	char	*str;
-	char	*id;
 
 	str = get_next_line(map_fd);
 	ft_add_garbage(&map->garbage, str);
@@ -56,6 +55,19 @@ int	get_wall(int map_fd, t_map *map)
 		return (0);
 	while (*str && ft_isspace(*str))
 		str++;
+	if (*str)
+		return (str);
+	return (NULL);
+}
+
+int	get_wall(int map_fd, t_map *map)
+{
+	char	*str;
+	char	*id;
+
+	str = get_str_line(map_fd, map);
+	if (!str)
+		return (0);
 	id = ft_strsep(&str, " \t");
 	if (!ft_strcmp("NO", id) && map->north_fd == -1)
 		return (do_open(str, &map->north_fd, 0));
