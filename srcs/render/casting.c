@@ -6,17 +6,18 @@
 /*   By: llevasse <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/24 22:25:17 by llevasse          #+#    #+#             */
-/*   Updated: 2023/09/30 22:57:00 by llevasse         ###   ########.fr       */
+/*   Updated: 2023/09/30 23:17:07 by llevasse         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "cub3d.h"
 
+//fisheye : angle of ray from player angle
 float	get_fisheye(t_cub *cub, float ca)
 {
 	float	fisheye;
 
-	fisheye = cub->player.pa - ca;//angle of ray from player angle
+	fisheye = cub->player.pa - ca;
 	if (fisheye < 0)
 		fisheye += 2 * PI;
 	if (fisheye > 2 * PI)
@@ -31,7 +32,7 @@ void	cast(t_cub *cub, int dist, int x, float ca)
 	int		height;
 	int		colour;
 
-	ca = no_higher(ca, 360, 0);//angle of ray
+	ca = no_higher(ca, 360, 0);
 //	dist *= cos(get_fisheye(cub, ca));
 	if (dist == 0)
 		dist = 1;

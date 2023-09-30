@@ -6,7 +6,7 @@
 /*   By: llevasse <llevasse@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/19 23:04:28 by llevasse          #+#    #+#             */
-/*   Updated: 2023/09/29 00:17:21 by llevasse         ###   ########.fr       */
+/*   Updated: 2023/09/30 23:18:49 by llevasse         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -97,7 +97,7 @@ int	get_line_dist(t_cub cub, int x2, int y2)
 	return (sqrt(pow(nb.py - cub.player.py,2) + pow(nb.px - cub.player.px, 2)));
 }
 
-void	drawRays3D(t_cub cub)
+/*void	drawRays3D(t_cub cub)
 {
 	t_math	var;
 
@@ -148,4 +148,4 @@ void	drawRays3D(t_cub cub)
 		draw_line(cub, var.rx, var.ry, 0x222222);
 		var.r++;
 	}
-}
+}*/
