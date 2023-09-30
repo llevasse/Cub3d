@@ -6,7 +6,7 @@
 /*   By: llevasse <llevasse@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/22 11:37:45 by llevasse          #+#    #+#             */
-/*   Updated: 2023/09/22 23:57:33 by llevasse         ###   ########.fr       */
+/*   Updated: 2023/10/01 00:12:47 by llevasse         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -27,7 +27,8 @@ void	init_player(t_cub *cub)
 		{
 			if (ft_is_in_str("NSEW", cub->mmap->map[i][j++]))
 			{
-				cub->player.pa = get_player_start_orientation(cub->mmap->map[i][j - 1]);
+				cub->player.pa = get_player_start_orientation(i
+						cub->mmap->map[i][j - 1]);
 				cub->player.px = ((j - 1) * cub->mmap->block_h);
 				cub->player.py = (i * cub->mmap->block_h);
 			}
