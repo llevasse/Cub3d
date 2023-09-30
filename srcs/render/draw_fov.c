@@ -6,38 +6,37 @@
 /*   By: llevasse <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/22 21:44:52 by llevasse          #+#    #+#             */
-/*   Updated: 2023/09/29 00:02:45 by llevasse         ###   ########.fr       */
+/*   Updated: 2023/09/30 23:05:34 by llevasse         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "cub3d.h"
 
+//float	ca is angle of casted ray
+//second while loop : draw value of one cast as a column on window
+//third while oop : fill radar on minimap
 void	draw_fov(t_cub *cub)
 {
 	t_fov	fov;
 	float	x;
-	float	ca;				//angle of casted ray
+	float	ca;
 	float	gained_angle;
 	float	temp_x;
 
 	fov = get_fov(cub);
-	ca = fov.cur_angle;		//get leftest angle of fow
+	ca = fov.cur_angle;
 	x = 0;
 	gained_angle = 0;
-	while (gained_angle < PLAYER_FOV)	//stop when current angle of ray is equal to the rightest angle of fov
+	while (gained_angle < PLAYER_FOV)
 	{
-		get_player_new_pos(cub, ca, MMAP_H * 5, &fov.p);
+		get_player_new_pos(cub, no_higher(ca + gained_angle, 360, 0), MMAP_H * 5, &fov.p);
 		temp_x = x + ((WINDOW_W / PLAYER_FOV) * fov.field_step);
-		while (x < temp_x)	//draw value of one cast as a column on window
-		{
-			cast(cub, draw_line(*cub, fov.p.x, fov.p.y, PLAYER_RGB), x, ca);
-			x += 1;
-		}
+		while (x < temp_x)
+			cast(cub, draw_line(*cub, fov.p.x, fov.p.y, PLAYER_RGB), x++, ca);
 		gained_angle += fov.field_step;
-		ca = no_higher(ca + fov.field_step, 360, 0);	//increase angle to the right
-		get_player_new_pos(cub, ca, MMAP_H * 5, &fov.p2);
+		get_player_new_pos(cub, no_higher(ca + gained_angle, 360, 0), MMAP_H * 5, &fov.p2);
 		fov.false_line = get_line(fov.p, fov.p2);
-		while (fov.false_line.steps-- > 0)				//fill 'radar' on minimap
+		while (fov.false_line.steps-- > 0)
 		{
 			draw_line(*cub, fov.p.x, fov.p.y, PLAYER_RGB);
 			fov.p.x += fov.false_line.x_step;
