@@ -6,7 +6,7 @@
 /*   By: llevasse <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/22 21:44:52 by llevasse          #+#    #+#             */
-/*   Updated: 2023/10/02 21:30:38 by llevasse         ###   ########.fr       */
+/*   Updated: 2023/10/02 21:41:52 by llevasse         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -29,7 +29,7 @@ void	draw_fov(t_cub *cub)
 	while (gained_angle < PLAYER_FOV - 1)
 	{
 		get_player_new_pos(cub, no_higher(ca + gained_angle, 360, 0), MMAP_H * 5, &fov.p);
-		temp_x = x + ((WINDOW_W / PLAYER_FOV) * fov.field_step);
+		temp_x = x + fov.column_width;
 		while (x < temp_x)
 			cast(cub, draw_line(*cub, fov.p, PLAYER_RGB), x++, ca);
 		gained_angle += fov.field_step;
@@ -62,5 +62,6 @@ t_fov	get_fov(float *ca)
 	fov.end_angle = no_higher(fov.beg_angle + (PLAYER_FOV - 1), 360, 0);
 	*ca = fov.beg_angle;
 	fov.field_step = ((float)(PLAYER_FOV - 1) / WINDOW_W);
+	fov.column_width = (WINDOW_W / PLAYER_FOV) * fov.field_step;
 	return (fov);
 }
