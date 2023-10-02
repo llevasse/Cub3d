@@ -6,7 +6,7 @@
 /*   By: llevasse <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/22 21:44:52 by llevasse          #+#    #+#             */
-/*   Updated: 2023/10/02 21:23:19 by llevasse         ###   ########.fr       */
+/*   Updated: 2023/10/02 21:30:38 by llevasse         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,18 +26,16 @@ void	draw_fov(t_cub *cub)
 	fov = get_fov(&ca);
 	x = 0;
 	gained_angle = 0;
-	while (gained_angle < PLAYER_FOV)
+	while (gained_angle < PLAYER_FOV - 1)
 	{
 		get_player_new_pos(cub, no_higher(ca + gained_angle, 360, 0), MMAP_H * 5, &fov.p);
-		temp_x = x + ((WINDOW_W / PLAYER_FOV ) * fov.field_step);
+		temp_x = x + ((WINDOW_W / PLAYER_FOV) * fov.field_step);
 		while (x < temp_x)
 			cast(cub, draw_line(*cub, fov.p, PLAYER_RGB), x++, ca);
 		gained_angle += fov.field_step;
-		if (gained_angle >= PLAYER_FOV - 1)
-			break ;
 		get_player_new_pos(cub, no_higher(ca + gained_angle, 360, 0), MMAP_H * 5, &fov.p2);
 		fov.fl = get_line(fov.p, fov.p2);
-		while (fov.fl.steps-- > 0 && draw_line(*cub, fov.p, PLAYER_RGB))
+		while (gained_angle < PLAYER_FOV - 1 && fov.fl.steps-- > 0 && draw_line(*cub, fov.p, PLAYER_RGB))
 		{
 			fov.p.x += fov.fl.x_step;
 			fov.p.y += fov.fl.y_step;
