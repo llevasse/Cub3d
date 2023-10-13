@@ -6,7 +6,7 @@
 /*   By: tdutel <tdutel@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/19 22:29:27 by llevasse          #+#    #+#             */
-/*   Updated: 2023/10/13 10:27:41 by llevasse         ###   ########.fr       */
+/*   Updated: 2023/10/13 22:34:33 by llevasse         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -46,7 +46,7 @@ int	round_to_pow_2(int n){
 	n |= n >> 4;
 	n |= n >> 8;
 	n |= n >> 16;
-	return (n + 1);
+	return ((n + 1) / 2);
 }
 
 void	init_minimap(t_cub *cub)
