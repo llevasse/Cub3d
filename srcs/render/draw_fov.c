@@ -28,12 +28,12 @@ void	draw_fov(t_cub *cub)
 	gained_angle = 0;
 	while (gained_angle < PLAYER_FOV - 1)
 	{
-		get_player_new_pos(cub, no_higher(ca + gained_angle, 360, 0), MMAP_H * 5, &fov.p);
+		get_player_new_pos(cub, no_higher(ca + gained_angle, 360, 0), MMAP_S * 5, &fov.p);
 		temp_x = x + fov.column_width;
 		while (x < temp_x)
 			cast(cub, draw_line(*cub, fov.p, PLAYER_RGB), x++, ca);
 		gained_angle += fov.field_step;
-		get_player_new_pos(cub, no_higher(ca + gained_angle, 360, 0), MMAP_H * 5, &fov.p2);
+		get_player_new_pos(cub, no_higher(ca + gained_angle, 360, 0), MMAP_S * 5, &fov.p2);
 		fov.fl = get_line(fov.p, fov.p2);
 		while (gained_angle < PLAYER_FOV - 1 && fov.fl.steps-- > 0 && draw_line(*cub, fov.p, PLAYER_RGB))
 		{

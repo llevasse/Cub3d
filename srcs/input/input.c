@@ -16,7 +16,7 @@ int	handle_input(int keysym, t_cub *cub)
 {
 	float	offset;
 
-	offset = 0.1 * cub->mmap->block_w;
+	offset = 0.1 * cub->mmap->block_s;
 	if ((keysym == XK_w || keysym == XK_Up) && \
 		!check_collision(cub, 0, &offset))
 		set_player_new_pos(cub, 0, offset);

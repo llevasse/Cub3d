@@ -29,14 +29,14 @@ void	init_player(t_cub *cub)
 			{
 				cub->player.pa = get_player_start_orientation(
 						cub->mmap->map[i][j - 1]);
-				cub->player.px = ((j - 1) * cub->mmap->block_h);
-				cub->player.py = (i * cub->mmap->block_h);
+				cub->player.px = ((j - 1) * cub->mmap->block_s);
+				cub->player.py = (i * cub->mmap->block_s);
 			}
 		}
 		i++;
 	}
-	cub->player.px += cub->mmap->block_h / 2;
-	cub->player.py += cub->mmap->block_h / 2;
+	cub->player.px += cub->mmap->block_s / 2;
+	cub->player.py += cub->mmap->block_s / 2;
 }
 
 int	get_player_start_orientation(char c)

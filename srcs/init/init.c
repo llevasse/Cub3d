@@ -6,7 +6,7 @@
 /*   By: tdutel <tdutel@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/19 22:29:27 by llevasse          #+#    #+#             */
-/*   Updated: 2023/10/13 22:34:33 by llevasse         ###   ########.fr       */
+/*   Updated: 2023/10/13 22:53:25 by llevasse         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -46,7 +46,7 @@ int	round_to_pow_2(int n){
 	n |= n >> 4;
 	n |= n >> 8;
 	n |= n >> 16;
-	return ((n + 1) / 2);
+	return (n + 1);
 }
 
 void	init_minimap(t_cub *cub)
@@ -65,10 +65,9 @@ void	init_minimap(t_cub *cub)
 			cub->mmap->map_width = ft_strlen(cub->mmap->map[i - 1]);
 	}
 	divider = cub->mmap->map_width;
-	if (MMAP_W < MMAP_H)
+	if (WINDOW_W < WINDOW_H)
 		divider = cub->mmap->nb_line;
-	cub->mmap->block_w = round_to_pow_2(MMAP_W / divider);
-	cub->mmap->block_h = round_to_pow_2(MMAP_H / divider);
+	cub->mmap->block_s = round_to_pow_2(MMAP_S / divider) / 2;
 }
 
 void	init_map_value(t_cub *cub)

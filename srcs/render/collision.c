@@ -6,7 +6,7 @@
 /*   By: tdutel <tdutel@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/21 01:32:27 by llevasse          #+#    #+#             */
-/*   Updated: 2023/09/25 23:36:44 by llevasse         ###   ########.fr       */
+/*   Updated: 2023/10/13 22:53:06 by llevasse         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -31,7 +31,7 @@ int	check_collision(t_cub *cub, int angle, float *offset)
 	float	py;
 
 	get_player_new_pos(cub, angle, *offset, &new_p);
-	if (new_p.x < 0 || new_p.y < 0 || new_p.x > MMAP_W || new_p.y > MMAP_H)
+	if (new_p.x < 0 || new_p.y < 0 || new_p.x > MMAP_S || new_p.y > MMAP_S)
 		return (1);
 	px = cub->player.px;
 	py = cub->player.py;

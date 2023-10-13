@@ -52,8 +52,8 @@ int	draw_line(t_cub cub, t_point dest_p, int colour)
 	while (nb.pa <= line.steps && nb.px >= 0 && nb.px <= WINDOW_W && \
 			nb.py >= 0 && nb.py <= WINDOW_H)
 	{
-		pos_x = (int)(nb.px / cub.mmap->block_w);
-		pos_y = (int)(nb.py / cub.mmap->block_h);
+		pos_x = (int)(nb.px / cub.mmap->block_s);
+		pos_y = (int)(nb.py / cub.mmap->block_s);
 		if (pos_y >= cub.mmap->nb_line)
 			break ;
 		if (!ft_is_in_str("NSEW0", cub.mmap->map[pos_y][pos_x]))
@@ -80,8 +80,8 @@ int	get_line_dist(t_cub cub, t_point dest_p)
 	while (nb.pa <= line.steps && nb.px >= 0 && nb.px <= WINDOW_W && \
 			nb.py >= 0 && nb.py <= WINDOW_H)
 	{
-		pos_x = (int)(nb.px / cub.mmap->block_w);
-		pos_y = (int)(nb.py / cub.mmap->block_h);
+		pos_x = (int)(nb.px / cub.mmap->block_s);
+		pos_y = (int)(nb.py / cub.mmap->block_s);
 		if (pos_y >= cub.mmap->nb_line)
 			break ;
 		if (!ft_is_in_str("NSEW0", cub.mmap->map[pos_y][pos_x]))

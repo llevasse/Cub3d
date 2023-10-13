@@ -36,7 +36,7 @@ void	cast(t_cub *cub, int dist, int x, float ca)
 //	dist *= cos(get_fisheye(cub, ca));
 	if (dist == 0)
 		dist = 1;
-	height = (cub->mmap->block_h * WINDOW_H) / dist;
+	height = (cub->mmap->block_s * WINDOW_H) / dist;
 	high_y = (WINDOW_H / 2) - height;
 	low_y = (WINDOW_H / 2) + height;
 	if (high_y < 0)
