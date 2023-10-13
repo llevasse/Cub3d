@@ -6,7 +6,7 @@
 /*   By: tdutel <tdutel@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/19 23:04:28 by llevasse          #+#    #+#             */
-/*   Updated: 2023/10/01 00:14:18 by llevasse         ###   ########.fr       */
+/*   Updated: 2023/10/13 22:36:42 by llevasse         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -51,8 +51,8 @@ int	close_window(t_cub *cub)
 int	rotate_input(int keysym, t_cub *cub)
 {
 	if (keysym == XK_Left)
-		cub->player.pa--;
+		cub->player.pa -= PLAYER_R_OFFSET;
 	if (keysym == XK_Right)
-		cub->player.pa++;
+		cub->player.pa += PLAYER_R_OFFSET;
 	return (0);
 }

@@ -6,7 +6,7 @@
 /*   By: tdutel <tdutel@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/18 21:43:29 by llevasse          #+#    #+#             */
-/*   Updated: 2023/10/13 10:28:34 by llevasse         ###   ########.fr       */
+/*   Updated: 2023/10/13 22:37:07 by llevasse         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -46,7 +46,8 @@
 # define PLAYER_RGB		0x0000ff
 # define PLAYER_FOV		80
 
-# define PLAYER_OFFSET	5
+# define PLAYER_OFFSET		5
+# define PLAYER_R_OFFSET	3
 
 # define PI 3.1415926535
 # define RADIAN PI/180
