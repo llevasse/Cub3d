@@ -6,7 +6,7 @@
 /*   By: tdutel <tdutel@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/19 23:04:28 by llevasse          #+#    #+#             */
-/*   Updated: 2023/10/13 22:36:42 by llevasse         ###   ########.fr       */
+/*   Updated: 2023/10/17 10:27:32 by llevasse         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -37,10 +37,10 @@ int	handle_input(int keysym, t_cub *cub)
 int	close_window(t_cub *cub)
 {
 	mlx_destroy_window(cub->mlx_ptr, cub->win_ptr);
+	close_walls(cub, cub->map);
 	if (cub->img.mlx_img)
 		mlx_destroy_image(cub->mlx_ptr, cub->img.mlx_img);
 	mlx_destroy_display(cub->mlx_ptr);
-	close_walls(cub->map);
 	free_garbage(cub->garbage);
 	exit(0);
 }

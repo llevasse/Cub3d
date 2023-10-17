@@ -6,7 +6,7 @@
 /*   By: llevasse <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/18 21:50:20 by llevasse          #+#    #+#             */
-/*   Updated: 2023/10/17 10:13:36 by llevasse         ###   ########.fr       */
+/*   Updated: 2023/10/17 10:37:02 by llevasse         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -29,7 +29,7 @@ t_map	*parse(int map_fd, t_cub *cub)
 	while (element_got < 6 && get_wall(map_fd, map, cub) == 1)
 		element_got++;
 	if (element_got != 6 || !get_map(map_fd, map, cub))
-		return (close_walls(map), free_garbage(map->garbage),
+		return (close_walls(cub, map), free_garbage(map->garbage),
 			close(map_fd), NULL);
 	close(map_fd);
 	return (map);
@@ -49,9 +49,16 @@ int	is_line_empty(char *str)
 	return (1);
 }
 
-void	close_walls(t_map *map)
+void	close_walls(t_cub *cub, t_map *map)
 {
-	(void)map;
+	if (map->north_img.mlx_img)
+		mlx_destroy_image(cub->mlx_ptr, map->north_img.mlx_img);
+	if (map->south_img.mlx_img)
+		mlx_destroy_image(cub->mlx_ptr, map->south_img.mlx_img);
+	if (map->east_img.mlx_img)
+		mlx_destroy_image(cub->mlx_ptr, map->east_img.mlx_img);
+	if (map->west_img.mlx_img)
+		mlx_destroy_image(cub->mlx_ptr, map->west_img.mlx_img);
 }
 
 static void	set_map_null(t_map *map)
