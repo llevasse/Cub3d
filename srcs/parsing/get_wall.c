@@ -6,7 +6,7 @@
 /*   By: llevasse <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/18 23:48:52 by llevasse          #+#    #+#             */
-/*   Updated: 2023/10/17 10:06:06 by llevasse         ###   ########.fr       */
+/*   Updated: 2023/10/17 10:15:33 by llevasse         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -72,14 +72,14 @@ int	get_wall(int map_fd, t_map *map, t_cub *cub)
 	if (!str)
 		return (0);
 	id = ft_strsep(&str, " \t");
-	if (!ft_strcmp("NO", id) && map->north_img == 0)
-		return (do_open(str, map->north_img->mlx_img, 0, cub));
-	if (!ft_strcmp("SO", id) && map->south_img == 0)
-		return (do_open(str, map->south_img->mlx_img, 1, cub));
-	if (!ft_strcmp("WE", id) && map->west_img == 0)
-		return (do_open(str, map->west_img->mlx_img, 2, cub));
-	if (!ft_strcmp("EA", id) && map->east_img == 0)
-		return (do_open(str, map->east_img->mlx_img, 3, cub));
+	if (!ft_strcmp("NO", id) && map->north_img.mlx_img == 0)
+		return (do_open(str, map->north_img.mlx_img, 0, cub));
+	if (!ft_strcmp("SO", id) && map->south_img.mlx_img == 0)
+		return (do_open(str, map->south_img.mlx_img, 1, cub));
+	if (!ft_strcmp("WE", id) && map->west_img.mlx_img == 0)
+		return (do_open(str, map->west_img.mlx_img, 2, cub));
+	if (!ft_strcmp("EA", id) && map->east_img.mlx_img == 0)
+		return (do_open(str, map->east_img.mlx_img, 3, cub));
 	if (!ft_strcmp("F", id) && map->f_rgb == -1)
 		return ((void)(map->f_rgb = get_rgb_value(str)), 1);
 	if (!ft_strcmp("C", id) && map->c_rgb == -1)

@@ -6,7 +6,7 @@
 /*   By: llevasse <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/18 21:50:20 by llevasse          #+#    #+#             */
-/*   Updated: 2023/10/17 10:07:05 by llevasse         ###   ########.fr       */
+/*   Updated: 2023/10/17 10:13:36 by llevasse         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -51,26 +51,15 @@ int	is_line_empty(char *str)
 
 void	close_walls(t_map *map)
 {
-	if (map->north_fd != -1)
-		close(map->north_fd);
-	if (map->south_fd != -1)
-		close(map->south_fd);
-	if (map->east_fd != -1)
-		close(map->east_fd);
-	if (map->west_fd != -1)
-		close(map->west_fd);
+	(void)map;
 }
 
 static void	set_map_null(t_map *map)
 {
-	map->north_fd = -1;
-	map->south_fd = -1;
-	map->east_fd = -1;
-	map->west_fd = -1;
-	map->north_img = NULL;
-	map->south_img = NULL;
-	map->east_img = NULL;
-	map->west_img = NULL;
+	map->north_img.mlx_img = NULL;
+	map->south_img.mlx_img = NULL;
+	map->east_img.mlx_img = NULL;
+	map->west_img.mlx_img = NULL;
 	map->f_rgb = -1;
 	map->c_rgb = -1;
 	map->player_rotation = -1;
