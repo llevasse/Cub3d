@@ -6,7 +6,7 @@
 /*   By: llevasse <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/18 21:50:20 by llevasse          #+#    #+#             */
-/*   Updated: 2023/10/01 00:09:00 by llevasse         ###   ########.fr       */
+/*   Updated: 2023/10/17 10:07:05 by llevasse         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,7 +26,7 @@ t_map	*parse(int map_fd, t_cub *cub)
 	ft_add_garbage(&cub->garbage, map);
 	set_map_null(map);
 	map->garbage = cub->garbage;
-	while (element_got < 6 && get_wall(map_fd, map) == 1)
+	while (element_got < 6 && get_wall(map_fd, map, cub) == 1)
 		element_got++;
 	if (element_got != 6 || !get_map(map_fd, map, cub))
 		return (close_walls(map), free_garbage(map->garbage),
@@ -67,6 +67,10 @@ static void	set_map_null(t_map *map)
 	map->south_fd = -1;
 	map->east_fd = -1;
 	map->west_fd = -1;
+	map->north_img = NULL;
+	map->south_img = NULL;
+	map->east_img = NULL;
+	map->west_img = NULL;
 	map->f_rgb = -1;
 	map->c_rgb = -1;
 	map->player_rotation = -1;
