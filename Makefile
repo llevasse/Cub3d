@@ -30,6 +30,7 @@ SRC				=	srcs/main.c \
 					srcs/render/casting.c \
 					srcs/render/collision.c \
 					srcs/render/get_pixel_colour.c \
+					srcs/render/get_orientation.c \
 					srcs/input/input.c \
 					srcs/input/set_player_pos.c
 

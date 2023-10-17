@@ -6,7 +6,7 @@
 /*   By: llevasse <llevasse@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/19 23:04:28 by llevasse          #+#    #+#             */
-/*   Updated: 2023/09/30 23:39:24 by llevasse         ###   ########.fr       */
+/*   Updated: 2023/10/17 15:17:02 by llevasse         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -38,7 +38,7 @@ t_point	get_player_point(float x, float y)
 }
 
 // Fonction pour tracer une ligne avec la minilibX
-int	draw_line(t_cub cub, t_point dest_p, int colour)
+int	draw_line(t_cub cub, t_point dest_p, int colour, int ca)
 {
 	t_line		line;
 	int			pos_x;
@@ -56,8 +56,11 @@ int	draw_line(t_cub cub, t_point dest_p, int colour)
 		pos_y = (int)(nb.py / cub.mmap->block_s);
 		if (pos_y >= cub.mmap->nb_line)
 			break ;
-		if (!ft_is_in_str("NSEW0", cub.mmap->map[pos_y][pos_x]))
+		if (!ft_is_in_str("NSEW0", cub.mmap->map[pos_y][pos_x])){
+			if (ca >= (PLAYER_FOV/2) - 1 && ca <= (PLAYER_FOV/2) + 1)
+				get_orientation(cub.map, cub.mmap->block_s, nb.px, nb.py);
 			break ;
+		}
 		img_pix_put(&cub.img, (int)nb.px, (int)nb.py, colour);
 		nb.px += line.x_step;
 		nb.py += line.y_step;
