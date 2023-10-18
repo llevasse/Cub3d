@@ -6,7 +6,7 @@
 /*   By: llevasse <llevasse@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/19 23:04:28 by llevasse          #+#    #+#             */
-/*   Updated: 2023/10/18 12:32:16 by llevasse         ###   ########.fr       */
+/*   Updated: 2023/10/18 13:09:05 by llevasse         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,8 +23,8 @@ t_line	get_line(t_point p_a, t_point p_b)
 	line.steps = fabsf(line.dy);
 	if (fabsf(line.dx) > fabsf(line.dy))
 		line.steps = fabsf(line.dx);
-	line.x_step = (float)line.dx / line.steps;
-	line.y_step = (float)line.dy / line.steps;
+	line.x_step = line.dx / line.steps;
+	line.y_step = line.dy / line.steps;
 	return (line);
 }
 
@@ -38,7 +38,7 @@ t_point	get_player_point(float x, float y)
 }
 
 // Fonction pour tracer une ligne avec la minilibX
-int	draw_line(t_cub cub, t_point *dest_p, int colour)
+double	draw_line(t_cub cub, t_point *dest_p, int colour)
 {
 	t_line		line;
 	int			pos_x;
@@ -52,8 +52,8 @@ int	draw_line(t_cub cub, t_point *dest_p, int colour)
 	while (nb.pa <= line.steps && nb.px >= 0 && nb.px <= WINDOW_W && \
 			nb.py >= 0 && nb.py <= WINDOW_H)
 	{
-		pos_x = (int)(nb.px / cub.mmap->block_s);
-		pos_y = (int)(nb.py / cub.mmap->block_s);
+		pos_x = (nb.px / cub.mmap->block_s);
+		pos_y = (nb.py / cub.mmap->block_s);
 		if (pos_y >= cub.mmap->nb_line)
 			break ;
 		if (!ft_is_in_str("NSEW0", cub.mmap->map[pos_y][pos_x])){
