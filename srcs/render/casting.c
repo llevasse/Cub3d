@@ -6,7 +6,7 @@
 /*   By: llevasse <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/24 22:25:17 by llevasse          #+#    #+#             */
-/*   Updated: 2023/09/30 23:17:07 by llevasse         ###   ########.fr       */
+/*   Updated: 2023/10/18 12:00:28 by llevasse         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -37,8 +37,8 @@ void	cast(t_cub *cub, int dist, int x, float ca)
 	if (dist == 0)
 		dist = 1;
 	height = (cub->mmap->block_s * WINDOW_H) / dist;
-	high_y = (WINDOW_H / 2) - height;
-	low_y = (WINDOW_H / 2) + height;
+	high_y = (WINDOW_H / 2) - height / 2;
+	low_y = (WINDOW_H / 2) + height / 2;
 	if (high_y < 0)
 		high_y = 0;
 	if (low_y > WINDOW_H)

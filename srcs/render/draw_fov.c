@@ -6,7 +6,7 @@
 /*   By: llevasse <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/22 21:44:52 by llevasse          #+#    #+#             */
-/*   Updated: 2023/10/17 13:54:33 by llevasse         ###   ########.fr       */
+/*   Updated: 2023/10/18 11:35:15 by llevasse         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -35,11 +35,11 @@ void	draw_fov(t_cub *cub)
 		gained_angle += fov.field_step;
 		get_player_new_pos(cub, no_higher(ca + gained_angle, 360, 0), MMAP_S * 5, &fov.p2);
 		fov.fl = get_line(fov.p, fov.p2);
-		while (gained_angle < PLAYER_FOV - 1 && fov.fl.steps-- > 0 && draw_line(*cub, fov.p, PLAYER_RGB, gained_angle))
+/*		while (gained_angle < PLAYER_FOV - 1 && fov.fl.steps-- > 0 && draw_line(*cub, fov.p, PLAYER_RGB, gained_angle))
 		{
 			fov.p.x += fov.fl.x_step;
 			fov.p.y += fov.fl.y_step;
-		}
+		}*/
 	}
 }
 
