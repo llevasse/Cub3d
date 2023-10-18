@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   casting.c                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: llevasse <marvin@42.fr>                    +#+  +:+       +#+        */
+/*   By: tdutel <tdutel@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/24 22:25:17 by llevasse          #+#    #+#             */
-/*   Updated: 2023/10/18 13:10:51 by llevasse         ###   ########.fr       */
+/*   Updated: 2023/10/18 16:07:56 by tdutel           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -36,7 +36,7 @@ void	cast(t_cub *cub, double dist, int x, float ca, t_point end_point)
 	ca = no_higher(ca, 360, 0);
 	wall = get_orientation(cub->map, cub->mmap->block_s, end_point.x, end_point.y);
 //	dist *= cos(get_fisheye(cub, ca));
-	printf("%f\n", dist);
+	// printf("%f\n", dist);
 	if (dist == 0)
 		dist = 1;
 	height = (cub->mmap->block_s * WINDOW_H) / dist;
