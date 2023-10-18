@@ -6,7 +6,7 @@
 /*   By: llevasse <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/18 21:50:20 by llevasse          #+#    #+#             */
-/*   Updated: 2023/10/17 10:37:02 by llevasse         ###   ########.fr       */
+/*   Updated: 2023/10/18 12:16:08 by llevasse         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -31,6 +31,10 @@ t_map	*parse(int map_fd, t_cub *cub)
 	if (element_got != 6 || !get_map(map_fd, map, cub))
 		return (close_walls(cub, map), free_garbage(map->garbage),
 			close(map_fd), NULL);
+	map->north_img.addr = mlx_get_data_addr(map->north_img.mlx_img, &map->north_img.bpp, &map->north_img.line_len, &map->north_img.endian);
+	map->south_img.addr = mlx_get_data_addr(map->south_img.mlx_img, &map->south_img.bpp, &map->south_img.line_len, &map->south_img.endian);
+	map->west_img.addr = mlx_get_data_addr(map->west_img.mlx_img, &map->west_img.bpp, &map->west_img.line_len, &map->west_img.endian);
+	map->east_img.addr = mlx_get_data_addr(map->east_img.mlx_img, &map->east_img.bpp, &map->east_img.line_len, &map->east_img.endian);
 	close(map_fd);
 	return (map);
 }
