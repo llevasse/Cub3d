@@ -6,7 +6,7 @@
 /*   By: llevasse <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/24 22:25:17 by llevasse          #+#    #+#             */
-/*   Updated: 2023/10/18 12:20:56 by llevasse         ###   ########.fr       */
+/*   Updated: 2023/10/18 12:34:09 by llevasse         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,14 +25,16 @@ float	get_fisheye(t_cub *cub, float ca)
 	return (fisheye);
 }
 
-void	cast(t_cub *cub, int dist, int x, float ca)
+void	cast(t_cub *cub, int dist, int x, float ca, t_point end_point)
 {
 	int		high_y;
 	int		low_y;
 	int		height;
 	int		colour;
+	t_img	wall;
 
 	ca = no_higher(ca, 360, 0);
+	wall = get_orientation(cub->map, cub->mmap->block_s, end_point.x, end_point.y);
 //	dist *= cos(get_fisheye(cub, ca));
 	if (dist == 0)
 		dist = 1;
@@ -47,7 +49,7 @@ void	cast(t_cub *cub, int dist, int x, float ca)
 	{
 		colour = get_pixel_colour(&cub->img, x, high_y);
 		if (colour != MMAP_W_RGB && colour != MMAP_RGB && colour != PLAYER_RGB)
-			img_pix_put(&cub->img, x, high_y, get_pixel_colour(&cub->map->north_img, x % 64, high_y % 64));
+			img_pix_put(&cub->img, x, high_y, get_pixel_colour(&wall, x % 64, high_y % 64));
 		high_y++;
 	}
 }

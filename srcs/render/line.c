@@ -6,7 +6,7 @@
 /*   By: llevasse <llevasse@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/19 23:04:28 by llevasse          #+#    #+#             */
-/*   Updated: 2023/10/17 15:17:02 by llevasse         ###   ########.fr       */
+/*   Updated: 2023/10/18 12:32:16 by llevasse         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -38,14 +38,14 @@ t_point	get_player_point(float x, float y)
 }
 
 // Fonction pour tracer une ligne avec la minilibX
-int	draw_line(t_cub cub, t_point dest_p, int colour, int ca)
+int	draw_line(t_cub cub, t_point *dest_p, int colour)
 {
 	t_line		line;
 	int			pos_x;
 	int			pos_y;
 	t_player	nb;
 
-	line = get_line(get_player_point(cub.player.px, cub.player.py), dest_p);
+	line = get_line(get_player_point(cub.player.px, cub.player.py), *dest_p);
 	nb.px = cub.player.px;
 	nb.py = cub.player.py;
 	nb.pa = 0;
@@ -57,8 +57,8 @@ int	draw_line(t_cub cub, t_point dest_p, int colour, int ca)
 		if (pos_y >= cub.mmap->nb_line)
 			break ;
 		if (!ft_is_in_str("NSEW0", cub.mmap->map[pos_y][pos_x])){
-			if (ca >= (PLAYER_FOV/2) - 1 && ca <= (PLAYER_FOV/2) + 1)
-				get_orientation(cub.map, cub.mmap->block_s, nb.px, nb.py);
+			dest_p->x = nb.px;
+			dest_p->y = nb.py;
 			break ;
 		}
 		img_pix_put(&cub.img, (int)nb.px, (int)nb.py, colour);

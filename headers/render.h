@@ -6,7 +6,7 @@
 /*   By: llevasse <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/22 22:05:00 by llevasse          #+#    #+#             */
-/*   Updated: 2023/10/17 15:17:52 by llevasse         ###   ########.fr       */
+/*   Updated: 2023/10/18 12:34:16 by llevasse         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,7 +21,7 @@ void	paint_bg(t_cub *cub);
 //srcs/render/line.c:
 t_line	get_line(t_point p_a, t_point p_b);
 int		get_line_dist(t_cub cub, t_point dest_p);
-int		draw_line(t_cub cub, t_point dest_p, int colour, int ca);
+int		draw_line(t_cub cub, t_point *dest_p, int colour);
 void	drawRays3D(t_cub cub);
 
 //srcs/render/minimap.c:
@@ -41,7 +41,7 @@ void	draw_fov(t_cub *cub);
 t_fov	get_fov(float *ca);
 
 //srcs/render/casting.c
-void	cast(t_cub *cub, int dist, int x, float ca);
+void	cast(t_cub *cub, int dist, int x, float ca, t_point end_p);
 
 //srcs/render/get_orientation.c
 t_img	get_orientation(t_map *map, int block_s, int x, int y);
