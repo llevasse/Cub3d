@@ -6,7 +6,7 @@
 /*   By: llevasse <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/24 22:25:17 by llevasse          #+#    #+#             */
-/*   Updated: 2023/10/18 13:10:51 by llevasse         ###   ########.fr       */
+/*   Updated: 2023/10/19 16:12:33 by llevasse         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,18 +25,25 @@ float	get_fisheye(t_cub *cub, float ca)
 	return (fisheye);
 }
 
-void	cast(t_cub *cub, double dist, int x, float ca, t_point end_point)
+void	cast(t_cub *cub, float dist, int x, float ca, t_point end_point)
 {
 	int		high_y;
 	int		low_y;
 	int		height;
 	int		colour;
-	t_img	wall;
-
-	ca = no_higher(ca, 360, 0);
+	int		center = 0;
+	t_img	*wall;
+	
+	dist = draw_line(*cub, &end_point, PLAYER_RGB, ca);
+//	ca = no_higher(ca, 360, 0);
+	if (ca >= (PLAYER_FOV / 2) - 0.5 && ca <= (PLAYER_FOV / 2) + 0.5){
+		printf("x : %f(%d) | y : %f(%d) (block s : %d)\n", end_point.x, (int)end_point.x, end_point.y, (int)end_point.y, cub->mmap->block_s);
+		center = 1;
+	}
 	wall = get_orientation(cub->map, cub->mmap->block_s, end_point.x, end_point.y);
+	if (!wall)
+		return ;
 //	dist *= cos(get_fisheye(cub, ca));
-	printf("%f\n", dist);
 	if (dist == 0)
 		dist = 1;
 	height = (cub->mmap->block_s * WINDOW_H) / dist;
@@ -51,8 +58,12 @@ void	cast(t_cub *cub, double dist, int x, float ca, t_point end_point)
 	while (high_y < low_y)
 	{
 		colour = get_pixel_colour(&cub->img, x, high_y);
-		if (colour != MMAP_W_RGB && colour != MMAP_RGB && colour != PLAYER_RGB)
-			img_pix_put(&cub->img, x, high_y, get_pixel_colour(&wall, x % 64, high_y % 64));
+		if (colour != MMAP_W_RGB && colour != MMAP_RGB && colour != PLAYER_RGB){
+			if (!center)
+				img_pix_put(&cub->img, x, high_y, get_pixel_colour(wall, x % 64, high_y % 64));
+			else
+				img_pix_put(&cub->img, x, high_y, 0x222222);
+		}
 		high_y++;
 	}
 }

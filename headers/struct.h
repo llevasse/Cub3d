@@ -38,7 +38,7 @@ typedef struct s_map
 	struct s_img		west_img;
 	int					f_rgb;		//floor rgb value
 	int					c_rgb;		//ceiling rgb value
-	double				player_rotation;
+	float				player_rotation;
 	struct s_garbage	*garbage;
 	}				t_map;
 
