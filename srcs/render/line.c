@@ -6,11 +6,14 @@
 /*   By: llevasse <llevasse@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/19 23:04:28 by llevasse          #+#    #+#             */
-/*   Updated: 2023/10/19 21:24:29 by llevasse         ###   ########.fr       */
+/*   Updated: 2023/10/19 22:48:27 by llevasse         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "cub3d.h"
+
+t_point	check_horizontal(t_cub cub, t_fov *fov, float ca);
+t_point	check_vertical(t_cub cub, t_fov *fov, float ca);
 
 t_line	get_line(t_point p_a, t_point p_b)
 {
@@ -25,6 +28,7 @@ t_line	get_line(t_point p_a, t_point p_b)
 		line.steps = fabs(line.dx);
 	line.x_step = line.dx / line.steps;
 	line.y_step = line.dy / line.steps;
+	line.dist = sqrt(pow(line.dy, 2) + pow(line.dx, 2));
 	return (line);
 }
 
@@ -59,18 +63,20 @@ t_point	get_distance_from_block_center(float x, float y, int block_s, int ca){
 }
 
 // Fonction pour tracer une ligne avec la minilibX
-float	draw_line(t_cub cub, t_point *dest_p, int colour, float ca)
+float	draw_line(t_cub cub, t_fov *fov, int colour, float ca)
 {
 	t_line		line;
 	int			pos_x;
 	int			pos_y;
 	t_player	nb;
 	t_point		diff;
+	t_line		horr = get_line(get_player_point(nb.px - diff.x, nb.py - diff.y), check_horizontal(cub, fov, ca));
+	t_line		vert = get_line(get_player_point(nb.px - diff.x, nb.py - diff.y), check_vertical(cub, fov, ca));
 
 	diff = get_distance_from_block_center(cub.player.px, cub.player.py, cub.mmap->block_s, ca);
 	nb.px = cub.player.px;
 	nb.py = cub.player.py;
-	line = get_line(get_player_point(nb.px - diff.x, nb.py - diff.y), *dest_p);
+	line = get_line(get_player_point(nb.px - diff.x, nb.py - diff.y), fov->p);
 	nb.pa = 0;
 	while (nb.pa <= line.steps && nb.px >= 0 && nb.px <= WINDOW_W && \
 			nb.py >= 0 && nb.py <= WINDOW_H)
@@ -89,11 +95,70 @@ float	draw_line(t_cub cub, t_point *dest_p, int colour, float ca)
 		nb.py += line.y_step;
 		nb.pa += 1;
 	}
-//	nb.px -= diff.x;
-//	nb.py -= diff.y;
-	dest_p->x = nb.px;
-	dest_p->y = nb.py;
-	return (sqrt(pow(nb.py - cub.player.py, 2) + pow(nb.px - cub.player.px, 2)));
+	if (horr.dist < vert.dist){
+		fov->p.x = horr.p_b.x;
+		fov->p.y = horr.p_b.y;
+		return (horr.dist);
+	}
+	fov->p.x = vert.p_b.x;
+	fov->p.y = vert.p_b.y;
+	return (vert.dist);
+}
+
+t_point	check_horizontal(t_cub cub, t_fov *fov, float ca)
+{
+	t_point	pA;
+	float	yA;
+	float	xA;
+
+	ca = no_higher(fov->beg_angle + ca, 360, 0);
+	if (ca > 180 && ca <= 360)
+	{
+		pA.y = (cub.player.py / cub.mmap->block_s) * cub.mmap->block_s - 1;
+		yA = -cub.mmap->block_s;
+	}
+	else
+	{
+		pA.y = (cub.player.py / cub.mmap->block_s) * cub.mmap->block_s + cub.mmap->block_s;
+		yA = cub.mmap->block_s;
+	}
+	xA = cub.mmap->block_s / tan(ca);
+	pA.x = cub.player.px + (cub.player.py - pA.y) / tan(ca);
+	while (pA.x + xA >= 0 && pA.y + yA >= 0 && pA.x + xA < WINDOW_W && pA.y + yA < WINDOW_H){
+		if (!ft_is_in_str("NSEW0", cub.mmap->map[(int)(pA.y / cub.mmap->block_s)][(int)(pA.x / cub.mmap->block_s)]))
+			return (pA);
+		pA.x += xA;
+		pA.y += yA;
+	}
+	return (pA);
+}
+
+t_point	check_vertical(t_cub cub, t_fov *fov, float ca)
+{
+	t_point	pA;
+	float	yA;
+	float	xA;
+
+	ca = no_higher(fov->beg_angle + ca, 360, 0);
+	if (ca > 270 && ca <= 90)
+	{
+		pA.x = (cub.player.px / cub.mmap->block_s) * cub.mmap->block_s + cub.mmap->block_s;
+		xA = cub.mmap->block_s;
+	}
+	else
+	{
+		pA.x = (cub.player.px / cub.mmap->block_s) * cub.mmap->block_s - 1;
+		xA = -cub.mmap->block_s;
+	}
+	yA = cub.mmap->block_s * tan(ca);
+	pA.y = cub.player.py + (cub.player.px - pA.x) * tan(ca);
+	while (pA.x + xA >= 0 && pA.y + yA >= 0 && pA.x + xA < WINDOW_W && pA.y + yA < WINDOW_H){
+		if (!ft_is_in_str("NSEW0", cub.mmap->map[(int)(pA.y / cub.mmap->block_s)][(int)(pA.x / cub.mmap->block_s)]))
+			return (pA);
+		pA.x += xA;
+		pA.y += yA;
+	}
+	return (pA);
 }
 
 int	get_line_dist(t_cub cub, t_point dest_p)
