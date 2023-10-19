@@ -6,7 +6,7 @@
 /*   By: tdutel <tdutel@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/24 22:25:17 by llevasse          #+#    #+#             */
-/*   Updated: 2023/10/19 12:38:41 by tdutel           ###   ########.fr       */
+/*   Updated: 2023/10/19 15:42:09 by tdutel           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -31,10 +31,13 @@ void	cast(t_cub *cub, double dist, int x, float ca, t_point end_point)
 	int		low_y;
 	int		height;
 	int		colour;
-	t_img	wall;
 
 	ca = no_higher(ca, 360, 0);
-	wall = get_orientation(cub->map, cub->mmap->block_s, end_point.x, end_point.y);
+	cub->map->wall = get_orientation(cub->map, cub->mmap->block_s, end_point.x, end_point.y);
+	if (!cub->map->wall)
+		cub->map->wall = cub->map->old_wall;
+	// else if (!cub->map->wall && !cub->map->old_wall)
+	// cub->map->old_wall = cub->map->wall;
 	// dist *= cos(get_fisheye(cub, ca));
 	// printf("%f\n", dist);
 	if (dist == 0)
@@ -52,7 +55,7 @@ void	cast(t_cub *cub, double dist, int x, float ca, t_point end_point)
 	{
 		colour = get_pixel_colour(&cub->img, x, high_y);
 		if (colour != MMAP_W_RGB && colour != MMAP_RGB && colour != PLAYER_RGB)
-			img_pix_put(&cub->img, x, high_y, get_pixel_colour(&wall, x % 64, high_y % 64));
+			img_pix_put(&cub->img, x, high_y, get_pixel_colour(cub->map->wall, x % 64, high_y % 64));
 		high_y++;
 	}
 }

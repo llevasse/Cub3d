@@ -6,7 +6,7 @@
 /*   By: tdutel <tdutel@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/18 21:52:44 by llevasse          #+#    #+#             */
-/*   Updated: 2023/10/18 16:08:18 by tdutel           ###   ########.fr       */
+/*   Updated: 2023/10/19 15:03:48 by tdutel           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -36,6 +36,8 @@ typedef struct s_map
 	struct s_img		south_img;
 	struct s_img		east_img;
 	struct s_img		west_img;
+	struct s_img		*wall;
+	struct s_img		*old_wall;
 	int					f_rgb;		//floor rgb value
 	int					c_rgb;		//ceiling rgb value
 	double				player_rotation;
