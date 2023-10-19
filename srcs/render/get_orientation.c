@@ -6,7 +6,7 @@
 /*   By: tdutel <tdutel@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/17 13:34:04 by llevasse          #+#    #+#             */
-/*   Updated: 2023/10/18 16:13:37 by tdutel           ###   ########.fr       */
+/*   Updated: 2023/10/19 13:28:12 by tdutel           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,15 +15,15 @@
 t_img	get_orientation(t_map *map, int block_s, int x, int y)
 {
 	printf("x : %d\t y : %d\n", x, y);
-	if (y % block_s == 0 && (x + 1) % block_s != 0 && x % block_s != 0)
+	if (y % block_s == 0 && ((x + 1) % block_s != 0 && (y + 1) % block_s != 0 && x % block_s != 0))
 		return (map->south_img);
-	if ((y + 1) % block_s == 0 && (x + 1) % block_s != 0 && x % block_s != 0)
+	if ((y + 1) % block_s == 0 && ((x + 1) % block_s != 0 && y % block_s != 0 && x % block_s != 0))
 		return (map->north_img);
-	if ((x + 1) % block_s == 0 && y % block_s != 0 && (y + 1) % block_s != 0)
-		return (map->west_img);
-	if (x % block_s == 0 && y % block_s != 0 && (y + 1) % block_s != 0)
+	if (x % block_s == 0 && ((x + 1) % block_s != 0 && y % block_s != 0 && (y + 1) % block_s != 0))
 		return (map->east_img);
-	return (map->west_img);
+	if ((x + 1) % block_s == 0 && y % block_s != 0 && (y + 1) % block_s != 0 && (x % block_s != 0))
+		return (map->west_img);
+	return (map->east_img);
 }
 
 //NORTH STOP	: X134 Y128 = 128.0 / 16 = 8.0
