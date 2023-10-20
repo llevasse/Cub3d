@@ -6,14 +6,11 @@
 /*   By: llevasse <llevasse@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/19 23:04:28 by llevasse          #+#    #+#             */
-/*   Updated: 2023/10/20 11:30:49 by llevasse         ###   ########.fr       */
+/*   Updated: 2023/10/19 16:12:25 by llevasse         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "cub3d.h"
-
-t_point	check_horizontal(t_cub cub, t_fov *fov, float ca);
-t_point	check_vertical(t_cub cub, t_fov *fov, float ca);
 
 t_line	get_line(t_point p_a, t_point p_b)
 {
@@ -23,12 +20,11 @@ t_line	get_line(t_point p_a, t_point p_b)
 	line.p_b = p_b;
 	line.dx = p_b.x - p_a.x;
 	line.dy = p_b.y - p_a.y;
-	line.steps = fabs(line.dy);
-	if (fabs(line.dx) > fabs(line.dy))
-		line.steps = fabs(line.dx);
+	line.steps = fabsf(line.dy);
+	if (fabsf(line.dx) > fabsf(line.dy))
+		line.steps = fabsf(line.dx);
 	line.x_step = line.dx / line.steps;
 	line.y_step = line.dy / line.steps;
-	line.dist = sqrt(pow(line.dy, 2) + pow(line.dx, 2));
 	return (line);
 }
 
@@ -41,52 +37,37 @@ t_point	get_player_point(float x, float y)
 	return (p);
 }
 
-t_point	get_distance_from_block_center(float x, float y, int block_s, int ca){
+t_point	get_distance_from_block_center(float x, float y, int block_s){
 	float	center_x;
 	float	center_y;
 	t_point	diff;
 
-	center_x = ((int)(x / block_s) + 0.5) * block_s;
-	center_y = ((int)(y / block_s) + 0.5) * block_s;
-	if (x > center_x)
-		diff.x = x - center_x;
-	else
-		diff.x = center_x - x;
-	if (y > center_y)
-		diff.y = y - center_y;
-	else
-		diff.y = center_y - y;
-	if (ca >= (PLAYER_FOV / 2) - 0.5 && ca <= (PLAYER_FOV / 2) + 0.5){
-//		printf("	%f:%f (%f-%f)\n", center_x, center_y, diff.x, diff.y);
-	}
+	center_x = ((x / block_s) + 0.5) * block_s;
+	center_y = ((y / block_s) + 0.5) * block_s;
+	diff.x = fabsf(center_x - x);
+	diff.y = fabsf(center_y - y);
 	return (diff);
 }
 
 // Fonction pour tracer une ligne avec la minilibX
-float	draw_line(t_cub cub, t_fov *fov, int colour, float ca)
+float	draw_line(t_cub cub, t_point *dest_p, int colour, float ca)
 {
 	t_line		line;
 	int			pos_x;
 	int			pos_y;
 	t_player	nb;
 	t_point		diff;
-	t_line		horr;
-	t_line		vert;
 
+	line = get_line(get_player_point(cub.player.px, cub.player.py), *dest_p);
 	nb.px = cub.player.px;
 	nb.py = cub.player.py;
-	diff = get_distance_from_block_center(cub.player.px, cub.player.py, cub.mmap->block_s, ca);
-	horr = get_line(get_player_point(nb.px - diff.x, nb.py - diff.y), check_horizontal(cub, fov, ca));
-	vert = get_line(get_player_point(nb.px - diff.x, nb.py - diff.y), check_vertical(cub, fov, ca));
-	line = get_line(get_player_point(nb.px - diff.x, nb.py - diff.y), fov->p);
+	diff = get_distance_from_block_center(nb.px, nb.py, cub.mmap->block_s);
 	nb.pa = 0;
 	while (nb.pa <= line.steps && nb.px >= 0 && nb.px <= WINDOW_W && \
 			nb.py >= 0 && nb.py <= WINDOW_H)
 	{
-		if (ca >= (PLAYER_FOV / 2) - 0.5 && ca <= (PLAYER_FOV / 2) + 0.5){
+		if (ca >= (PLAYER_FOV / 2) - 0.5 && ca <= (PLAYER_FOV / 2) + 0.5)
 			printf("	x : %f | y : %f\n", nb.px, nb.py);
-			colour = 0x222222;
-		}
 		pos_x = (nb.px / cub.mmap->block_s);
 		pos_y = (nb.py / cub.mmap->block_s);
 		if (pos_y >= cub.mmap->nb_line)
@@ -98,108 +79,9 @@ float	draw_line(t_cub cub, t_fov *fov, int colour, float ca)
 		nb.py += line.y_step;
 		nb.pa += 1;
 	}
-	if (horr.dist < vert.dist){
-		fov->p.x = horr.p_b.x;
-		fov->p.y = horr.p_b.y;
-		return (horr.dist);
-	}
-	fov->p.x = vert.p_b.x;
-	fov->p.y = vert.p_b.y;
-	return (vert.dist);
-}
-
-t_point	check_horizontal(t_cub cub, t_fov *fov, float ca)
-{
-	t_point	p;
-	float	xo;
-	float	yo;
-	float	aTan;
-	int		pos_x;
-	int		pos_y;
-	int		dof = 0;
-
-	ca = no_higher(fov->beg_angle + ca, 360, 0);
-	aTan = -1/tan(ca);
-	if (ca > 180 && ca < 360)
-	{
-		p.y = (cub.player.py / cub.mmap->block_s) * cub.mmap->block_s - 1;
-		yo = -cub.mmap->block_s;
-		p.x = (cub.player.py - p.y) *aTan + cub.player.px;
-		xo = -yo*aTan;
-	}
-	else
-	{
-		p.y = (cub.player.py / cub.mmap->block_s) * cub.mmap->block_s + cub.mmap->block_s;
-		yo = cub.mmap->block_s;
-		p.x = (cub.player.py - p.y) *aTan + cub.player.px;
-		xo = -yo*aTan;
-	}
-	if (ca == 180 || ca == 360){
-		p.x = cub.player.px;
-		p.y = cub.player.py;
-		dof = 8;
-	}
-	while (dof < 8){
-		pos_x = (p.x / cub.mmap->block_s);
-		pos_y = (p.y / cub.mmap->block_s);
-		if (pos_y >= cub.mmap->nb_line || !ft_is_in_str("NSEW0", cub.mmap->map[pos_y][pos_x]))
-			break ;
-		p.x += xo;
-		p.y += yo;
-		dof++;
-	}
-	if (ca >= (fov->beg_angle + (PLAYER_FOV / 2)) - 0.5 && ca <= (fov->beg_angle + (PLAYER_FOV / 2)) + 0.5){
-		printf("		horr : x : %f | y : %f\n", p.x, p.y);
-	}
-	return (p);
-}
-
-t_point	check_vertical(t_cub cub, t_fov *fov, float ca)
-{
-	t_point	p;
-	float	xo;
-	float	yo;
-	float	nTan;
-	int		pos_x;
-	int		pos_y;
-	int		dof = 0;
-
-	ca = no_higher(fov->beg_angle + ca, 360, 0);
-	nTan = -tan(ca);
-	printf("\n");
-	if (ca > 90 && ca < 270)
-	{
-		p.x = (cub.player.px / cub.mmap->block_s) * cub.mmap->block_s - 1;
-		xo = -cub.mmap->block_s;
-		p.y = (cub.player.px -  p.x) * nTan + cub.player.py;
-		yo = -xo*nTan;
-	}
-	else
-	{
-		p.x = (cub.player.px / cub.mmap->block_s) * cub.mmap->block_s + cub.mmap->block_s;
-		xo = cub.mmap->block_s;
-		p.y = (cub.player.px - p.x) * nTan + cub.player.py;
-		yo = -xo * nTan;
-	}
-	if (ca == 90 || ca == 270){
-		p.x = cub.player.px;
-		p.y = cub.player.py;
-		dof = 8;
-	}
-	while (dof < 8){
-		pos_x = (p.x / cub.mmap->block_s);
-		pos_y = (p.y / cub.mmap->block_s);
-		printf("check x%d(%f) y%d(%f) a%f\n", pos_x, p.x, pos_y, p.y, ca);
-		if (pos_y >= cub.mmap->nb_line || !ft_is_in_str("NSEW0", cub.mmap->map[pos_y][pos_x]))
-			break ;
-		p.x += xo;
-		p.y += yo;
-		dof++;
-	}
-	if (ca >= (fov->beg_angle + (PLAYER_FOV / 2)) - 0.5 && ca <= (fov->beg_angle + (PLAYER_FOV / 2)) + 0.5){
-		printf("		horr : x : %f | y : %f\n", p.x, p.y);
-	}
-	return (p);
+	dest_p->x = nb.px - diff.x;
+	dest_p->y = nb.py - diff.y;
+	return (sqrt(pow(nb.py - cub.player.py, 2) + pow(nb.px - cub.player.px, 2)));
 }
 
 int	get_line_dist(t_cub cub, t_point dest_p)
