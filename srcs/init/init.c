@@ -6,7 +6,7 @@
 /*   By: tdutel <tdutel@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/19 22:29:27 by llevasse          #+#    #+#             */
-/*   Updated: 2023/10/17 10:17:07 by llevasse         ###   ########.fr       */
+/*   Updated: 2023/10/20 15:25:03 by tdutel           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,7 +20,7 @@ void	init_cub(t_cub *cub, char **argv)
 	cub->mlx_ptr = mlx_init();
 	if (!cub->mlx_ptr)
 		return ((void)(free_garbage(cub->garbage), ft_putstr_fd(MLX_ERR, 2)));
-	cub->map = parse(open(argv[1], O_RDONLY), cub);
+	cub->map = parse(open(argv[1], O_RDONLY), cub);	//TODO: addd O_condition only open file and avoid dir named map.ber
 	if (!cub->map)
 		return ;
 	init_minimap(cub);

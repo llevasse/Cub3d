@@ -6,7 +6,7 @@
 /*   By: tdutel <tdutel@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/22 21:44:52 by llevasse          #+#    #+#             */
-/*   Updated: 2023/10/19 15:42:41 by tdutel           ###   ########.fr       */
+/*   Updated: 2023/10/20 15:44:03 by tdutel           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -30,11 +30,10 @@ void	draw_fov(t_cub *cub)
 	{
 		get_player_new_pos(cub, no_higher(ca + gained_angle, 360, 0), MMAP_S * 5, &fov.p);
 		temp_x = x + fov.column_width;
-		// cub->map->next_wall = get_orientation(cub->map, cub->mmap->block_s, fov.p.x, fov.p.y);
 		while (x < temp_x)
 		{
-			cub->map->old_wall = cub->map->wall;
 			cast(cub, draw_line(*cub, &fov.p, PLAYER_RGB), x++, ca, fov.p);
+			cub->map->old_wall = cub->map->wall;
 		}
 		gained_angle += fov.field_step;
 		get_player_new_pos(cub, no_higher(ca + gained_angle, 360, 0), MMAP_S * 5, &fov.p2);
