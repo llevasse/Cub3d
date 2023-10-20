@@ -6,7 +6,7 @@
 /*   By: tdutel <tdutel@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/19 22:29:27 by llevasse          #+#    #+#             */
-/*   Updated: 2023/10/17 10:17:07 by llevasse         ###   ########.fr       */
+/*   Updated: 2023/10/20 18:39:37 by llevasse         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,8 +21,12 @@ void	init_cub(t_cub *cub, char **argv)
 	if (!cub->mlx_ptr)
 		return ((void)(free_garbage(cub->garbage), ft_putstr_fd(MLX_ERR, 2)));
 	cub->map = parse(open(argv[1], O_RDONLY), cub);
-	if (!cub->map)
+	if (!cub->map){
+		mlx_destroy_display(cub->mlx_ptr);
+		free(cub->mlx_ptr);
+		exit(0);
 		return ;
+	}
 	init_minimap(cub);
 	init_player(cub);
 	ft_add_garbage(&cub->garbage, cub->mlx_ptr);
