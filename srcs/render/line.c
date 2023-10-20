@@ -6,7 +6,7 @@
 /*   By: llevasse <llevasse@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/19 23:04:28 by llevasse          #+#    #+#             */
-/*   Updated: 2023/10/19 22:48:27 by llevasse         ###   ########.fr       */
+/*   Updated: 2023/10/20 10:43:31 by llevasse         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -70,12 +70,14 @@ float	draw_line(t_cub cub, t_fov *fov, int colour, float ca)
 	int			pos_y;
 	t_player	nb;
 	t_point		diff;
-	t_line		horr = get_line(get_player_point(nb.px - diff.x, nb.py - diff.y), check_horizontal(cub, fov, ca));
-	t_line		vert = get_line(get_player_point(nb.px - diff.x, nb.py - diff.y), check_vertical(cub, fov, ca));
+	t_line		horr;
+	t_line		vert;
 
-	diff = get_distance_from_block_center(cub.player.px, cub.player.py, cub.mmap->block_s, ca);
 	nb.px = cub.player.px;
 	nb.py = cub.player.py;
+	diff = get_distance_from_block_center(cub.player.px, cub.player.py, cub.mmap->block_s, ca);
+	horr = get_line(get_player_point(nb.px - diff.x, nb.py - diff.y), check_horizontal(cub, fov, ca));
+	vert = get_line(get_player_point(nb.px - diff.x, nb.py - diff.y), check_vertical(cub, fov, ca));
 	line = get_line(get_player_point(nb.px - diff.x, nb.py - diff.y), fov->p);
 	nb.pa = 0;
 	while (nb.pa <= line.steps && nb.px >= 0 && nb.px <= WINDOW_W && \
