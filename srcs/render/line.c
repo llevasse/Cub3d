@@ -6,7 +6,7 @@
 /*   By: llevasse <llevasse@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/19 23:04:28 by llevasse          #+#    #+#             */
-/*   Updated: 2023/10/19 16:12:25 by llevasse         ###   ########.fr       */
+/*   Updated: 2023/10/22 21:59:41 by llevasse         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -79,8 +79,8 @@ float	draw_line(t_cub cub, t_point *dest_p, int colour, float ca)
 		nb.py += line.y_step;
 		nb.pa += 1;
 	}
-	dest_p->x = nb.px - diff.x;
-	dest_p->y = nb.py - diff.y;
+	dest_p->x = nb.px;
+	dest_p->y = nb.py;
 	return (sqrt(pow(nb.py - cub.player.py, 2) + pow(nb.px - cub.player.px, 2)));
 }
 
