@@ -6,7 +6,7 @@
 /*   By: tdutel <tdutel@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/18 21:52:44 by llevasse          #+#    #+#             */
-/*   Updated: 2023/10/18 13:01:27 by llevasse         ###   ########.fr       */
+/*   Updated: 2023/10/22 22:24:09 by llevasse         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -68,6 +68,7 @@ typedef struct s_line
 	float				x_step;
 	float				y_step;
 	float				steps;
+	float				dist;
 }				t_line;
 
 typedef struct s_player

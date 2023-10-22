@@ -6,11 +6,13 @@
 /*   By: llevasse <llevasse@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/19 23:04:28 by llevasse          #+#    #+#             */
-/*   Updated: 2023/10/22 21:59:41 by llevasse         ###   ########.fr       */
+/*   Updated: 2023/10/22 22:52:27 by llevasse         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "cub3d.h"
+
+t_line	get_horr(t_cub cub, float ca);
 
 t_line	get_line(t_point p_a, t_point p_b)
 {
@@ -25,6 +27,7 @@ t_line	get_line(t_point p_a, t_point p_b)
 		line.steps = fabsf(line.dx);
 	line.x_step = line.dx / line.steps;
 	line.y_step = line.dy / line.steps;
+	line.dist = sqrt(pow(line.dy, 2) + pow(line.dx, 2));
 	return (line);
 }
 
@@ -50,15 +53,18 @@ t_point	get_distance_from_block_center(float x, float y, int block_s){
 }
 
 // Fonction pour tracer une ligne avec la minilibX
-float	draw_line(t_cub cub, t_point *dest_p, int colour, float ca)
+float	draw_line(t_cub cub, t_fov *fov, int colour, float ca)
 {
 	t_line		line;
+	t_line		horr;
+//	t_line		vert;
 	int			pos_x;
 	int			pos_y;
 	t_player	nb;
 	t_point		diff;
 
-	line = get_line(get_player_point(cub.player.px, cub.player.py), *dest_p);
+	line = get_line(get_player_point(cub.player.px, cub.player.py), fov->p);
+	horr = get_horr(cub, no_higher(fov->beg_angle + ca, 360, 0));
 	nb.px = cub.player.px;
 	nb.py = cub.player.py;
 	diff = get_distance_from_block_center(nb.px, nb.py, cub.mmap->block_s);
@@ -66,8 +72,10 @@ float	draw_line(t_cub cub, t_point *dest_p, int colour, float ca)
 	while (nb.pa <= line.steps && nb.px >= 0 && nb.px <= WINDOW_W && \
 			nb.py >= 0 && nb.py <= WINDOW_H)
 	{
-		if (ca >= (PLAYER_FOV / 2) - 0.5 && ca <= (PLAYER_FOV / 2) + 0.5)
-			printf("	x : %f | y : %f\n", nb.px, nb.py);
+		if (ca >= (PLAYER_FOV / 2) - 0.5 && ca <= (PLAYER_FOV / 2) + 0.5){
+			printf("	x : %f | y : %f (ca : %f)\n", nb.px, nb.py, ca);
+			printf("	horr xb %f yb %f\n", horr.p_a.x, horr.p_a.y, horr.p_b.x, horr.p_b.y); // horr yb is right wall position in pixel
+		}
 		pos_x = (nb.px / cub.mmap->block_s);
 		pos_y = (nb.py / cub.mmap->block_s);
 		if (pos_y >= cub.mmap->nb_line)
@@ -79,9 +87,42 @@ float	draw_line(t_cub cub, t_point *dest_p, int colour, float ca)
 		nb.py += line.y_step;
 		nb.pa += 1;
 	}
-	dest_p->x = nb.px;
-	dest_p->y = nb.py;
+	fov->p.x = nb.px;
+	fov->p.y = nb.py;
 	return (sqrt(pow(nb.py - cub.player.py, 2) + pow(nb.px - cub.player.px, 2)));
+}
+
+t_line	get_horr(t_cub cub, float ca){
+	t_point	p;
+	float	yo;
+	float	xo;
+	int		pos_x;
+	int		pos_y;
+	int		dof;
+
+	if (ca <= 180 && ca >= 0)
+	{
+		yo = -cub.mmap->block_s;
+		p.y = (int)(cub.player.py/cub.mmap->block_s) * cub.mmap->block_s - 1;
+	}
+	else
+	{
+		yo = cub.mmap->block_s;
+		p.y = (int)(cub.player.py/cub.mmap->block_s) * cub.mmap->block_s + cub.mmap->block_s;
+	}
+	p.x = cub.player.px + ((cub.player.py - p.y) / tan(PLAYER_FOV * RADIAN));
+	xo = cub.mmap->block_s / tan(PLAYER_FOV * RADIAN);
+	dof = 8;	//check during 8 square
+	while (dof > 0){
+		pos_x = (p.x / cub.mmap->block_s);
+		pos_y = (p.y / cub.mmap->block_s);
+		if (pos_y >= cub.mmap->nb_line || !ft_is_in_str("NSEW0", cub.mmap->map[pos_y][pos_x]))
+			break ;
+		p.x += xo;
+		p.y += yo;
+		dof--;
+	}
+	return (get_line(get_player_point(cub.player.px, cub.player.py), p));
 }
 
 int	get_line_dist(t_cub cub, t_point dest_p)
