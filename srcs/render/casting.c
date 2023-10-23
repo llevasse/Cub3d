@@ -6,7 +6,7 @@
 /*   By: llevasse <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/24 22:25:17 by llevasse          #+#    #+#             */
-/*   Updated: 2023/10/22 22:44:29 by llevasse         ###   ########.fr       */
+/*   Updated: 2023/10/23 11:07:21 by llevasse         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -36,8 +36,8 @@ void	cast(t_cub *cub, float dist, int x, float ca, t_fov fov)
 	
 	dist = draw_line(*cub, &fov, PLAYER_RGB, ca);
 //	ca = no_higher(ca, 360, 0);
-	if (ca >= (PLAYER_FOV / 2) - 0.5 && ca <= (PLAYER_FOV / 2) + 0.5){
-		printf("x : %f(%d) | y : %f(%d) (block s : %d)\n", fov.p.x, (int)fov.p.x, fov.p.y, (int)fov.p.y, cub->mmap->block_s);
+	if (ca >= (PLAYER_FOV / 2) - 0.1 && ca <= (PLAYER_FOV / 2) + 0.1){
+//		printf("x : %f(%d) | y : %f(%d) (block s : %d)\n", fov.p.x, (int)fov.p.x, fov.p.y, (int)fov.p.y, cub->mmap->block_s);
 		center = 1;
 	}
 	wall = get_orientation(cub->map, cub->mmap->block_s, fov.p.x, fov.p.y);

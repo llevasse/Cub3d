@@ -6,13 +6,14 @@
 /*   By: llevasse <llevasse@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/19 23:04:28 by llevasse          #+#    #+#             */
-/*   Updated: 2023/10/22 22:52:27 by llevasse         ###   ########.fr       */
+/*   Updated: 2023/10/23 11:07:47 by llevasse         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "cub3d.h"
 
 t_line	get_horr(t_cub cub, float ca);
+t_line	get_vert(t_cub cub, float ca);
 
 t_line	get_line(t_point p_a, t_point p_b)
 {
@@ -57,24 +58,29 @@ float	draw_line(t_cub cub, t_fov *fov, int colour, float ca)
 {
 	t_line		line;
 	t_line		horr;
-//	t_line		vert;
+	t_line		vert;
 	int			pos_x;
 	int			pos_y;
 	t_player	nb;
 	t_point		diff;
 
+	ca = no_higher(fov->beg_angle + ca, 360, 0);
 	line = get_line(get_player_point(cub.player.px, cub.player.py), fov->p);
-	horr = get_horr(cub, no_higher(fov->beg_angle + ca, 360, 0));
+	horr = get_horr(cub, no_higher(cub.player.pa, 360, 0));
+	vert = get_vert(cub, no_higher(cub.player.pa, 360, 0));
 	nb.px = cub.player.px;
 	nb.py = cub.player.py;
 	diff = get_distance_from_block_center(nb.px, nb.py, cub.mmap->block_s);
 	nb.pa = 0;
+	if (ca >= (PLAYER_FOV / 2) - 0.5 && ca <= (PLAYER_FOV / 2) + 0.5){
+		printf("	(pa %f)horr xb %f yb %f\n", cub.player.pa, horr.p_b.x, horr.p_b.y); // horr yb is right wall position in pixel
+		printf("	(pa %f)vert xb %f yb %f\n", cub.player.pa, vert.p_b.x, vert.p_b.y); // horr yb is right wall position in pixel
+	}
 	while (nb.pa <= line.steps && nb.px >= 0 && nb.px <= WINDOW_W && \
 			nb.py >= 0 && nb.py <= WINDOW_H)
 	{
 		if (ca >= (PLAYER_FOV / 2) - 0.5 && ca <= (PLAYER_FOV / 2) + 0.5){
-			printf("	x : %f | y : %f (ca : %f)\n", nb.px, nb.py, ca);
-			printf("	horr xb %f yb %f\n", horr.p_a.x, horr.p_a.y, horr.p_b.x, horr.p_b.y); // horr yb is right wall position in pixel
+//			printf("	x : %f | y : %f (pa : %f)\n", nb.px, nb.py, cub.player.pa);
 		}
 		pos_x = (nb.px / cub.mmap->block_s);
 		pos_y = (nb.py / cub.mmap->block_s);
@@ -92,7 +98,8 @@ float	draw_line(t_cub cub, t_fov *fov, int colour, float ca)
 	return (sqrt(pow(nb.py - cub.player.py, 2) + pow(nb.px - cub.player.px, 2)));
 }
 
-t_line	get_horr(t_cub cub, float ca){
+t_line	get_horr(t_cub cub, float ca)
+{
 	t_point	p;
 	float	yo;
 	float	xo;
@@ -100,7 +107,7 @@ t_line	get_horr(t_cub cub, float ca){
 	int		pos_y;
 	int		dof;
 
-	if (ca <= 180 && ca >= 0)
+	if (ca >= 180 && ca <= 0)
 	{
 		yo = -cub.mmap->block_s;
 		p.y = (int)(cub.player.py/cub.mmap->block_s) * cub.mmap->block_s - 1;
@@ -110,17 +117,49 @@ t_line	get_horr(t_cub cub, float ca){
 		yo = cub.mmap->block_s;
 		p.y = (int)(cub.player.py/cub.mmap->block_s) * cub.mmap->block_s + cub.mmap->block_s;
 	}
-	p.x = cub.player.px + ((cub.player.py - p.y) / tan(PLAYER_FOV * RADIAN));
+	p.x = cub.player.px + ((cub.player.py - p.y) / tan(PLAYER_FOV));
 	xo = cub.mmap->block_s / tan(PLAYER_FOV * RADIAN);
 	dof = 8;	//check during 8 square
-	while (dof > 0){
+	while (dof-- > 0){
 		pos_x = (p.x / cub.mmap->block_s);
 		pos_y = (p.y / cub.mmap->block_s);
 		if (pos_y >= cub.mmap->nb_line || !ft_is_in_str("NSEW0", cub.mmap->map[pos_y][pos_x]))
 			break ;
 		p.x += xo;
 		p.y += yo;
-		dof--;
+	}
+	return (get_line(get_player_point(cub.player.px, cub.player.py), p));
+}
+
+t_line	get_vert(t_cub cub, float ca)
+{
+	t_point	p;
+	float	yo;
+	float	xo;
+	int		pos_x;
+	int		pos_y;
+	int		dof;
+
+	if (ca >= 270 && ca <= 90)	// facing right
+	{
+		xo = cub.mmap->block_s;
+		p.x = (int)(cub.player.px/cub.mmap->block_s) * cub.mmap->block_s + cub.mmap->block_s;
+	}
+	else						// facing left
+	{
+		xo = -cub.mmap->block_s;
+		p.x = (int)(cub.player.px/cub.mmap->block_s) * cub.mmap->block_s - 1;
+	}
+	p.y = cub.player.py + ((cub.player.px - p.x) * tan(PLAYER_FOV));
+	yo = cub.mmap->block_s * tan(PLAYER_FOV * RADIAN);
+	dof = 8;	//check during 8 square
+	while (dof-- > 0){
+		pos_x = (p.x / cub.mmap->block_s);
+		pos_y = (p.y / cub.mmap->block_s);
+		if (pos_y >= cub.mmap->nb_line || !ft_is_in_str("NSEW0", cub.mmap->map[pos_y][pos_x]))
+			break ;
+		p.x += xo;
+		p.y += yo;
 	}
 	return (get_line(get_player_point(cub.player.px, cub.player.py), p));
 }
