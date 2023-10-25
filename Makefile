@@ -25,6 +25,7 @@ SRC				=	srcs/main.c \
 					srcs/parsing/get_wall.c	\
 					srcs/render/render.c \
 					srcs/render/line.c \
+					srcs/render/line_coalission.c \
 					srcs/render/minimap.c \
 					srcs/render/draw_fov.c \
 					srcs/render/casting.c \
