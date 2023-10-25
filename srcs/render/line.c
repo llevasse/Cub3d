@@ -6,7 +6,7 @@
 /*   By: llevasse <llevasse@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/19 23:04:28 by llevasse          #+#    #+#             */
-/*   Updated: 2023/10/25 09:58:58 by llevasse         ###   ########.fr       */
+/*   Updated: 2023/10/25 21:43:30 by llevasse         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -113,16 +113,16 @@ t_line	get_horr(t_cub cub, float pa, float ca)
 	if (sin(pa * RADIAN) > 0.001)
 	{
 		yo = -cub.mmap->block_s;
-		p.y = (int)((int)cub.player.py/cub.mmap->block_s) * cub.mmap->block_s - 0.0001;
-	p.x = ((cub.player.py - p.y) * Tan) + cub.player.px;
-	xo = -yo * Tan;
+		p.y =(cub.player.py/cub.mmap->block_s) * cub.mmap->block_s - 0.0001;
+		p.x = ((cub.player.py - p.y) * Tan) + cub.player.px;
+		xo = -yo * Tan;
 	}
 	else if (sin(pa * RADIAN) < -0.001)
 	{
 		yo = cub.mmap->block_s;
-		p.y = (int)((int)cub.player.py/cub.mmap->block_s) * cub.mmap->block_s + cub.mmap->block_s;
-	p.x = ((cub.player.py - p.y) * Tan) + cub.player.px;
-	xo = -yo * Tan;
+		p.y = (cub.player.py/cub.mmap->block_s) * cub.mmap->block_s + cub.mmap->block_s;
+		p.x = ((cub.player.py - p.y) * Tan) + cub.player.px;
+		xo = -yo * Tan;
 	}
 	else
 	{
@@ -144,7 +144,7 @@ t_line	get_horr(t_cub cub, float pa, float ca)
 			break ;
 		img_pix_put(&cub.img, (int)p.x, (int)p.y, 0xff0000);
 		p.x += xo;
-		p.y += yo;
+		p.y -= yo;
 	}
 	line = get_line(get_player_point(cub.player.px, cub.player.py), p);
 	while (line.steps > 0 && line.p_a.x >= 0 && line.p_a.x <= WINDOW_W && \
