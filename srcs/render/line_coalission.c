@@ -6,7 +6,7 @@
 /*   By: llevasse <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/25 21:58:31 by llevasse          #+#    #+#             */
-/*   Updated: 2023/10/26 10:57:48 by llevasse         ###   ########.fr       */
+/*   Updated: 2023/10/26 11:15:30 by llevasse         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,19 +15,20 @@
 int		init_horr(t_cub cub, float pa, t_line *line){
 	float	Tan;
 
+	printf("pa %f\n", pa);
 	Tan = 1.0/tan(pa * RADIAN);
-	if (sin(pa * RADIAN) > 0.001)
+	if (pa > 180 && pa < 360)
 	{
-		line->y_step = -cub.mmap->block_s;
-		line->p_a.y =(cub.player.py/cub.mmap->block_s) * cub.mmap->block_s - 0.0001;
+		line->y_step = cub.mmap->block_s;
+		line->p_a.y =(cub.player.py/cub.mmap->block_s) * cub.mmap->block_s + cub.mmap->block_s;
 		line->p_a.x = ((cub.player.py - line->p_a.y) * Tan) + cub.player.px;
 		line->x_step = -line->y_step * Tan;
 		return (8);
 	}
-	else if (sin(pa * RADIAN) < -0.001)
+	else if (pa > 0 && pa < 180)
 	{
-		line->y_step = cub.mmap->block_s;
-		line->p_a.y =(cub.player.py/cub.mmap->block_s) * cub.mmap->block_s + cub.mmap->block_s;
+		line->y_step = -cub.mmap->block_s;
+		line->p_a.y =(cub.player.py/cub.mmap->block_s) * cub.mmap->block_s - 0.0001;
 		line->p_a.x = ((cub.player.py - line->p_a.y) * Tan) + cub.player.px;
 		line->x_step = -line->y_step * Tan;
 		return (8);
@@ -51,13 +52,13 @@ t_line	get_horr(t_cub cub, float pa, float ca)
 	int		dof;
 
 	dof = init_horr(cub, pa, &line);	//check during 8 square
+	printf("		beg point %f %f\n", line.p_a.x, line.p_a.y);
 	while (dof-- > 0){
 		pos_x = (line.p_a.x / cub.mmap->block_s);
 		pos_y = (line.p_a.y / cub.mmap->block_s);
-		printf("%d %d\n", pos_x, pos_y);
-		if (ca >= (PLAYER_FOV / 2) - 0.5 && ca <= (PLAYER_FOV / 2) + 0.5){
-			printf("	horr xo %f	   yo %f\n", line.x_step, line.y_step);
-			printf("	horr xb %d(%f) yb %d(%f)\n", pos_x, line.p_a.x, pos_y, line.p_a.y);
+		if (ca >= (PLAYER_FOV / 2) - 1 && ca <= (PLAYER_FOV / 2) + 1){
+//			printf("	horr xo %f	   yo %f(%d block size)\n", line.x_step, line.y_step, cub.mmap->block_s);
+//			printf("	horr xb %d(%f) yb %d(%f)\n", pos_x, line.p_a.x, pos_y, line.p_a.y);
 		}
 		img_pix_put(&cub.img, (int)line.p_a.x, (int)line.p_a.y, 0xff0000);
 		if (pos_y >= cub.mmap->nb_line || !ft_is_in_str("NSEW0", cub.mmap->map[pos_y][pos_x]))
