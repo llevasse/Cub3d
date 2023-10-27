@@ -6,7 +6,7 @@
 /*   By: llevasse <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/25 21:58:31 by llevasse          #+#    #+#             */
-/*   Updated: 2023/10/27 21:44:26 by llevasse         ###   ########.fr       */
+/*   Updated: 2023/10/27 22:03:48 by llevasse         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -79,7 +79,7 @@ int		init_vert(t_cub cub, float pa, t_line *line){
 	if (pa > 90 && pa < 270)	// if ray is facing left
 	{
 		line->x_step = cub.mmap->block_s;
-		line->p_a.x =((int)cub.player.px/cub.mmap->block_s) * cub.mmap->block_s - 1;
+		line->p_a.x = ((int)((int)cub.player.px/cub.mmap->block_s) * cub.mmap->block_s) + cub.mmap->block_s;
 		line->p_a.y = ((cub.player.px - line->p_a.x) * Tan) + cub.player.py;
 		line->y_step = -line->x_step * Tan;
 		return (8);
@@ -87,7 +87,7 @@ int		init_vert(t_cub cub, float pa, t_line *line){
 	else if (pa > 270 || pa < 90) // if ray is facing right
 	{
 		line->x_step = -cub.mmap->block_s;
-		line->p_a.x =((int)cub.player.px/cub.mmap->block_s) * cub.mmap->block_s + cub.mmap->block_s;
+		line->p_a.x = (((int)cub.player.px/cub.mmap->block_s) * cub.mmap->block_s) - 1;
 		line->p_a.y = ((cub.player.px - line->p_a.x) * Tan) + cub.player.py;
 		line->y_step = -line->x_step * Tan;
 		return (8);
@@ -127,7 +127,7 @@ t_line	get_vert(t_cub cub, float pa, float ca)
 	}
 	line = get_line(get_player_point(cub.player.px, cub.player.py), line.p_a);
 	ret = line;
-	while (line.steps > 0 && line.p_a.x >= 0 && line.p_a.x <= WINDOW_W && \
+/*	while (line.steps > 0 && line.p_a.x >= 0 && line.p_a.x <= WINDOW_W && \
 			line.p_a.y >= 0 && line.p_a.y <= WINDOW_H)
 	{
 		pos_x = (line.p_a.x / cub.mmap->block_s);
@@ -138,7 +138,7 @@ t_line	get_vert(t_cub cub, float pa, float ca)
 		line.p_a.x += line.x_step;
 		line.p_a.y += line.y_step;
 		line.steps--;
-	}
+	}*/
 	if (dof == -42)
 		ret.dist = (float)0x7fffffff;
 	return (ret);
