@@ -6,7 +6,7 @@
 /*   By: llevasse <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/24 22:25:17 by llevasse          #+#    #+#             */
-/*   Updated: 2023/10/23 11:07:21 by llevasse         ###   ########.fr       */
+/*   Updated: 2023/10/29 18:08:01 by llevasse         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -32,15 +32,23 @@ void	cast(t_cub *cub, float dist, int x, float ca, t_fov fov)
 	int		height;
 	int		colour;
 	int		center = 0;
+	t_line	horr;
+	t_line	vert;
 	t_img	*wall;
 	
-	dist = draw_line(*cub, &fov, PLAYER_RGB, ca);
-//	ca = no_higher(ca, 360, 0);
-	if (ca >= (PLAYER_FOV / 2) - 0.1 && ca <= (PLAYER_FOV / 2) + 0.1){
-//		printf("x : %f(%d) | y : %f(%d) (block s : %d)\n", fov.p.x, (int)fov.p.x, fov.p.y, (int)fov.p.y, cub->mmap->block_s);
-		center = 1;
+//	dist = draw_line(*cub, &fov, PLAYER_RGB, ca);
+	horr = get_horr(*cub, no_higher(fov.beg_angle + ca, 360, 0));
+	vert = get_vert(*cub, no_higher(fov.beg_angle + ca, 360, 0));
+	if (horr.dist < vert.dist)
+	{
+		dist = horr.dist;
+		wall = get_orientation(cub->map, cub->mmap->block_s, horr.p_b.x, horr.p_b.y);
 	}
-	wall = get_orientation(cub->map, cub->mmap->block_s, fov.p.x, fov.p.y);
+	else
+	{
+		dist = vert.dist;
+		wall = get_orientation(cub->map, cub->mmap->block_s, vert.p_b.x, vert.p_b.y);
+	}
 	if (!wall)
 		return ;
 //	dist *= cos(get_fisheye(cub, ca));

@@ -6,7 +6,7 @@
 /*   By: llevasse <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/22 22:05:00 by llevasse          #+#    #+#             */
-/*   Updated: 2023/10/29 15:14:29 by llevasse         ###   ########.fr       */
+/*   Updated: 2023/10/29 18:07:46 by llevasse         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,7 +22,8 @@ void	paint_bg(t_cub *cub);
 t_line	get_line(t_point p_a, t_point p_b);
 t_point	get_player_point(float x, float y);
 int		get_line_dist(t_cub cub, t_point dest_p);
-float		draw_line(t_cub cub, t_fov *fov, int colour, float ca);
+float	draw_line(t_cub cub, t_fov *fov, int colour);
+void	draw_given_line(t_cub cub, t_line line, int colour);
 void	drawRays3D(t_cub cub);
 
 //srcs/render/line_coalission.c
