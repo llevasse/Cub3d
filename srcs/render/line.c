@@ -6,7 +6,7 @@
 /*   By: llevasse <llevasse@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/19 23:04:28 by llevasse          #+#    #+#             */
-/*   Updated: 2023/10/26 19:02:02 by llevasse         ###   ########.fr       */
+/*   Updated: 2023/10/29 14:55:56 by llevasse         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -54,7 +54,7 @@ t_point	get_distance_from_block_center(float x, float y, int block_s){
 float	draw_line(t_cub cub, t_fov *fov, int colour, float ca)
 {
 	t_line		line;
-//	t_line		horr;
+	t_line		horr;
 	t_line		vert;
 	int			pos_x;
 	int			pos_y;
@@ -85,10 +85,9 @@ float	draw_line(t_cub cub, t_fov *fov, int colour, float ca)
 	fov->p.x = nb.px;
 	fov->p.y = nb.py;
 	if (ca >= (PLAYER_FOV / 2) - 1 && ca <= (PLAYER_FOV / 2) + 1){
-//		ca = no_higher(fov->beg_angle + ca, 360, 0);
-//		horr = get_horr(cub, no_higher(cub.player.pa, 360, 0), ca);
+		horr = get_horr(cub, no_higher(cub.player.pa, 360, 0), ca);
 		vert = get_vert(cub, no_higher(cub.player.pa, 360, 0), ca);
-//		printf("(pa %f)horr xb %f yb %f\n", cub.player.pa, horr.p_b.x, horr.p_b.y); // horr yb is right wall position in pixel
+		printf("(pa %f)horr xb %f yb %f\n", cub.player.pa, horr.p_b.x, horr.p_b.y); // horr yb is right wall position in pixel
 		printf("(pa %f)vert xb %f yb %f\n", cub.player.pa, vert.p_b.x, vert.p_b.y); // horr yb is right wall position in pixel
 	}
 	return (sqrt(pow(nb.py - cub.player.py, 2) + pow(nb.px - cub.player.px, 2)));
