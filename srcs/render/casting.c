@@ -6,7 +6,7 @@
 /*   By: llevasse <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/24 22:25:17 by llevasse          #+#    #+#             */
-/*   Updated: 2023/10/29 18:08:01 by llevasse         ###   ########.fr       */
+/*   Updated: 2023/10/29 18:42:04 by llevasse         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,7 +25,7 @@ float	get_fisheye(t_cub *cub, float ca)
 	return (fisheye);
 }
 
-void	cast(t_cub *cub, float dist, int x, float ca, t_fov fov)
+void	cast(t_cub *cub, float dist, int x, float ca)
 {
 	int		high_y;
 	int		low_y;
@@ -36,18 +36,19 @@ void	cast(t_cub *cub, float dist, int x, float ca, t_fov fov)
 	t_line	vert;
 	t_img	*wall;
 	
-//	dist = draw_line(*cub, &fov, PLAYER_RGB, ca);
-	horr = get_horr(*cub, no_higher(fov.beg_angle + ca, 360, 0));
-	vert = get_vert(*cub, no_higher(fov.beg_angle + ca, 360, 0));
+	horr = get_horr(*cub, ca);
+	vert = get_vert(*cub, ca);
 	if (horr.dist < vert.dist)
 	{
 		dist = horr.dist;
 		wall = get_orientation(cub->map, cub->mmap->block_s, horr.p_b.x, horr.p_b.y);
+		draw_given_line(*cub, horr, 0x00ffff);
 	}
 	else
 	{
 		dist = vert.dist;
 		wall = get_orientation(cub->map, cub->mmap->block_s, vert.p_b.x, vert.p_b.y);
+		draw_given_line(*cub, vert, 0x0000ff);
 	}
 	if (!wall)
 		return ;

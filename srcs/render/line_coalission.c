@@ -6,7 +6,7 @@
 /*   By: llevasse <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/25 21:58:31 by llevasse          #+#    #+#             */
-/*   Updated: 2023/10/29 18:17:13 by llevasse         ###   ########.fr       */
+/*   Updated: 2023/10/29 18:20:33 by llevasse         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -55,7 +55,6 @@ t_line	get_horr(t_cub cub, float pa)
 	{
 		pos_x = (line.p_a.x / cub.mmap->block_s);
 		pos_y = (line.p_a.y / cub.mmap->block_s);
-		printf("%d %d (%d)\n", pos_x, pos_y, cub.mmap->nb_line);
 		if (pos_y >= cub.mmap->nb_line || pos_y < 0 || pos_x < 0 || pos_x >= (int)ft_strlen(cub.mmap->map[pos_y]) \
 			|| !ft_is_in_str("NSEW0", cub.mmap->map[pos_y][pos_x]))
 			break ;
