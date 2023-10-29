@@ -6,7 +6,7 @@
 /*   By: llevasse <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/25 21:58:31 by llevasse          #+#    #+#             */
-/*   Updated: 2023/10/29 14:31:25 by llevasse         ###   ########.fr       */
+/*   Updated: 2023/10/29 14:35:07 by llevasse         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -80,8 +80,8 @@ int		init_vert(t_cub cub, float pa, t_line *line){
 	{
 		line->x_step = -cub.mmap->block_s;
 		line->p_a.x = (((int)cub.player.px/cub.mmap->block_s) * cub.mmap->block_s) - 1;
-		line->p_a.y = ((cub.player.px - line->p_a.x) * Tan) + cub.player.py;
-		line->y_step = -line->x_step * Tan;
+		line->p_a.y = ((cub.player.px - line->p_a.x) * -Tan) + cub.player.py;
+		line->y_step = -line->x_step * -Tan;
 		return (8);
 	}
 	else if (pa > 270 || pa < 90) // if ray is facing right
