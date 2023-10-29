@@ -6,7 +6,7 @@
 /*   By: llevasse <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/25 21:58:31 by llevasse          #+#    #+#             */
-/*   Updated: 2023/10/29 14:07:35 by llevasse         ###   ########.fr       */
+/*   Updated: 2023/10/29 14:31:25 by llevasse         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -79,7 +79,7 @@ int		init_vert(t_cub cub, float pa, t_line *line){
 	if (pa > 90 && pa < 270)	// if ray is facing left
 	{
 		line->x_step = -cub.mmap->block_s;
-		line->p_a.x = ((int)((int)cub.player.px/cub.mmap->block_s) * cub.mmap->block_s) - 1;
+		line->p_a.x = (((int)cub.player.px/cub.mmap->block_s) * cub.mmap->block_s) - 1;
 		line->p_a.y = ((cub.player.px - line->p_a.x) * Tan) + cub.player.py;
 		line->y_step = -line->x_step * Tan;
 		return (8);
@@ -119,7 +119,15 @@ t_line	get_vert(t_cub cub, float pa, float ca)
 //			printf("	vert xo %f	   yo %f\n", line.x_step, line.y_step);
 //			printf("	vert xb %d(%f) yb %d(%f)\n", pos_x, line.p_a.x, pos_y, line.p_a.y);
 		}
-		img_pix_put(&cub.img, (int)line.p_a.x, (int)line.p_a.y, 0x00ff00);
+		img_pix_put(&cub.img, (int)line.p_a.x, (int)line.p_a.y, 0x00ffff);
+		img_pix_put(&cub.img, (int)line.p_a.x - 1, (int)line.p_a.y - 1, 0x00ffff);
+		img_pix_put(&cub.img, (int)line.p_a.x - 2, (int)line.p_a.y - 2, 0x00ffff);
+		img_pix_put(&cub.img, (int)line.p_a.x + 1, (int)line.p_a.y - 1, 0x00ffff);
+		img_pix_put(&cub.img, (int)line.p_a.x + 2, (int)line.p_a.y - 2, 0x00ffff);
+		img_pix_put(&cub.img, (int)line.p_a.x - 1, (int)line.p_a.y + 1, 0x00ffff);
+		img_pix_put(&cub.img, (int)line.p_a.x - 2, (int)line.p_a.y + 2, 0x00ffff);
+		img_pix_put(&cub.img, (int)line.p_a.x + 1, (int)line.p_a.y + 1, 0x00ffff);
+		img_pix_put(&cub.img, (int)line.p_a.x + 2, (int)line.p_a.y + 2, 0x00ffff);
 		if (pos_y >= cub.mmap->nb_line || pos_y < 0 || pos_x < 0 || !ft_is_in_str("NSEW0", cub.mmap->map[pos_y][pos_x]))
 			break ;
 		line.p_a.x += line.x_step;
