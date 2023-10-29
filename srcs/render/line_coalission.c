@@ -6,7 +6,7 @@
 /*   By: llevasse <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/25 21:58:31 by llevasse          #+#    #+#             */
-/*   Updated: 2023/10/29 15:00:31 by llevasse         ###   ########.fr       */
+/*   Updated: 2023/10/29 15:14:11 by llevasse         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -42,7 +42,7 @@ int		init_horr(t_cub cub, float pa, t_line *line){
 	}
 }
 
-t_line	get_horr(t_cub cub, float pa, float ca)
+t_line	get_horr(t_cub cub, float pa)
 {
 	t_line	line;
 	int		pos_x;
@@ -50,14 +50,9 @@ t_line	get_horr(t_cub cub, float pa, float ca)
 	int		dof;
 
 	dof = init_horr(cub, pa, &line);	//check during 8 square
-	printf("		beg point %f %f\n", line.p_a.x, line.p_a.y);
-	while (dof-- > 0){
+	while (dof > 0){
 		pos_x = (line.p_a.x / cub.mmap->block_s);
 		pos_y = (line.p_a.y / cub.mmap->block_s);
-		if (ca >= (PLAYER_FOV / 2) - 1 && ca <= (PLAYER_FOV / 2) + 1){
-//			printf("	horr xo %f	   yo %f(%d block size)\n", line.x_step, line.y_step, cub.mmap->block_s);
-//			printf("	horr xb %d(%f) yb %d(%f)\n", pos_x, line.p_a.x, pos_y, line.p_a.y);
-		}
 		img_pix_put(&cub.img, (int)line.p_a.x, (int)line.p_a.y, 0xff0000);
 		img_pix_put(&cub.img, (int)line.p_a.x - 1, (int)line.p_a.y - 1, 0xff0000);
 		img_pix_put(&cub.img, (int)line.p_a.x + 1, (int)line.p_a.y - 1, 0xff0000);
@@ -67,10 +62,11 @@ t_line	get_horr(t_cub cub, float pa, float ca)
 			break ;
 		line.p_a.x += line.x_step;
 		line.p_a.y -= line.y_step;
+		dof--;
 	}
 	line = get_line(get_player_point(cub.player.px, cub.player.py), line.p_a);
 	if (dof == -42)
-		line.dist = (float)0x7fffffff;
+		line.dist = 0x7fffffff + 0.0;
 	return(line);
 }
 
@@ -105,7 +101,7 @@ int		init_vert(t_cub cub, float pa, t_line *line){
 	}
 }
 
-t_line	get_vert(t_cub cub, float pa, float ca)
+t_line	get_vert(t_cub cub, float pa)
 {
 	t_line	line;
 	int		pos_x;
@@ -113,14 +109,9 @@ t_line	get_vert(t_cub cub, float pa, float ca)
 	int		dof;						//dof = depth of field
 
 	dof = init_vert(cub, pa, &line);	//check during 8 square
-	printf("		beg point %f %f\n", line.p_a.x, line.p_a.y);
-	while (dof-- > 0){
+	while (dof > 0){
 		pos_x = (line.p_a.x / cub.mmap->block_s);
 		pos_y = (line.p_a.y / cub.mmap->block_s);
-		if (ca >= (PLAYER_FOV / 2) - 0.5 && ca <= (PLAYER_FOV / 2) + 0.5){
-//			printf("	vert xo %f	   yo %f\n", line.x_step, line.y_step);
-//			printf("	vert xb %d(%f) yb %d(%f)\n", pos_x, line.p_a.x, pos_y, line.p_a.y);
-		}
 		img_pix_put(&cub.img, (int)line.p_a.x, (int)line.p_a.y, 0x00ffff);
 		img_pix_put(&cub.img, (int)line.p_a.x - 1, (int)line.p_a.y - 1, 0x00ffff);
 		img_pix_put(&cub.img, (int)line.p_a.x + 1, (int)line.p_a.y - 1, 0x00ffff);
@@ -130,11 +121,10 @@ t_line	get_vert(t_cub cub, float pa, float ca)
 			break ;
 		line.p_a.x += line.x_step;
 		line.p_a.y += line.y_step;
+		dof--;
 	}
 	line = get_line(get_player_point(cub.player.px, cub.player.py), line.p_a);
 	if (dof == -42)
-		line.dist = (float)0x7fffffff;
+		line.dist = 0x7fffffff + 0.0;
 	return (line);
 }
-
-

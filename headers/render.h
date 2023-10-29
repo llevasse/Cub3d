@@ -6,7 +6,7 @@
 /*   By: llevasse <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/22 22:05:00 by llevasse          #+#    #+#             */
-/*   Updated: 2023/10/25 22:01:49 by llevasse         ###   ########.fr       */
+/*   Updated: 2023/10/29 15:14:29 by llevasse         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,8 +26,8 @@ float		draw_line(t_cub cub, t_fov *fov, int colour, float ca);
 void	drawRays3D(t_cub cub);
 
 //srcs/render/line_coalission.c
-t_line	get_horr(t_cub cub, float pa, float ca);
-t_line	get_vert(t_cub cub, float pa, float ca);
+t_line	get_horr(t_cub cub, float pa);
+t_line	get_vert(t_cub cub, float pa);
 
 //srcs/render/minimap.c:
 void	draw_square(t_cub *cub, int x, int y, int colour);
