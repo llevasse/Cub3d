@@ -6,7 +6,7 @@
 /*   By: llevasse <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/25 21:58:31 by llevasse          #+#    #+#             */
-/*   Updated: 2023/10/29 18:20:33 by llevasse         ###   ########.fr       */
+/*   Updated: 2023/10/31 20:31:04 by llevasse         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -40,7 +40,7 @@ int	init_horr(t_cub cub, float pa, t_line *line)
 	}
 	line->p_a.x = ((cub.player.py - line->p_a.y) * -tan_v + cub.player.px);
 	line->x_step = -line->y_step * tan_v;
-	return (8);
+	return (cub.mmap->dof);
 }
 
 t_line	get_horr(t_cub cub, float pa)
@@ -96,7 +96,7 @@ int	init_vert(t_cub cub, float pa, t_line *line)
 	}
 	line->p_a.y = ((cub.player.px - line->p_a.x) * -tan_v) + cub.player.py;
 	line->y_step = -line->x_step * -tan_v;
-	return (8);
+	return (cub.mmap->dof);
 }
 
 //dof == depth of field
