@@ -6,7 +6,7 @@
 /*   By: llevasse <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/17 13:34:04 by llevasse          #+#    #+#             */
-/*   Updated: 2023/10/19 11:59:43 by llevasse         ###   ########.fr       */
+/*   Updated: 2023/11/04 19:04:30 by llevasse         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,6 +23,34 @@ t_img *get_orientation(t_map *map, int block_s, int x, int y)
 	if ((x + 1) % block_s == 0)
 		return (&map->east_img);
 	return (&map->north_img);	
+}
+
+int	get_x(int x, int y, int block_s){
+	if (y % block_s == 0)	{
+		return (x%64);
+		while (x >= block_s)
+			x -= block_s;
+		return (x);
+	}
+	if ((y + 1) % block_s == 0){
+		return (x%64);
+		while (x >= block_s)
+			x -= block_s;
+		return (block_s - x);
+	}
+	if (x % block_s == 0){
+		return (y%64);
+		while (y >= block_s)
+			y -= block_s;
+		return (y);
+	}
+	if ((x + 1) % block_s == 0){
+		return (y%64);
+		while (y >= block_s)
+			y -= block_s;
+		return (y);
+	}
+	return (0);
 }
 
 //NORTH STOP	: X134 Y128 = 128.0 / 16 = 8.0

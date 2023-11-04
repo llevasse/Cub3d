@@ -6,7 +6,7 @@
 /*   By: llevasse <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/24 22:25:17 by llevasse          #+#    #+#             */
-/*   Updated: 2023/10/29 18:55:46 by llevasse         ###   ########.fr       */
+/*   Updated: 2023/11/04 19:03:47 by llevasse         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -32,8 +32,12 @@ void	cast(t_cub *cub, float dist, int x, float ca)
 	int		height;
 	int		colour;
 	int		center = 0;
+	int		img_x;
+	float	img_y_ratio;
+	int		img_y = 0;
 	t_line	horr;
 	t_line	vert;
+	t_line	line;
 	t_img	*wall;
 	
 	horr = get_horr(*cub, ca);
@@ -41,13 +45,17 @@ void	cast(t_cub *cub, float dist, int x, float ca)
 	if (horr.dist < vert.dist)
 	{
 		dist = horr.dist;
+		line = horr;
 		wall = get_orientation(cub->map, cub->mmap->block_s, horr.p_b.x, horr.p_b.y);
+		img_x= get_x(horr.p_b.x, horr.p_b.y, cub->mmap->block_s);
 		draw_given_line(*cub, horr, 0x00ffff);
 	}
 	else
 	{
 		dist = vert.dist;
+		line = vert;
 		wall = get_orientation(cub->map, cub->mmap->block_s, vert.p_b.x, vert.p_b.y);
+		img_x= get_x(vert.p_b.x, vert.p_b.y, cub->mmap->block_s);
 		draw_given_line(*cub, vert, 0x0000ff);
 	}
 	if (!wall)
@@ -64,15 +72,24 @@ void	cast(t_cub *cub, float dist, int x, float ca)
 		high_y = 0;
 	if (low_y > WINDOW_H)
 		low_y = WINDOW_H;
+	img_y_ratio = height / 64;
+	int	tmp_y;
 	while (high_y < low_y)
 	{
-		colour = get_pixel_colour(&cub->img, x, high_y);
-		if (colour != MMAP_W_RGB && colour != MMAP_RGB && colour != PLAYER_RGB){
-			if (!center)
-				img_pix_put(&cub->img, x, high_y, get_pixel_colour(wall, x / 64, high_y / 64));
-			else
-				img_pix_put(&cub->img, x, high_y, 0x222222);
+		tmp_y=0;
+		while (high_y < low_y && tmp_y <= img_y_ratio)
+		{
+			colour = get_pixel_colour(&cub->img, x, high_y);
+//			printf("%f\n",img_y_ratio * img_y);
+			if (colour != MMAP_W_RGB && colour != MMAP_RGB && colour != PLAYER_RGB){
+				if (!center)
+					img_pix_put(&cub->img, x, high_y, get_pixel_colour(wall, img_x, img_y));
+				else
+					img_pix_put(&cub->img, x, high_y, 0x222222);
+			}
+			high_y++;
+			tmp_y++;
 		}
-		high_y++;
+		img_y++;
 	}
 }

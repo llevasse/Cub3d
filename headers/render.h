@@ -6,7 +6,7 @@
 /*   By: llevasse <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/22 22:05:00 by llevasse          #+#    #+#             */
-/*   Updated: 2023/10/29 18:42:20 by llevasse         ###   ########.fr       */
+/*   Updated: 2023/11/02 23:23:26 by llevasse         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -51,5 +51,6 @@ void	cast(t_cub *cub, float dist, int x, float ca);
 
 //srcs/render/get_orientation.c
 t_img	*get_orientation(t_map *map, int block_s, int x, int y);
+int		get_x(int x, int y, int block_s);
 
 #endif
