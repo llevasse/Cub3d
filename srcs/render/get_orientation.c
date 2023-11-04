@@ -6,13 +6,13 @@
 /*   By: llevasse <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/17 13:34:04 by llevasse          #+#    #+#             */
-/*   Updated: 2023/11/04 19:08:29 by llevasse         ###   ########.fr       */
+/*   Updated: 2023/11/04 19:31:50 by llevasse         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "cub3d.h"
 
-t_img *get_orientation(t_map *map, int block_s, int x, int y)
+t_img *get_orient(t_map *map, int block_s, int x, int y)
 {
 	if (y % block_s == 0)
 		return (&map->north_img);

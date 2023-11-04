@@ -6,7 +6,7 @@
 /*   By: llevasse <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/24 22:25:17 by llevasse          #+#    #+#             */
-/*   Updated: 2023/11/04 19:26:35 by llevasse         ###   ########.fr       */
+/*   Updated: 2023/11/04 19:34:28 by llevasse         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,27 +25,27 @@ float	get_fisheye(t_cub *cub, float ca)
 	return (fisheye);
 }
 
-static	t_cast get_cast_data(t_cub *cub, float ca)
+static t_cast	get_cast_data(t_cub *cub, float ca)
 {
 	t_cast	cast;
-	t_line	horr;
-	t_line	vert;
+	t_line	h;
+	t_line	v;
 
-	horr = get_horr(*cub, ca);
-	vert = get_vert(*cub, ca);
-	if (horr.dist < vert.dist)
+	h = get_horr(*cub, ca);
+	v = get_vert(*cub, ca);
+	if (h.dist < v.dist)
 	{
-		cast.dist = horr.dist;
-		cast.wall = get_orientation(cub->map, cub->mmap->block_s, horr.p_b.x, horr.p_b.y);
-		cast.x= get_x(horr.p_b.x, horr.p_b.y, cub->mmap->block_s);
-		draw_given_line(*cub, horr, 0x00ffff);
+		cast.dist = h.dist;
+		cast.wall = get_orient(cub->map, cub->mmap->block_s, h.p_b.x, h.p_b.y);
+		cast.x = get_x(h.p_b.x, h.p_b.y, cub->mmap->block_s);
+		draw_given_line(*cub, h, 0x00ffff);
 	}
 	else
 	{
-		cast.dist = vert.dist;
-		cast.wall = get_orientation(cub->map, cub->mmap->block_s, vert.p_b.x, vert.p_b.y);
-		cast.x= get_x(vert.p_b.x, vert.p_b.y, cub->mmap->block_s);
-		draw_given_line(*cub, vert, 0x0000ff);
+		cast.dist = v.dist;
+		cast.wall = get_orient(cub->map, cub->mmap->block_s, v.p_b.x, v.p_b.y);
+		cast.x = get_x(v.p_b.x, v.p_b.y, cub->mmap->block_s);
+		draw_given_line(*cub, v, 0x0000ff);
 	}
 	if (cast.dist == 0)
 		cast.dist = 1;
@@ -61,30 +61,29 @@ static	t_cast get_cast_data(t_cub *cub, float ca)
 
 void	cast(t_cub *cub, int x, float ca)
 {
-	int		colour;
+	int		rgb;
 	int		tmp_y;
-	t_cast	cast;
-	
-	cast = get_cast_data(cub, ca);
-	if (!cast.wall)
+	t_cast	c;
+
+	c = get_cast_data(cub, ca);
+	if (!c.wall)
 		return ;
-//	dist *= cos(get_fisheye(cub, ca));
-	if (cast.high < 0)
-		cast.high = 0;
-	if (cast.low > WINDOW_H)
-		cast.low = WINDOW_H;
-	while (cast.high < cast.low)
+	if (c.high < 0)
+		c.high = 0;
+	if (c.low > WINDOW_H)
+		c.low = WINDOW_H;
+	while (c.high < c.low)
 	{
-		tmp_y=0;
-		while (cast.high < cast.low && tmp_y <= cast.y_ratio)
+		tmp_y = 0;
+		while (c.high < c.low && tmp_y <= c.y_ratio)
 		{
-			colour = get_pixel_colour(&cub->img, x, cast.high);
-			if (colour != MMAP_W_RGB && colour != MMAP_RGB && colour != PLAYER_RGB){
-				img_pix_put(&cub->img, x, cast.high, get_pixel_colour(cast.wall, cast.x, cast.y));
-			}
-			cast.high++;
+			rgb = get_pixel_colour(&cub->img, x, c.high);
+			if (rgb != MMAP_W_RGB && rgb != MMAP_RGB && rgb != PLAYER_RGB)
+				img_pix_put(&cub->img, x, c.high,
+					get_pixel_colour(c.wall, c.x, c.y));
+			c.high++;
 			tmp_y++;
 		}
-		cast.y++;
+		c.y++;
 	}
 }
