@@ -6,7 +6,7 @@
 /*   By: llevasse <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/17 13:34:04 by llevasse          #+#    #+#             */
-/*   Updated: 2023/11/04 19:04:30 by llevasse         ###   ########.fr       */
+/*   Updated: 2023/11/04 19:08:29 by llevasse         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,34 +26,13 @@ t_img *get_orientation(t_map *map, int block_s, int x, int y)
 }
 
 int	get_x(int x, int y, int block_s){
-	if (y % block_s == 0)	{
+	if (y % block_s == 0)
 		return (x%64);
-		while (x >= block_s)
-			x -= block_s;
-		return (x);
-	}
-	if ((y + 1) % block_s == 0){
+	if ((y + 1) % block_s == 0)
 		return (x%64);
-		while (x >= block_s)
-			x -= block_s;
-		return (block_s - x);
-	}
-	if (x % block_s == 0){
+	if (x % block_s == 0)
 		return (y%64);
-		while (y >= block_s)
-			y -= block_s;
-		return (y);
-	}
-	if ((x + 1) % block_s == 0){
+	if ((x + 1) % block_s == 0)
 		return (y%64);
-		while (y >= block_s)
-			y -= block_s;
-		return (y);
-	}
 	return (0);
 }
-
-//NORTH STOP	: X134 Y128 = 128.0 / 16 = 8.0
-//SOUTH	STOP	: X138 Y79 = (79.0 + 1) / 16 = 5.0
-//EAST	STOP	: X111 Y103 = (111.0 + 1) / 16 = 7.0
-//WEST	STOP	: X160 Y106	= 160.0 / 16 = 10.0

@@ -6,7 +6,7 @@
 /*   By: tdutel <tdutel@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/18 21:52:44 by llevasse          #+#    #+#             */
-/*   Updated: 2023/10/31 20:27:27 by llevasse         ###   ########.fr       */
+/*   Updated: 2023/11/04 19:22:33 by llevasse         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -110,6 +110,19 @@ typedef struct s_fov
 	float				ray_step;
 	float				player_dist;
 }				t_fov;
+
+typedef struct s_cast
+{
+	t_line	line;
+	t_img	*wall;
+	int		height;
+	int		high;
+	int		low;
+	int		x;
+	int		y;
+	float	y_ratio;
+	float	dist;
+}				t_cast;
 
 t_garbage	*ft_new_garbage(void *address);
 void		ft_add_garbage(t_garbage **lst, void *addr);
