@@ -6,7 +6,7 @@
 /*   By: tdutel <tdutel@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/18 21:52:44 by llevasse          #+#    #+#             */
-/*   Updated: 2023/11/04 19:22:33 by llevasse         ###   ########.fr       */
+/*   Updated: 2023/11/06 11:13:06 by llevasse         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -28,6 +28,8 @@ typedef struct s_img
 	int					bpp;
 	int					line_len;
 	int					endian;
+	int					width;
+	int					height;
 }				t_img;
 
 typedef struct s_map
