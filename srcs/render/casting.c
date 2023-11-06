@@ -6,7 +6,7 @@
 /*   By: llevasse <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/24 22:25:17 by llevasse          #+#    #+#             */
-/*   Updated: 2023/11/06 11:35:31 by llevasse         ###   ########.fr       */
+/*   Updated: 2023/11/06 11:41:04 by llevasse         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,11 +18,11 @@ float	get_fisheye(t_cub *cub, float ca)
 	float	fisheye;
 
 	fisheye = cub->player.pa - ca;
-	if (fisheye < 0)
+/*	if (fisheye < 0)
 		fisheye += 2 * PI;
 	if (fisheye > 2 * PI)
-		fisheye -= 2 * PI;
-	return (fisheye);
+		fisheye -= 2 * PI;*/
+	return (cos(fisheye * RADIAN));
 }
 
 static t_cast	get_cast_data(t_cub *cub, float ca)
@@ -47,6 +47,7 @@ static t_cast	get_cast_data(t_cub *cub, float ca)
 		cast.x = get_x(v.p_b.x, v.p_b.y, cub->mmap->block_s);
 		draw_given_line(*cub, v, 0x0000ff);
 	}
+	cast.dist *= get_fisheye(cub, ca);
 	if (cast.dist == 0)
 		cast.dist = 1;
 	cast.height = (cub->mmap->block_s * WINDOW_H) / cast.dist;
