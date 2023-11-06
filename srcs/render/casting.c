@@ -6,7 +6,7 @@
 /*   By: llevasse <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/24 22:25:17 by llevasse          #+#    #+#             */
-/*   Updated: 2023/11/04 19:34:28 by llevasse         ###   ########.fr       */
+/*   Updated: 2023/11/06 11:35:31 by llevasse         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -54,7 +54,7 @@ static t_cast	get_cast_data(t_cub *cub, float ca)
 		cast.height = WINDOW_H;
 	cast.high = (WINDOW_H / 2) - cast.height / 2;
 	cast.low = (WINDOW_H / 2) + cast.height / 2;
-	cast.y_ratio = cast.height / 64;
+	cast.y_ratio = cast.height / cast.wall->height;
 	cast.y = 0;
 	return (cast);
 }
