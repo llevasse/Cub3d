@@ -6,7 +6,7 @@
 /*   By: llevasse <marvin@42.fr>                    +#+  +:+       +#+        */
 /*  ea                                             +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/18 23:48:52 by llevasse          #+#    #+#             */
-/*   Updated: 2023/10/17 11:05:54 by llevasse         ###   ########.fr       */
+/*   Updated: 2023/10/20 18:34:34 by llevasse         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -48,6 +48,8 @@ static char	*get_str_line(int map_fd, t_map *map)
 	char	*str;
 
 	str = get_next_line(map_fd);
+	if (!str)
+		return (0);
 	ft_add_garbage(&map->garbage, str);
 	while (str && is_line_empty(str))
 	{

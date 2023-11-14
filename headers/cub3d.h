@@ -6,7 +6,7 @@
 /*   By: tdutel <tdutel@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/18 21:43:29 by llevasse          #+#    #+#             */
-/*   Updated: 2023/10/18 11:49:42 by llevasse         ###   ########.fr       */
+/*   Updated: 2023/10/29 15:12:39 by llevasse         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -32,8 +32,8 @@
 //# define WINDOW_W	1024*2
 //# define WINDOW_H	512*2
 
-# define WINDOW_W	320*3
-# define WINDOW_H	200*3
+# define WINDOW_W	320*9
+# define WINDOW_H	200*9
 
 //# define MMAP_W	WINDOW_W/3
 //# define MMAP_H	WINDOW_H/3
@@ -42,8 +42,10 @@
 #	undef MMAP_S
 #	define MMAP_S WINDOW_H/3
 # endif
-# define MMAP_W_RGB	0xff0000
-# define MMAP_RGB	0x00ff00
+//# define MMAP_W_RGB	0xff0000
+//# define MMAP_RGB	0x00ff00
+# define MMAP_W_RGB	0x000000
+# define MMAP_RGB	0xffffff
 # define PLAYER_RGB		0x0000ff
 # define PLAYER_FOV		80
 

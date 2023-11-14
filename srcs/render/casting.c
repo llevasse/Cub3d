@@ -6,7 +6,7 @@
 /*   By: tdutel <tdutel@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/24 22:25:17 by llevasse          #+#    #+#             */
-/*   Updated: 2023/10/20 15:45:22 by tdutel           ###   ########.fr       */
+/*   Updated: 2023/11/14 13:08:37 by tdutel           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,36 +25,65 @@ float	get_fisheye(t_cub *cub, float ca)
 	return (fisheye);
 }
 
-void	cast(t_cub *cub, double dist, int x, float ca, t_point end_point)
+static t_cast	get_cast_data(t_cub *cub, float ca)
 {
-	int		high_y;
-	int		low_y;
-	int		height;
-	int		colour;
+	t_cast	cast;
+	t_line	h;
+	t_line	v;
 
-	ca = no_higher(ca, 360, 0);
-	// cub->map->wall = NULL;
-	// (void)(end_point);
-	cub->map->wall = get_orientation(cub->map, cub->mmap->block_s, end_point.x, end_point.y);
-	if (!cub->map->wall && cub->map->old_wall)
-		cub->map->wall = cub->map->old_wall;
-	// dist *= cos(get_fisheye(cub, ca));
-	if (dist == 0)
-		dist = 1;
-	height = (cub->mmap->block_s * WINDOW_H) / dist;
-	if (height > WINDOW_H)
-		height = WINDOW_H;
-	high_y = (WINDOW_H / 2) - height / 2;
-	low_y = (WINDOW_H / 2) + height / 2;
-	if (high_y < 0)
-		high_y = 0;
-	if (low_y > WINDOW_H)
-		low_y = WINDOW_H;
-	while (high_y < low_y)
+	h = get_horr(*cub, ca);
+	v = get_vert(*cub, ca);
+	if (h.dist < v.dist)
 	{
-		colour = get_pixel_colour(&cub->img, x, high_y);
-		if (colour != MMAP_W_RGB && colour != MMAP_RGB && colour != PLAYER_RGB)
-			img_pix_put(&cub->img, x, high_y, get_pixel_colour(cub->map->wall, x % 64, high_y % 64));
-		high_y++;
+		cast.dist = h.dist;
+		cast.wall = get_orient(cub->map, cub->mmap->block_s, h.p_b.x, h.p_b.y);
+		cast.x = get_x(h.p_b.x, h.p_b.y, cub->mmap->block_s);
+		draw_given_line(*cub, h, 0x00ffff);
+	}
+	else
+	{
+		cast.dist = v.dist;
+		cast.wall = get_orient(cub->map, cub->mmap->block_s, v.p_b.x, v.p_b.y);
+		cast.x = get_x(v.p_b.x, v.p_b.y, cub->mmap->block_s);
+		draw_given_line(*cub, v, 0x0000ff);
+	}
+	if (cast.dist == 0)
+		cast.dist = 1;
+	cast.height = (cub->mmap->block_s * WINDOW_H) / cast.dist;
+	if (cast.height > WINDOW_H)
+		cast.height = WINDOW_H;
+	cast.high = (WINDOW_H / 2) - cast.height / 2;
+	cast.low = (WINDOW_H / 2) + cast.height / 2;
+	cast.y_ratio = cast.height / 64;
+	cast.y = 0;
+	return (cast);
+}
+
+void	cast(t_cub *cub, int x, float ca)
+{
+	int		rgb;
+	int		tmp_y;
+	t_cast	c;
+
+	c = get_cast_data(cub, ca);
+	if (!c.wall)
+		return ;
+	if (c.high < 0)
+		c.high = 0;
+	if (c.low > WINDOW_H)
+		c.low = WINDOW_H;
+	while (c.high < c.low)
+	{
+		tmp_y = 0;
+		while (c.high < c.low && tmp_y <= c.y_ratio)
+		{
+			rgb = get_pixel_colour(&cub->img, x, c.high);
+			if (rgb != MMAP_W_RGB && rgb != MMAP_RGB && rgb != PLAYER_RGB)
+				img_pix_put(&cub->img, x, c.high,
+					get_pixel_colour(c.wall, c.x, c.y));
+			c.high++;
+			tmp_y++;
+		}
+		c.y++;
 	}
 }

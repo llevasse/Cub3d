@@ -6,7 +6,7 @@
 /*   By: tdutel <tdutel@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/19 22:29:27 by llevasse          #+#    #+#             */
-/*   Updated: 2023/10/20 15:25:03 by tdutel           ###   ########.fr       */
+/*   Updated: 2023/11/14 13:08:27 by tdutel           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,9 +20,13 @@ void	init_cub(t_cub *cub, char **argv)
 	cub->mlx_ptr = mlx_init();
 	if (!cub->mlx_ptr)
 		return ((void)(free_garbage(cub->garbage), ft_putstr_fd(MLX_ERR, 2)));
-	cub->map = parse(open(argv[1], O_RDONLY), cub);	//TODO: addd O_condition only open file and avoid dir named map.ber
-	if (!cub->map)
+	cub->map = parse(open(argv[1], O_RDONLY), cub);
+	if (!cub->map){
+		mlx_destroy_display(cub->mlx_ptr);
+		free(cub->mlx_ptr);
+		exit(0);
 		return ;
+	}
 	init_minimap(cub);
 	init_player(cub);
 	ft_add_garbage(&cub->garbage, cub->mlx_ptr);
@@ -64,6 +68,9 @@ void	init_minimap(t_cub *cub)
 		if ((int)ft_strlen(cub->mmap->map[i++]) > cub->mmap->map_width)
 			cub->mmap->map_width = ft_strlen(cub->mmap->map[i - 1]);
 	}
+	cub->mmap->dof = cub->mmap->map_width;
+	if (cub->mmap->map_width < cub->mmap->nb_line)
+		cub->mmap->dof = cub->mmap->nb_line;
 	divider = cub->mmap->map_width;
 	if (WINDOW_W < WINDOW_H)
 		divider = cub->mmap->nb_line;

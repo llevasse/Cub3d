@@ -6,7 +6,7 @@
 /*   By: tdutel <tdutel@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/22 22:05:00 by llevasse          #+#    #+#             */
-/*   Updated: 2023/10/19 14:37:38 by tdutel           ###   ########.fr       */
+/*   Updated: 2023/11/14 13:08:13 by tdutel           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,9 +20,15 @@ void	paint_bg(t_cub *cub);
 
 //srcs/render/line.c:
 t_line	get_line(t_point p_a, t_point p_b);
+t_point	get_player_point(float x, float y);
 int		get_line_dist(t_cub cub, t_point dest_p);
-double		draw_line(t_cub cub, t_point *dest_p, int colour);
+float	draw_line(t_cub cub, t_fov *fov, int colour);
+void	draw_given_line(t_cub cub, t_line line, int colour);
 void	drawRays3D(t_cub cub);
+
+//srcs/render/line_coalission.c
+t_line	get_horr(t_cub cub, float pa);
+t_line	get_vert(t_cub cub, float pa);
 
 //srcs/render/minimap.c:
 void	draw_square(t_cub *cub, int x, int y, int colour);
@@ -41,9 +47,10 @@ void	draw_fov(t_cub *cub);
 t_fov	get_fov(float *ca);
 
 //srcs/render/casting.c
-void	cast(t_cub *cub, double dist, int x, float ca, t_point end_p);
+void	cast(t_cub *cub, int x, float ca);
 
 //srcs/render/get_orientation.c
-t_img	*get_orientation(t_map *map, int block_s, int x, int y);
+t_img	*get_orient(t_map *map, int block_s, int x, int y);
+int		get_x(int x, int y, int block_s);
 
 #endif

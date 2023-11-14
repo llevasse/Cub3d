@@ -6,7 +6,7 @@
 /*   By: tdutel <tdutel@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/22 21:44:52 by llevasse          #+#    #+#             */
-/*   Updated: 2023/10/20 15:44:03 by tdutel           ###   ########.fr       */
+/*   Updated: 2023/11/14 13:09:11 by tdutel           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,20 +23,19 @@ void	draw_fov(t_cub *cub)
 	float	gained_angle;
 	float	temp_x;
 
+	ca = cub->player.pa;
 	fov = get_fov(&ca);
 	x = 0;
 	gained_angle = 0;
 	while (gained_angle < PLAYER_FOV - 1)
 	{
-		get_player_new_pos(cub, no_higher(ca + gained_angle, 360, 0), MMAP_S * 5, &fov.p);
+		get_player_new_pos(cub, ca, MMAP_S * 5, &fov.p);
 		temp_x = x + fov.column_width;
 		while (x < temp_x)
-		{
-			cast(cub, draw_line(*cub, &fov.p, PLAYER_RGB), x++, ca, fov.p);
-			cub->map->old_wall = cub->map->wall;
-		}
+			cast(cub, x++, ca);
 		gained_angle += fov.field_step;
-		get_player_new_pos(cub, no_higher(ca + gained_angle, 360, 0), MMAP_S * 5, &fov.p2);
+		ca = no_higher(ca + fov.field_step, 360, 0);
+		get_player_new_pos(cub, ca, MMAP_S * 5, &fov.p2);
 		fov.fl = get_line(fov.p, fov.p2);
 /*		while (gained_angle < PLAYER_FOV - 1 && fov.fl.steps-- > 0 && draw_line(*cub, fov.p, PLAYER_RGB, gained_angle))
 		{
@@ -61,7 +60,7 @@ t_fov	get_fov(float *ca)
 	t_fov	fov;
 
 	fov.player_dist = (WINDOW_W / 2) / tan(PLAYER_FOV / 2);
-	fov.beg_angle = no_higher(-((PLAYER_FOV - 1) / 2), 360, 0);
+	fov.beg_angle = no_higher(*ca - ((PLAYER_FOV - 1) / 2), 360, 0);
 	fov.end_angle = no_higher(fov.beg_angle + (PLAYER_FOV - 1), 360, 0);
 	*ca = fov.beg_angle;
 	fov.field_step = ((float)(PLAYER_FOV - 1) / WINDOW_W);

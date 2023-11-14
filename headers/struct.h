@@ -6,7 +6,7 @@
 /*   By: tdutel <tdutel@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/18 21:52:44 by llevasse          #+#    #+#             */
-/*   Updated: 2023/10/19 15:03:48 by tdutel           ###   ########.fr       */
+/*   Updated: 2023/11/14 13:08:18 by tdutel           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -40,13 +40,14 @@ typedef struct s_map
 	struct s_img		*old_wall;
 	int					f_rgb;		//floor rgb value
 	int					c_rgb;		//ceiling rgb value
-	double				player_rotation;
+	float				player_rotation;
 	struct s_garbage	*garbage;
 	}				t_map;
 
 typedef struct s_minimap
 {
 	char				**map;
+	int					dof;		//depth of field
 	int					nb_line;
 	int					map_width;
 	int					block_s;
@@ -70,6 +71,7 @@ typedef struct s_line
 	float				x_step;
 	float				y_step;
 	float				steps;
+	float				dist;
 }				t_line;
 
 typedef struct s_player
@@ -110,6 +112,19 @@ typedef struct s_fov
 	float				ray_step;
 	float				player_dist;
 }				t_fov;
+
+typedef struct s_cast
+{
+	t_line	line;
+	t_img	*wall;
+	int		height;
+	int		high;
+	int		low;
+	int		x;
+	int		y;
+	float	y_ratio;
+	float	dist;
+}				t_cast;
 
 t_garbage	*ft_new_garbage(void *address);
 void		ft_add_garbage(t_garbage **lst, void *addr);
