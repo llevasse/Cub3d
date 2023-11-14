@@ -6,7 +6,7 @@
 /*   By: tdutel <tdutel@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/19 22:29:27 by llevasse          #+#    #+#             */
-/*   Updated: 2023/11/14 13:08:27 by tdutel           ###   ########.fr       */
+/*   Updated: 2023/11/14 14:05:36 by tdutel           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -39,6 +39,8 @@ void	init_cub(t_cub *cub, char **argv)
 void	init_images(t_cub *cub)
 {
 	cub->img.mlx_img = mlx_new_image(cub->mlx_ptr, WINDOW_W, WINDOW_H);
+	cub->img.width = WINDOW_W;
+	cub->img.height = WINDOW_H;
 	cub->img.addr = mlx_get_data_addr(cub->img.mlx_img,
 			&cub->img.bpp, &cub->img.line_len, &cub->img.endian);
 }
