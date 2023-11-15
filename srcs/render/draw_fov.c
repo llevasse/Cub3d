@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   draw_fov.c                                         :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: llevasse <marvin@42.fr>                    +#+  +:+       +#+        */
+/*   By: tdutel <tdutel@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/22 21:44:52 by llevasse          #+#    #+#             */
-/*   Updated: 2023/11/04 19:16:42 by llevasse         ###   ########.fr       */
+/*   Updated: 2023/11/14 14:44:04 by tdutel           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -27,7 +27,7 @@ void	draw_fov(t_cub *cub)
 	fov = get_fov(&ca);
 	x = 0;
 	gained_angle = 0;
-	while (gained_angle < PLAYER_FOV - 1)
+	while (gained_angle < PLAYER_FOV)	// remove PLAYER_FOV - 1
 	{
 		get_player_new_pos(cub, ca, MMAP_S * 5, &fov.p);
 		temp_x = x + fov.column_width;
@@ -63,7 +63,14 @@ t_fov	get_fov(float *ca)
 	fov.beg_angle = no_higher(*ca - ((PLAYER_FOV - 1) / 2), 360, 0);
 	fov.end_angle = no_higher(fov.beg_angle + (PLAYER_FOV - 1), 360, 0);
 	*ca = fov.beg_angle;
-	fov.field_step = ((float)(PLAYER_FOV - 1) / WINDOW_W);
+	fov.field_step = ((float)(PLAYER_FOV - 1) / WINDOW_W / 16);
 	fov.column_width = (WINDOW_W / PLAYER_FOV) * fov.field_step;
 	return (fov);
 }
+
+
+
+/*
+
+peut etre que les bordures differente proviennent selon l'ordre des confitions dans get_otientation
+*/
