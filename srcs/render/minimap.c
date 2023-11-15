@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   minimap.c                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: llevasse <marvin@42.fr>                    +#+  +:+       +#+        */
+/*   By: tdutel <tdutel@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/20 00:28:00 by llevasse          #+#    #+#             */
-/*   Updated: 2023/09/26 23:32:02 by llevasse         ###   ########.fr       */
+/*   Updated: 2023/11/15 14:54:00 by tdutel           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -50,5 +50,5 @@ void	draw_minimap(t_cub *cub)
 		}
 		y++;
 	}
-	draw_fov(cub);
+	// draw_fov(cub);
 }
