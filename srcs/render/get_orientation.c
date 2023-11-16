@@ -6,7 +6,7 @@
 /*   By: tdutel <tdutel@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/17 13:34:04 by llevasse          #+#    #+#             */
-/*   Updated: 2023/11/15 12:00:56 by tdutel           ###   ########.fr       */
+/*   Updated: 2023/11/16 12:18:38 by tdutel           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -27,13 +27,13 @@ t_img *get_orient(t_map *map, int block_s, int x, int y)
 
 int	get_x(int x, int y, int block_s){
 	if (y % block_s == 0)
-		return (x%64);
+		return (x % 64);
 	if ((y + 1) % block_s == 0)
-		return (x%64);
+		return (x % 64);
 	if (x % block_s == 0)
-		return (y%64);
+		return (y % 64);
 	if ((x + 1) % block_s == 0)
-		return (y%64);
+		return (y % 64);
 	return (0);
 }
 

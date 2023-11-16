@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   line_coalission.c                                  :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: llevasse <marvin@42.fr>                    +#+  +:+       +#+        */
+/*   By: tdutel <tdutel@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/25 21:58:31 by llevasse          #+#    #+#             */
-/*   Updated: 2023/10/31 20:31:04 by llevasse         ###   ########.fr       */
+/*   Updated: 2023/11/16 14:14:04 by tdutel           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,11 +25,13 @@ int	init_horr(t_cub cub, float pa, t_line *line)
 	if (pa > 180 && pa < 360)
 	{
 		line->y_step = block_s;
+		// line->p_a.y = ((int)cub.player.py * (0.0625 * block_s)) * block_s - 1;	//	
 		line->p_a.y = ((int)cub.player.py / block_s) * block_s - 1;
 	}
 	else if (pa > 0 && pa < 180)
 	{
 		line->y_step = -block_s;
+		// line->p_a.y = ((int)cub.player.py * (0.0625 * block_s)) * block_s + block_s;	//	
 		line->p_a.y = ((int)cub.player.py / block_s) * block_s + block_s;
 	}
 	else
@@ -53,8 +55,8 @@ t_line	get_horr(t_cub cub, float pa)
 	dof = init_horr(cub, pa, &line);
 	while (dof > 0)
 	{
-		pos_x = (line.p_a.x / cub.mmap->block_s);
-		pos_y = (line.p_a.y / cub.mmap->block_s);
+		pos_x = (line.p_a.x * 0.0625); //pos_x = (line.p_a.x / cub.mmap->block_s);
+		pos_y = (line.p_a.y * 0.0625); //pos_y = (line.p_a.y / cub.mmap->block_s);
 		if (pos_y >= cub.mmap->nb_line || pos_y < 0 || pos_x < 0 || pos_x >= (int)ft_strlen(cub.mmap->map[pos_y]) \
 			|| !ft_is_in_str("NSEW0", cub.mmap->map[pos_y][pos_x]))
 			break ;
@@ -78,6 +80,7 @@ int	init_vert(t_cub cub, float pa, t_line *line)
 
 	tan_v = tan(pa * RADIAN);
 	block_s = cub.mmap->block_s;
+	// printf("%d\t", block_s);
 	if (pa > 90 && pa < 270)
 	{
 		line->x_step = -block_s;

@@ -6,7 +6,7 @@
 /*   By: tdutel <tdutel@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/24 22:25:17 by llevasse          #+#    #+#             */
-/*   Updated: 2023/11/14 14:05:38 by tdutel           ###   ########.fr       */
+/*   Updated: 2023/11/16 12:31:36 by tdutel           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -53,8 +53,8 @@ static t_cast	get_cast_data(t_cub *cub, float ca)
 	cast.height = (cub->mmap->block_s * WINDOW_H) / cast.dist;
 	if (cast.height > WINDOW_H)
 		cast.height = WINDOW_H;
-	cast.high = (WINDOW_H / 2) - cast.height / 2;
-	cast.low = (WINDOW_H / 2) + cast.height / 2;
+	cast.high = (WINDOW_H2) - cast.height / 2;
+	cast.low = (WINDOW_H2) + cast.height / 2;
 	cast.y_ratio = cast.height / cast.wall->height;
 	cast.y = 0;
 	return (cast);
