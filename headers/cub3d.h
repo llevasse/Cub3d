@@ -6,7 +6,7 @@
 /*   By: tdutel <tdutel@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/18 21:43:29 by llevasse          #+#    #+#             */
-/*   Updated: 2023/10/29 15:12:39 by llevasse         ###   ########.fr       */
+/*   Updated: 2023/11/19 17:33:51 by llevasse         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -29,21 +29,15 @@
 
 # include <stdio.h> //debug.
 
-//# define WINDOW_W	1024*2
-//# define WINDOW_H	512*2
-
 # define WINDOW_W	320*9
 # define WINDOW_H	200*9
 
-//# define MMAP_W	WINDOW_W/3
-//# define MMAP_H	WINDOW_H/3
 # define MMAP_S		WINDOW_W/3
 # if WINDOW_W/3 > WINDOW_H/3
 #	undef MMAP_S
 #	define MMAP_S WINDOW_H/3
 # endif
-//# define MMAP_W_RGB	0xff0000
-//# define MMAP_RGB	0x00ff00
+
 # define MMAP_W_RGB	0x000000
 # define MMAP_RGB	0xffffff
 # define PLAYER_RGB		0x0000ff
@@ -54,6 +48,9 @@
 
 # define PI 3.1415926535
 # define RADIAN PI/180
+
+# define FIELD_R_STEP ((float)(PLAYER_FOV - 1) / WINDOW_W) / 16 
+# define COLUMN_WIDTH (WINDOW_W / PLAYER_FOV) * FIELD_R_STEP
 
 t_map	*parse(int map_fd, t_cub *cub);
 int		get_map(int map_fd, t_map *map, t_cub *cub);
