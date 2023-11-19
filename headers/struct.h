@@ -6,7 +6,7 @@
 /*   By: tdutel <tdutel@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/18 21:52:44 by llevasse          #+#    #+#             */
-/*   Updated: 2023/11/19 18:14:53 by llevasse         ###   ########.fr       */
+/*   Updated: 2023/11/19 20:01:32 by llevasse         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -117,6 +117,7 @@ typedef struct s_cast
 	t_line	line;
 	t_img	*wall;
 	int		w_type;
+	int		side;
 	int		height;
 	int		start;
 	int		stop;
@@ -124,6 +125,7 @@ typedef struct s_cast
 	int		y;
 	float	y_ratio;
 	float	dist;
+	float	wall_percent;
 }				t_cast;
 
 t_garbage	*ft_new_garbage(void *address);
