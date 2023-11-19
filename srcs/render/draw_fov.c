@@ -6,15 +6,12 @@
 /*   By: llevasse <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/22 21:44:52 by llevasse          #+#    #+#             */
-/*   Updated: 2023/11/19 17:38:46 by llevasse         ###   ########.fr       */
+/*   Updated: 2023/11/19 17:40:00 by llevasse         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "cub3d.h"
 
-//float	ca is angle of casted ray
-//second while loop : draw value of one cast as a column on window
-//third while oop : fill radar on minimap
 void	draw_fov(t_cub *cub)
 {
 	t_fov	fov;
@@ -54,7 +51,6 @@ t_fov	get_fov(float *ca)
 {
 	t_fov	fov;
 
-	fov.player_dist = (WINDOW_W / 2) / tan(PLAYER_FOV / 2);
 	fov.beg_angle = no_higher(*ca - ((PLAYER_FOV - 1) / 2), 360, 0);
 	fov.end_angle = no_higher(fov.beg_angle + (PLAYER_FOV - 1), 360, 0);
 	*ca = fov.beg_angle;

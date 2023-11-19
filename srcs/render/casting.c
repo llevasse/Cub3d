@@ -6,7 +6,7 @@
 /*   By: llevasse <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/24 22:25:17 by llevasse          #+#    #+#             */
-/*   Updated: 2023/11/06 11:41:04 by llevasse         ###   ########.fr       */
+/*   Updated: 2023/11/19 19:37:19 by llevasse         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -36,55 +36,56 @@ static t_cast	get_cast_data(t_cub *cub, float ca)
 	if (h.dist < v.dist)
 	{
 		cast.dist = h.dist;
-		cast.wall = get_orient(cub->map, cub->mmap->block_s, h.p_b.x, h.p_b.y);
-		cast.x = get_x(h.p_b.x, h.p_b.y, cub->mmap->block_s);
+		cast.wall = get_orient_horr(cub->map, cub->mmap->block_s, h.p_b.x, &c.w_type);
 		draw_given_line(*cub, h, 0x00ffff);
+		cast.side = 0
 	}
 	else
 	{
 		cast.dist = v.dist;
-		cast.wall = get_orient(cub->map, cub->mmap->block_s, v.p_b.x, v.p_b.y);
-		cast.x = get_x(v.p_b.x, v.p_b.y, cub->mmap->block_s);
+		cast.wall = get_orient_vert(cub->map, cub->mmap->block_s, h.p_b.y, &c.w_type);
 		draw_given_line(*cub, v, 0x0000ff);
+		cast.side = 1;
 	}
 	cast.dist *= get_fisheye(cub, ca);
 	if (cast.dist == 0)
-		cast.dist = 1;
-	cast.height = (cub->mmap->block_s * WINDOW_H) / cast.dist;
-	if (cast.height > WINDOW_H)
-		cast.height = WINDOW_H;
-	cast.high = (WINDOW_H / 2) - cast.height / 2;
-	cast.low = (WINDOW_H / 2) + cast.height / 2;
-	cast.y_ratio = cast.height / cast.wall->height;
-	cast.y = 0;
+		cast.height = WINDOW_H / 2;
+	else
+		cast.height = WINDOW_H / 2 / cast.dist;
+	cast.start = (WINDOW_H / 2) - cast.height;
+	cast.stop = (WINDOW_H / 2) + cast.height;
 	return (cast);
+}
+
+int	get_texture_colour(t_cast c, t_cub *cub, int height, int wall_type){
+	int	y;
+	int	x;
+	
+	y = (int)(height * c.wall->height / c.height) % c.wall->height * c.wall->line_len;
+	if (wall_type == SO || wall_type == WE)
+		x = ((int)((1.0f - cast.wall_percent) * c.wall->width));
+	else
+		x = ((int)(cast.wall_percent * c.wall->width));
+	x *= c.wall->bpp / 8;
+	return (*(int *)(c.wall->addr + y + x);
 }
 
 void	cast(t_cub *cub, int x, float ca)
 {
 	int		rgb;
-	int		tmp_y;
+	int		current;
 	t_cast	c;
 
 	c = get_cast_data(cub, ca);
 	if (!c.wall)
 		return ;
-	if (c.high < 0)
-		c.high = 0;
-	if (c.low > WINDOW_H)
-		c.low = WINDOW_H;
-	while (c.high < c.low)
+	current = c.start;
+	while (current < c.stop)
 	{
-		tmp_y = 0;
-		while (c.high < c.low && tmp_y <= c.y_ratio)
-		{
-			rgb = get_pixel_colour(&cub->img, x, c.high);
-			if (rgb != MMAP_W_RGB && rgb != MMAP_RGB && rgb != PLAYER_RGB)
-				img_pix_put(&cub->img, x, c.high,
-					get_pixel_colour(c.wall, c.x, c.y));
-			c.high++;
-			tmp_y++;
-		}
-		c.y++;
+		rgb = get_pixel_colour(&cub->img, x, c.high);
+		if (rgb != MMAP_W_RGB && rgb != MMAP_RGB && rgb != PLAYER_RGB)
+			img_pix_put(&cub->img, x, c.start,
+				get_texture_colour(c, cub, current - s.start));
+		current++;
 	}
 }

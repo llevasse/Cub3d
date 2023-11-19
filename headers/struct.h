@@ -6,7 +6,7 @@
 /*   By: tdutel <tdutel@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/18 21:52:44 by llevasse          #+#    #+#             */
-/*   Updated: 2023/11/19 17:35:09 by llevasse         ###   ########.fr       */
+/*   Updated: 2023/11/19 18:14:53 by llevasse         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -116,9 +116,10 @@ typedef struct s_cast
 {
 	t_line	line;
 	t_img	*wall;
+	int		w_type;
 	int		height;
-	int		high;
-	int		low;
+	int		start;
+	int		stop;
 	int		x;
 	int		y;
 	float	y_ratio;

@@ -6,7 +6,7 @@
 /*   By: tdutel <tdutel@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/18 21:43:29 by llevasse          #+#    #+#             */
-/*   Updated: 2023/11/19 17:33:51 by llevasse         ###   ########.fr       */
+/*   Updated: 2023/11/19 18:15:56 by llevasse         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -51,6 +51,11 @@
 
 # define FIELD_R_STEP ((float)(PLAYER_FOV - 1) / WINDOW_W) / 16 
 # define COLUMN_WIDTH (WINDOW_W / PLAYER_FOV) * FIELD_R_STEP
+
+# define NO 1
+# define SO 2
+# define WE 3
+# define EA 4
 
 t_map	*parse(int map_fd, t_cub *cub);
 int		get_map(int map_fd, t_map *map, t_cub *cub);
