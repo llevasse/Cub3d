@@ -6,7 +6,7 @@
 /*   By: llevasse <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/24 22:25:17 by llevasse          #+#    #+#             */
-/*   Updated: 2023/11/19 20:06:20 by llevasse         ###   ########.fr       */
+/*   Updated: 2023/11/19 20:18:44 by llevasse         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -38,14 +38,14 @@ static t_cast	get_cast_data(t_cub *cub, float ca)
 		cast.dist = h.dist;
 		cast.wall = get_orient_horr(cub->map, cub->mmap->block_s, h.p_b.x, &cast.w_type);
 		draw_given_line(*cub, h, 0x00ffff);
-		cast.wall_percent = h.p_b.x * h.dist;
+		cast.wall_percent = (h.p_b.x * h.dist);
 	}
 	else
 	{
 		cast.dist = v.dist;
 		cast.wall = get_orient_vert(cub->map, cub->mmap->block_s, h.p_b.y, &cast.w_type);
 		draw_given_line(*cub, v, 0x0000ff);
-		cast.wall_percent = v.p_b.y * v.dist;
+		cast.wall_percent = (v.p_b.y * v.dist);
 	}
 	cast.dist *= get_fisheye(cub, ca);
 	if (cast.dist == 0)
@@ -85,7 +85,7 @@ void	cast(t_cub *cub, int x, float ca)
 	{
 		rgb = get_pixel_colour(&cub->img, x, c.start);
 		if (rgb != MMAP_W_RGB && rgb != MMAP_RGB && rgb != PLAYER_RGB)
-			img_pix_put(&cub->img, x, c.start,
+			img_pix_put(&cub->img, x, current,
 				get_texture_colour(c, current - c.start, c.w_type));
 		current++;
 	}
