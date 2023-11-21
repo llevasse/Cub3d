@@ -6,7 +6,7 @@
 /*   By: tdutel <tdutel@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/24 22:25:17 by llevasse          #+#    #+#             */
-/*   Updated: 2023/11/16 12:31:36 by tdutel           ###   ########.fr       */
+/*   Updated: 2023/11/21 15:17:20 by tdutel           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,11 +18,12 @@ float	get_fisheye(t_cub *cub, float ca)
 	float	fisheye;
 
 	fisheye = cub->player.pa - ca;
-/*	if (fisheye < 0)
+	if (fisheye < 0)
 		fisheye += 2 * PI;
 	if (fisheye > 2 * PI)
-		fisheye -= 2 * PI;*/
+		fisheye -= 2 * PI;
 	return (cos(fisheye * RADIAN));
+
 }
 
 static t_cast	get_cast_data(t_cub *cub, float ca)
@@ -33,6 +34,9 @@ static t_cast	get_cast_data(t_cub *cub, float ca)
 
 	h = get_horr(*cub, ca);
 	v = get_vert(*cub, ca);
+	/*
+		Le v est mal calculé et chaque rayon bleu foncé correspond aux pics sur les murs.
+	*/
 	if (h.dist < v.dist)
 	{
 		cast.dist = h.dist;
@@ -55,7 +59,10 @@ static t_cast	get_cast_data(t_cub *cub, float ca)
 		cast.height = WINDOW_H;
 	cast.high = (WINDOW_H2) - cast.height / 2;
 	cast.low = (WINDOW_H2) + cast.height / 2;
-	cast.y_ratio = cast.height / cast.wall->height;
+	if (cast.wall)
+		cast.y_ratio = cast.height / cast.wall->height;
+	else
+		cast.y_ratio = cast.height;
 	cast.y = 0;
 	return (cast);
 }

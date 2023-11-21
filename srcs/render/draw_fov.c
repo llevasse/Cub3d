@@ -6,7 +6,7 @@
 /*   By: tdutel <tdutel@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/22 21:44:52 by llevasse          #+#    #+#             */
-/*   Updated: 2023/11/16 12:47:51 by tdutel           ###   ########.fr       */
+/*   Updated: 2023/11/21 15:01:13 by tdutel           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -65,11 +65,7 @@ t_fov	get_fov(float *ca)
 	*ca = fov.beg_angle;
 	fov.field_step = ((float)(PLAYER_FOV) / WINDOW_W); //(float)(PLAYER_FOV - 1)
 	fov.column_width = (WINDOW_W / PLAYER_FOV) * fov.field_step;
+	// fov.column_width = 1 - fov.column_width;
 	return (fov);
 }
 
-
-
-/*
-peut etre que les bordures differente proviennent selon l'ordre des confitions dans get_otientation
-*/

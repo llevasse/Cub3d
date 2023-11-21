@@ -6,7 +6,7 @@
 /*   By: tdutel <tdutel@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/20 22:45:53 by llevasse          #+#    #+#             */
-/*   Updated: 2023/10/19 15:45:57 by tdutel           ###   ########.fr       */
+/*   Updated: 2023/11/21 15:32:59 by tdutel           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,7 +26,7 @@ int	get_pixel_colour(t_img *img, int x, int y)
 	if (!img)
 		return ((((r - 1) * 256 * 256) + ((g - 1) * 256) + (b - 1)));
 	i = img->bpp - 8;
-	pixel = img->addr + (y * img->line_len + x * (img->bpp / 8));
+	pixel = img->addr + (y * img->line_len + x * (img->bpp / 8));		//bpp ?
 	if (img->endian != 0)
 	{
 		r *= ((*(pixel++)) & 0xFF) + 1;
