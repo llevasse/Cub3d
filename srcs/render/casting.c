@@ -6,7 +6,7 @@
 /*   By: llevasse <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/24 22:25:17 by llevasse          #+#    #+#             */
-/*   Updated: 2023/11/23 14:04:52 by llevasse         ###   ########.fr       */
+/*   Updated: 2023/11/23 14:12:51 by llevasse         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -42,6 +42,10 @@ t_cast	get_cast_data(t_cub *cub, float ca)
 	printf("%f : dist (%f) height (%d)\n", ca, cast.dist, cast.height);
 	cast.start = (WINDOW_H / 2) - cast.height;
 	cast.stop = (WINDOW_H / 2) + cast.height;
+	if (cast.start < 0)
+		cast.start = 0;
+	if (cast.stop > WINDOW_H)
+		cast.stop = WINDOW_H;
 	cast.wall_percent -= floor(cast.wall_percent);
 	return (cast);
 }
