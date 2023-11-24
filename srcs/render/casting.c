@@ -6,7 +6,7 @@
 /*   By: llevasse <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/24 22:25:17 by llevasse          #+#    #+#             */
-/*   Updated: 2023/11/23 14:12:51 by llevasse         ###   ########.fr       */
+/*   Updated: 2023/11/24 22:59:29 by llevasse         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -36,12 +36,12 @@ t_cast	get_cast_data(t_cub *cub, float ca)
 	}
 	cast.dist *= cos((cub->player.pa - ca) * RADIAN);		//apply fisheye
 	if (cast.dist == 0)
-		cast.height = WINDOW_H / 2;
+		cast.height = WINDOW_H;
 	else
-		cast.height = ((cub->mmap->block_s * WINDOW_H) / cast.dist) / 2;
+		cast.height = ((cub->mmap->block_s * WINDOW_H) / cast.dist);
 	printf("%f : dist (%f) height (%d)\n", ca, cast.dist, cast.height);
-	cast.start = (WINDOW_H / 2) - cast.height;
-	cast.stop = (WINDOW_H / 2) + cast.height;
+	cast.start = (WINDOW_H / 2) - (cast.height/2);
+	cast.stop = (WINDOW_H / 2) + (cast.height/2);
 	if (cast.start < 0)
 		cast.start = 0;
 	if (cast.stop > WINDOW_H)
