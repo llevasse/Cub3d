@@ -6,7 +6,7 @@
 /*   By: llevasse <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/24 22:25:17 by llevasse          #+#    #+#             */
-/*   Updated: 2023/11/24 23:12:34 by llevasse         ###   ########.fr       */
+/*   Updated: 2023/11/24 23:15:02 by llevasse         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,20 +22,18 @@ t_cast	get_cast_data(t_cub *cub, float ca)
 	v = get_vert(*cub, ca);
 	if (h.dist < v.dist)
 	{
-		cast.dist = h.dist;
+		cast.dist = h.dist * cos((cub->player.pa - ca) * RADIAN);
 		cast.wall = get_orient_horr(cub->map, cub->mmap->block_s, h.p_b.x, &cast.w_type);
 		draw_given_line(*cub, h, 0x00ffff);
 		cast.wall_percent = ((int)h.p_b.x % cub->mmap->block_s);
 	}
 	else
 	{
-		cast.dist = v.dist;
+		cast.dist = v.dist * cos((cub->player.pa - ca) * RADIAN);
 		cast.wall = get_orient_vert(cub->map, cub->mmap->block_s, h.p_b.y, &cast.w_type);
 		draw_given_line(*cub, v, 0x0000ff);
 		cast.wall_percent = ((int)v.p_b.y % cub->mmap->block_s);
 	}
-	printf("%f\n", cast.wall_percent);
-	cast.dist *= cos((cub->player.pa - ca) * RADIAN);		//apply fisheye
 	if (cast.dist == 0)
 		cast.height = WINDOW_H;
 	else
