@@ -6,7 +6,7 @@
 /*   By: llevasse <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/24 22:25:17 by llevasse          #+#    #+#             */
-/*   Updated: 2023/11/24 22:59:29 by llevasse         ###   ########.fr       */
+/*   Updated: 2023/11/24 23:12:34 by llevasse         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,41 +25,36 @@ t_cast	get_cast_data(t_cub *cub, float ca)
 		cast.dist = h.dist;
 		cast.wall = get_orient_horr(cub->map, cub->mmap->block_s, h.p_b.x, &cast.w_type);
 		draw_given_line(*cub, h, 0x00ffff);
-		cast.wall_percent = (h.p_b.x * h.dist);
+		cast.wall_percent = ((int)h.p_b.x % cub->mmap->block_s);
 	}
 	else
 	{
 		cast.dist = v.dist;
 		cast.wall = get_orient_vert(cub->map, cub->mmap->block_s, h.p_b.y, &cast.w_type);
 		draw_given_line(*cub, v, 0x0000ff);
-		cast.wall_percent = (v.p_b.y * v.dist);
+		cast.wall_percent = ((int)v.p_b.y % cub->mmap->block_s);
 	}
+	printf("%f\n", cast.wall_percent);
 	cast.dist *= cos((cub->player.pa - ca) * RADIAN);		//apply fisheye
 	if (cast.dist == 0)
 		cast.height = WINDOW_H;
 	else
 		cast.height = ((cub->mmap->block_s * WINDOW_H) / cast.dist);
-	printf("%f : dist (%f) height (%d)\n", ca, cast.dist, cast.height);
 	cast.start = (WINDOW_H / 2) - (cast.height/2);
 	cast.stop = (WINDOW_H / 2) + (cast.height/2);
 	if (cast.start < 0)
 		cast.start = 0;
 	if (cast.stop > WINDOW_H)
 		cast.stop = WINDOW_H;
-	cast.wall_percent -= floor(cast.wall_percent);
 	return (cast);
 }
 
-int	get_texture_colour(t_cast c, int height, int wall_type){
+int	get_texture_colour(t_cast c, int height){
 	int	y;
 	int	x;
 	
 	y = (int)(height * c.wall->height / c.height) % c.wall->height * c.wall->line_len;
-	if (wall_type == SO || wall_type == WE)
-		x = ((int)((1.0f - c.wall_percent) * c.wall->width));
-	else
-		x = ((int)(c.wall_percent * c.wall->width));
-	x *= c.wall->bpp / 8;
+	x = c.wall_percent * (c.wall->bpp / 8);
 	return (*(int *)(c.wall->addr + y + x));
 }
 
@@ -78,7 +73,7 @@ void	cast(t_cub *cub, int x, float ca)
 		rgb = get_pixel_colour(&cub->img, x, c.start);
 		if (rgb != MMAP_W_RGB && rgb != MMAP_RGB && rgb != PLAYER_RGB)
 			img_pix_put(&cub->img, x, current,
-				get_texture_colour(c, current - c.start, c.w_type));
+				get_texture_colour(c, current - c.start));
 		current++;
 	}
 }
