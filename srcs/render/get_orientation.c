@@ -6,7 +6,7 @@
 /*   By: llevasse <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/17 13:34:04 by llevasse          #+#    #+#             */
-/*   Updated: 2023/11/19 18:21:31 by llevasse         ###   ########.fr       */
+/*   Updated: 2023/11/24 23:42:31 by llevasse         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,21 +15,21 @@
 t_img *get_orient_horr(t_map *map, int block_s, int x, int *side)
 {
 	if (x % block_s == 0){
-		*side = WE;
-		return (&map->west_img);
-	}
-	*side = EA;
-	return (&map->east_img);
-}
-
-t_img *get_orient_vert(t_map *map, int block_s, int y, int *side)
-{
-	if (y % block_s == 0){
 		*side = NO;
 		return (&map->north_img);
 	}
 	*side = SO;
 	return (&map->south_img);
+}
+
+t_img *get_orient_vert(t_map *map, int block_s, int y, int *side)
+{
+	if (y % block_s == 0){
+		*side = WE;
+		return (&map->west_img);
+	}
+	*side = EA;
+	return (&map->east_img);
 }
 
 int	get_x(int x, int y, int block_s){
