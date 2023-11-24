@@ -6,7 +6,7 @@
 /*   By: llevasse <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/24 22:25:17 by llevasse          #+#    #+#             */
-/*   Updated: 2023/11/24 23:15:02 by llevasse         ###   ########.fr       */
+/*   Updated: 2023/11/24 23:26:25 by llevasse         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -38,8 +38,8 @@ t_cast	get_cast_data(t_cub *cub, float ca)
 		cast.height = WINDOW_H;
 	else
 		cast.height = ((cub->mmap->block_s * WINDOW_H) / cast.dist);
-	cast.start = (WINDOW_H / 2) - (cast.height/2);
-	cast.stop = (WINDOW_H / 2) + (cast.height/2);
+	cast.start = (WINDOW_H - cast.height) / 2;
+	cast.stop = (WINDOW_H + cast.height) / 2;
 	if (cast.start < 0)
 		cast.start = 0;
 	if (cast.stop > WINDOW_H)
@@ -68,7 +68,7 @@ void	cast(t_cub *cub, int x, float ca)
 	current = c.start;
 	while (current < c.stop)
 	{
-		rgb = get_pixel_colour(&cub->img, x, c.start);
+		rgb = get_pixel_colour(&cub->img, x, current);
 		if (rgb != MMAP_W_RGB && rgb != MMAP_RGB && rgb != PLAYER_RGB)
 			img_pix_put(&cub->img, x, current,
 				get_texture_colour(c, current - c.start));
