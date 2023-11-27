@@ -3,29 +3,16 @@
 /*                                                        :::      ::::::::   */
 /*   casting.c                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: llevasse <marvin@42.fr>                    +#+  +:+       +#+        */
+/*   By: tdutel <tdutel@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/24 22:25:17 by llevasse          #+#    #+#             */
-/*   Updated: 2023/11/06 11:41:04 by llevasse         ###   ########.fr       */
+/*   Updated: 2023/11/27 13:36:18 by tdutel           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "cub3d.h"
 
-//fisheye : angle of ray from player angle
-float	get_fisheye(t_cub *cub, float ca)
-{
-	float	fisheye;
-
-	fisheye = cub->player.pa - ca;
-/*	if (fisheye < 0)
-		fisheye += 2 * PI;
-	if (fisheye > 2 * PI)
-		fisheye -= 2 * PI;*/
-	return (cos(fisheye * RADIAN));
-}
-
-static t_cast	get_cast_data(t_cub *cub, float ca)
+t_cast	get_cast_data(t_cub *cub, float ca)
 {
 	t_cast	cast;
 	t_line	h;
@@ -35,56 +22,55 @@ static t_cast	get_cast_data(t_cub *cub, float ca)
 	v = get_vert(*cub, ca);
 	if (h.dist < v.dist)
 	{
-		cast.dist = h.dist;
-		cast.wall = get_orient(cub->map, cub->mmap->block_s, h.p_b.x, h.p_b.y);
-		cast.x = get_x(h.p_b.x, h.p_b.y, cub->mmap->block_s);
+		cast.dist = h.dist * cos((cub->player.pa - ca) * RADIAN);
+		cast.wall = get_orient_horr(cub->map, cub->mmap->block_s, v, &cast);
 		draw_given_line(*cub, h, 0x00ffff);
+		cast.wall_percent = ((int)h.p_b.x % cast.wall->width);
 	}
 	else
 	{
-		cast.dist = v.dist;
-		cast.wall = get_orient(cub->map, cub->mmap->block_s, v.p_b.x, v.p_b.y);
-		cast.x = get_x(v.p_b.x, v.p_b.y, cub->mmap->block_s);
+		cast.dist = v.dist * cos((cub->player.pa - ca) * RADIAN);
+		cast.wall = get_orient_vert(cub->map, cub->mmap->block_s, v, &cast);
 		draw_given_line(*cub, v, 0x0000ff);
+		cast.wall_percent = ((int)v.p_b.y % cast.wall->width);
 	}
-	cast.dist *= get_fisheye(cub, ca);
 	if (cast.dist == 0)
-		cast.dist = 1;
-	cast.height = (cub->mmap->block_s * WINDOW_H) / cast.dist;
-	if (cast.height > WINDOW_H)
 		cast.height = WINDOW_H;
-	cast.high = (WINDOW_H / 2) - cast.height / 2;
-	cast.low = (WINDOW_H / 2) + cast.height / 2;
-	cast.y_ratio = cast.height / cast.wall->height;
-	cast.y = 0;
+	else
+		cast.height = ((cub->mmap->block_s * WINDOW_H) / cast.dist);
+	cast.start = (WINDOW_H - cast.height) / 2;
+	cast.stop = (WINDOW_H + cast.height) / 2;
 	return (cast);
+}
+
+int	get_texture_colour(t_cast c, int height){
+	int	y;
+	int	x;
+
+	// printf("height : %d\t wall->height : %d\t c.height : %d\t wall->line_len : %d\n\n", height, c.wall->height, c.height, c.wall->line_len);
+	y = (int)(height * c.wall->height / c.height) % c.wall->height * c.wall->line_len;
+	x = c.wall_percent * (c.wall->bpp / 8);
+	return (*(int *)(c.wall->addr + y + x));
 }
 
 void	cast(t_cub *cub, int x, float ca)
 {
 	int		rgb;
-	int		tmp_y;
+	int		current;
 	t_cast	c;
 
 	c = get_cast_data(cub, ca);
 	if (!c.wall)
 		return ;
-	if (c.high < 0)
-		c.high = 0;
-	if (c.low > WINDOW_H)
-		c.low = WINDOW_H;
-	while (c.high < c.low)
+	current = 0;
+	if (c.start < 0)
+		current += -c.start;
+	while (c.start + current < c.stop && c.start + current < WINDOW_H)
 	{
-		tmp_y = 0;
-		while (c.high < c.low && tmp_y <= c.y_ratio)
-		{
-			rgb = get_pixel_colour(&cub->img, x, c.high);
-			if (rgb != MMAP_W_RGB && rgb != MMAP_RGB && rgb != PLAYER_RGB)
-				img_pix_put(&cub->img, x, c.high,
-					get_pixel_colour(c.wall, c.x, c.y));
-			c.high++;
-			tmp_y++;
-		}
-		c.y++;
+		rgb = get_pixel_colour(&cub->img, x, c.start + current);
+		if (rgb != MMAP_W_RGB && rgb != MMAP_RGB && rgb != PLAYER_RGB)
+			img_pix_put(&cub->img, x, c.start + current,
+				get_texture_colour(c, current));
+		current++;
 	}
 }

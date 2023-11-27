@@ -6,7 +6,7 @@
 /*   By: tdutel <tdutel@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/18 21:52:44 by llevasse          #+#    #+#             */
-/*   Updated: 2023/11/06 11:13:06 by llevasse         ###   ########.fr       */
+/*   Updated: 2023/11/19 20:01:32 by llevasse         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -104,7 +104,6 @@ typedef struct s_fov
 	t_point				p2;
 	t_line				fl;				//false_line
 	float				field_dist;		//distance between leftest point and rightest point
-	float				field_step;		//field_dist / WINDOW_WIDTH
 	float				column_width;
 	float				beg_angle;
 	float				cur_angle;
@@ -117,13 +116,16 @@ typedef struct s_cast
 {
 	t_line	line;
 	t_img	*wall;
+	int		w_type;
+	int		side;
 	int		height;
-	int		high;
-	int		low;
+	int		start;
+	int		stop;
 	int		x;
 	int		y;
 	float	y_ratio;
 	float	dist;
+	float	wall_percent;
 }				t_cast;
 
 t_garbage	*ft_new_garbage(void *address);
