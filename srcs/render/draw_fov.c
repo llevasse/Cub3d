@@ -6,15 +6,12 @@
 /*   By: tdutel <tdutel@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/22 21:44:52 by llevasse          #+#    #+#             */
-/*   Updated: 2023/11/21 15:01:13 by tdutel           ###   ########.fr       */
+/*   Updated: 2023/11/27 13:56:08 by tdutel           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "cub3d.h"
 
-//float	ca is angle of casted ray
-//second while loop : draw value of one cast as a column on window
-//third while oop : fill radar on minimap
 void	draw_fov(t_cub *cub)
 {
 	t_fov	fov;
@@ -30,18 +27,13 @@ void	draw_fov(t_cub *cub)
 	while (gained_angle < PLAYER_FOV)	// remove PLAYER_FOV - 1
 	{
 		get_player_new_pos(cub, ca, MMAP_S * 5, &fov.p);
-		temp_x = x + fov.column_width;
+		temp_x = x + COLUMN_WIDTH;
 		while (x < temp_x)
 			cast(cub, x++, ca);
-		gained_angle += fov.field_step;
-		ca = no_higher(ca + fov.field_step, 360, 0);
+		gained_angle += FIELD_R_STEP;
+		ca = no_higher(ca + FIELD_R_STEP, 360, 0);
 		get_player_new_pos(cub, ca, MMAP_S * 5, &fov.p2);
 		fov.fl = get_line(fov.p, fov.p2);
-/*		while (gained_angle < PLAYER_FOV - 1 && fov.fl.steps-- > 0 && draw_line(*cub, fov.p, PLAYER_RGB, gained_angle))
-		{
-			fov.p.x += fov.fl.x_step;
-			fov.p.y += fov.fl.y_step;
-		}*/
 	}
 }
 
@@ -59,13 +51,9 @@ t_fov	get_fov(float *ca)
 {
 	t_fov	fov;
 
-	fov.player_dist = (WINDOW_W / 2) / tan(PLAYER_FOV / 2);
 	fov.beg_angle = no_higher(*ca - ((PLAYER_FOV - 1) / 2), 360, 0);
 	fov.end_angle = no_higher(fov.beg_angle + (PLAYER_FOV - 1), 360, 0);
 	*ca = fov.beg_angle;
-	fov.field_step = ((float)(PLAYER_FOV) / WINDOW_W); //(float)(PLAYER_FOV - 1)
-	fov.column_width = (WINDOW_W / PLAYER_FOV) * fov.field_step;
-	// fov.column_width = 1 - fov.column_width;
 	return (fov);
 }
 
