@@ -6,17 +6,17 @@
 /*   By: tdutel <tdutel@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/17 13:34:04 by llevasse          #+#    #+#             */
-/*   Updated: 2023/11/28 14:58:44 by tdutel           ###   ########.fr       */
+/*   Updated: 2023/11/28 15:15:00 by tdutel           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "cub3d.h"
 
-t_img	*get_orient_horr(t_map *map, int block_s, t_line v, int *side)
+t_img	*get_orient_horr(t_map *map, int block_s, float dy, int *side)
 {
 	// printf("x = %d\t block s = %d\n", v.p_b.x, block_s);
 	(void)block_s;
-	if (v.dy < 0){
+	if (dy > 0){
 		*side  = NO;
 		return (&map->north_img);
 	}
@@ -24,11 +24,11 @@ t_img	*get_orient_horr(t_map *map, int block_s, t_line v, int *side)
 	return (&map->south_img);
 }
 
-t_img	*get_orient_vert(t_map *map, int block_s, t_line v, int *side)
+t_img	*get_orient_vert(t_map *map, int block_s, float dx, int *side)
 {
 	// printf("y = %d\t block s = %d\n", v.p_b.y, block_s);
 	(void)block_s;
-	if (v.dx > 0){
+	if (dx > 0){
 		*side  = EA;
 		return (&map->east_img);
 	}

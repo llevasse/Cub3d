@@ -6,7 +6,7 @@
 /*   By: tdutel <tdutel@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/22 22:05:00 by llevasse          #+#    #+#             */
-/*   Updated: 2023/11/28 14:57:38 by tdutel           ###   ########.fr       */
+/*   Updated: 2023/11/28 15:02:47 by tdutel           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -50,8 +50,8 @@ t_fov	get_fov(float *ca);
 void	cast(t_cub *cub, int x, float ca);
 
 //srcs/render/get_orientation.c
-t_img	*get_orient_horr(t_map *map, int block_s, t_line v, int *side);
-t_img	*get_orient_vert(t_map *map, int block_s, t_line v, int *side);
+t_img	*get_orient_horr(t_map *map, int block_s, float dy, int *side);
+t_img	*get_orient_vert(t_map *map, int block_s, float dx, int *side);
 int		get_x(int x, int y, int block_s);
 
 #endif
