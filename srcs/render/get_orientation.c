@@ -6,33 +6,33 @@
 /*   By: tdutel <tdutel@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/17 13:34:04 by llevasse          #+#    #+#             */
-/*   Updated: 2023/11/28 14:21:58 by tdutel           ###   ########.fr       */
+/*   Updated: 2023/11/28 14:58:44 by tdutel           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "cub3d.h"
 
-t_img	*get_orient_horr(t_map *map, int block_s, t_line v, t_cast *cast)
+t_img	*get_orient_horr(t_map *map, int block_s, t_line v, int *side)
 {
 	// printf("x = %d\t block s = %d\n", v.p_b.x, block_s);
 	(void)block_s;
 	if (v.dy < 0){
-		cast->w_type = NO;
+		*side  = NO;
 		return (&map->north_img);
 	}
-	cast->w_type = SO;
+	*side  = SO;
 	return (&map->south_img);
 }
 
-t_img	*get_orient_vert(t_map *map, int block_s, t_line v, t_cast *cast)
+t_img	*get_orient_vert(t_map *map, int block_s, t_line v, int *side)
 {
 	// printf("y = %d\t block s = %d\n", v.p_b.y, block_s);
 	(void)block_s;
 	if (v.dx > 0){
-		cast->w_type = EA;
+		*side  = EA;
 		return (&map->east_img);
 	}
-	cast->w_type = WE;
+	*side  = WE;
 	return (&map->west_img);
 }
 
