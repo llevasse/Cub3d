@@ -6,7 +6,7 @@
 /*   By: llevasse <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/24 22:25:17 by llevasse          #+#    #+#             */
-/*   Updated: 2023/11/29 19:03:54 by llevasse         ###   ########.fr       */
+/*   Updated: 2023/11/29 19:24:24 by llevasse         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -34,7 +34,7 @@ t_cast	get_cast_data(t_cub *cub, float ca)
 		draw_given_line(*cub, v, 0x0000ff);
 		cast.wall_percent = ((int)v.p_b.y % cast.wall->width);
 	}
-	if (cast.dist == 0)
+	if (cast.dist < 1) //if player is almost inside the wall
 		cast.height = WINDOW_H;
 	else
 		cast.height = ((cub->mmap->block_s * WINDOW_H) / cast.dist);
