@@ -6,7 +6,7 @@
 /*   By: llevasse <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/18 23:42:30 by llevasse          #+#    #+#             */
-/*   Updated: 2023/09/19 22:19:04 by llevasse         ###   ########.fr       */
+/*   Updated: 2023/11/29 19:49:44 by llevasse         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -27,5 +27,6 @@
 # define OPEN_MAP "Error\nThe map is not closed.\n"
 # define TMP "Error\nToo many player in the map file.\n"
 # define NO_PLAYER "Error\nThere is no player in the map file.\n"
+# define ISLAND_MAP "Error\nThere is an unreachable section in the map file.\n"
 
 #endif

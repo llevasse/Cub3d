@@ -6,7 +6,7 @@
 /*   By: llevasse <llevasse@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/19 12:01:04 by llevasse          #+#    #+#             */
-/*   Updated: 2023/09/30 23:55:45 by llevasse         ###   ########.fr       */
+/*   Updated: 2023/11/29 19:44:28 by llevasse         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -45,7 +45,7 @@ int	check_player_in_string(t_point *p, int y, int x, char *str)
 {
 	if (ft_is_in_str("NSEW", str[x]))
 	{
-		p->x = x - 1;
+		p->x = x;
 		p->y = y;
 		return (1);
 	}

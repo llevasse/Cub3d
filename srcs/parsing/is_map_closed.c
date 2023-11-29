@@ -6,7 +6,7 @@
 /*   By: llevasse <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/19 21:56:14 by llevasse          #+#    #+#             */
-/*   Updated: 2023/10/01 00:10:09 by llevasse         ###   ########.fr       */
+/*   Updated: 2023/11/29 19:48:49 by llevasse         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,6 +25,10 @@ int	check_closed(t_cub *cub, int x, int y)
 	while (cub->mmap->map[y])
 	{
 		x = 0;
+		if (ft_is_in_str(cub->mmap->map[y], '0')){
+			ft_putstr_fd(ISLAND_MAP, 2);
+			return (0);
+		}
 		while (x < (int)ft_strlen(cub->mmap->map[y]))
 		{
 			if (cub->mmap->map[y][x] == 'A')
