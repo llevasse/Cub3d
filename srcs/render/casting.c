@@ -6,7 +6,7 @@
 /*   By: llevasse <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/24 22:25:17 by llevasse          #+#    #+#             */
-/*   Updated: 2023/11/25 00:00:33 by llevasse         ###   ########.fr       */
+/*   Updated: 2023/11/29 19:03:54 by llevasse         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,14 +23,14 @@ t_cast	get_cast_data(t_cub *cub, float ca)
 	if (h.dist < v.dist)
 	{
 		cast.dist = h.dist * cos((cub->player.pa - ca) * RADIAN);
-		cast.wall = get_orient_horr(cub->map, cub->mmap->block_s, h.p_b.x, &cast.w_type);
+		cast.wall = get_orient_horr(cub->map, ca, &cast.w_type);
 		draw_given_line(*cub, h, 0x00ffff);
 		cast.wall_percent = ((int)h.p_b.x % cast.wall->width);
 	}
 	else
 	{
 		cast.dist = v.dist * cos((cub->player.pa - ca) * RADIAN);
-		cast.wall = get_orient_vert(cub->map, cub->mmap->block_s, v.p_b.y, &cast.w_type);
+		cast.wall = get_orient_vert(cub->map, ca, &cast.w_type);
 		draw_given_line(*cub, v, 0x0000ff);
 		cast.wall_percent = ((int)v.p_b.y % cast.wall->width);
 	}
