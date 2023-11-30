@@ -6,7 +6,7 @@
 /*   By: tdutel <tdutel@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/17 13:34:04 by llevasse          #+#    #+#             */
-/*   Updated: 2023/11/30 11:08:23 by tdutel           ###   ########.fr       */
+/*   Updated: 2023/11/30 11:30:47 by tdutel           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -28,6 +28,6 @@ t_img *get_orient_vert(t_map *map, float ca, int *side)
 		*side = WE;
 		return (&map->west_img);
 	}
-	*side  = WE;
-	return (&map->west_img);
+	*side  = EA;
+	return (&map->east_img);
 }
