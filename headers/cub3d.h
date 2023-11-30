@@ -6,28 +6,12 @@
 /*   By: tdutel <tdutel@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/18 21:43:29 by llevasse          #+#    #+#             */
-/*   Updated: 2023/11/19 18:15:56 by llevasse         ###   ########.fr       */
+/*   Updated: 2023/11/30 14:43:33 by llevasse         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #ifndef CUB3D_H
 # define CUB3D_H
-
-# include "../libft/libft.h"
-# include "struct.h"
-# include "err.h"
-# include "render.h"
-# include "init.h"
-# include "input.h"
-# include "../minilibx/mlx.h"
-
-# include <X11/X.h>
-# include <X11/keysym.h>
-# include <fcntl.h>
-# include <math.h>
-# include <errno.h>
-
-# include <stdio.h> //debug.
 
 # define WINDOW_W	320*9
 # define WINDOW_H	200*9
@@ -56,6 +40,22 @@
 # define SO 2
 # define WE 3
 # define EA 4
+
+# include "../libft/libft.h"
+# include "struct.h"
+# include "err.h"
+# include "render.h"
+# include "init.h"
+# include "input.h"
+# include "../minilibx/mlx.h"
+
+# include <X11/X.h>
+# include <X11/keysym.h>
+# include <fcntl.h>
+# include <math.h>
+# include <errno.h>
+
+# include <stdio.h> //debug.
 
 t_map	*parse(int map_fd, t_cub *cub);
 int		get_map(int map_fd, t_map *map, t_cub *cub);

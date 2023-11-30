@@ -6,7 +6,7 @@
 /*   By: tdutel <tdutel@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/18 21:52:44 by llevasse          #+#    #+#             */
-/*   Updated: 2023/11/19 20:01:32 by llevasse         ###   ########.fr       */
+/*   Updated: 2023/11/30 14:42:54 by llevasse         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -95,6 +95,25 @@ typedef struct s_cub
 	t_player			player;
 }				t_cub;
 
+typedef struct s_cast
+{
+	t_line	line;
+	t_line	h;
+	t_line	v;
+	t_img	*wall;
+	int		w_type;
+	int		side;
+	int		height;
+	int		start;
+	int		stop;
+	int		x;
+	int		y;
+	int		type;		//1 for horrizontal and 0 for vertical
+	float	y_ratio;
+	float	dist;
+	float	wall_percent;
+}				t_cast;
+
 typedef struct s_fov
 {
 	t_point				player;
@@ -110,23 +129,8 @@ typedef struct s_fov
 	float				end_angle;
 	float				ray_step;
 	float				player_dist;
+	t_cast				rays[WINDOW_W];
 }				t_fov;
-
-typedef struct s_cast
-{
-	t_line	line;
-	t_img	*wall;
-	int		w_type;
-	int		side;
-	int		height;
-	int		start;
-	int		stop;
-	int		x;
-	int		y;
-	float	y_ratio;
-	float	dist;
-	float	wall_percent;
-}				t_cast;
 
 t_garbage	*ft_new_garbage(void *address);
 void		ft_add_garbage(t_garbage **lst, void *addr);
