@@ -6,7 +6,7 @@
 /*   By: tdutel <tdutel@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/20 00:40:14 by llevasse          #+#    #+#             */
-/*   Updated: 2023/11/30 11:08:35 by tdutel           ###   ########.fr       */
+/*   Updated: 2023/11/30 11:36:27 by tdutel           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,7 +25,7 @@ void	img_pix_put(t_img *img, int x, int y, int colour)
 {
 	char	*pixel;
 	int		i;
-	
+
 	if (x < 0 || x > WINDOW_W || y < 0 || y > WINDOW_H)
 		return ;
 	i = img->bpp - 8;
