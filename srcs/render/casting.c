@@ -6,7 +6,7 @@
 /*   By: tdutel <tdutel@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/24 22:25:17 by llevasse          #+#    #+#             */
-/*   Updated: 2023/11/28 15:08:15 by tdutel           ###   ########.fr       */
+/*   Updated: 2023/11/30 11:08:08 by tdutel           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,18 +26,18 @@ t_cast	get_cast_data(t_cub *cub, float ca)
 	if (h.dist < v.dist)
 	{
 		cast.dist = h.dist * cos((cub->player.pa - ca) * RADIAN);
-		cast.wall = get_orient_horr(cub->map, cub->mmap->block_s, v.dy, &cast.w_type);
+		cast.wall = get_orient_horr(cub->map, ca, &cast.w_type);
 		draw_given_line(*cub, h, 0x00ffff);
 		cast.wall_percent = ((int)h.p_b.x % cast.wall->width);
 	}
 	else
 	{
 		cast.dist = v.dist * cos((cub->player.pa - ca) * RADIAN);
-		cast.wall = get_orient_vert(cub->map, cub->mmap->block_s, v.dx, &cast.w_type);
+		cast.wall = get_orient_vert(cub->map, ca, &cast.w_type);
 		draw_given_line(*cub, v, 0x0000ff);
 		cast.wall_percent = ((int)v.p_b.y % cast.wall->width);
 	}
-	if (cast.dist == 0)
+	if (cast.dist < 1) //if player is almost inside the wall
 		cast.height = WINDOW_H;
 	else
 		cast.height = ((cub->mmap->block_s * WINDOW_H) / cast.dist);
