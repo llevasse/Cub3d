@@ -6,7 +6,7 @@
 /*   By: tdutel <tdutel@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/18 21:52:44 by llevasse          #+#    #+#             */
-/*   Updated: 2023/11/30 11:39:16 by tdutel           ###   ########.fr       */
+/*   Updated: 2023/12/01 12:22:56 by tdutel           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -93,6 +93,7 @@ typedef struct s_cub
 	struct s_minimap	*mmap;
 	struct s_garbage	*garbage;
 	t_player			player;
+	int				hv;
 }				t_cub;
 
 typedef struct s_fov

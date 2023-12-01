@@ -6,7 +6,7 @@
 /*   By: tdutel <tdutel@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/24 22:25:17 by llevasse          #+#    #+#             */
-/*   Updated: 2023/11/30 14:43:16 by tdutel           ###   ########.fr       */
+/*   Updated: 2023/12/01 12:46:58 by tdutel           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -27,38 +27,46 @@ t_cast	get_cast_data(t_cub *cub, float ca)
 	*/
 	if (h.dist < v.dist)
 	{
-		if (simulcast(*cub, no_higher(ca - FIELD_R_STEP, 360, 0)) == 'h'
-			&& simulcast(*cub, no_higher(ca + FIELD_R_STEP, 360, 0)) == 'h')
-		{
-			cast.dist = h.dist * cos((cub->player.pa - ca) * RADIAN);
-			cast.wall = get_orient_horr(cub->map, ca, &cast.w_type);
-			draw_given_line(*cub, h, 0x00ffff);	//cyan ray
-			cast.wall_percent = ((int)h.p_b.x % cast.wall->width);
-		}
-		else
+		if ((simulcast(*cub, no_higher(ca - FIELD_R_STEP, 360, 0)) == 'v' && cub->hv == 0
+			&& simulcast(*cub, no_higher(ca + FIELD_R_STEP, 360, 0)) == 'v')
+		|| (simulcast(*cub, no_higher(ca - FIELD_R_STEP, 360, 0)) == 'h' && cub->hv == 1
+			&& simulcast(*cub, no_higher(ca + FIELD_R_STEP, 360, 0)) == 'v'))
 		{
 			cast.dist = v.dist * cos((cub->player.pa - ca) * RADIAN);
 			cast.wall = get_orient_vert(cub->map, ca, &cast.w_type);
-			draw_given_line(*cub, v, 0x0000ff);	//blue ray
+			draw_given_line(*cub, v, 0x0000ff);	//blue ray v
 			cast.wall_percent = ((int)v.p_b.y % cast.wall->width);
+			cub->hv = 1;
+		}
+		else
+		{
+			cast.dist = h.dist * cos((cub->player.pa - ca) * RADIAN);
+			cast.wall = get_orient_horr(cub->map, ca, &cast.w_type);
+			draw_given_line(*cub, h, 0x00ffff);	//cyan ray h
+			cast.wall_percent = ((int)h.p_b.x % cast.wall->width);
+			cub->hv = 0;
 		}
 	}
 	else
 	{
-		if (simulcast(*cub, no_higher(ca - FIELD_R_STEP, 360, 0)) == 'v'
-			&& simulcast(*cub, no_higher(ca + FIELD_R_STEP, 360, 0)) == 'v')
-		{
-			cast.dist = v.dist * cos((cub->player.pa - ca) * RADIAN);
-			cast.wall = get_orient_vert(cub->map, ca, &cast.w_type);
-			draw_given_line(*cub, v, 0x0000ff);	//blue ray
-			cast.wall_percent = ((int)v.p_b.y % cast.wall->width);
-		}
-		else
+		if ((simulcast(*cub, no_higher(ca - FIELD_R_STEP, 360, 0)) == 'h' && cub->hv == 0
+			&& simulcast(*cub, no_higher(ca + FIELD_R_STEP, 360, 0)) == 'h')
+			|| (simulcast(*cub, no_higher(ca - FIELD_R_STEP, 360, 0)) == 'v' && cub->hv == 1
+			&& simulcast(*cub, no_higher(ca + FIELD_R_STEP, 360, 0)) == 'h'))
 		{
 			cast.dist = h.dist * cos((cub->player.pa - ca) * RADIAN);
 			cast.wall = get_orient_horr(cub->map, ca, &cast.w_type);
-			draw_given_line(*cub, h, 0x00ffff);	//cyan ray
+			draw_given_line(*cub, h, 0x00ffff);	//cyan ray h
 			cast.wall_percent = ((int)h.p_b.x % cast.wall->width);
+			cub->hv = 1;
+		}
+		else
+		{
+			cast.dist = v.dist * cos((cub->player.pa - ca) * RADIAN);
+			cast.wall = get_orient_vert(cub->map, ca, &cast.w_type);
+			draw_given_line(*cub, v, 0x0000ff);	//blue ray v
+			cast.wall_percent = ((int)v.p_b.y % cast.wall->width);
+			cub->hv = 0;
 		}
 	}
 	if (cast.dist < 1) //if player is almost inside the wall
@@ -69,6 +77,10 @@ t_cast	get_cast_data(t_cub *cub, float ca)
 	cast.stop = (WINDOW_H + cast.height) / 2;
 	return (cast);
 }
+
+/*
+theorie :le problème de rayon vient de l'endroit exacte où la dist v et h sont égale comme dans le coin
+*/
 
 int	get_texture_colour(t_cast c, int height){
 	int	y;
@@ -112,6 +124,8 @@ char	simulcast(t_cub cub, float ca)
 	v = get_vert(cub, ca);
 	if (h.dist < v.dist)
 		return ('h');
-	else
+	else if (v.dist < h.dist)
 		return ('v');
+	else
+		return ('e');
 }
