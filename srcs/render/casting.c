@@ -6,7 +6,7 @@
 /*   By: llevasse <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/24 22:25:17 by llevasse          #+#    #+#             */
-/*   Updated: 2023/12/04 22:50:16 by llevasse         ###   ########.fr       */
+/*   Updated: 2023/12/05 00:15:43 by llevasse         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,6 +26,7 @@ t_cast	get_cast_data(t_cub *cub, float ca)
 		cast.wall = get_orient_horr(cub->map, ca, &cast.w_type);
 		draw_given_line(*cub, h, 0x00ffff);
 		cast.wall_percent = ((int)h.p_b.x % cast.wall->width);
+		cast.type = 1;
 	}
 	else
 	{
@@ -33,6 +34,7 @@ t_cast	get_cast_data(t_cub *cub, float ca)
 		cast.wall = get_orient_vert(cub->map, ca, &cast.w_type);
 		draw_given_line(*cub, v, 0x0000ff);
 		cast.wall_percent = ((int)v.p_b.y % cast.wall->width);
+		cast.type = 0;
 	}
 	if (cast.dist < 1) //if player is almost inside the wall
 		cast.height = WINDOW_H;
