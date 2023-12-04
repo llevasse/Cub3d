@@ -6,7 +6,7 @@
 /*   By: llevasse <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/24 22:25:17 by llevasse          #+#    #+#             */
-/*   Updated: 2023/11/29 19:24:24 by llevasse         ###   ########.fr       */
+/*   Updated: 2023/12/04 22:50:16 by llevasse         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -52,13 +52,11 @@ int	get_texture_colour(t_cast c, int height){
 	return (*(int *)(c.wall->addr + y + x));
 }
 
-void	cast(t_cub *cub, int x, float ca)
+void	cast(t_cub *cub, t_cast c, int x)
 {
 	int		rgb;
 	int		current;
-	t_cast	c;
 
-	c = get_cast_data(cub, ca);
 	if (!c.wall)
 		return ;
 	current = 0;
