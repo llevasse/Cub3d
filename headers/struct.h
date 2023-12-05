@@ -6,7 +6,7 @@
 /*   By: tdutel <tdutel@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/18 21:52:44 by llevasse          #+#    #+#             */
-/*   Updated: 2023/12/04 23:06:52 by llevasse         ###   ########.fr       */
+/*   Updated: 2023/12/05 21:16:48 by llevasse         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -72,6 +72,14 @@ typedef struct s_line
 	float				y_step;
 	float				steps;
 	float				dist;
+	float				wall_percent;
+	t_img				*wall;
+	int					w_type;
+	int					x;
+	int					y;
+	int					height;
+	int					start;
+	int					stop;
 }				t_line;
 
 typedef struct s_player
@@ -97,21 +105,13 @@ typedef struct s_cub
 
 typedef struct s_cast
 {
-	t_line	line;
+	t_line	*line;
 	t_line	h;
 	t_line	v;
-	t_img	*wall;
-	int		w_type;
 	int		side;
-	int		height;
-	int		start;
-	int		stop;
-	int		x;
-	int		y;
 	int		type;		//1 for horrizontal and 0 for vertical
 	float	y_ratio;
 	float	dist;
-	float	wall_percent;
 }				t_cast;
 
 typedef struct s_fov
