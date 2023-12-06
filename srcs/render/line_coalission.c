@@ -6,7 +6,7 @@
 /*   By: llevasse <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/25 21:58:31 by llevasse          #+#    #+#             */
-/*   Updated: 2023/10/31 20:31:04 by llevasse         ###   ########.fr       */
+/*   Updated: 2023/12/05 21:43:01 by llevasse         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -65,6 +65,14 @@ t_line	get_horr(t_cub cub, float pa)
 	line = get_line(get_player_point(cub.player.px, cub.player.py), line.p_a);
 	if (dof == -42)
 		line.dist = 0x7fffffff + 0.0;
+	else
+		line.dist *= cos((cub.player.pa - pa) * RADIAN);
+	line.wall = get_orient_horr(cub.map, pa, &line.w_type);
+	line.wall_percent = ((int)line.p_b.x % line.wall->width);
+	if (line.dist >= 1)
+		line.height = ((cub.mmap->block_s * WINDOW_H) / line.dist);
+	line.start = (WINDOW_H - line.height) / 2;
+	line.stop = (WINDOW_H + line.height) / 2;
 	return (line);
 }
 
@@ -122,5 +130,14 @@ t_line	get_vert(t_cub cub, float pa)
 	line = get_line(get_player_point(cub.player.px, cub.player.py), line.p_a);
 	if (dof == -42)
 		line.dist = 0x7fffffff + 0.0;
+	else
+		line.dist *= cos((cub.player.pa - pa) * RADIAN);
+	line.wall = get_orient_vert(cub.map, pa, &line.w_type);
+	line.wall_percent = ((int)line.p_b.y % line.wall->width);
+	line.height = WINDOW_H;
+	if (line.dist >= 1)
+		line.height = ((cub.mmap->block_s * WINDOW_H) / line.dist);
+	line.start = (WINDOW_H - line.height) / 2;
+	line.stop = (WINDOW_H + line.height) / 2;
 	return (line);
 }

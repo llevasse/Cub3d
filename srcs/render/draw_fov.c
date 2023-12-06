@@ -6,7 +6,7 @@
 /*   By: llevasse <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/22 21:44:52 by llevasse          #+#    #+#             */
-/*   Updated: 2023/11/30 14:43:17 by llevasse         ###   ########.fr       */
+/*   Updated: 2023/12/04 23:44:00 by llevasse         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -28,13 +28,16 @@ void	draw_fov(t_cub *cub)
 	{
 		get_player_new_pos(cub, ca, MMAP_S * 5, &fov.p);
 		temp_x = x + COLUMN_WIDTH;
-		while (x < temp_x)
-			cast(cub, x++, ca);
+		while (x < temp_x && x < WINDOW_W)
+			fov.rays[(int)x++] = get_cast_data(cub, ca);
 		gained_angle += FIELD_R_STEP;
 		ca = no_higher(ca + FIELD_R_STEP, 360, 0);
 		get_player_new_pos(cub, ca, MMAP_S * 5, &fov.p2);
 		fov.fl = get_line(fov.p, fov.p2);
 	}
+	x = -1;
+	while (++x < WINDOW_W)
+		cast(cub, fov.rays[(int)x], x);
 }
 
 float	get_dist_betw_points(t_point p_a, t_point p_b)
@@ -50,9 +53,11 @@ float	get_dist_betw_points(t_point p_a, t_point p_b)
 t_fov	get_fov(float *ca)
 {
 	t_fov	fov;
+	int		i;
 
 	fov.beg_angle = no_higher(*ca - ((PLAYER_FOV) / 2), 360, 0);
 	fov.end_angle = no_higher(fov.beg_angle + (PLAYER_FOV - 1), 360, 0);
+	i = 0;
 	*ca = fov.beg_angle;
 	return (fov);
 }

@@ -6,7 +6,7 @@
 /*   By: llevasse <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/24 22:25:17 by llevasse          #+#    #+#             */
-/*   Updated: 2023/11/29 19:24:24 by llevasse         ###   ########.fr       */
+/*   Updated: 2023/12/05 22:05:58 by llevasse         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,60 +15,49 @@
 t_cast	get_cast_data(t_cub *cub, float ca)
 {
 	t_cast	cast;
-	t_line	h;
-	t_line	v;
 
-	h = get_horr(*cub, ca);
-	v = get_vert(*cub, ca);
-	if (h.dist < v.dist)
+	cast.h = get_horr(*cub, ca);
+	cast.v = get_vert(*cub, ca);
+	if (cast.h.dist < cast.v.dist)
 	{
-		cast.dist = h.dist * cos((cub->player.pa - ca) * RADIAN);
-		cast.wall = get_orient_horr(cub->map, ca, &cast.w_type);
-		draw_given_line(*cub, h, 0x00ffff);
-		cast.wall_percent = ((int)h.p_b.x % cast.wall->width);
+		cast.line = &cast.h;
+		draw_given_line(*cub, cast.h, 0x00ffff);
+		cast.type = 1;
 	}
 	else
 	{
-		cast.dist = v.dist * cos((cub->player.pa - ca) * RADIAN);
-		cast.wall = get_orient_vert(cub->map, ca, &cast.w_type);
-		draw_given_line(*cub, v, 0x0000ff);
-		cast.wall_percent = ((int)v.p_b.y % cast.wall->width);
+		cast.line = &cast.v;
+		draw_given_line(*cub, cast.v, 0x0000ff);
+		cast.type = 0;
 	}
-	if (cast.dist < 1) //if player is almost inside the wall
-		cast.height = WINDOW_H;
-	else
-		cast.height = ((cub->mmap->block_s * WINDOW_H) / cast.dist);
-	cast.start = (WINDOW_H - cast.height) / 2;
-	cast.stop = (WINDOW_H + cast.height) / 2;
 	return (cast);
 }
 
 int	get_texture_colour(t_cast c, int height){
 	int	y;
 	int	x;
-	
-	y = (int)(height * c.wall->height / c.height) % c.wall->height * c.wall->line_len;
-	x = c.wall_percent * (c.wall->bpp / 8);
-	return (*(int *)(c.wall->addr + y + x));
+
+	printf("%d\n", height);
+	y = (int)(height * c.line->wall->height / c.line->height) % c.line->wall->height * c.line->wall->line_len;
+	x = c.line->wall_percent * (c.line->wall->bpp / 8);
+	return (*(int *)(c.line->wall->addr + y + x));
 }
 
-void	cast(t_cub *cub, int x, float ca)
+void	cast(t_cub *cub, t_cast c, int x)
 {
 	int		rgb;
 	int		current;
-	t_cast	c;
+	t_line	line;
 
-	c = get_cast_data(cub, ca);
-	if (!c.wall)
-		return ;
+	line = *c.line;
 	current = 0;
-	if (c.start < 0)
-		current += -c.start;
-	while (c.start + current < c.stop && c.start + current < WINDOW_H)
+	if (line.start < 0)
+		current += -line.start;
+	while (line.start + current < line.stop && line.start + current < WINDOW_H)
 	{
-		rgb = get_pixel_colour(&cub->img, x, c.start + current);
+		rgb = get_pixel_colour(&cub->img, x, line.start + current);
 		if (rgb != MMAP_W_RGB && rgb != MMAP_RGB && rgb != PLAYER_RGB)
-			img_pix_put(&cub->img, x, c.start + current,
+			img_pix_put(&cub->img, x, line.start + current,
 				get_texture_colour(c, current));
 		current++;
 	}
