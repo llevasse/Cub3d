@@ -6,7 +6,7 @@
 /*   By: llevasse <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/25 21:58:31 by llevasse          #+#    #+#             */
-/*   Updated: 2023/12/06 23:27:57 by llevasse         ###   ########.fr       */
+/*   Updated: 2023/12/06 23:40:14 by llevasse         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -43,7 +43,6 @@ int	init_horr(t_cub cub, float pa, t_line *line)
 	return (cub.mmap->dof);
 }
 
-//TODO invert south texture
 t_line	get_horr(t_cub cub, float pa)
 {
 	t_line	line;
@@ -70,6 +69,8 @@ t_line	get_horr(t_cub cub, float pa)
 		line.dist *= cos((cub.player.pa - pa) * RADIAN);
 	line.wall = get_orient_horr(cub.map, pa, &line.w_type);
 	line.wall_percent = ((int)line.p_b.x % line.wall->width);
+	if (pa > 0 && pa < 180)
+		line.wall_percent = line.wall->width - line.wall_percent;
 	if (line.dist >= 1)
 		line.height = ((cub.mmap->block_s * WINDOW_H) / line.dist);
 	line.start = (WINDOW_H - line.height) / 2;
