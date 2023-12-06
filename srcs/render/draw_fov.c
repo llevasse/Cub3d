@@ -6,7 +6,7 @@
 /*   By: llevasse <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/22 21:44:52 by llevasse          #+#    #+#             */
-/*   Updated: 2023/12/04 23:44:00 by llevasse         ###   ########.fr       */
+/*   Updated: 2023/12/06 15:18:54 by llevasse         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -53,11 +53,9 @@ float	get_dist_betw_points(t_point p_a, t_point p_b)
 t_fov	get_fov(float *ca)
 {
 	t_fov	fov;
-	int		i;
 
 	fov.beg_angle = no_higher(*ca - ((PLAYER_FOV) / 2), 360, 0);
 	fov.end_angle = no_higher(fov.beg_angle + (PLAYER_FOV - 1), 360, 0);
-	i = 0;
 	*ca = fov.beg_angle;
 	return (fov);
 }
