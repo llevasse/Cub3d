@@ -6,7 +6,7 @@
 /*   By: llevasse <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/24 22:25:17 by llevasse          #+#    #+#             */
-/*   Updated: 2023/12/05 22:05:58 by llevasse         ###   ########.fr       */
+/*   Updated: 2023/12/06 15:32:22 by llevasse         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -33,32 +33,43 @@ t_cast	get_cast_data(t_cub *cub, float ca)
 	return (cast);
 }
 
-int	get_texture_colour(t_cast c, int height){
+int	get_texture_colour(t_line line, int height){
 	int	y;
 	int	x;
 
-	printf("%d\n", height);
-	y = (int)(height * c.line->wall->height / c.line->height) % c.line->wall->height * c.line->wall->line_len;
-	x = c.line->wall_percent * (c.line->wall->bpp / 8);
-	return (*(int *)(c.line->wall->addr + y + x));
+	y = (int)(height * line.wall->height / line.height) % line.wall->height * line.wall->line_len;
+	x = line.wall_percent * (line.wall->bpp / 8);
+	return (*(int *)(line.wall->addr + y + x));
 }
 
 void	cast(t_cub *cub, t_cast c, int x)
 {
 	int		rgb;
 	int		current;
-	t_line	line;
 
-	line = *c.line;
 	current = 0;
-	if (line.start < 0)
-		current += -line.start;
-	while (line.start + current < line.stop && line.start + current < WINDOW_H)
-	{
-		rgb = get_pixel_colour(&cub->img, x, line.start + current);
-		if (rgb != MMAP_W_RGB && rgb != MMAP_RGB && rgb != PLAYER_RGB)
-			img_pix_put(&cub->img, x, line.start + current,
-				get_texture_colour(c, current));
-		current++;
+	if (c.type == 1){
+		if (c.h.start < 0)
+			current += -c.h.start;
+		while (c.h.start + current < c.h.stop && c.h.start + current < WINDOW_H)
+		{
+			rgb = get_pixel_colour(&cub->img, x, c.h.start + current);
+			if (rgb != MMAP_W_RGB && rgb != MMAP_RGB && rgb != PLAYER_RGB)
+				img_pix_put(&cub->img, x, c.h.start + current,
+					get_texture_colour(c.h, current));
+			current++;
+		}
+	}
+	else {
+		if (c.v.start < 0)
+			current += -c.v.start;
+		while (c.v.start + current < c.v.stop && c.v.start + current < WINDOW_H)
+		{
+			rgb = get_pixel_colour(&cub->img, x, c.v.start + current);
+			if (rgb != MMAP_W_RGB && rgb != MMAP_RGB && rgb != PLAYER_RGB)
+				img_pix_put(&cub->img, x, c.v.start + current,
+					get_texture_colour(c.v, current));
+			current++;
+		}
 	}
 }
