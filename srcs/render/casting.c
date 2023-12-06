@@ -6,7 +6,7 @@
 /*   By: llevasse <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/24 22:25:17 by llevasse          #+#    #+#             */
-/*   Updated: 2023/12/06 23:42:27 by llevasse         ###   ########.fr       */
+/*   Updated: 2023/12/06 23:55:04 by llevasse         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -39,6 +39,7 @@ t_cast	get_cast_data(t_cub *cub, float ca)
 int	get_texture_colour(t_line line, int height){
 	int	y;
 	int	x;
+//	printf("%f\n", line.wall_percent);
 
 	y = (int)(height * line.wall->height / line.height) % line.wall->height * line.wall->line_len;
 	x = line.wall_percent * (line.wall->bpp / 8);
