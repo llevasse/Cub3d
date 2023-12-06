@@ -6,7 +6,7 @@
 /*   By: llevasse <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/25 21:58:31 by llevasse          #+#    #+#             */
-/*   Updated: 2023/12/06 23:40:14 by llevasse         ###   ########.fr       */
+/*   Updated: 2023/12/06 23:51:59 by llevasse         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -68,9 +68,9 @@ t_line	get_horr(t_cub cub, float pa)
 	else
 		line.dist *= cos((cub.player.pa - pa) * RADIAN);
 	line.wall = get_orient_horr(cub.map, pa, &line.w_type);
-	line.wall_percent = ((int)line.p_b.x % line.wall->width);
+	line.wall_percent = ((int)line.p_b.x % line.wall->width)*2;
 	if (pa > 0 && pa < 180)
-		line.wall_percent = line.wall->width - line.wall_percent;
+		line.wall_percent = line.wall->width - (line.wall_percent/2);
 	if (line.dist >= 1)
 		line.height = ((cub.mmap->block_s * WINDOW_H) / line.dist);
 	line.start = (WINDOW_H - line.height) / 2;
