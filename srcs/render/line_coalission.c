@@ -6,7 +6,7 @@
 /*   By: llevasse <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/25 21:58:31 by llevasse          #+#    #+#             */
-/*   Updated: 2023/12/06 17:03:19 by llevasse         ###   ########.fr       */
+/*   Updated: 2023/12/06 23:27:57 by llevasse         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -43,6 +43,7 @@ int	init_horr(t_cub cub, float pa, t_line *line)
 	return (cub.mmap->dof);
 }
 
+//TODO invert south texture
 t_line	get_horr(t_cub cub, float pa)
 {
 	t_line	line;
@@ -141,3 +142,4 @@ t_line	get_vert(t_cub cub, float pa)
 	line.stop = (WINDOW_H + line.height) / 2;
 	return (line);
 }
+//TODO invert east texture

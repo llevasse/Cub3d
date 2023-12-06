@@ -6,7 +6,7 @@
 /*   By: llevasse <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/24 22:25:17 by llevasse          #+#    #+#             */
-/*   Updated: 2023/12/06 17:15:22 by llevasse         ###   ########.fr       */
+/*   Updated: 2023/12/06 23:26:44 by llevasse         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -35,6 +35,7 @@ t_cast	get_cast_data(t_cub *cub, float ca)
 	return (cast);
 }
 
+//bug : block display left half of texture and and other block the right half
 int	get_texture_colour(t_line line, int height){
 	int	y;
 	int	x;
@@ -44,6 +45,9 @@ int	get_texture_colour(t_line line, int height){
 	return (*(int *)(line.wall->addr + y + x));
 }
 
+
+
+//bug : on west and north side, corners of most block display south or east texture
 void	cast(t_cub *cub, t_cast c, int x)
 {
 	int		rgb;
