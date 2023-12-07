@@ -6,7 +6,7 @@
 /*   By: llevasse <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/25 21:58:31 by llevasse          #+#    #+#             */
-/*   Updated: 2023/12/07 00:46:52 by llevasse         ###   ########.fr       */
+/*   Updated: 2023/12/07 21:03:53 by llevasse         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,7 +25,7 @@ int	init_horr(t_cub cub, float pa, t_line *line)
 	if (pa > 180 && pa < 360)
 	{
 		line->y_step = block_s;
-		line->p_a.y = ((int)cub.player.py / block_s) * block_s - 1;
+		line->p_a.y = ((int)cub.player.py / block_s) * block_s - 0.001;
 	}
 	else if (pa > 0 && pa < 180)
 	{
@@ -91,7 +91,7 @@ int	init_vert(t_cub cub, float pa, t_line *line)
 	if (pa > 90 && pa < 270)
 	{
 		line->x_step = -block_s;
-		line->p_a.x = (((int)cub.player.px / block_s) * block_s) - 1 ;
+		line->p_a.x = (((int)cub.player.px / block_s) * block_s) - 0.001;
 	}
 	else if ((pa > 270 && pa < 360) || (pa < 90 && pa > 0))
 	{

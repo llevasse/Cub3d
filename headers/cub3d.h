@@ -6,7 +6,7 @@
 /*   By: tdutel <tdutel@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/18 21:43:29 by llevasse          #+#    #+#             */
-/*   Updated: 2023/11/30 14:43:33 by llevasse         ###   ########.fr       */
+/*   Updated: 2023/12/07 20:37:59 by llevasse         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -33,7 +33,7 @@
 # define PI 3.1415926535
 # define RADIAN PI/180
 
-# define FIELD_R_STEP ((float)(PLAYER_FOV - 1) / WINDOW_W) / 16 
+# define FIELD_R_STEP ((float)(PLAYER_FOV - 1) / WINDOW_W) / 16
 # define COLUMN_WIDTH (WINDOW_W / PLAYER_FOV) * FIELD_R_STEP
 
 # define NO 1
