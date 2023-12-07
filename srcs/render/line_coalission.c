@@ -6,7 +6,7 @@
 /*   By: llevasse <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/25 21:58:31 by llevasse          #+#    #+#             */
-/*   Updated: 2023/12/07 21:46:24 by llevasse         ###   ########.fr       */
+/*   Updated: 2023/12/07 22:32:46 by llevasse         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,22 +15,28 @@
 // ray facing up pa > 180 && pa < 360
 // ray facing down pa > 0 || pa < 180
 //if ray is facing string up or down (pa == 90 || pa == 360 || pa == 0)
-int	init_horr(t_cub cub, float pa, t_line *line)
+int	init_horr(t_cub cub, float pa, t_line *line, t_line *real)
 {
 	float	tan_v;
 	int		block_s;
+	int		width;
 
 	tan_v = 1.0 / tan(pa * RADIAN);
 	block_s = cub.mmap->block_s;
+	width = cub.map->north_img.width;
 	if (pa > 180 && pa < 360)
 	{
 		line->y_step = block_s;
+		real->y_step = width;
 		line->p_a.y = ((int)cub.player.py / block_s) * block_s - 0.001;
+		real->p_a.y = ((int)cub.player.py / width) * width - 0.001;
 	}
 	else if (pa > 0 && pa < 180)
 	{
 		line->y_step = -block_s;
+		real->y_step = -width;
 		line->p_a.y = ((int)cub.player.py / block_s) * block_s + block_s;
+		real->p_a.y = ((int)cub.player.py / width) * width + width;
 	}
 	else
 	{
@@ -46,11 +52,12 @@ int	init_horr(t_cub cub, float pa, t_line *line)
 t_line	get_horr(t_cub cub, float pa)
 {
 	t_line	line;
+	t_line	real;
 	int		pos_x;
 	int		pos_y;
 	int		dof;
 
-	dof = init_horr(cub, pa, &line);
+	dof = init_horr(cub, pa, &line, &real);
 	while (dof > 0)
 	{
 		pos_x = (line.p_a.x / cub.mmap->block_s);
@@ -59,7 +66,9 @@ t_line	get_horr(t_cub cub, float pa)
 			|| !ft_is_in_str("NSEW0", cub.mmap->map[pos_y][pos_x]))
 			break ;
 		line.p_a.x += line.x_step;
+		real.p_a.x += real.x_step;
 		line.p_a.y -= line.y_step;
+		real.p_a.y -= real.y_step;
 		dof--;
 	}
 	line = get_line(get_player_point(cub.player.px, cub.player.py), line.p_a);
@@ -68,7 +77,7 @@ t_line	get_horr(t_cub cub, float pa)
 	else
 		line.dist *= cos((cub.player.pa - pa) * RADIAN);
 	line.wall = get_orient_horr(cub.map, pa, &line.w_type);
-	line.wall_percent = ((int)line.p_b.x % cub.mmap->block_s) / (float)cub.mmap->block_s;
+	line.wall_percent = ((int)real.p_a.x % line.wall->width) / (float)line.wall->width;
 	if (pa > 0 && pa < 180)
 		line.wall_percent = (1 - (line.wall_percent));
 	line.wall_percent = line.wall->width * line.wall_percent;
@@ -147,4 +156,3 @@ t_line	get_vert(t_cub cub, float pa)
 	line.stop = (WINDOW_H + line.height) / 2;
 	return (line);
 }
-//TODO invert east texture

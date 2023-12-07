@@ -6,7 +6,7 @@
 /*   By: llevasse <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/22 21:44:52 by llevasse          #+#    #+#             */
-/*   Updated: 2023/12/07 20:35:43 by llevasse         ###   ########.fr       */
+/*   Updated: 2023/12/07 22:17:14 by llevasse         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -35,20 +35,10 @@ void	draw_fov(t_cub *cub)
 		get_player_new_pos(cub, ca, MMAP_S * 5, &fov.p2);
 		fov.fl = get_line(fov.p, fov.p2);
 	}
-/*	x = 0;
-	while (++x < WINDOW_W - 1){
-		if (fov.rays[(int)x-1].dist > fov.rays[(int)x].dist && fov.rays[(int)x-1].dist < fov.rays[(int)x].dist + 1)
-			fov.rays[(int)x].type = fov.rays[(int)x-1].type;
-		}*/
 	x = -1;
 	while (++x < WINDOW_W){
-/*		if (fov.rays[(int)x].type)
-			printf("\033[32mh%.1f\033[0m", fov.rays[(int)x].h.dist);
-		else
-			printf("\033[33mv%.1f\033[0m", fov.rays[(int)x].v.dist);*/
 		cast(cub, fov.rays[(int)x], x);
 	}
-//	printf("\n");	
 }
 
 float	get_dist_betw_points(t_point p_a, t_point p_b)

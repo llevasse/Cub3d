@@ -6,7 +6,7 @@
 /*   By: llevasse <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/24 22:25:17 by llevasse          #+#    #+#             */
-/*   Updated: 2023/12/06 23:58:24 by llevasse         ###   ########.fr       */
+/*   Updated: 2023/12/07 22:16:58 by llevasse         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,14 +21,14 @@ t_cast	get_cast_data(t_cub *cub, float ca)
 	if (cast.h.dist < cast.v.dist)
 	{
 		cast.line = &cast.h;
-		draw_given_line(*cub, cast.h, 0x00ffff);
+//		draw_given_line(*cub, cast.h, 0x00ffff);
 		cast.type = 1;
 		cast.dist = cast.h.dist;
 	}
 	else
 	{
 		cast.line = &cast.v;
-		draw_given_line(*cub, cast.v, 0x0000ff);
+//		draw_given_line(*cub, cast.v, 0x0000ff);
 		cast.type = 0;
 		cast.dist = cast.v.dist;
 	}
