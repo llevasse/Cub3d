@@ -6,7 +6,7 @@
 /*   By: llevasse <llevasse@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/22 00:36:13 by llevasse          #+#    #+#             */
-/*   Updated: 2023/12/08 10:32:15 by llevasse         ###   ########.fr       */
+/*   Updated: 2023/11/29 19:35:24 by llevasse         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -33,7 +33,6 @@ void	set_player_new_pos(t_cub *cub, int angle, float distance)
 	new_angle = no_higher(cub->player.pa + angle, 360, 0);
 	cub->player.px = cub->player.px + distance * cos(new_angle * RADIAN);
 	cub->player.py = cub->player.py + distance * sin(new_angle * RADIAN);
-	printf("%f,%f\n", cub->player.px, cub->player.py);
 }
 
 ///@brief Get player new position given distance

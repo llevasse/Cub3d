@@ -6,7 +6,7 @@
 /*   By: tdutel <tdutel@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/19 22:29:27 by llevasse          #+#    #+#             */
-/*   Updated: 2023/11/28 14:47:35 by tdutel           ###   ########.fr       */
+/*   Updated: 2023/11/06 11:18:12 by llevasse         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -43,7 +43,6 @@ void	init_images(t_cub *cub)
 	cub->img.height = WINDOW_H;
 	cub->img.addr = mlx_get_data_addr(cub->img.mlx_img,
 			&cub->img.bpp, &cub->img.line_len, &cub->img.endian);
-	// printf("%d\n", cub->img.bpp);
 }
 
 int	round_to_pow_2(int n){
@@ -95,28 +94,3 @@ void	init_map_value(t_cub *cub)
 		i++;
 	}
 }
-
-/*
-t_img	*get_orient_horr(t_map *map, int block_s, t_line v, t_cast *cast)
-{
-	printf("vdy = %f\n", v.dy);
-	(void)block_s;
-	if (v.dy < 0){
-		cast->w_type = NO;
-		return (&map->north_img);
-	}
-	cast->w_type = SO;
-	return (&map->south_img);
-}
-
-t_img	*get_orient_vert(t_map *map, int block_s, t_line v, t_cast *cast)
-{
-	// printf("y = %d\t block s = %d\n", v.p_b.y, block_s);
-	(void)block_s;
-	if (v.dx > 0){
-		cast->w_type = EA;
-		return (&map->east_img);
-	}
-	cast->w_type = WE;
-	return (&map->west_img);
-}*/

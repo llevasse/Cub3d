@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   render.c                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: tdutel <tdutel@student.42.fr>              +#+  +:+       +#+        */
+/*   By: llevasse <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/20 00:40:14 by llevasse          #+#    #+#             */
-/*   Updated: 2023/12/08 12:22:12 by tdutel           ###   ########.fr       */
+/*   Updated: 2023/12/07 22:16:17 by llevasse         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,7 +25,7 @@ void	img_pix_put(t_img *img, int x, int y, int colour)
 {
 	char	*pixel;
 	int		i;
-
+	
 	if (x < 0 || x > WINDOW_W || y < 0 || y > WINDOW_H)
 		return ;
 	i = img->bpp - 8;
