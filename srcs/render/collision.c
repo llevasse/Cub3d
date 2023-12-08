@@ -6,7 +6,7 @@
 /*   By: tdutel <tdutel@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/21 01:32:27 by llevasse          #+#    #+#             */
-/*   Updated: 2023/12/08 10:21:49 by llevasse         ###   ########.fr       */
+/*   Updated: 2023/12/08 10:30:30 by llevasse         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -45,13 +45,13 @@ int	check_collision(t_cub *cub, int angle, float *offset)
 		|| !ft_is_in_str("NSEW0", cub->mmap->map[(int)new_p.y][(int)new_p.x]))
 	{
 		if (py >= 0 && py < cub->mmap->nb_line && 
-				new_p.x >= 0 && new_p.x < (int)ft_strlen(cub->mmap->map[py]) && ft_is_in_str("NSWE0", cub->mmap->map[(int)new_p.x][py]))
+				new_p.x >= 0 && new_p.x < (int)ft_strlen(cub->mmap->map[py]) && ft_is_in_str("NSWE0", cub->mmap->map[py][(int)new_p.x]))
 			cub->player.px = new_p.x;
-		else if (new_p.y >= 0 && new_p.y < cub->mmap->nb_line && 
-				px >= 0 && px < (int)ft_strlen(cub->mmap->map[(int)new_p.y]) && ft_is_in_str("NSWE0", cub->mmap->map[px][(int)new_p.y]))
+		if (new_p.y >= 0 && new_p.y < cub->mmap->nb_line && 
+				px >= 0 && px < (int)ft_strlen(cub->mmap->map[(int)new_p.y]) && ft_is_in_str("NSWE0", cub->mmap->map[(int)new_p.y][px]))
 			cub->player.py = new_p.y;
-		else
-			return (check_w_smaller_mov(cub, angle, offset));
+	//	else
+	//		return (check_w_smaller_mov(cub, angle, offset));
 		return (1);
 	}
 	return (0);
