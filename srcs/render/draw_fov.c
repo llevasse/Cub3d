@@ -6,7 +6,7 @@
 /*   By: tdutel <tdutel@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/22 21:44:52 by llevasse          #+#    #+#             */
-/*   Updated: 2023/12/08 12:10:10 by tdutel           ###   ########.fr       */
+/*   Updated: 2023/12/08 12:14:01 by tdutel           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,16 +24,20 @@ void	draw_fov(t_cub *cub)
 	fov = get_fov(&ca);
 	x = 0;
 	gained_angle = 0;
-	while (gained_angle < PLAYER_FOV)	// remove PLAYER_FOV - 1
+	while (gained_angle < PLAYER_FOV)
 	{
 		get_player_new_pos(cub, ca, MMAP_S * 5, &fov.p);
 		temp_x = x + COLUMN_WIDTH;
-		while (x < temp_x)
-			cast(cub, x++, ca);
+		while (x < temp_x && x < WINDOW_W)
+			fov.rays[(int)x++] = get_cast_data(cub, ca);
 		gained_angle += FIELD_R_STEP;
 		ca = no_higher(ca + FIELD_R_STEP, 360, 0);
 		get_player_new_pos(cub, ca, MMAP_S * 5, &fov.p2);
 		fov.fl = get_line(fov.p, fov.p2);
+	}
+	x = -1;
+	while (++x < WINDOW_W){
+		cast(cub, fov.rays[(int)x], x);
 	}
 }
 
@@ -51,7 +55,7 @@ t_fov	get_fov(float *ca)
 {
 	t_fov	fov;
 
-	fov.beg_angle = no_higher(*ca - ((PLAYER_FOV - 1) / 2), 360, 0);
+	fov.beg_angle = no_higher(*ca - ((PLAYER_FOV) / 2), 360, 0);
 	fov.end_angle = no_higher(fov.beg_angle + (PLAYER_FOV - 1), 360, 0);
 	*ca = fov.beg_angle;
 	return (fov);

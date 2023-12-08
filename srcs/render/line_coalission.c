@@ -6,7 +6,7 @@
 /*   By: tdutel <tdutel@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/25 21:58:31 by llevasse          #+#    #+#             */
-/*   Updated: 2023/11/27 13:56:19 by tdutel           ###   ########.fr       */
+/*   Updated: 2023/12/08 12:13:48 by tdutel           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,7 +25,7 @@ int	init_horr(t_cub cub, float pa, t_line *line)
 	if (pa > 180 && pa < 360)
 	{
 		line->y_step = block_s;
-		line->p_a.y = ((int)cub.player.py / block_s) * block_s - 1;
+		line->p_a.y = ((int)cub.player.py / block_s) * block_s - 0.001;
 	}
 	else if (pa > 0 && pa < 180)
 	{
@@ -65,6 +65,17 @@ t_line	get_horr(t_cub cub, float pa)
 	line = get_line(get_player_point(cub.player.px, cub.player.py), line.p_a);
 	if (dof == -42)
 		line.dist = 0x7fffffff + 0.0;
+	else
+		line.dist *= cos((cub.player.pa - pa) * RADIAN);
+	line.wall = get_orient_horr(cub.map, pa, &line.w_type);
+	line.wall_percent = ((int)line.p_b.x % cub.mmap->block_s) / (float)cub.mmap->block_s;
+	if (pa > 0 && pa < 180)
+		line.wall_percent = (1 - (line.wall_percent));
+	line.wall_percent = line.wall->width * line.wall_percent;
+	if (line.dist >= 1)
+		line.height = ((cub.mmap->block_s * WINDOW_H) / line.dist);
+	line.start = (WINDOW_H - line.height) / 2;
+	line.stop = (WINDOW_H + line.height) / 2;
 	return (line);
 }
 
@@ -81,9 +92,9 @@ int	init_vert(t_cub cub, float pa, t_line *line)
 	if (pa > 90 && pa < 270)
 	{
 		line->x_step = -block_s;
-		line->p_a.x = (((int)cub.player.px / block_s) * block_s) - 1;
+		line->p_a.x = (((int)cub.player.px / block_s) * block_s) - 0.001;
 	}
-	else if (pa > 270 || pa < 90)
+	else if ((pa > 270 && pa < 360) || (pa < 90 && pa > 0))
 	{
 		line->x_step = block_s;
 		line->p_a.x = (((int)cub.player.px / block_s) * block_s) + block_s;
@@ -110,8 +121,8 @@ t_line	get_vert(t_cub cub, float pa)
 	dof = init_vert(cub, pa, &line);
 	while (dof > 0)
 	{
-		pos_x = (line.p_a.x / cub.mmap->block_s);
-		pos_y = (line.p_a.y / cub.mmap->block_s);
+		pos_x = (line.p_a.x / (cub.mmap->block_s));
+		pos_y = (line.p_a.y / (cub.mmap->block_s));
 		if (pos_y >= cub.mmap->nb_line || pos_y < 0 || pos_x < 0 || pos_x >= (int)ft_strlen(cub.mmap->map[pos_y]) \
 			|| !ft_is_in_str("NSEW0", cub.mmap->map[pos_y][pos_x]))
 			break ;
@@ -122,5 +133,17 @@ t_line	get_vert(t_cub cub, float pa)
 	line = get_line(get_player_point(cub.player.px, cub.player.py), line.p_a);
 	if (dof == -42)
 		line.dist = 0x7fffffff + 0.0;
+	else
+		line.dist *= cos((cub.player.pa - pa) * RADIAN);
+	line.wall = get_orient_vert(cub.map, pa, &line.w_type);
+	line.wall_percent = ((int)line.p_b.y % cub.mmap->block_s) / (float)cub.mmap->block_s;
+	if (pa > 90 && pa < 270)
+		line.wall_percent = (1 - line.wall_percent);
+	line.wall_percent = line.wall->width * line.wall_percent;
+	line.height = WINDOW_H;
+	if (line.dist >= 1)
+		line.height = ((cub.mmap->block_s * WINDOW_H) / line.dist);
+	line.start = (WINDOW_H - line.height) / 2;
+	line.stop = (WINDOW_H + line.height) / 2;
 	return (line);
 }
