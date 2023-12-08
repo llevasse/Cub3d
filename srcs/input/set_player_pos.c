@@ -6,7 +6,7 @@
 /*   By: llevasse <llevasse@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/22 00:36:13 by llevasse          #+#    #+#             */
-/*   Updated: 2023/12/08 14:56:55 by llevasse         ###   ########.fr       */
+/*   Updated: 2023/12/08 15:06:26 by llevasse         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,18 +21,31 @@ float	no_higher(float nb, float highest, float lowest)
 	return (nb);
 }
 
-///@brief Set player new position given distance
-///@param *cub Pointer to cub
-///@param angle Should always pass 0 unless need an offset 
-///(like when going left or right)
-///@param distance Distance of which to put the new point from the old one
-void	set_player_new_pos(t_cub *cub, int angle, float distance)
+// return 1 if player collides with wall
+int	check_collision(t_cub *cub, int angle, float offset)
 {
-	int		new_angle;
+	t_point	new_p;
+	int		px;
+	int		py;
+	int		merge;				// 1 unit of distance to prevent player from being inside the wall
 
-	new_angle = no_higher(cub->player.pa + angle, 360, 0);
-	cub->player.px = cub->player.px + distance * cos(new_angle * RADIAN);
-	cub->player.py = cub->player.py + distance * sin(new_angle * RADIAN);
+	merge = 1;
+	if (offset < 0)
+		merge = -1;
+	get_player_new_pos(cub, angle, offset + merge, &new_p);
+	if (new_p.x < 0 || new_p.y < 0 || new_p.x > MMAP_S || new_p.y > MMAP_S)
+		return (1);
+	px = cub->player.px / cub->mmap->block_s;
+	py = cub->player.py / cub->mmap->block_s;
+	new_p.x /= cub->mmap->block_s;
+	new_p.y /= cub->mmap->block_s;
+	if (py >= 0 && py < cub->mmap->nb_line && 
+			new_p.x >= 0 && new_p.x < (int)ft_strlen(cub->mmap->map[py]) && ft_is_in_str("NSWE0", cub->mmap->map[py][(int)new_p.x]))
+		cub->player.px = new_p.x * cub->mmap->block_s;
+	if (new_p.y >= 0 && new_p.y < cub->mmap->nb_line && 
+			px >= 0 && px < (int)ft_strlen(cub->mmap->map[(int)new_p.y]) && ft_is_in_str("NSWE0", cub->mmap->map[(int)new_p.y][px]))
+		cub->player.py = new_p.y * cub->mmap->block_s;
+	return (1);
 }
 
 ///@brief Get player new position given distance

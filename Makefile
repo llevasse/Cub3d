@@ -32,7 +32,6 @@ SRC				=	srcs/main.c \
 					srcs/render/get_pixel_colour.c \
 					srcs/render/get_orientation.c \
 					srcs/input/input.c \
-					srcs/input/collision.c \
 					srcs/input/set_player_pos.c
 
 OBJS_DIR		=	.OBJS/

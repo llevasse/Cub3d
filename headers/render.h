@@ -6,7 +6,7 @@
 /*   By: llevasse <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/22 22:05:00 by llevasse          #+#    #+#             */
-/*   Updated: 2023/12/04 22:50:18 by llevasse         ###   ########.fr       */
+/*   Updated: 2023/12/08 15:01:33 by llevasse         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -37,10 +37,6 @@ void	draw_minimap(t_cub *cub);
 
 //srcs/render/get_pixel_colour.c:
 int		get_pixel_colour(t_img *img, int x, int y);
-
-//srcs/render/collision.c:
-int		check_w_smaller_mov(t_cub *cub, int angle, float *offset);
-int		check_collision(t_cub *cub, int angle, float *offset);
 
 //srcs/render/draw_fov.c:
 void	draw_fov(t_cub *cub);
