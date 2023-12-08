@@ -6,7 +6,7 @@
 /*   By: tdutel <tdutel@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/22 21:44:52 by llevasse          #+#    #+#             */
-/*   Updated: 2023/12/01 12:46:20 by tdutel           ###   ########.fr       */
+/*   Updated: 2023/12/08 12:10:10 by tdutel           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -28,7 +28,6 @@ void	draw_fov(t_cub *cub)
 	{
 		get_player_new_pos(cub, ca, MMAP_S * 5, &fov.p);
 		temp_x = x + COLUMN_WIDTH;
-		cub->hv = 0;
 		while (x < temp_x)
 			cast(cub, x++, ca);
 		gained_angle += FIELD_R_STEP;
