@@ -46,9 +46,9 @@ float	draw_line(t_cub cub, t_fov *fov, int colour)
 	int			pos_y;
 	t_player	nb;
 
-	line = get_line(get_player_point(cub.player.px, cub.player.py), fov->p);
-	nb.px = cub.player.px;
-	nb.py = cub.player.py;
+	line = get_line(get_player_point(cub.mini_player.px, cub.mini_player.py), fov->p);
+	nb.px = cub.mini_player.px;
+	nb.py = cub.mini_player.py;
 	nb.pa = 0;
 	while (nb.pa <= line.steps && nb.px >= 0 && nb.px <= WINDOW_W && \
 			nb.py >= 0 && nb.py <= WINDOW_H)
@@ -66,7 +66,7 @@ float	draw_line(t_cub cub, t_fov *fov, int colour)
 	}
 	fov->p.x = nb.px;
 	fov->p.y = nb.py;
-	return (sqrt(pow(nb.py - cub.player.py, 2) + pow(nb.px - cub.player.px, 2)));
+	return (sqrt(pow(nb.py - cub.mini_player.py, 2) + pow(nb.px - cub.mini_player.px, 2)));
 }
 
 void	draw_given_line(t_cub cub, t_line line, int colour)
@@ -98,9 +98,9 @@ int	get_line_dist(t_cub cub, t_point dest_p)
 	int			pos_y;
 	t_player	nb;
 
-	line = get_line(get_player_point(cub.player.px, cub.player.py), dest_p);
-	nb.px = cub.player.px;
-	nb.py = cub.player.py;
+	line = get_line(get_player_point(cub.mini_player.px, cub.mini_player.py), dest_p);
+	nb.px = cub.mini_player.px;
+	nb.py = cub.mini_player.py;
 	nb.pa = 0;
 	while (nb.pa <= line.steps && nb.px >= 0 && nb.px <= WINDOW_W && \
 			nb.py >= 0 && nb.py <= WINDOW_H)
@@ -115,14 +115,14 @@ int	get_line_dist(t_cub cub, t_point dest_p)
 		nb.py += line.y_step;
 		nb.pa += 1;
 	}
-	return (sqrt(pow(nb.py - cub.player.py, 2) + pow(nb.px - cub.player.px, 2)));
+	return (sqrt(pow(nb.py - cub.mini_player.py, 2) + pow(nb.px - cub.mini_player.px, 2)));
 }
 
 /*void	drawRays3D(t_cub cub)
 {
 	t_math	var;
 
-	var.ra = cub.player.pa;
+	var.ra = cub.mini_player.pa;
 	var.r = 0;
 	while (var.r < 1)
 	{
@@ -131,23 +131,23 @@ int	get_line_dist(t_cub cub, t_point dest_p)
 		if (var.ra > PI)
 		{
 			printf("ry = %f\n", var.ry);
-			var.ry = (((int)cub.player.py >> 6) << 6) - 0.0001;
+			var.ry = (((int)cub.mini_player.py >> 6) << 6) - 0.0001;
 			printf("ry = %f\n", var.ry);
-			var.rx = (cub.player.py - var.ry) * var.aTan + cub.player.px;
+			var.rx = (cub.mini_player.py - var.ry) * var.aTan + cub.mini_player.px;
 			var.yo = -cub.mmap->maps;
 			var.xo = -var.yo * var.aTan;
 		}
 		if (var.ra < PI)
 		{
-			var.ry = (((int)cub.player.py >> 6) << 6) + cub.mmap->maps;
-			var.rx = (cub.player.py - var.ry) * var.aTan + cub.player.px;
+			var.ry = (((int)cub.mini_player.py >> 6) << 6) + cub.mmap->maps;
+			var.rx = (cub.mini_player.py - var.ry) * var.aTan + cub.mini_player.px;
 			var.yo = cub.mmap->maps;
 			var.xo = -var.yo * var.aTan;
 		}
 		if (var.ra == 0 || var.ra == PI)
 		{
-			var.rx = cub.player.px;
-			var.ry = cub.player.py;
+			var.rx = cub.mini_player.px;
+			var.ry = cub.mini_player.py;
 			var.dof = cub.mmap->mapy;
 		}
 		printf("raPI\n");

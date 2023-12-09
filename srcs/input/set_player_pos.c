@@ -35,16 +35,16 @@ int	check_collision(t_cub *cub, int angle, float offset)
 	get_player_new_pos(cub, angle, offset + merge, &new_p);
 	if (new_p.x < 0 || new_p.y < 0 || new_p.x > MMAP_S || new_p.y > MMAP_S)
 		return (1);
-	px = cub->player.px / cub->mmap->block_s;
-	py = cub->player.py / cub->mmap->block_s;
+	px = cub->mini_player.px / cub->mmap->block_s;
+	py = cub->mini_player.py / cub->mmap->block_s;
 	new_p.x /= cub->mmap->block_s;
 	new_p.y /= cub->mmap->block_s;
 	if (py >= 0 && py < cub->mmap->nb_line && 
 			new_p.x >= 0 && new_p.x < (int)ft_strlen(cub->mmap->map[py]) && ft_is_in_str("NSWE0", cub->mmap->map[py][(int)new_p.x]))
-		cub->player.px = new_p.x * cub->mmap->block_s;
+		cub->mini_player.px = new_p.x * cub->mmap->block_s;
 	if (new_p.y >= 0 && new_p.y < cub->mmap->nb_line && 
 			px >= 0 && px < (int)ft_strlen(cub->mmap->map[(int)new_p.y]) && ft_is_in_str("NSWE0", cub->mmap->map[(int)new_p.y][px]))
-		cub->player.py = new_p.y * cub->mmap->block_s;
+		cub->mini_player.py = new_p.y * cub->mmap->block_s;
 	return (1);
 }
 
@@ -60,7 +60,7 @@ void	get_player_new_pos(t_cub *cub, int angle, float dist, t_point *p)
 {
 	int		new_angle;
 
-	new_angle = no_higher(cub->player.pa + angle, 360, 0);
-	p->x = cub->player.px + dist * cos(new_angle * RADIAN);
-	p->y = cub->player.py + dist * sin(new_angle * RADIAN);
+	new_angle = no_higher(cub->mini_player.pa + angle, 360, 0);
+	p->x = cub->mini_player.px + dist * cos(new_angle * RADIAN);
+	p->y = cub->mini_player.py + dist * sin(new_angle * RADIAN);
 }

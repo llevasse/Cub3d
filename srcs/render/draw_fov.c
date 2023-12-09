@@ -20,7 +20,7 @@ void	draw_fov(t_cub *cub)
 	float	gained_angle;
 	float	temp_x;
 
-	ca = cub->player.pa;
+	ca = cub->mini_player.pa;
 	fov = get_fov(&ca);
 	x = 0;
 	gained_angle = 0;

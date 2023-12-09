@@ -27,16 +27,16 @@ void	init_player(t_cub *cub)
 		{
 			if (ft_is_in_str("NSEW", cub->mmap->map[i][j++]))
 			{
-				cub->player.pa = get_player_start_orientation(
+				cub->mini_player.pa = get_player_start_orientation(
 						cub->mmap->map[i][j - 1]);
-				cub->player.px = ((j - 1) * cub->mmap->block_s);
-				cub->player.py = (i * cub->mmap->block_s);
+				cub->mini_player.px = ((j - 1) * cub->mmap->block_s);
+				cub->mini_player.py = (i * cub->mmap->block_s);
 			}
 		}
 		i++;
 	}
-	cub->player.px += cub->mmap->block_s / 2;
-	cub->player.py += cub->mmap->block_s / 2;
+	cub->mini_player.px += cub->mmap->block_s / 2;
+	cub->mini_player.py += cub->mmap->block_s / 2;
 }
 
 int	get_player_start_orientation(char c)

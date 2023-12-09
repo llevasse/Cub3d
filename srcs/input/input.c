@@ -49,8 +49,8 @@ int	close_window(t_cub *cub)
 int	rotate_input(int keysym, t_cub *cub)
 {
 	if (keysym == XK_Left)
-		cub->player.pa -= PLAYER_R_OFFSET;
+		cub->mini_player.pa -= PLAYER_R_OFFSET;
 	if (keysym == XK_Right)
-		cub->player.pa += PLAYER_R_OFFSET;
+		cub->mini_player.pa += PLAYER_R_OFFSET;
 	return (0);
 }
