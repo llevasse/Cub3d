@@ -6,7 +6,7 @@
 /*   By: llevasse <llevasse@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/22 00:36:13 by llevasse          #+#    #+#             */
-/*   Updated: 2023/12/08 15:06:26 by llevasse         ###   ########.fr       */
+/*   Updated: 2023/12/10 00:00:35 by llevasse         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,30 +22,41 @@ float	no_higher(float nb, float highest, float lowest)
 }
 
 // return 1 if player collides with wall
-int	check_collision(t_cub *cub, int angle, float offset)
+void	check_collision(t_cub *cub, int angle, float mini_offset, float offset)
 {
 	t_point	new_p;
-	int		px;
-	int		py;
+	t_point	new_mini_p;
+	int		x;
+	int		y;
 	int		merge;				// 1 unit of distance to prevent player from being inside the wall
 
 	merge = 1;
 	if (offset < 0)
 		merge = -1;
 	get_player_new_pos(cub, angle, offset + merge, &new_p);
-	if (new_p.x < 0 || new_p.y < 0 || new_p.x > MMAP_S || new_p.y > MMAP_S)
-		return (1);
-	px = cub->mini_player.px / cub->mmap->block_s;
-	py = cub->mini_player.py / cub->mmap->block_s;
-	new_p.x /= cub->mmap->block_s;
-	new_p.y /= cub->mmap->block_s;
-	if (py >= 0 && py < cub->mmap->nb_line && 
-			new_p.x >= 0 && new_p.x < (int)ft_strlen(cub->mmap->map[py]) && ft_is_in_str("NSWE0", cub->mmap->map[py][(int)new_p.x]))
-		cub->mini_player.px = new_p.x * cub->mmap->block_s;
-	if (new_p.y >= 0 && new_p.y < cub->mmap->nb_line && 
-			px >= 0 && px < (int)ft_strlen(cub->mmap->map[(int)new_p.y]) && ft_is_in_str("NSWE0", cub->mmap->map[(int)new_p.y][px]))
-		cub->mini_player.py = new_p.y * cub->mmap->block_s;
-	return (1);
+	get_mini_player_new_pos(cub, angle, mini_offset + merge, &new_mini_p);
+	new_mini_p.x /= cub->mmap->block_s;
+	new_mini_p.y /= cub->mmap->block_s;
+	x = new_mini_p.x;
+	y = new_mini_p.y;
+	if (new_mini_p.y >= 0 && new_mini_p.y < cub->mmap->nb_line &&
+			new_mini_p.x >= 0 &&
+			new_mini_p.x < (int)ft_strlen(cub->mmap->map[y]) &&
+			ft_is_in_str("NSWE0", cub->mmap->map[y][x]))
+	{
+		cub->mini_player.px = new_mini_p.x * cub->mmap->block_s;
+		cub->player.px = new_p.x;
+	}
+	if (new_mini_p.y >= 0 && new_mini_p.y < cub->mmap->nb_line &&
+			new_mini_p.x >= 0 &&
+			new_mini_p.x < (int)ft_strlen(cub->mmap->map[y]) &&
+			ft_is_in_str("NSWE0", cub->mmap->map[y][x]))
+	{
+		cub->mini_player.py = new_mini_p.y * cub->mmap->block_s;
+		cub->player.py = new_p.y;
+	}
+	printf("\nmini player pos %f/%f\n", cub->mini_player.px, cub->mini_player.py);
+	printf("real player pos %f/%f\n", cub->player.px, cub->player.py);
 }
 
 ///@brief Get player new position given distance
@@ -57,6 +68,15 @@ int	check_collision(t_cub *cub, int angle, float offset)
 ///@return Return value of new y pos
 
 void	get_player_new_pos(t_cub *cub, int angle, float dist, t_point *p)
+{
+	int		new_angle;
+
+	new_angle = no_higher(cub->player.pa + angle, 360, 0);
+	p->x = cub->player.px + dist * cos(new_angle * RADIAN);
+	p->y = cub->player.py + dist * sin(new_angle * RADIAN);
+}
+
+void	get_mini_player_new_pos(t_cub *cub, int angle, float dist, t_point *p)
 {
 	int		new_angle;
 

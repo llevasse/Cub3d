@@ -6,7 +6,7 @@
 /*   By: tdutel <tdutel@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/19 23:04:28 by llevasse          #+#    #+#             */
-/*   Updated: 2023/12/08 15:02:17 by llevasse         ###   ########.fr       */
+/*   Updated: 2023/12/09 22:40:56 by llevasse         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,19 +15,22 @@
 int	handle_input(int keysym, t_cub *cub)
 {
 	float	offset;
+	float	mini_offset;
 
-	offset = 0.1 * cub->mmap->block_s;
+	mini_offset = 0.1 * cub->mmap->block_s;
+	offset = 0.1 * cub->map->north_img.width;
 	if (keysym == XK_w || keysym == XK_Up)
-		check_collision(cub, 0, offset);
+		check_collision(cub, 0, mini_offset, offset);
 	if (keysym == XK_d)
-		check_collision(cub, 90, offset);
+		check_collision(cub, 90, mini_offset, offset);
+	mini_offset *= -1;
 	offset *= -1;
 	if (keysym == XK_s || keysym == XK_Down)
-		check_collision(cub, 0, offset);
+		check_collision(cub, 0, mini_offset, offset);
 	if (keysym == XK_a)
-		check_collision(cub, 90, offset);
+		check_collision(cub, 90, mini_offset, offset);
 	if (keysym == XK_Escape)
-		return (close_window(cub), offset);
+		return (close_window(cub), 0);
 	rotate_input(keysym, cub);
 	return (0);
 }
