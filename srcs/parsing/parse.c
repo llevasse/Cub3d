@@ -74,5 +74,5 @@ static void	set_map_null(t_map *map)
 	map->west_img.mlx_img = NULL;
 	map->f_rgb = -1;
 	map->c_rgb = -1;
-	map->mini_player_rotation = -1;
+	map->player_rotation = -1;
 }
