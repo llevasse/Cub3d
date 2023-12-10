@@ -6,7 +6,7 @@
 /*   By: llevasse <llevasse@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/22 00:36:13 by llevasse          #+#    #+#             */
-/*   Updated: 2023/12/10 15:03:25 by llevasse         ###   ########.fr       */
+/*   Updated: 2023/12/10 15:46:02 by llevasse         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -55,8 +55,6 @@ void	check_collision(t_cub *cub, int angle, float mini_offset, float offset)
 		cub->mini_player.py = new_mini_p.y * cub->mmap->block_s;
 		cub->player.py = new_p.y;
 	}
-	printf("mini : %f %f\n", cub->mini_player.px, cub->mini_player.py);
-	printf("real : %f %f\n\n", cub->player.px, cub->player.py);
 }
 
 ///@brief Get player new position given distance

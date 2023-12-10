@@ -6,7 +6,7 @@
 /*   By: llevasse <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/25 21:58:31 by llevasse          #+#    #+#             */
-/*   Updated: 2023/12/10 15:06:57 by llevasse         ###   ########.fr       */
+/*   Updated: 2023/12/10 15:47:24 by llevasse         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -74,16 +74,20 @@ t_line	get_horr(t_cub cub, float pa)
 		dof--;
 	}
 	mini_line = get_line(get_player_point(cub.mini_player.px, cub.mini_player.py), mini_line.p_a);
-	line = get_line(get_player_point(cub.player.px, cub.player.py), line.p_a);
 	if (dof == -42)
 		mini_line.dist = 0x7fffffff + 0.0;
 	else
 		mini_line.dist *= cos((cub.mini_player.pa - pa) * RADIAN);
 	mini_line.wall = get_orient_horr(cub.map, pa, &mini_line.w_type);
-	mini_line.wall_percent = ((int)line.p_b.x % mini_line.wall->width) / (float)mini_line.wall->width;
+	mini_line.wall_percent = ((int)line.p_a.x % mini_line.wall->width);
 	if (pa > 0 && pa < 180)
-		mini_line.wall_percent = 1 - mini_line.wall_percent;
-	mini_line.wall_percent = mini_line.wall->width * mini_line.wall_percent;
+		mini_line.wall_percent = mini_line.wall->width - mini_line.wall_percent;
+	if (pos_x == 8){
+		if (mini_line.wall_percent < 63)
+			printf("%f ", mini_line.wall_percent);
+		else
+			printf("%f\n", mini_line.wall_percent);
+	}
 	if (mini_line.dist >= 1)
 		mini_line.height = ((cub.mmap->block_s * WINDOW_H) / mini_line.dist);
 	mini_line.start = (WINDOW_H - mini_line.height) / 2;
