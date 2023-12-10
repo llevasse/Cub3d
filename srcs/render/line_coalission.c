@@ -6,7 +6,7 @@
 /*   By: llevasse <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/25 21:58:31 by llevasse          #+#    #+#             */
-/*   Updated: 2023/12/10 00:22:18 by llevasse         ###   ########.fr       */
+/*   Updated: 2023/12/10 15:06:57 by llevasse         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -33,7 +33,7 @@ int	init_horr(t_cub cub, float pa, t_line *mini_line, t_line *line)
 	}
 	else if (pa > 0 && pa < 180)
 	{
-		line->y_step = -cub.map->north_img.width;
+		line->y_step = -width;
 		mini_line->y_step = -block_s;
 		mini_line->p_a.y = ((int)cub.mini_player.py / block_s) * block_s + block_s;
 		line->p_a.y = ((int)cub.player.py / width) * width + width;
@@ -70,18 +70,19 @@ t_line	get_horr(t_cub cub, float pa)
 		mini_line.p_a.x += mini_line.x_step;
 		line.p_a.x += line.x_step;
 		mini_line.p_a.y -= mini_line.y_step;
-		line.p_a.y += line.y_step;
+		line.p_a.y -= line.y_step;
 		dof--;
 	}
 	mini_line = get_line(get_player_point(cub.mini_player.px, cub.mini_player.py), mini_line.p_a);
+	line = get_line(get_player_point(cub.player.px, cub.player.py), line.p_a);
 	if (dof == -42)
 		mini_line.dist = 0x7fffffff + 0.0;
 	else
 		mini_line.dist *= cos((cub.mini_player.pa - pa) * RADIAN);
 	mini_line.wall = get_orient_horr(cub.map, pa, &mini_line.w_type);
-	mini_line.wall_percent = ((int)line.p_a.x % mini_line.wall->width) / (float)mini_line.wall->width;
+	mini_line.wall_percent = ((int)line.p_b.x % mini_line.wall->width) / (float)mini_line.wall->width;
 	if (pa > 0 && pa < 180)
-		mini_line.wall_percent = (1 - (mini_line.wall_percent));
+		mini_line.wall_percent = 1 - mini_line.wall_percent;
 	mini_line.wall_percent = mini_line.wall->width * mini_line.wall_percent;
 	if (mini_line.dist >= 1)
 		mini_line.height = ((cub.mmap->block_s * WINDOW_H) / mini_line.dist);

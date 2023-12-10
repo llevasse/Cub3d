@@ -6,7 +6,7 @@
 /*   By: llevasse <llevasse@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/22 00:36:13 by llevasse          #+#    #+#             */
-/*   Updated: 2023/12/10 00:29:17 by llevasse         ###   ########.fr       */
+/*   Updated: 2023/12/10 15:03:25 by llevasse         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -71,7 +71,7 @@ void	get_player_new_pos(t_cub *cub, int angle, float dist, t_point *p)
 {
 	int		new_angle;
 
-	new_angle = no_higher(cub->player.pa + angle, 360, 0);
+	new_angle = no_higher(cub->mini_player.pa + angle, 360, 0);
 	p->x = cub->player.px + dist * cos(new_angle * RADIAN);
 	p->y = cub->player.py + dist * sin(new_angle * RADIAN);
 }
