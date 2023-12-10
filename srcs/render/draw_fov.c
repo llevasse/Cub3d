@@ -42,9 +42,9 @@ void	draw_fov(t_cub *cub)
 	x = 0;
 	while (x < WINDOW_W){
 		if (fov.rays[(int)x].type)
-			draw_given_line(*cub, fov.rays[(int)x++].h, 0x00ffff);
+			draw_line(*cub, fov.rays[(int)x++].h, 0x00ffff);
 		else
-			draw_given_line(*cub, fov.rays[(int)x++].v, 0x0000ff);
+			draw_line(*cub, fov.rays[(int)x++].v, 0x0000ff);
 	
 	}
 }
