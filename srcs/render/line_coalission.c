@@ -6,7 +6,7 @@
 /*   By: llevasse <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/25 21:58:31 by llevasse          #+#    #+#             */
-/*   Updated: 2023/12/10 15:47:24 by llevasse         ###   ########.fr       */
+/*   Updated: 2023/12/10 23:05:23 by llevasse         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -45,11 +45,14 @@ int	init_horr(t_cub cub, float pa, t_line *mini_line, t_line *line)
 		return (-42);
 	}
 	mini_line->p_a.x = ((cub.mini_player.py - mini_line->p_a.y) * -tan_v + cub.mini_player.px);
-	line->p_a.x = ((cub.player.py - line->p_a.y) * -tan_v + cub.player.px);
+	line->p_a.x = (cub.player.py - line->p_a.y) * -tan_v + cub.player.px);
 	mini_line->x_step = -mini_line->y_step * tan_v;
 	line->x_step = -line->y_step * tan_v;
 	return (cub.mmap->dof);
 }
+
+//bug: texture moves with player
+//bug: texture error if a bit close to wall
 
 t_line	get_horr(t_cub cub, float pa)
 {
@@ -68,9 +71,8 @@ t_line	get_horr(t_cub cub, float pa)
 			|| !ft_is_in_str("NSEW0", cub.mmap->map[pos_y][pos_x]))
 			break ;
 		mini_line.p_a.x += mini_line.x_step;
-		line.p_a.x += line.x_step;
 		mini_line.p_a.y -= mini_line.y_step;
-		line.p_a.y -= line.y_step;
+		line.p_a.x += line.x_step;
 		dof--;
 	}
 	mini_line = get_line(get_player_point(cub.mini_player.px, cub.mini_player.py), mini_line.p_a);
@@ -82,12 +84,12 @@ t_line	get_horr(t_cub cub, float pa)
 	mini_line.wall_percent = ((int)line.p_a.x % mini_line.wall->width);
 	if (pa > 0 && pa < 180)
 		mini_line.wall_percent = mini_line.wall->width - mini_line.wall_percent;
-	if (pos_x == 8){
+/*	if (pos_x == 8){
 		if (mini_line.wall_percent < 63)
 			printf("%f ", mini_line.wall_percent);
 		else
 			printf("%f\n", mini_line.wall_percent);
-	}
+	}*/
 	if (mini_line.dist >= 1)
 		mini_line.height = ((cub.mmap->block_s * WINDOW_H) / mini_line.dist);
 	mini_line.start = (WINDOW_H - mini_line.height) / 2;
