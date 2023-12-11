@@ -6,7 +6,7 @@
 /*   By: llevasse <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/25 21:58:31 by llevasse          #+#    #+#             */
-/*   Updated: 2023/12/10 23:05:23 by llevasse         ###   ########.fr       */
+/*   Updated: 2023/12/11 11:21:47 by llevasse         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -28,15 +28,15 @@ int	init_horr(t_cub cub, float pa, t_line *mini_line, t_line *line)
 	{
 		line->y_step = width;
 		mini_line->y_step = block_s;
-		mini_line->p_a.y = ((int)cub.mini_player.py / block_s) * block_s - 0.001;
-		line->p_a.y = ((int)cub.player.py / width) * width - 0.001;
+		mini_line->p_a.y = (((int)cub.mini_player.py / block_s) * block_s) - 0.001;
+		line->p_a.y = (((int)cub.player.py / width) * width) - 0.001;
 	}
 	else if (pa > 0 && pa < 180)
 	{
 		line->y_step = -width;
 		mini_line->y_step = -block_s;
-		mini_line->p_a.y = ((int)cub.mini_player.py / block_s) * block_s + block_s;
-		line->p_a.y = ((int)cub.player.py / width) * width + width;
+		mini_line->p_a.y = (((int)cub.mini_player.py / block_s) * block_s) + block_s;
+		line->p_a.y = (((int)cub.player.py / width) * width) + width;
 	}
 	else
 	{
@@ -44,8 +44,8 @@ int	init_horr(t_cub cub, float pa, t_line *mini_line, t_line *line)
 		mini_line->p_a.y = cub.mini_player.py;
 		return (-42);
 	}
-	mini_line->p_a.x = ((cub.mini_player.py - mini_line->p_a.y) * -tan_v + cub.mini_player.px);
-	line->p_a.x = (cub.player.py - line->p_a.y) * -tan_v + cub.player.px);
+	mini_line->p_a.x = ((cub.mini_player.py - mini_line->p_a.y) * -tan_v) + cub.mini_player.px;
+	line->p_a.x = ((cub.player.py - line->p_a.y) * -tan_v) + cub.player.px;
 	mini_line->x_step = -mini_line->y_step * tan_v;
 	line->x_step = -line->y_step * tan_v;
 	return (cub.mmap->dof);
@@ -63,7 +63,7 @@ t_line	get_horr(t_cub cub, float pa)
 	int		dof;
 
 	dof = init_horr(cub, pa, &mini_line, &line);
-	while (dof > 0)
+	while (dof-- > 0)
 	{
 		pos_x = (mini_line.p_a.x / cub.mmap->block_s);
 		pos_y = (mini_line.p_a.y / cub.mmap->block_s);
@@ -73,10 +73,9 @@ t_line	get_horr(t_cub cub, float pa)
 		mini_line.p_a.x += mini_line.x_step;
 		mini_line.p_a.y -= mini_line.y_step;
 		line.p_a.x += line.x_step;
-		dof--;
 	}
 	mini_line = get_line(get_player_point(cub.mini_player.px, cub.mini_player.py), mini_line.p_a);
-	if (dof == -42)
+	if (dof <= -42)
 		mini_line.dist = 0x7fffffff + 0.0;
 	else
 		mini_line.dist *= cos((cub.mini_player.pa - pa) * RADIAN);

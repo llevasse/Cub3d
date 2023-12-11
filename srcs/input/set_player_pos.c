@@ -6,7 +6,7 @@
 /*   By: llevasse <llevasse@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/22 00:36:13 by llevasse          #+#    #+#             */
-/*   Updated: 2023/12/10 15:46:02 by llevasse         ###   ########.fr       */
+/*   Updated: 2023/12/11 11:35:48 by llevasse         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -39,18 +39,15 @@ void	check_collision(t_cub *cub, int angle, float mini_offset, float offset)
 	new_mini_p.y /= cub->mmap->block_s;
 	x = new_mini_p.x;
 	y = new_mini_p.y;
-	if (new_mini_p.y >= 0 && new_mini_p.y < cub->mmap->nb_line &&
-			new_mini_p.x >= 0 &&
-			new_mini_p.x < (int)ft_strlen(cub->mmap->map[y]) &&
-			ft_is_in_str("NSWE0", cub->mmap->map[y][x]))
+	if (y < 0 || y >= cub->mmap->nb_line ||
+			x < 0 || x >= (int)ft_strlen(cub->mmap->map[y]))
+		return ;
+	if (ft_is_in_str("NSWE0", cub->mmap->map[(int)cub->mini_player.py / cub->mmap->block_s][x]))
 	{
 		cub->mini_player.px = new_mini_p.x * cub->mmap->block_s;
 		cub->player.px = new_p.x;
 	}
-	if (new_mini_p.y >= 0 && new_mini_p.y < cub->mmap->nb_line &&
-			new_mini_p.x >= 0 &&
-			new_mini_p.x < (int)ft_strlen(cub->mmap->map[y]) &&
-			ft_is_in_str("NSWE0", cub->mmap->map[y][x]))
+	if (ft_is_in_str("NSWE0", cub->mmap->map[y][(int)cub->mini_player.px / cub->mmap->block_s]))
 	{
 		cub->mini_player.py = new_mini_p.y * cub->mmap->block_s;
 		cub->player.py = new_p.y;
