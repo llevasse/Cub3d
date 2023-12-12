@@ -6,7 +6,7 @@
 /*   By: llevasse <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/25 21:58:31 by llevasse          #+#    #+#             */
-/*   Updated: 2023/12/11 11:21:47 by llevasse         ###   ########.fr       */
+/*   Updated: 2023/12/11 16:43:48 by llevasse         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -42,6 +42,8 @@ int	init_horr(t_cub cub, float pa, t_line *mini_line, t_line *line)
 	{
 		mini_line->p_a.x = cub.mini_player.px;
 		mini_line->p_a.y = cub.mini_player.py;
+		line->p_a.x = cub.player.px;
+		line->p_a.y = cub.player.py;
 		return (-42);
 	}
 	mini_line->p_a.x = ((cub.mini_player.py - mini_line->p_a.y) * -tan_v) + cub.mini_player.px;
@@ -67,7 +69,7 @@ t_line	get_horr(t_cub cub, float pa)
 	{
 		pos_x = (mini_line.p_a.x / cub.mmap->block_s);
 		pos_y = (mini_line.p_a.y / cub.mmap->block_s);
-		if (pos_y >= cub.mmap->nb_line || pos_y < 0 || pos_x < 0 || pos_x >= (int)ft_strlen(cub.mmap->map[pos_y]) \
+		if (pos_y >= cub.mmap->nb_line || pos_y < 0 || pos_x < 0 || pos_x >= (int)ft_strlen(cub.mmap->map[pos_y]) 
 			|| !ft_is_in_str("NSEW0", cub.mmap->map[pos_y][pos_x]))
 			break ;
 		mini_line.p_a.x += mini_line.x_step;
@@ -83,12 +85,12 @@ t_line	get_horr(t_cub cub, float pa)
 	mini_line.wall_percent = ((int)line.p_a.x % mini_line.wall->width);
 	if (pa > 0 && pa < 180)
 		mini_line.wall_percent = mini_line.wall->width - mini_line.wall_percent;
-/*	if (pos_x == 8){
-		if (mini_line.wall_percent < 63)
-			printf("%f ", mini_line.wall_percent);
+	if (line.p_a.x > 512 && line.p_a.x < 576){
+		if (line.p_a.x < 574)
+			printf("%.f ", line.p_a.x);
 		else
-			printf("%f\n", mini_line.wall_percent);
-	}*/
+			printf("%.f\n", line.p_a.x);
+	}
 	if (mini_line.dist >= 1)
 		mini_line.height = ((cub.mmap->block_s * WINDOW_H) / mini_line.dist);
 	mini_line.start = (WINDOW_H - mini_line.height) / 2;

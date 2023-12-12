@@ -6,7 +6,7 @@
 /*   By: llevasse <llevasse@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/22 00:36:13 by llevasse          #+#    #+#             */
-/*   Updated: 2023/12/11 11:44:27 by llevasse         ###   ########.fr       */
+/*   Updated: 2023/12/11 13:55:44 by llevasse         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -28,24 +28,22 @@ void	check_collision(t_cub *cub, int angle, float mini_offset, float offset)
 	t_point	new_mini_p;
 	int		x;
 	int		y;
-	int		merge;				// 1 unit of distance to prevent player from being inside the wall
+	int		block_s;
 
-	merge = 1;
-	if (offset < 0)
-		merge = -1;
-	get_player_new_pos(cub, angle, offset + merge, &new_p);
-	get_mini_player_new_pos(cub, angle, mini_offset + merge, &new_mini_p);
+	get_player_new_pos(cub, angle, offset, &new_p);
+	get_mini_player_new_pos(cub, angle, mini_offset, &new_mini_p);
 	x = new_mini_p.x / cub->mmap->block_s;
 	y = new_mini_p.y / cub->mmap->block_s;
+	block_s = cub->mmap->block_s;
 	if (y < 0 || y >= cub->mmap->nb_line ||
 			x < 0 || x >= (int)ft_strlen(cub->mmap->map[y]))
 		return ;
-	if (ft_is_in_str("NSWE0", cub->mmap->map[(int)cub->mini_player.py / cub->mmap->block_s][x]))
+	if (ft_is_in_str("NSWE0", cub->mmap->map[(int)cub->mini_player.py / block_s][x]))
 	{
 		cub->mini_player.px = new_mini_p.x;
 		cub->player.px = new_p.x;
 	}
-	if (ft_is_in_str("NSWE0", cub->mmap->map[y][(int)cub->mini_player.px / cub->mmap->block_s]))
+	if (ft_is_in_str("NSWE0", cub->mmap->map[y][(int)cub->mini_player.px / block_s]))
 	{
 		cub->mini_player.py = new_mini_p.y;
 		cub->player.py = new_p.y;
@@ -64,6 +62,10 @@ void	get_player_new_pos(t_cub *cub, int angle, float dist, t_point *p)
 {
 	int		new_angle;
 
+	if (dist < 0)		//unit of distance to prevent player from being inside the wall
+		dist--;
+	else
+		dist++;
 	new_angle = no_higher(cub->mini_player.pa + angle, 360, 0);
 	p->x = cub->player.px + dist * cos(new_angle * RADIAN);
 	p->y = cub->player.py + dist * sin(new_angle * RADIAN);
@@ -73,6 +75,10 @@ void	get_mini_player_new_pos(t_cub *cub, int angle, float dist, t_point *p)
 {
 	int		new_angle;
 
+	if (dist < 0)		//unit of distance to prevent player from being inside the wall
+		dist--;
+	else
+		dist++;
 	new_angle = no_higher(cub->mini_player.pa + angle, 360, 0);
 	p->x = cub->mini_player.px + dist * cos(new_angle * RADIAN);
 	p->y = cub->mini_player.py + dist * sin(new_angle * RADIAN);
