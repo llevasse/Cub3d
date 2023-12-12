@@ -6,7 +6,7 @@
 /*   By: llevasse <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/25 21:58:31 by llevasse          #+#    #+#             */
-/*   Updated: 2023/12/11 16:43:48 by llevasse         ###   ########.fr       */
+/*   Updated: 2023/12/12 23:48:47 by llevasse         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,30 +26,23 @@ int	init_horr(t_cub cub, float pa, t_line *mini_line, t_line *line)
 	width = cub.map->north_img.width;
 	if (pa > 180 && pa < 360)
 	{
-		line->y_step = width;
 		mini_line->y_step = block_s;
 		mini_line->p_a.y = (((int)cub.mini_player.py / block_s) * block_s) - 0.001;
-		line->p_a.y = (((int)cub.player.py / width) * width) - 0.001;
 	}
 	else if (pa > 0 && pa < 180)
 	{
-		line->y_step = -width;
 		mini_line->y_step = -block_s;
 		mini_line->p_a.y = (((int)cub.mini_player.py / block_s) * block_s) + block_s;
-		line->p_a.y = (((int)cub.player.py / width) * width) + width;
 	}
 	else
 	{
 		mini_line->p_a.x = cub.mini_player.px;
 		mini_line->p_a.y = cub.mini_player.py;
-		line->p_a.x = cub.player.px;
-		line->p_a.y = cub.player.py;
 		return (-42);
 	}
 	mini_line->p_a.x = ((cub.mini_player.py - mini_line->p_a.y) * -tan_v) + cub.mini_player.px;
-	line->p_a.x = ((cub.player.py - line->p_a.y) * -tan_v) + cub.player.px;
 	mini_line->x_step = -mini_line->y_step * tan_v;
-	line->x_step = -line->y_step * tan_v;
+	(void)line;
 	return (cub.mmap->dof);
 }
 
@@ -65,7 +58,7 @@ t_line	get_horr(t_cub cub, float pa)
 	int		dof;
 
 	dof = init_horr(cub, pa, &mini_line, &line);
-	while (dof-- > 0)
+	while (dof-- > 0)									//move point A of line until it lands on a wall
 	{
 		pos_x = (mini_line.p_a.x / cub.mmap->block_s);
 		pos_y = (mini_line.p_a.y / cub.mmap->block_s);
@@ -74,23 +67,21 @@ t_line	get_horr(t_cub cub, float pa)
 			break ;
 		mini_line.p_a.x += mini_line.x_step;
 		mini_line.p_a.y -= mini_line.y_step;
-		line.p_a.x += line.x_step;
 	}
-	mini_line = get_line(get_player_point(cub.mini_player.px, cub.mini_player.py), mini_line.p_a);
+	mini_line = get_line(get_player_point(cub.mini_player.px, cub.mini_player.py), mini_line.p_a);		// reset line with point A as player and point B a wall bordure
+
 	if (dof <= -42)
-		mini_line.dist = 0x7fffffff + 0.0;
+		mini_line.dist = 0x7fffffff + 0.0;		// if out of view set the distance to max int
 	else
-		mini_line.dist *= cos((cub.mini_player.pa - pa) * RADIAN);
-	mini_line.wall = get_orient_horr(cub.map, pa, &mini_line.w_type);
-	mini_line.wall_percent = ((int)line.p_a.x % mini_line.wall->width);
+		mini_line.dist *= cos((cub.mini_player.pa - pa) * RADIAN);	// apply fisheye effet
+
+	mini_line.wall = get_orient_horr(cub.map, pa, &mini_line.w_type);	// get which texture is on the wall
+
+	mini_line.wall_percent = ((int)fmod(mini_line.p_b.x, cub.mmap->block_s) / (float)cub.mmap->block_s);	// get X value of texture
 	if (pa > 0 && pa < 180)
 		mini_line.wall_percent = mini_line.wall->width - mini_line.wall_percent;
-	if (line.p_a.x > 512 && line.p_a.x < 576){
-		if (line.p_a.x < 574)
-			printf("%.f ", line.p_a.x);
-		else
-			printf("%.f\n", line.p_a.x);
-	}
+	mini_line.wall_percent *= mini_line.wall->width;
+
 	if (mini_line.dist >= 1)
 		mini_line.height = ((cub.mmap->block_s * WINDOW_H) / mini_line.dist);
 	mini_line.start = (WINDOW_H - mini_line.height) / 2;
@@ -106,6 +97,7 @@ int	init_vert(t_cub cub, float pa, t_line *mini_line, t_line *line)
 	float	tan_v;
 	int		block_s;
 	int		width;
+	(void)line;
 
 	tan_v = tan(pa * RADIAN);
 	block_s = cub.mmap->block_s;
@@ -113,16 +105,12 @@ int	init_vert(t_cub cub, float pa, t_line *mini_line, t_line *line)
 	if (pa > 90 && pa < 270)
 	{
 		mini_line->x_step = -block_s;
-		line->x_step = -width;
 		mini_line->p_a.x = (((int)cub.mini_player.px / block_s) * block_s) - 0.001;
-		line->p_a.x = (((int)cub.player.px / width) * width) - 0.001;
 	}
 	else if ((pa > 270 && pa < 360) || (pa < 90 && pa > 0))
 	{
 		mini_line->x_step = block_s;
-		line->x_step = width;
 		mini_line->p_a.x = (((int)cub.mini_player.px / block_s) * block_s) + block_s;
-		line->p_a.x = (((int)cub.player.px / width) * width) + width;
 	}
 	else
 	{
@@ -131,9 +119,7 @@ int	init_vert(t_cub cub, float pa, t_line *mini_line, t_line *line)
 		return (-42);
 	}
 	mini_line->p_a.y = ((cub.mini_player.px - mini_line->p_a.x) * -tan_v) + cub.mini_player.py;
-	line->p_a.y = ((cub.player.px - line->p_a.x) * -tan_v) + cub.player.py;
 	mini_line->y_step = -mini_line->x_step * -tan_v;
-	line->y_step = -line->x_step * -tan_v;
 	return (cub.mmap->dof);
 }
 
@@ -155,9 +141,7 @@ t_line	get_vert(t_cub cub, float pa)
 			|| !ft_is_in_str("NSEW0", cub.mmap->map[pos_y][pos_x]))
 			break ;
 		mini_line.p_a.x += mini_line.x_step;
-		line.p_a.x += line.x_step;
 		mini_line.p_a.y += mini_line.y_step;
-		line.p_a.y += line.y_step;
 		dof--;
 	}
 	mini_line = get_line(get_player_point(cub.mini_player.px, cub.mini_player.py), mini_line.p_a);
@@ -166,10 +150,9 @@ t_line	get_vert(t_cub cub, float pa)
 	else
 		mini_line.dist *= cos((cub.mini_player.pa - pa) * RADIAN);
 	mini_line.wall = get_orient_vert(cub.map, pa, &mini_line.w_type);
-	mini_line.wall_percent = ((int)line.p_a.y % mini_line.wall->width) / (float)mini_line.wall->width;
+	mini_line.wall_percent = ((int)mini_line.p_b.y % mini_line.wall->width);
 	if (pa > 90 && pa < 270)
 		mini_line.wall_percent = (1 - mini_line.wall_percent);
-	mini_line.wall_percent = mini_line.wall->width * mini_line.wall_percent;
 	mini_line.height = WINDOW_H;
 	if (mini_line.dist >= 1)
 		mini_line.height = ((cub.mmap->block_s * WINDOW_H) / mini_line.dist);
