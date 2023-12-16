@@ -6,7 +6,7 @@
 /*   By: llevasse <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/25 21:58:31 by llevasse          #+#    #+#             */
-/*   Updated: 2023/12/16 18:11:51 by llevasse         ###   ########.fr       */
+/*   Updated: 2023/12/16 18:41:51 by llevasse         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -43,7 +43,7 @@ int	init_vert(t_cub cub, float pa, t_line *line)
 	return (cub.mmap->dof);
 }
 
-void	get_wall_percent(t_cub cub, t_line *line, float pa, int dof)
+static void	get_wall_percent(t_cub cub, t_line *line, float pa, int dof)
 {
 	*line = get_line(get_player_point(cub.player.px, cub.player.py), line->p_a);
 	line->dist *= cos((cub.player.pa - pa) * RADIAN);
