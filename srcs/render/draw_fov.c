@@ -6,7 +6,7 @@
 /*   By: llevasse <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/22 21:44:52 by llevasse          #+#    #+#             */
-/*   Updated: 2023/12/16 17:14:17 by llevasse         ###   ########.fr       */
+/*   Updated: 2023/12/16 17:20:19 by llevasse         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -43,8 +43,7 @@ void	draw_fov(t_cub *cub)
 		else
 			draw_line(*cub, fov.rays[(int)x++].v, 0x0000ff);
 	
-	}
-	*/
+	}*/
 }
 
 float	get_dist_betw_points(t_point p_a, t_point p_b)

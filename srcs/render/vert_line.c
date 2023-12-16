@@ -6,7 +6,7 @@
 /*   By: llevasse <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/25 21:58:31 by llevasse          #+#    #+#             */
-/*   Updated: 2023/12/16 17:08:59 by llevasse         ###   ########.fr       */
+/*   Updated: 2023/12/16 17:26:28 by llevasse         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,12 +25,12 @@ int	init_vert(t_cub cub, float pa, t_line *line)
 	if (pa > 90 && pa < 270)
 	{
 		line->x_step = -width;
-		line->p_a.x = (((int)cub.player.px / width) * width) - 1;
+		line->p_a.x = (((int)cub.player.px / width) * width) - 0.001;
 	}
 	else if ((pa > 270 && pa < 360) || (pa < 90 && pa > 0))
 	{
 		line->x_step = width;
-		line->p_a.x = (((int)cub.player.px / width) * width) + width + 1;
+		line->p_a.x = (((int)cub.player.px / width) * width) + width;
 	}
 	else
 	{
