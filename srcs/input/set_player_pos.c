@@ -6,7 +6,7 @@
 /*   By: llevasse <llevasse@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/22 00:36:13 by llevasse          #+#    #+#             */
-/*   Updated: 2023/12/16 17:14:45 by llevasse         ###   ########.fr       */
+/*   Updated: 2023/12/16 19:29:40 by llevasse         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -33,8 +33,8 @@ void	check_collision(t_cub *cub, int angle, float offset)
 	x = new_p.x / cub->mmap->block_s;
 	y = new_p.y / cub->mmap->block_s;
 	block_s = cub->mmap->block_s;
-	if (y < 0 || y >= cub->mmap->nb_line ||
-			x < 0 || x >= (int)ft_strlen(cub->mmap->map[y]))
+	if (y < 0 || y >= cub->mmap->nb_line
+		|| x < 0 || x >= (int)ft_strlen(cub->mmap->map[y]))
 		return ;
 	if (ft_is_in_str("NSWE0", cub->mmap->map[(int)cub->player.py / block_s][x]))
 		cub->player.px = new_p.x;
@@ -54,7 +54,7 @@ void	get_player_new_pos(t_cub *cub, int angle, float dist, t_point *p)
 {
 	int		new_angle;
 
-	if (dist < 0)		//unit of distance to prevent player from being inside the wall
+	if (dist < 0)
 		dist--;
 	else
 		dist++;
