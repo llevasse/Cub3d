@@ -6,7 +6,7 @@
 /*   By: llevasse <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/22 21:44:52 by llevasse          #+#    #+#             */
-/*   Updated: 2023/12/13 14:37:36 by llevasse         ###   ########.fr       */
+/*   Updated: 2023/12/16 16:52:47 by llevasse         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -35,7 +35,7 @@ void	draw_fov(t_cub *cub)
 	x = -1;
 	while (++x < WINDOW_W)
 		cast(cub, fov.rays[(int)x], x);
-	draw_minimap(cub);
+/*	draw_minimap(cub);
 	x = 0;
 	while (x < WINDOW_W){
 		if (fov.rays[(int)x].type)
@@ -44,6 +44,7 @@ void	draw_fov(t_cub *cub)
 			draw_line(*cub, fov.rays[(int)x++].v, 0x0000ff);
 	
 	}
+	*/
 }
 
 float	get_dist_betw_points(t_point p_a, t_point p_b)

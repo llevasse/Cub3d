@@ -6,7 +6,7 @@
 /*   By: llevasse <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/22 22:05:00 by llevasse          #+#    #+#             */
-/*   Updated: 2023/12/15 15:27:00 by llevasse         ###   ########.fr       */
+/*   Updated: 2023/12/16 17:03:22 by llevasse         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,11 +25,11 @@ int		get_line_dist(t_cub cub, t_point dest_p);
 void	draw_line(t_cub cub, t_line line, int colour);
 
 //srcs/render/horr_line.c
-int		init_horr(t_cub cub, float pa, t_line *mini_line, t_line *line);
+int		init_horr(t_cub cub, float pa, t_line *line);
 t_line	get_horr(t_cub cub, float pa);
 
 //srcs/render/vert_line.c
-int		init_vert(t_cub cub, float pa, t_line *mini_line, t_line *line);
+int		init_vert(t_cub cub, float pa, t_line *line);
 t_line	get_vert(t_cub cub, float pa);
 
 //srcs/render/minimap.c:

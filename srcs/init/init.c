@@ -6,7 +6,7 @@
 /*   By: tdutel <tdutel@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/19 22:29:27 by llevasse          #+#    #+#             */
-/*   Updated: 2023/11/06 11:18:12 by llevasse         ###   ########.fr       */
+/*   Updated: 2023/12/16 16:55:55 by llevasse         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -45,20 +45,9 @@ void	init_images(t_cub *cub)
 			&cub->img.bpp, &cub->img.line_len, &cub->img.endian);
 }
 
-int	round_to_pow_2(int n){
-	n--;
-	n |= n >> 1;
-	n |= n >> 2;
-	n |= n >> 4;
-	n |= n >> 8;
-	n |= n >> 16;
-	return (n + 1);
-}
-
 void	init_minimap(t_cub *cub)
 {
 	int	i;
-	int	divider;
 
 	cub->mmap->nb_line = get_tab_len(cub->mmap->map);
 	cub->mmap->mapy = cub->mmap->nb_line;
@@ -73,10 +62,7 @@ void	init_minimap(t_cub *cub)
 	cub->mmap->dof = cub->mmap->map_width;
 	if (cub->mmap->map_width < cub->mmap->nb_line)
 		cub->mmap->dof = cub->mmap->nb_line;
-	divider = cub->mmap->map_width;
-	if (WINDOW_W < WINDOW_H)
-		divider = cub->mmap->nb_line;
-	cub->mmap->block_s = round_to_pow_2(MMAP_S / divider) / 2;
+	cub->mmap->block_s = cub->map->north_img.width;
 }
 
 void	init_map_value(t_cub *cub)
