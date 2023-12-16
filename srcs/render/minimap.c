@@ -6,7 +6,7 @@
 /*   By: llevasse <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/20 00:28:00 by llevasse          #+#    #+#             */
-/*   Updated: 2023/11/24 23:24:24 by llevasse         ###   ########.fr       */
+/*   Updated: 2023/12/16 18:49:08 by llevasse         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -32,10 +32,12 @@ void	draw_minimap(t_cub *cub)
 	float		x;
 	float		y;
 	float		len;
+	int			size;
 	t_minimap	*map;
 
 	y = 0;
 	map = cub->mmap;
+	size = map->block_s;
 	while (y < map->nb_line)
 	{
 		x = 0;
@@ -43,9 +45,9 @@ void	draw_minimap(t_cub *cub)
 		while (x < len)
 		{
 			if (ft_is_in_str("0NSEW", map->map[(int)y][(int)x]))
-				draw_square(cub, x * map->block_s, y * map->block_s, MMAP_RGB);
+				draw_square(cub, x * size, y * size, MMAP_RGB);
 			else if (map->map[(int)y][(int)x] == '1')
-				draw_square(cub, x * map->block_s, y * map->block_s, MMAP_W_RGB);
+				draw_square(cub, x * size, y * size, MMAP_W_RGB);
 			x++;
 		}
 		y++;
