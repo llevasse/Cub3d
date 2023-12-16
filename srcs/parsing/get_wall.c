@@ -4,9 +4,9 @@
 /*   get_wall.c                                         :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: llevasse <marvin@42.fr>                    +#+  +:+       +#+        */
-/*  ea                                             +#+#+#+#+#+   +#+           */
+/*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/18 23:48:52 by llevasse          #+#    #+#             */
-/*   Updated: 2023/11/06 11:16:44 by llevasse         ###   ########.fr       */
+/*   Updated: 2023/12/16 19:27:08 by llevasse         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -31,8 +31,8 @@ static int	do_open(char *s, t_img *img, int face, t_cub *cub)
 
 	while (*s && ft_isspace(*s))
 		s++;
-
-	img->mlx_img = mlx_xpm_file_to_image(cub->mlx_ptr, ft_strsep(&s, "\n\r\t "), &w, &h);
+	img->mlx_img = mlx_xpm_file_to_image(cub->mlx_ptr,
+			ft_strsep(&s, "\n\r\t "), &w, &h);
 	if (img->mlx_img == NULL && face == 0)
 		return ((void)ft_putstr_fd(N_WALL_OPEN_ERR, 2), 0);
 	if (img->mlx_img == NULL && face == 1)
