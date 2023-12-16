@@ -6,7 +6,7 @@
 /*   By: llevasse <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/22 21:44:52 by llevasse          #+#    #+#             */
-/*   Updated: 2023/12/16 16:52:47 by llevasse         ###   ########.fr       */
+/*   Updated: 2023/12/16 17:14:17 by llevasse         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,7 +20,7 @@ void	draw_fov(t_cub *cub)
 	float	gained_angle;
 	float	temp_x;
 
-	ca = cub->mini_player.pa;
+	ca = cub->player.pa;
 	fov = get_fov(&ca);
 	x = 0;
 	gained_angle = 0;

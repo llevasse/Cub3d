@@ -6,7 +6,7 @@
 /*   By: llevasse <llevasse@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/22 11:37:45 by llevasse          #+#    #+#             */
-/*   Updated: 2023/12/11 11:26:04 by llevasse         ###   ########.fr       */
+/*   Updated: 2023/12/16 17:10:54 by llevasse         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -27,20 +27,16 @@ void	init_player(t_cub *cub)
 		{
 			if (ft_is_in_str("NSEW", cub->mmap->map[i][j++]))
 			{
-				cub->mini_player.pa = get_player_start_orientation(
+				cub->player.pa = get_player_start_orientation(
 						cub->mmap->map[i][j - 1]);
-				cub->mini_player.px = ((j - 1) * cub->mmap->block_s);
-				cub->mini_player.py = (i * cub->mmap->block_s);
-				cub->player.px = ((j - 1) * cub->map->north_img.width);
-				cub->player.py = (i * cub->map->north_img.width);
+				cub->player.px = ((j - 1) * cub->mmap->block_s);
+				cub->player.py = (i * cub->mmap->block_s);
 			}
 		}
 		i++;
 	}
-	cub->mini_player.px += cub->mmap->block_s / 2;
-	cub->mini_player.py += cub->mmap->block_s / 2;
-	cub->player.px += cub->map->north_img.width / 2;
-	cub->player.py += cub->map->north_img.width / 2;
+	cub->player.px += cub->mmap->block_s / 2;
+	cub->player.py += cub->mmap->block_s / 2;
 }
 
 int	get_player_start_orientation(char c)

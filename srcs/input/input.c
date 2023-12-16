@@ -6,7 +6,7 @@
 /*   By: tdutel <tdutel@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/19 23:04:28 by llevasse          #+#    #+#             */
-/*   Updated: 2023/12/11 11:03:41 by llevasse         ###   ########.fr       */
+/*   Updated: 2023/12/16 17:13:23 by llevasse         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,20 +15,17 @@
 int	handle_input(int keysym, t_cub *cub)
 {
 	float	offset;
-	float	mini_offset;
 
-	mini_offset = 0.1 * cub->mmap->block_s;
-	offset = 0.1 * cub->map->north_img.width;
+	offset = 0.1 * cub->mmap->block_s;
 	if (keysym == XK_w || keysym == XK_Up)
-		check_collision(cub, 0, mini_offset, offset);
+		check_collision(cub, 0, offset);
 	if (keysym == XK_d)
-		check_collision(cub, 90, mini_offset, offset);
-	mini_offset *= -1;
+		check_collision(cub, 90, offset);
 	offset *= -1;
 	if (keysym == XK_s || keysym == XK_Down)
-		check_collision(cub, 0, mini_offset, offset);
+		check_collision(cub, 0, offset);
 	if (keysym == XK_a)
-		check_collision(cub, 90, mini_offset, offset);
+		check_collision(cub, 90, offset);
 	if (keysym == XK_Escape)
 		return (close_window(cub), 0);
 	rotate_input(keysym, cub);
@@ -52,8 +49,8 @@ int	close_window(t_cub *cub)
 int	rotate_input(int keysym, t_cub *cub)
 {
 	if (keysym == XK_Left)
-		cub->mini_player.pa -= PLAYER_R_OFFSET;
+		cub->player.pa -= PLAYER_R_OFFSET;
 	if (keysym == XK_Right)
-		cub->mini_player.pa += PLAYER_R_OFFSET;
+		cub->player.pa += PLAYER_R_OFFSET;
 	return (0);
 }

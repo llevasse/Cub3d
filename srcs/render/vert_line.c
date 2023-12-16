@@ -6,7 +6,7 @@
 /*   By: llevasse <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/25 21:58:31 by llevasse          #+#    #+#             */
-/*   Updated: 2023/12/16 17:03:04 by llevasse         ###   ########.fr       */
+/*   Updated: 2023/12/16 17:08:59 by llevasse         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -51,7 +51,7 @@ t_line	get_vert(t_cub cub, float pa)
 	int		dof;
 
 	dof = init_vert(cub, pa, &line);
-	while (dof > 0)
+	while (dof-- > 0)
 	{
 		pos_x = (line.p_a.x / cub.mmap->block_s);
 		pos_y = (line.p_a.y / cub.mmap->block_s);
@@ -60,10 +60,9 @@ t_line	get_vert(t_cub cub, float pa)
 			break ;
 		line.p_a.x += line.x_step;
 		line.p_a.y += line.y_step;
-		dof--;
 	}
 	line = get_line(get_player_point(cub.player.px, cub.player.py), line.p_a);
-	if (dof == -42)
+	if (dof <= -42)
 		line.dist = 0x7fffffff + 0.0;
 	else
 		line.dist *= cos((cub.player.pa - pa) * RADIAN);
