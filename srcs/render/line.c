@@ -6,7 +6,7 @@
 /*   By: llevasse <llevasse@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/19 23:04:28 by llevasse          #+#    #+#             */
-/*   Updated: 2023/12/10 21:58:53 by llevasse         ###   ########.fr       */
+/*   Updated: 2023/12/16 18:47:32 by llevasse         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -50,7 +50,6 @@ void	draw_line(t_cub cub, t_line line, int colour)
 	}
 }
 
-
 int	get_line_dist(t_cub cub, t_point dest_p)
 {
 	t_line		line;
@@ -58,7 +57,8 @@ int	get_line_dist(t_cub cub, t_point dest_p)
 	int			pos_y;
 	t_player	nb;
 
-	line = get_line(get_player_point(cub.mini_player.px, cub.mini_player.py), dest_p);
+	line = get_line(get_player_point(cub.mini_player.px,
+				cub.mini_player.py), dest_p);
 	nb.px = cub.mini_player.px;
 	nb.py = cub.mini_player.py;
 	nb.pa = 0;
@@ -75,5 +75,6 @@ int	get_line_dist(t_cub cub, t_point dest_p)
 		nb.py += line.y_step;
 		nb.pa += 1;
 	}
-	return (sqrt(pow(nb.py - cub.mini_player.py, 2) + pow(nb.px - cub.mini_player.px, 2)));
+	return (sqrt(pow(nb.py - cub.mini_player.py, 2)
+			+ pow(nb.px - cub.mini_player.px, 2)));
 }
