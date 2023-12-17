@@ -6,7 +6,7 @@
 /*   By: llevasse <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/22 21:44:52 by llevasse          #+#    #+#             */
-/*   Updated: 2023/12/16 17:20:19 by llevasse         ###   ########.fr       */
+/*   Updated: 2023/12/17 11:35:54 by llevasse         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -28,32 +28,12 @@ void	draw_fov(t_cub *cub)
 	{
 		temp_x = x + COLUMN_WIDTH;
 		while (x < temp_x && x < WINDOW_W)
-			fov.rays[(int)x++] = get_cast_data(cub, ca);
+			cast(cub, get_cast_data(cub, ca), x++);
 		gained_angle += FIELD_R_STEP;
 		ca = no_higher(ca + FIELD_R_STEP, 360, 0);
 	}
 	x = -1;
-	while (++x < WINDOW_W)
-		cast(cub, fov.rays[(int)x], x);
-/*	draw_minimap(cub);
-	x = 0;
-	while (x < WINDOW_W){
-		if (fov.rays[(int)x].type)
-			draw_line(*cub, fov.rays[(int)x++].h, 0x00ffff);
-		else
-			draw_line(*cub, fov.rays[(int)x++].v, 0x0000ff);
-	
-	}*/
-}
-
-float	get_dist_betw_points(t_point p_a, t_point p_b)
-{
-	float	dx;
-	float	dy;
-
-	dx = p_b.x - p_a.x;
-	dy = p_b.y - p_a.y;
-	return (sqrt(pow(dy, 2) + pow(dx, 2)));
+//	draw_minimap(cub);
 }
 
 t_fov	get_fov(float *ca)
