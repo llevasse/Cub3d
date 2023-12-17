@@ -6,7 +6,7 @@
 /*   By: llevasse <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/22 21:44:52 by llevasse          #+#    #+#             */
-/*   Updated: 2023/12/17 16:25:04 by llevasse         ###   ########.fr       */
+/*   Updated: 2023/12/17 22:08:28 by llevasse         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,11 +26,11 @@ void	draw_fov(t_cub *cub)
 	gained_angle = 0;
 	while (gained_angle < PLAYER_FOV)
 	{
-		temp_x = x + COLUMN_WIDTH;
+		temp_x = x + cub->column_width;
 		while (x < temp_x && x < WINDOW_W)
 			cast(cub, get_cast_data(cub, ca), x++);
-		gained_angle += FIELD_R_STEP;
-		ca = no_higher(ca + FIELD_R_STEP, 360, 0);
+		gained_angle += cub->field_step;
+		ca = no_higher(ca + cub->field_step, 360, 0);
 	}
 	x = -1;
 	draw_minimap(cub);
