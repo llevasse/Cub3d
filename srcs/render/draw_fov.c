@@ -6,7 +6,7 @@
 /*   By: llevasse <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/22 21:44:52 by llevasse          #+#    #+#             */
-/*   Updated: 2023/12/18 00:34:16 by llevasse         ###   ########.fr       */
+/*   Updated: 2023/12/18 00:35:00 by llevasse         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -32,14 +32,4 @@ void	draw_fov(t_cub *cub)
 	}
 	x = -1;
 	draw_minimap(cub);
-}
-
-t_fov	get_fov(float *ca)
-{
-	t_fov	fov;
-
-	fov.beg_angle = no_higher(*ca - ((PLAYER_FOV) / 2), 360, 0);
-	fov.end_angle = no_higher(fov.beg_angle + (PLAYER_FOV - 1), 360, 0);
-	*ca = fov.beg_angle;
-	return (fov);
 }
