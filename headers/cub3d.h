@@ -6,25 +6,19 @@
 /*   By: tdutel <tdutel@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/18 21:43:29 by llevasse          #+#    #+#             */
-/*   Updated: 2023/12/17 15:15:41 by llevasse         ###   ########.fr       */
+/*   Updated: 2023/12/17 22:03:19 by llevasse         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #ifndef CUB3D_H
 # define CUB3D_H
 
-# define WINDOW_W	320*9
-# define WINDOW_H	200*9
-
-# define MMAP_S		WINDOW_W/3
-# if WINDOW_W/3 > WINDOW_H/3
-#	undef MMAP_S
-#	define MMAP_S WINDOW_H/3
-# endif
+# define WINDOW_W	1920
+# define WINDOW_H	1200
 
 # define MMAP_W_RGB		0x000000
 # define MMAP_RGB		0xffffff
-# define MMAP_RANGE		8	// numbers of blocks in the radius of player
+# define MMAP_RANGE		8
 # define MMAP_BLOCK_S	16
 
 # define PLAYER_RGB		0x0000ff
@@ -36,7 +30,7 @@
 # define PI 3.1415926535
 # define RADIAN PI/180
 
-# define FIELD_R_STEP ((float)(PLAYER_FOV - 1) / WINDOW_W) / 16
+# define FIELD_R_STEP ((float)(PLAYER_FOV - 1) / WINDOW_W)
 # define COLUMN_WIDTH (WINDOW_W / PLAYER_FOV) * FIELD_R_STEP
 
 # define NO 1
