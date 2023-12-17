@@ -6,13 +6,11 @@
 /*   By: llevasse <llevasse@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/19 12:01:04 by llevasse          #+#    #+#             */
-/*   Updated: 2023/11/29 19:44:28 by llevasse         ###   ########.fr       */
+/*   Updated: 2023/12/17 22:21:47 by llevasse         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "cub3d.h"
-
-static int	search_player_presence(t_map *map, t_cub *cub, char *s);
 
 int	get_map(int map_fd, t_map *map, t_cub *cub)
 {
@@ -52,7 +50,7 @@ int	check_player_in_string(t_point *p, int y, int x, char *str)
 	return (0);
 }
 
-static int	search_player_presence(t_map *map, t_cub *cub, char *s)
+int	search_player_presence(t_map *map, t_cub *cub, char *s)
 {
 	t_point	p;
 	int		y;

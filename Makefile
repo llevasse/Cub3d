@@ -44,6 +44,7 @@ HEADER_FILE		=	headers/cub3d.h \
 					headers/init.h \
 					headers/input.h \
 					headers/struct.h \
+					headers/parse.h \
 					headers/err.h
 BASE_INCLUDE	=	-I $(HEADER_DIR)
 

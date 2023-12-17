@@ -6,7 +6,7 @@
 /*   By: llevasse <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/20 00:28:00 by llevasse          #+#    #+#             */
-/*   Updated: 2023/12/17 16:22:00 by llevasse         ###   ########.fr       */
+/*   Updated: 2023/12/17 22:13:24 by llevasse         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -69,5 +69,5 @@ void	draw_minimap(t_cub *cub)
 		print.y++;
 	}
 	draw_square(cub, (MMAP_RANGE + 1) * MMAP_BLOCK_S,
-		(MMAP_RANGE + 1) * MMAP_BLOCK_S, 0xFF0000);
+		(MMAP_RANGE + 1) * MMAP_BLOCK_S, PLAYER_RGB);
 }

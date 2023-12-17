@@ -6,14 +6,11 @@
 /*   By: llevasse <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/18 21:50:20 by llevasse          #+#    #+#             */
-/*   Updated: 2023/12/16 19:26:09 by llevasse         ###   ########.fr       */
+/*   Updated: 2023/12/17 22:21:29 by llevasse         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "cub3d.h"
-
-static void	set_map_null(t_map *map);
-static void	get_side_data_addrs(t_map *map);
 
 t_map	*parse(int map_fd, t_cub *cub)
 {
@@ -79,7 +76,7 @@ void	close_walls(t_cub *cub, t_map *map)
 		mlx_destroy_image(cub->mlx_ptr, map->west_img.mlx_img);
 }
 
-static void	set_map_null(t_map *map)
+void	set_map_null(t_map *map)
 {
 	map->north_img.mlx_img = NULL;
 	map->south_img.mlx_img = NULL;

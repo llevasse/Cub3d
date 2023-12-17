@@ -6,13 +6,11 @@
 /*   By: llevasse <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/19 21:56:14 by llevasse          #+#    #+#             */
-/*   Updated: 2023/12/16 19:27:45 by llevasse         ###   ########.fr       */
+/*   Updated: 2023/12/17 22:21:57 by llevasse         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "cub3d.h"
-
-static int	fload(t_cub *cub, int x, int y);
 
 int	check_closed(t_cub *cub, int x, int y)
 {
@@ -36,7 +34,7 @@ int	check_closed(t_cub *cub, int x, int y)
 	return (1);
 }
 
-static int	fload(t_cub *cub, int x, int y)
+int	fload(t_cub *cub, int x, int y)
 {
 	if (y < 0 || x < 0)
 		return (0);

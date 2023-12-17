@@ -6,7 +6,7 @@
 /*   By: tdutel <tdutel@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/19 22:29:27 by llevasse          #+#    #+#             */
-/*   Updated: 2023/12/17 22:09:54 by llevasse         ###   ########.fr       */
+/*   Updated: 2023/12/17 22:11:01 by llevasse         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,7 +26,6 @@ void	init_cub(t_cub *cub, char **argv)
 		mlx_destroy_display(cub->mlx_ptr);
 		free(cub->mlx_ptr);
 		exit(0);
-		return ;
 	}
 	init_minimap(cub);
 	init_player(cub);
