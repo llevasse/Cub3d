@@ -6,7 +6,7 @@
 /*   By: tdutel <tdutel@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/19 22:29:27 by llevasse          #+#    #+#             */
-/*   Updated: 2023/12/17 16:08:00 by llevasse         ###   ########.fr       */
+/*   Updated: 2023/12/17 21:54:38 by llevasse         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -43,7 +43,7 @@ void	init_images(t_cub *cub)
 	cub->img.width = WINDOW_W;
 	cub->img.height = WINDOW_H;
 	cub->img.addr = mlx_get_data_addr(cub->img.mlx_img,
-			&cub->img.bpp, &cub->img.line_len, &cub->img.endian);
+		&cub->img.bpp, &cub->img.line_len, &cub->img.endian);
 }
 
 void	init_minimap(t_cub *cub)
@@ -63,8 +63,6 @@ void	init_minimap(t_cub *cub)
 	if (cub->mmap->map_width < cub->mmap->nb_line)
 		cub->mmap->dof = cub->mmap->nb_line;
 	cub->mmap->block_s = cub->map->north_img.width;
-	cub->mmap->m_ratio = cub->mmap->block_s / MMAP_BLOCK_S;
-	printf("%f\n", cub->mmap->m_ratio);
 }
 
 void	init_map_value(t_cub *cub)

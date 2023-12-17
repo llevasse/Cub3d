@@ -6,7 +6,7 @@
 /*   By: tdutel <tdutel@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/18 21:52:44 by llevasse          #+#    #+#             */
-/*   Updated: 2023/12/17 15:10:23 by llevasse         ###   ########.fr       */
+/*   Updated: 2023/12/17 21:54:54 by llevasse         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -38,22 +38,21 @@ typedef struct s_map
 	struct s_img		south_img;
 	struct s_img		east_img;
 	struct s_img		west_img;
-	int					f_rgb;		//floor rgb value
-	int					c_rgb;		//ceiling rgb value
+	int					f_rgb;
+	int					c_rgb;
 	float				player_rotation;
 	struct s_garbage	*garbage;
-	}				t_map;
+}				t_map;
 
 typedef struct s_minimap
 {
 	char				**map;
-	int					dof;		//depth of field
+	int					dof;
 	int					nb_line;
 	int					map_width;
 	int					block_s;
 	int					*mapx;
 	int					maps;
-	float				m_ratio;	// ratio to display minimap	(so each in block is 16px in minimap)
 }				t_minimap;
 
 typedef struct s_point
@@ -86,9 +85,9 @@ typedef struct s_player
 {
 	float			px;
 	float			py;
-	float			pdx;	//player delta x
-	float			pdy;	//player delta y
-	float			pa;		//player angle
+	float			pdx;
+	float			pdy;
+	float			pa;
 	struct s_point	p;
 }				t_player;
 
@@ -108,8 +107,6 @@ typedef struct s_cast
 	t_line	line;
 	t_line	h;
 	t_line	v;
-	int		side;
-	int		type;		//1 for horrizontal and 0 for vertical
 	float	y_ratio;
 	float	dist;
 }				t_cast;
@@ -121,8 +118,8 @@ typedef struct s_fov
 	t_point				rightest;
 	t_point				p;
 	t_point				p2;
-	t_line				fl;				//false_line
-	float				field_dist;		//distance between leftest point and rightest point
+	t_line				fl;
+	float				field_dist;
 	float				column_width;
 	float				beg_angle;
 	float				cur_angle;
