@@ -6,7 +6,7 @@
 /*   By: tdutel <tdutel@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/18 21:43:29 by llevasse          #+#    #+#             */
-/*   Updated: 2023/12/11 14:09:56 by llevasse         ###   ########.fr       */
+/*   Updated: 2023/12/17 15:15:41 by llevasse         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,8 +22,11 @@
 #	define MMAP_S WINDOW_H/3
 # endif
 
-# define MMAP_W_RGB	0x000000
-# define MMAP_RGB	0xffffff
+# define MMAP_W_RGB		0x000000
+# define MMAP_RGB		0xffffff
+# define MMAP_RANGE		8	// numbers of blocks in the radius of player
+# define MMAP_BLOCK_S	16
+
 # define PLAYER_RGB		0x0000ff
 # define PLAYER_FOV		80
 
