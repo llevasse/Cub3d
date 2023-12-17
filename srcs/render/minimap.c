@@ -6,7 +6,7 @@
 /*   By: llevasse <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/20 00:28:00 by llevasse          #+#    #+#             */
-/*   Updated: 2023/12/17 16:00:42 by llevasse         ###   ########.fr       */
+/*   Updated: 2023/12/17 16:22:00 by llevasse         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -27,37 +27,47 @@ void	draw_square(t_cub *cub, int x, int y, int colour)
 	}
 }
 
+static void	init_points(t_cub *cub, t_point *p, t_point *print, t_point *tmp)
+{
+	tmp->y = (int)(cub->player.py / cub->mmap->block_s) - MMAP_RANGE;
+	tmp->x = (int)(cub->player.px / cub->mmap->block_s) - MMAP_RANGE;
+	p->y = tmp->y;
+	print->y = 1;
+}
+
+static void	draw_row(t_cub *cub, t_point *p, t_point *print, t_point *tmp)
+{
+	while (p->y >= 0 && p->x < cub->mmap->mapx[(int)p->y]
+		&& p->x <= tmp->x + (MMAP_RANGE * 2))
+	{
+		if (p->x >= 0
+			&& ft_is_in_str("0NSEW", cub->mmap->map[(int)p->y][(int)p->x]))
+			draw_square(cub, print->x * MMAP_BLOCK_S,
+				print->y * MMAP_BLOCK_S, MMAP_RGB);
+		else if (p->x >= 0
+			&& cub->mmap->map[(int)p->y][(int)p->x] == '1')
+			draw_square(cub, print->x * MMAP_BLOCK_S,
+				print->y * MMAP_BLOCK_S, MMAP_W_RGB);
+		p->x++;
+		print->x++;
+	}
+}
+
 void	draw_minimap(t_cub *cub)
 {
 	t_point	p;
-	t_point print;
+	t_point	print;
 	t_point	tmp;
-	t_point	player;
 
-	player.y = (int)(cub->player.py / cub->mmap->block_s);
-	player.x = (int)(cub->player.px / cub->mmap->block_s);
-	tmp.x = player.x - MMAP_RANGE;
-	tmp.y = player.y - MMAP_RANGE;
-	p.y = tmp.y;
-	print.y = 1;
+	init_points(cub, &p, &print, &tmp);
 	while (p.y <= tmp.y + (MMAP_RANGE * 2) && p.y < cub->mmap->nb_line)
 	{
 		print.x = 1;
 		p.x = tmp.x;
-		if (p.y >= 0)
-		{
-			while (p.x < (int)ft_strlen(cub->mmap->map[(int)p.y]) && p.x <= tmp.x + (MMAP_RANGE * 2))
-			{
-				if (p.x >= 0 && ft_is_in_str("0NSEW", cub->mmap->map[(int)p.y][(int)p.x]))
-					draw_square(cub, print.x * MMAP_BLOCK_S, print.y * MMAP_BLOCK_S, MMAP_RGB);
-				else if (p.x >= 0 && cub->mmap->map[(int)p.y][(int)p.x] == '1')
-					draw_square(cub, print.x * MMAP_BLOCK_S, print.y * MMAP_BLOCK_S, MMAP_W_RGB);
-				p.x++;
-				print.x++;
-			}
-		}
+		draw_row(cub, &p, &print, &tmp);
 		p.y++;
 		print.y++;
 	}
-	draw_square(cub, (MMAP_RANGE + 1) * MMAP_BLOCK_S, (MMAP_RANGE + 1) * MMAP_BLOCK_S, 0xFF0000);
+	draw_square(cub, (MMAP_RANGE + 1) * MMAP_BLOCK_S,
+		(MMAP_RANGE + 1) * MMAP_BLOCK_S, 0xFF0000);
 }
