@@ -6,7 +6,7 @@
 /*   By: tdutel <tdutel@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/19 22:29:27 by llevasse          #+#    #+#             */
-/*   Updated: 2023/12/16 19:28:26 by llevasse         ###   ########.fr       */
+/*   Updated: 2023/12/17 15:16:06 by llevasse         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -51,7 +51,6 @@ void	init_minimap(t_cub *cub)
 	int	i;
 
 	cub->mmap->nb_line = get_tab_len(cub->mmap->map);
-	cub->mmap->mapy = cub->mmap->nb_line;
 	init_map_value(cub);
 	i = 0;
 	cub->mmap->map_width = 0;
@@ -64,6 +63,8 @@ void	init_minimap(t_cub *cub)
 	if (cub->mmap->map_width < cub->mmap->nb_line)
 		cub->mmap->dof = cub->mmap->nb_line;
 	cub->mmap->block_s = cub->map->north_img.width;
+	cub->mmap->m_ratio = cub->mmap->block_s / MMAP_BLOCK_S;
+	printf("%f\n", cub->mmap->m_ratio);
 }
 
 void	init_map_value(t_cub *cub)
@@ -71,10 +72,10 @@ void	init_map_value(t_cub *cub)
 	int	i;
 
 	i = 0;
-	cub->mmap->mapx = malloc(sizeof(int) * (cub->mmap->mapy));
+	cub->mmap->mapx = malloc(sizeof(int) * (cub->mmap->nb_line));
 	ft_add_garbage(&cub->garbage, cub->mmap->mapx);
 	cub->mmap->maps = 0;
-	while (i < cub->mmap->mapy)
+	while (i < cub->mmap->nb_line)
 	{
 		cub->mmap->mapx[i] = ft_strlen(cub->mmap->map[i]) - 1;
 		cub->mmap->maps += cub->mmap->mapx[i];

@@ -6,7 +6,7 @@
 /*   By: llevasse <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/22 21:44:52 by llevasse          #+#    #+#             */
-/*   Updated: 2023/12/17 11:35:54 by llevasse         ###   ########.fr       */
+/*   Updated: 2023/12/17 15:19:53 by llevasse         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -33,7 +33,7 @@ void	draw_fov(t_cub *cub)
 		ca = no_higher(ca + FIELD_R_STEP, 360, 0);
 	}
 	x = -1;
-//	draw_minimap(cub);
+	draw_minimap(cub);
 }
 
 t_fov	get_fov(float *ca)

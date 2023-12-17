@@ -6,7 +6,7 @@
 /*   By: tdutel <tdutel@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/18 21:52:44 by llevasse          #+#    #+#             */
-/*   Updated: 2023/12/17 11:33:37 by llevasse         ###   ########.fr       */
+/*   Updated: 2023/12/17 15:10:23 by llevasse         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -52,8 +52,8 @@ typedef struct s_minimap
 	int					map_width;
 	int					block_s;
 	int					*mapx;
-	int					mapy;
 	int					maps;
+	float				m_ratio;	// ratio to display minimap	(so each in block is 16px in minimap)
 }				t_minimap;
 
 typedef struct s_point
@@ -129,31 +129,10 @@ typedef struct s_fov
 	float				end_angle;
 	float				ray_step;
 	float				player_dist;
-	t_cast				rays[WINDOW_W];
 }				t_fov;
 
 t_garbage	*ft_new_garbage(void *address);
 void		ft_add_garbage(t_garbage **lst, void *addr);
 void		malloc_failed(t_garbage *garbage);
 void		free_garbage(t_garbage	*garbage);
-
-
-
-//-----math-----------------------------
-
-typedef struct s_math
-{
-	int		r;
-	int		mx;
-	int		my;
-	int		mp;
-	int		dof;
-	float	rx;
-	float	ry;
-	float	ra;
-	float	xo;
-	float	yo;
-	float	aTan;
-}				t_math;
-
 #endif
