@@ -6,7 +6,7 @@
 /*   By: llevasse <llevasse@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/19 23:04:28 by llevasse          #+#    #+#             */
-/*   Updated: 2023/12/17 11:32:53 by llevasse         ###   ########.fr       */
+/*   Updated: 2023/12/18 21:56:54 by llevasse         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -36,16 +36,4 @@ t_point	get_player_point(float x, float y)
 	p.x = x;
 	p.y = y;
 	return (p);
-}
-
-void	draw_line(t_cub cub, t_line line, int colour)
-{
-	while (line.steps > 0 && line.p_a.x >= 0 && line.p_a.x <= WINDOW_W && \
-			line.p_a.y >= 0 && line.p_a.y <= WINDOW_H)
-	{
-		img_pix_put(&cub.img, (int)line.p_a.x, (int)line.p_a.y, colour);
-		line.p_a.x += line.x_step;
-		line.p_a.y += line.y_step;
-		line.steps--;
-	}
 }

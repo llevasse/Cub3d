@@ -6,7 +6,7 @@
 /*   By: llevasse <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/22 22:05:00 by llevasse          #+#    #+#             */
-/*   Updated: 2023/12/18 21:54:52 by llevasse         ###   ########.fr       */
+/*   Updated: 2023/12/18 21:57:11 by llevasse         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,8 +21,6 @@ void	paint_bg(t_cub *cub);
 //srcs/render/line.c:
 t_line	get_line(t_point p_a, t_point p_b);
 t_point	get_player_point(float x, float y);
-int		get_line_dist(t_cub cub, t_point dest_p);
-void	draw_line(t_cub cub, t_line line, int colour);
 
 //srcs/render/horr_line.c
 int		init_horr(t_cub cub, float pa, t_line *line);
