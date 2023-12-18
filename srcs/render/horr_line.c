@@ -6,7 +6,7 @@
 /*   By: llevasse <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/25 21:58:31 by llevasse          #+#    #+#             */
-/*   Updated: 2023/12/17 11:39:08 by llevasse         ###   ########.fr       */
+/*   Updated: 2023/12/18 21:27:58 by llevasse         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -52,7 +52,7 @@ static void	get_wall_percent(t_cub cub, t_line *line, float pa, int dof)
 	line->wall = get_orient_horr(cub.map, pa);
 	line->wall_percent = ((int)line->p_b.x % line->wall->width);
 	if (pa > 0 && pa < 180)
-		line->wall_percent = (line->wall->width - line->wall_percent);
+		line->wall_percent = ((line->wall->width - 1) - line->wall_percent);
 	line->height = WINDOW_H;
 	if (line->dist >= 1)
 		line->height = ((cub.mmap->block_s * WINDOW_H) / line->dist);
