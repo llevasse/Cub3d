@@ -6,7 +6,7 @@
 /*   By: llevasse <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/20 00:28:00 by llevasse          #+#    #+#             */
-/*   Updated: 2023/12/18 16:29:30 by llevasse         ###   ########.fr       */
+/*   Updated: 2023/12/18 16:31:34 by llevasse         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -37,7 +37,8 @@ static void	init_points(t_cub *cub, t_point *p, t_point *print, t_point *tmp)
 	y = MMAP_BLOCK_S - 1;
 	max_y = y + 1 + (MMAP_BLOCK_S * ((MMAP_RANGE * 2) + 1) + 1);
 	max_x = max_y;
-	while (y < max_y){
+	while (y < max_y)
+	{
 		x = MMAP_BLOCK_S - 1;
 		while (x < max_x)
 			img_pix_put(&cub->img, x++, y, MMAP_W_RGB);

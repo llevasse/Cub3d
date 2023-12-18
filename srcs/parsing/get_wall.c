@@ -6,7 +6,7 @@
 /*   By: llevasse <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/18 23:48:52 by llevasse          #+#    #+#             */
-/*   Updated: 2023/12/18 14:13:14 by llevasse         ###   ########.fr       */
+/*   Updated: 2023/12/18 16:32:09 by llevasse         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,10 +14,10 @@
 
 static int	get_rgb_value(char *s, int *value, char *err)
 {
-	int	r;
-	int	g;
-	int	b;
-	char *tmp;
+	int		r;
+	int		g;
+	int		b;
+	char	*tmp;
 
 	tmp = ft_strsep(&s, ", \t");
 	if (tmp[0] == '\n')
