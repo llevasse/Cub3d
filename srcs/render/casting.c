@@ -6,7 +6,7 @@
 /*   By: llevasse <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/24 22:25:17 by llevasse          #+#    #+#             */
-/*   Updated: 2023/12/18 21:25:16 by llevasse         ###   ########.fr       */
+/*   Updated: 2023/12/18 21:50:09 by llevasse         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -32,7 +32,7 @@ int	get_texture_colour(t_line line, int height)
 	int	x;
 
 	y = (int)((((height * line.wall->height) / line.height)
-		% line.wall->height) * line.wall->line_len);
+				% line.wall->height) * line.wall->line_len);
 	x = line.wall_percent * (line.wall->bpp / 8);
 	return (*(int *)(line.wall->addr + y + x));
 }
