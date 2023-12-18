@@ -6,7 +6,7 @@
 /*   By: llevasse <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/25 21:58:31 by llevasse          #+#    #+#             */
-/*   Updated: 2023/12/18 21:41:12 by llevasse         ###   ########.fr       */
+/*   Updated: 2023/12/18 21:53:46 by llevasse         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -49,7 +49,9 @@ static void	get_wall_percent(t_cub cub, t_line *line, float pa, int dof)
 	line->dist *= cos((cub.player.pa - pa) * RADIAN);
 	if (dof <= -42)
 		line->dist = 0x7fffffff + 0.0;
-	line->wall = get_orient_vert(cub.map, pa);
+	line->wall = &cub.map->east_img;
+	if (pa > 90 && pa < 270)
+		line->wall = &cub.map->west_img;
 	line->wall_percent = ((int)line->p_b.y % line->wall->width);
 	if (pa > 90 && pa < 270)
 		line->wall_percent = ((line->wall->width - 1) - line->wall_percent);

@@ -6,7 +6,7 @@
 /*   By: llevasse <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/22 22:05:00 by llevasse          #+#    #+#             */
-/*   Updated: 2023/12/18 21:22:59 by llevasse         ###   ########.fr       */
+/*   Updated: 2023/12/18 21:54:52 by llevasse         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -43,9 +43,5 @@ void	draw_fov(t_cub *cub);
 //srcs/render/casting.c
 t_cast	get_cast_data(t_cub *cub, float ca);
 void	cast(t_cub *cub, t_cast c, int x);
-
-//srcs/render/get_orientation.c
-t_img	*get_orient_horr(t_map *map, float ca);
-t_img	*get_orient_vert(t_map *map, float ca);
 
 #endif
