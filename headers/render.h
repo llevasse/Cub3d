@@ -6,7 +6,7 @@
 /*   By: llevasse <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/22 22:05:00 by llevasse          #+#    #+#             */
-/*   Updated: 2023/12/18 00:35:30 by llevasse         ###   ########.fr       */
+/*   Updated: 2023/12/18 21:22:59 by llevasse         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -36,9 +36,6 @@ t_line	get_vert(t_cub cub, float pa);
 void	draw_square(t_cub *cub, int x, int y, int colour);
 void	draw_player(t_cub *cub, int x, int y, int colour);
 void	draw_minimap(t_cub *cub);
-
-//srcs/render/get_pixel_colour.c:
-int		get_pixel_colour(t_img *img, int x, int y);
 
 //srcs/render/draw_fov.c:
 void	draw_fov(t_cub *cub);
