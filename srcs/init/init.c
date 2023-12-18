@@ -6,7 +6,7 @@
 /*   By: tdutel <tdutel@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/19 22:29:27 by llevasse          #+#    #+#             */
-/*   Updated: 2023/12/18 14:36:48 by llevasse         ###   ########.fr       */
+/*   Updated: 2023/12/18 22:00:54 by llevasse         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -35,7 +35,6 @@ void	init_cub(t_cub *cub, char **argv)
 		ft_add_garbage(&cub->garbage, NULL);
 	init_images(cub);
 	cub->field_step = ((float)(PLAYER_FOV - 1) / WINDOW_W);
-	cub->column_width = (WINDOW_W / PLAYER_FOV) * cub->field_step;
 }
 
 void	init_images(t_cub *cub)

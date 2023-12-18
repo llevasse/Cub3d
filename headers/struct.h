@@ -6,7 +6,7 @@
 /*   By: tdutel <tdutel@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/18 21:52:44 by llevasse          #+#    #+#             */
-/*   Updated: 2023/12/18 00:35:17 by llevasse         ###   ########.fr       */
+/*   Updated: 2023/12/18 22:00:35 by llevasse         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -100,7 +100,6 @@ typedef struct s_cub
 	struct s_minimap	*mmap;
 	struct s_garbage	*garbage;
 	float				field_step;
-	float				column_width;
 	t_player			player;
 }				t_cub;
 

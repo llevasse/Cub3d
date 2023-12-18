@@ -6,7 +6,7 @@
 /*   By: llevasse <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/20 00:40:14 by llevasse          #+#    #+#             */
-/*   Updated: 2023/12/18 13:38:57 by llevasse         ###   ########.fr       */
+/*   Updated: 2023/12/18 21:59:44 by llevasse         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,16 +17,13 @@ int	render(t_cub *cub)
 	float	x;
 	float	ca;
 	float	gained_angle;
-	float	temp_x;
 
 	ca = no_higher(cub->player.pa - (PLAYER_FOV / 2), 360, 0);
 	x = 0;
 	gained_angle = 0;
 	while (gained_angle < PLAYER_FOV)
 	{
-		temp_x = x + cub->column_width;
-		while (x < temp_x && x < WINDOW_W)
-			cast(cub, get_cast_data(cub, ca), x++);
+		cast(cub, get_cast_data(cub, ca), x++);
 		gained_angle += cub->field_step;
 		ca = no_higher(ca + cub->field_step, 360, 0);
 	}
