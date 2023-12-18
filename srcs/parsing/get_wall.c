@@ -6,13 +6,13 @@
 /*   By: llevasse <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/18 23:48:52 by llevasse          #+#    #+#             */
-/*   Updated: 2023/12/18 14:10:14 by llevasse         ###   ########.fr       */
+/*   Updated: 2023/12/18 14:13:14 by llevasse         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "cub3d.h"
 
-static int	get_rgb_value(char *s, int *value)
+static int	get_rgb_value(char *s, int *value, char *err)
 {
 	int	r;
 	int	g;
@@ -21,15 +21,15 @@ static int	get_rgb_value(char *s, int *value)
 
 	tmp = ft_strsep(&s, ", \t");
 	if (tmp[0] == '\n')
-		return (0);
+		return ((void)ft_putstr_fd(err, 2), 0);
 	r = no_higher(ft_atoi(tmp), 255, 0);
 	tmp = ft_strsep(&s, ", \t");
 	if (tmp[0] == '\n')
-		return (0);
+		return ((void)ft_putstr_fd(err, 2), 0);
 	g = no_higher(ft_atoi(tmp), 255, 0);
 	tmp = ft_strsep(&s, ", \t");
 	if (tmp[0] == '\n')
-		return (0);
+		return ((void)ft_putstr_fd(err, 2), 0);
 	b = no_higher(ft_atoi(tmp), 255, 0);
 	*value = (r * 256 * 256) + (g * 256) + b;
 	return (1);
@@ -97,8 +97,8 @@ int	get_wall(int map_fd, t_map *map, t_cub *cub)
 	if (!ft_strcmp("EA", id) && map->east_img.mlx_img == 0)
 		return (do_open(str, &map->east_img, 3, cub));
 	if (!ft_strcmp("F", id) && map->f_rgb == -1)
-		return (get_rgb_value(str, &map->f_rgb));
+		return (get_rgb_value(str, &map->f_rgb, F_ERR));
 	if (!ft_strcmp("C", id) && map->c_rgb == -1)
-		return (get_rgb_value(str, &map->c_rgb));
+		return (get_rgb_value(str, &map->c_rgb, C_ERR));
 	return ((void)ft_putstr_fd(INVALID_CUB, 2), 0);
 }
