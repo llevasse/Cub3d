@@ -6,7 +6,7 @@
 /*   By: llevasse <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/24 22:25:17 by llevasse          #+#    #+#             */
-/*   Updated: 2023/12/17 11:37:03 by llevasse         ###   ########.fr       */
+/*   Updated: 2023/12/18 13:31:41 by llevasse         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -44,7 +44,6 @@ int	get_texture_colour(t_line line, int height)
 
 void	cast(t_cub *cub, t_cast c, int x)
 {
-	int		rgb;
 	int		current;
 
 	current = 0;
@@ -53,10 +52,8 @@ void	cast(t_cub *cub, t_cast c, int x)
 	while (c.line.start + current < c.line.stop
 		&& c.line.start + current < WINDOW_H)
 	{
-		rgb = get_pixel_colour(&cub->img, x, c.line.start + current);
-		if (rgb != MMAP_W_RGB && rgb != MMAP_RGB && rgb != PLAYER_RGB)
-			img_pix_put(&cub->img, x, c.line.start + current,
-				get_texture_colour(c.line, current));
+		img_pix_put(&cub->img, x, c.line.start + current,
+			get_texture_colour(c.line, current));
 		current++;
 	}
 }
