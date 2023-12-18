@@ -6,7 +6,7 @@
 /*   By: llevasse <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/24 22:25:17 by llevasse          #+#    #+#             */
-/*   Updated: 2023/12/18 13:31:41 by llevasse         ###   ########.fr       */
+/*   Updated: 2023/12/18 13:36:28 by llevasse         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -47,6 +47,9 @@ void	cast(t_cub *cub, t_cast c, int x)
 	int		current;
 
 	current = 0;
+	while (current < c.line.start)
+		img_pix_put(&cub->img, x, current++, cub->map->c_rgb);
+	current = 0;
 	if (c.line.start < 0)
 		current += -c.line.start;
 	while (c.line.start + current < c.line.stop
@@ -56,4 +59,7 @@ void	cast(t_cub *cub, t_cast c, int x)
 			get_texture_colour(c.line, current));
 		current++;
 	}
+	current = c.line.stop;
+	while (current < WINDOW_H)
+		img_pix_put(&cub->img, x, current++, cub->map->f_rgb);
 }

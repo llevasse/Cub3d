@@ -28,7 +28,6 @@ SRC				=	srcs/main.c \
 					srcs/render/horr_line.c \
 					srcs/render/vert_line.c \
 					srcs/render/minimap.c \
-					srcs/render/draw_fov.c \
 					srcs/render/casting.c \
 					srcs/render/get_pixel_colour.c \
 					srcs/render/get_orientation.c \
