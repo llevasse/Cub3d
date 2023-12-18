@@ -6,22 +6,33 @@
 /*   By: llevasse <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/18 23:48:52 by llevasse          #+#    #+#             */
-/*   Updated: 2023/12/16 19:27:08 by llevasse         ###   ########.fr       */
+/*   Updated: 2023/12/18 14:13:14 by llevasse         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "cub3d.h"
 
-static int	get_rgb_value(char *s)
+static int	get_rgb_value(char *s, int *value, char *err)
 {
 	int	r;
 	int	g;
 	int	b;
+	char *tmp;
 
-	r = ft_atoi(ft_strsep(&s, ", \t"));
-	g = ft_atoi(ft_strsep(&s, ", \t"));
-	b = ft_atoi(ft_strsep(&s, ", \t"));
-	return ((r * 256 * 256) + (g * 256) + b);
+	tmp = ft_strsep(&s, ", \t");
+	if (tmp[0] == '\n')
+		return ((void)ft_putstr_fd(err, 2), 0);
+	r = no_higher(ft_atoi(tmp), 255, 0);
+	tmp = ft_strsep(&s, ", \t");
+	if (tmp[0] == '\n')
+		return ((void)ft_putstr_fd(err, 2), 0);
+	g = no_higher(ft_atoi(tmp), 255, 0);
+	tmp = ft_strsep(&s, ", \t");
+	if (tmp[0] == '\n')
+		return ((void)ft_putstr_fd(err, 2), 0);
+	b = no_higher(ft_atoi(tmp), 255, 0);
+	*value = (r * 256 * 256) + (g * 256) + b;
+	return (1);
 }
 
 static int	do_open(char *s, t_img *img, int face, t_cub *cub)
@@ -86,8 +97,8 @@ int	get_wall(int map_fd, t_map *map, t_cub *cub)
 	if (!ft_strcmp("EA", id) && map->east_img.mlx_img == 0)
 		return (do_open(str, &map->east_img, 3, cub));
 	if (!ft_strcmp("F", id) && map->f_rgb == -1)
-		return ((void)(map->f_rgb = get_rgb_value(str)), 1);
+		return (get_rgb_value(str, &map->f_rgb, F_ERR));
 	if (!ft_strcmp("C", id) && map->c_rgb == -1)
-		return ((void)(map->c_rgb = get_rgb_value(str)), 1);
+		return (get_rgb_value(str, &map->c_rgb, C_ERR));
 	return ((void)ft_putstr_fd(INVALID_CUB, 2), 0);
 }
