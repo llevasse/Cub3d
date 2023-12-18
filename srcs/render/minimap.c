@@ -6,7 +6,7 @@
 /*   By: llevasse <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/20 00:28:00 by llevasse          #+#    #+#             */
-/*   Updated: 2023/12/17 22:13:24 by llevasse         ###   ########.fr       */
+/*   Updated: 2023/12/18 16:29:30 by llevasse         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -29,6 +29,20 @@ void	draw_square(t_cub *cub, int x, int y, int colour)
 
 static void	init_points(t_cub *cub, t_point *p, t_point *print, t_point *tmp)
 {
+	int	x;
+	int	max_x;
+	int	y;
+	int	max_y;
+
+	y = MMAP_BLOCK_S - 1;
+	max_y = y + 1 + (MMAP_BLOCK_S * ((MMAP_RANGE * 2) + 1) + 1);
+	max_x = max_y;
+	while (y < max_y){
+		x = MMAP_BLOCK_S - 1;
+		while (x < max_x)
+			img_pix_put(&cub->img, x++, y, MMAP_W_RGB);
+		y++;
+	}
 	tmp->y = (int)(cub->player.py / cub->mmap->block_s) - MMAP_RANGE;
 	tmp->x = (int)(cub->player.px / cub->mmap->block_s) - MMAP_RANGE;
 	p->y = tmp->y;
