@@ -6,7 +6,7 @@
 /*   By: llevasse <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/22 22:05:00 by llevasse          #+#    #+#             */
-/*   Updated: 2023/12/17 11:38:18 by llevasse         ###   ########.fr       */
+/*   Updated: 2023/12/18 00:35:30 by llevasse         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -42,7 +42,6 @@ int		get_pixel_colour(t_img *img, int x, int y);
 
 //srcs/render/draw_fov.c:
 void	draw_fov(t_cub *cub);
-t_fov	get_fov(float *ca);
 
 //srcs/render/casting.c
 t_cast	get_cast_data(t_cub *cub, float ca);
