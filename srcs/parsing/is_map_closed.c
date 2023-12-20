@@ -6,7 +6,7 @@
 /*   By: llevasse <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/19 21:56:14 by llevasse          #+#    #+#             */
-/*   Updated: 2023/12/17 22:21:57 by llevasse         ###   ########.fr       */
+/*   Updated: 2023/12/20 14:43:39 by llevasse         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -42,7 +42,7 @@ int	fload(t_cub *cub, int x, int y)
 		return (0);
 	if (cub->mmap->map[y][x] == '1' || cub->mmap->map[y][x] == 'A')
 		return (1);
-	if (!ft_is_in_str("0NSEW", cub->mmap->map[y][x]))
+	if (!ft_is_in_str("0NSEWOC", cub->mmap->map[y][x]))
 		return (0);
 	else if (cub->mmap->map[y][x] == '0')
 		cub->mmap->map[y][x] = 'A';
