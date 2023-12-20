@@ -6,7 +6,7 @@
 /*   By: llevasse <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/25 21:58:31 by llevasse          #+#    #+#             */
-/*   Updated: 2023/12/20 15:31:03 by llevasse         ###   ########.fr       */
+/*   Updated: 2023/12/20 15:35:39 by llevasse         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -91,9 +91,7 @@ t_line	get_horr(t_cub cub, float pa)
 	line.cross_door = cross_door;
 	if (pos_y < cub.mmap->nb_line && pos_y >= 0
 		&& pos_x >= 0 && pos_x < (int)ft_strlen(cub.mmap->map[pos_y])
-		&& cub.mmap->map[pos_y][pos_x] == 'C'){
-		line.cross_door = 1;
+		&& cub.mmap->map[pos_y][pos_x] == 'C')
 		line.hit_door=1;
-	}
 	return (line);
 }

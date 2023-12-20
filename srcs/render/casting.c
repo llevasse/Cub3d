@@ -6,7 +6,7 @@
 /*   By: llevasse <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/24 22:25:17 by llevasse          #+#    #+#             */
-/*   Updated: 2023/12/20 15:22:42 by llevasse         ###   ########.fr       */
+/*   Updated: 2023/12/20 15:36:07 by llevasse         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -59,5 +59,5 @@ int	cast(t_cub *cub, t_cast c, int x)
 	current = c.line.stop;
 	while (current < WINDOW_H)
 		img_pix_put(&cub->img, x, current++, cub->map->f_rgb);
-	return (c.line.cross_door);
+	return (c.line.cross_door || c.line.hit_door);
 }
