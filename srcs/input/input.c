@@ -6,7 +6,7 @@
 /*   By: tdutel <tdutel@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/19 23:04:28 by llevasse          #+#    #+#             */
-/*   Updated: 2023/12/20 15:56:52 by llevasse         ###   ########.fr       */
+/*   Updated: 2023/12/20 16:14:34 by llevasse         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -41,14 +41,13 @@ int	handle_input(int keysym, t_cub *cub)
 
 void	check_door(t_cub *cub)
 {
-	t_cast cast;
-	cast = get_cast_data(cub, cub->player.pa);
-	if (cast.line.door.cross_door || cast.line.door.hit_door)
+	if (cub->door && (cub->door->cross_door || cub->door->hit_door))
 	{
-		if (cub->mmap->map[cast.line.door.y][cast.line.door.x] == 'C')
-			cub->mmap->map[cast.line.door.y][cast.line.door.x] = 'O';
-		else if (cub->mmap->map[cast.line.door.y][cast.line.door.x] == 'O')
-			cub->mmap->map[cast.line.door.y][cast.line.door.x] = 'C';
+		if (cub->mmap->map[cub->door->y][cub->door->x] == 'C')
+			cub->mmap->map[cub->door->y][cub->door->x] = 'O';
+		else if (cub->mmap->map[cub->door->y][cub->door->x] == 'O')
+			cub->mmap->map[cub->door->y][cub->door->x] = 'C';
+		cub->door = NULL;
 	}
 }
 

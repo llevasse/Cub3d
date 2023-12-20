@@ -6,7 +6,7 @@
 /*   By: llevasse <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/20 00:40:14 by llevasse          #+#    #+#             */
-/*   Updated: 2023/12/20 15:32:07 by llevasse         ###   ########.fr       */
+/*   Updated: 2023/12/20 16:14:58 by llevasse         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,16 +17,20 @@ int	render(t_cub *cub)
 	float	x;
 	float	ca;
 	float	gained_angle;
-	int		cross_door;
+	t_door	door;
 
 	ca = no_higher(cub->player.pa - (PLAYER_FOV / 2), 360, 0);
-	cross_door = 0;
 	x = 0;
 	gained_angle = 0;
+	cub->door = NULL;
 	while (gained_angle < PLAYER_FOV)
 	{
-		if (gained_angle >= (PLAYER_FOV / 2) - 1 && gained_angle <= (PLAYER_FOV / 2) + 1 && !cross_door)
-			cross_door = cast(cub, get_cast_data(cub, ca), x++);
+		if (gained_angle >= (PLAYER_FOV / 2) - 1 && gained_angle <= (PLAYER_FOV / 2) + 1 && !cub->door)
+			{
+				door = cast(cub, get_cast_data(cub, ca), x++);
+				if (door.cross_door || door.hit_door)
+					cub->door = &door;
+			}
 		else
 			cast(cub, get_cast_data(cub, ca), x++);
 		gained_angle += cub->field_step;
@@ -34,7 +38,7 @@ int	render(t_cub *cub)
 	}
 	draw_minimap(cub);
 	mlx_put_image_to_window(cub->mlx_ptr, cub->win_ptr, cub->img.mlx_img, 0, 0);
-	if (cross_door)
+	if (cub->door)
 		mlx_string_put(cub->mlx_ptr, cub->win_ptr, WINDOW_W / 2, WINDOW_H / 2, 0xFF0000, "Press 'E'");
 	return (0);
 }
