@@ -6,7 +6,7 @@
 /*   By: tdutel <tdutel@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/18 21:52:44 by llevasse          #+#    #+#             */
-/*   Updated: 2023/12/20 15:18:13 by llevasse         ###   ########.fr       */
+/*   Updated: 2023/12/20 15:45:49 by llevasse         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -61,6 +61,14 @@ typedef struct s_point
 	float				y;
 }				t_point;
 
+typedef struct s_door
+{
+	int					x;
+	int					y;
+	int					hit_door;
+	int					cross_door;
+}				t_door;
+
 typedef struct s_line
 {
 	t_point				p_a;
@@ -79,8 +87,7 @@ typedef struct s_line
 	int					height;
 	int					start;
 	int					stop;
-	int					hit_door;
-	int					cross_door;
+	t_door				door;
 }				t_line;
 
 typedef struct s_player

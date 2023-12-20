@@ -6,7 +6,7 @@
 /*   By: llevasse <llevasse@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/19 23:04:28 by llevasse          #+#    #+#             */
-/*   Updated: 2023/12/20 15:01:38 by llevasse         ###   ########.fr       */
+/*   Updated: 2023/12/20 15:51:27 by llevasse         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,7 +26,6 @@ t_line	get_line(t_point p_a, t_point p_b)
 	line.x_step = line.dx / line.steps;
 	line.y_step = line.dy / line.steps;
 	line.dist = sqrt(pow(line.dy, 2) + pow(line.dx, 2));
-	line.hit_door = 0;
 	return (line);
 }
 

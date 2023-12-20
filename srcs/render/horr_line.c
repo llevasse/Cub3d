@@ -6,7 +6,7 @@
 /*   By: llevasse <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/25 21:58:31 by llevasse          #+#    #+#             */
-/*   Updated: 2023/12/20 15:35:39 by llevasse         ###   ########.fr       */
+/*   Updated: 2023/12/20 15:50:26 by llevasse         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -68,10 +68,11 @@ t_line	get_horr(t_cub cub, float pa)
 	int		pos_x;
 	int		pos_y;
 	int		dof;
-	int		cross_door;
+	t_door	door;
 
 	dof = init_horr(cub, pa, &line);
-	cross_door = 0;
+	door.cross_door = 0;
+	door.hit_door = 0;
 	while (dof-- > 0)
 	{
 		pos_x = (line.p_a.x / cub.mmap->block_s);
@@ -82,16 +83,24 @@ t_line	get_horr(t_cub cub, float pa)
 			break ;
 		if (pos_y < cub.mmap->nb_line && pos_y >= 0
 			&& pos_x >= 0 && pos_x < (int)ft_strlen(cub.mmap->map[pos_y])
-			&& cub.mmap->map[pos_y][pos_x] == 'O')
-			cross_door = 1;
+			&& cub.mmap->map[pos_y][pos_x] == 'O' && !door.cross_door)
+		{
+			door.cross_door = 1;
+			door.x = pos_x;
+			door.y = pos_y;
+		}
 		line.p_a.x += line.x_step;
 		line.p_a.y -= line.y_step;
 	}
 	get_wall_percent(cub, &line, pa, dof);
-	line.cross_door = cross_door;
 	if (pos_y < cub.mmap->nb_line && pos_y >= 0
 		&& pos_x >= 0 && pos_x < (int)ft_strlen(cub.mmap->map[pos_y])
-		&& cub.mmap->map[pos_y][pos_x] == 'C')
-		line.hit_door=1;
+		&& cub.mmap->map[pos_y][pos_x] == 'C' && !door.cross_door)
+	{
+		door.hit_door=1;
+		door.x = pos_x;
+		door.y = pos_y;
+	}
+	line.door = door;
 	return (line);
 }
