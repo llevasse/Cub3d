@@ -6,7 +6,7 @@
 /*   By: tdutel <tdutel@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/19 23:04:28 by llevasse          #+#    #+#             */
-/*   Updated: 2023/12/20 15:55:45 by llevasse         ###   ########.fr       */
+/*   Updated: 2023/12/20 15:56:52 by llevasse         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -47,7 +47,7 @@ void	check_door(t_cub *cub)
 	{
 		if (cub->mmap->map[cast.line.door.y][cast.line.door.x] == 'C')
 			cub->mmap->map[cast.line.door.y][cast.line.door.x] = 'O';
-		if (cub->mmap->map[cast.line.door.y][cast.line.door.x] == 'O')
+		else if (cub->mmap->map[cast.line.door.y][cast.line.door.x] == 'O')
 			cub->mmap->map[cast.line.door.y][cast.line.door.x] = 'C';
 	}
 }
