@@ -6,7 +6,7 @@
 /*   By: tdutel <tdutel@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/18 21:43:29 by llevasse          #+#    #+#             */
-/*   Updated: 2023/12/20 14:36:41 by llevasse         ###   ########.fr       */
+/*   Updated: 2023/12/20 14:45:31 by llevasse         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,6 +20,8 @@
 # define MMAP_RGB		0xffffff
 # define MMAP_RANGE		8
 # define MMAP_BLOCK_S	8 //16
+
+# define DOOR_RGB		0x888888
 
 # define PLAYER_RGB		0x0000ff
 # define PLAYER_FOV		80
