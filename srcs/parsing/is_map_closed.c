@@ -6,7 +6,7 @@
 /*   By: llevasse <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/19 21:56:14 by llevasse          #+#    #+#             */
-/*   Updated: 2023/12/20 14:43:39 by llevasse         ###   ########.fr       */
+/*   Updated: 2023/12/21 18:39:16 by llevasse         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -27,6 +27,10 @@ int	check_closed(t_cub *cub, int x, int y)
 		{
 			if (cub->mmap->map[y][x] == 'A')
 				cub->mmap->map[y][x] = '0';
+			if (cub->mmap->map[y][x] == 'o')
+				cub->mmap->map[y][x] = 'O';
+			if (cub->mmap->map[y][x] == 'c')
+				cub->mmap->map[y][x] = 'C';
 			x++;
 		}
 		y++;
@@ -36,16 +40,21 @@ int	check_closed(t_cub *cub, int x, int y)
 
 int	fload(t_cub *cub, int x, int y)
 {
+	ft_printf("%d %d\n", x, y);
 	if (y < 0 || x < 0)
 		return (0);
 	if (x > (int)ft_strlen(cub->mmap->map[y]))
 		return (0);
-	if (cub->mmap->map[y][x] == '1' || cub->mmap->map[y][x] == 'A')
+	if (ft_is_in_str("1Aoc", cub->mmap->map[y][x]))
 		return (1);
 	if (!ft_is_in_str("0NSEWOC", cub->mmap->map[y][x]))
 		return (0);
 	else if (cub->mmap->map[y][x] == '0')
 		cub->mmap->map[y][x] = 'A';
+	else if (cub->mmap->map[y][x] == 'O')
+		cub->mmap->map[y][x] = 'o';
+	else if (cub->mmap->map[y][x] == 'C')
+		cub->mmap->map[y][x] = 'c';
 	if (fload(cub, x - 1, y) && fload(cub, x + 1, y) && \
 		fload(cub, x, y - 1) && fload(cub, x, y + 1))
 		return (1);
