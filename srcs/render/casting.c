@@ -6,7 +6,7 @@
 /*   By: llevasse <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/24 22:25:17 by llevasse          #+#    #+#             */
-/*   Updated: 2023/12/20 16:03:12 by llevasse         ###   ########.fr       */
+/*   Updated: 2023/12/21 19:36:12 by llevasse         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,6 +22,10 @@ t_cast	get_cast_data(t_cub *cub, float ca)
 		cast.line = cast.h;
 	else
 		cast.line = cast.v;
+	if (cast.h.door.dist > cast.v.door.dist && !cast.v.dist)
+	   cast.line.door = cast.h.door;
+	else if (cast.h.door.dist < cast.v.door.dist && !cast.h.dist)
+	   cast.line.door = cast.v.door;
 	cast.dist = cast.line.dist;
 	return (cast);
 }

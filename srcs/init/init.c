@@ -6,7 +6,7 @@
 /*   By: tdutel <tdutel@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/19 22:29:27 by llevasse          #+#    #+#             */
-/*   Updated: 2023/12/18 22:00:54 by llevasse         ###   ########.fr       */
+/*   Updated: 2023/12/21 19:39:15 by llevasse         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,6 +15,7 @@
 void	init_cub(t_cub *cub, char **argv)
 {
 	cub->garbage = 0x0;
+	cub->door = NULL;
 	cub->mmap = malloc(sizeof(struct s_minimap));
 	ft_add_garbage(&cub->garbage, cub->mmap);
 	cub->mlx_ptr = mlx_init();

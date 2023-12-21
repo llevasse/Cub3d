@@ -6,7 +6,7 @@
 /*   By: llevasse <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/19 21:56:14 by llevasse          #+#    #+#             */
-/*   Updated: 2023/12/21 18:39:16 by llevasse         ###   ########.fr       */
+/*   Updated: 2023/12/21 19:17:10 by llevasse         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -40,7 +40,6 @@ int	check_closed(t_cub *cub, int x, int y)
 
 int	fload(t_cub *cub, int x, int y)
 {
-	ft_printf("%d %d\n", x, y);
 	if (y < 0 || x < 0)
 		return (0);
 	if (x > (int)ft_strlen(cub->mmap->map[y]))

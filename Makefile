@@ -29,6 +29,7 @@ SRC				=	srcs/main.c \
 					srcs/render/vert_line.c \
 					srcs/render/minimap.c \
 					srcs/render/casting.c \
+					srcs/render/door.c \
 					srcs/input/input.c \
 					srcs/input/set_player_pos.c
 

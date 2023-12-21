@@ -6,11 +6,12 @@
 /*   By: llevasse <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/20 00:40:14 by llevasse          #+#    #+#             */
-/*   Updated: 2023/12/20 16:15:42 by llevasse         ###   ########.fr       */
+/*   Updated: 2023/12/21 18:48:42 by llevasse         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "cub3d.h"
+int		is_in_range(float nb, int min, int max);
 
 int	render(t_cub *cub)
 {
@@ -25,7 +26,7 @@ int	render(t_cub *cub)
 	cub->door = NULL;
 	while (gained_angle < PLAYER_FOV)
 	{
-		if (gained_angle >= (PLAYER_FOV / 2) - 1 && gained_angle <= (PLAYER_FOV / 2) + 1 && !cub->door)
+		if (is_in_range(gained_angle, (PLAYER_FOV / 2) - 1, (PLAYER_FOV / 2) + 1) && !cub->door)
 			{
 				door = cast(cub, get_cast_data(cub, ca), x++);
 				if (door.cross_door || door.hit_door)
@@ -41,6 +42,11 @@ int	render(t_cub *cub)
 	if (cub->door)
 		mlx_string_put(cub->mlx_ptr, cub->win_ptr, WINDOW_W / 2, WINDOW_H / 2, 0xFF0000, "Press 'E'");
 	return (0);
+}
+
+int		is_in_range(float nb, int min, int max)
+{
+	return (nb >= min && nb <= max);
 }
 
 void	img_pix_put(t_img *img, int x, int y, int colour)

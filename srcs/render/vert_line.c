@@ -6,7 +6,7 @@
 /*   By: llevasse <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/25 21:58:31 by llevasse          #+#    #+#             */
-/*   Updated: 2023/12/20 15:52:10 by llevasse         ###   ########.fr       */
+/*   Updated: 2023/12/21 19:26:18 by llevasse         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -73,6 +73,7 @@ t_line	get_vert(t_cub cub, float pa)
 	dof = init_vert(cub, pa, &line);
 	door.cross_door = 0;
 	door.hit_door = 0;
+	door.dist = 0;
 	while (dof-- > 0)
 	{
 		pos_x = (line.p_a.x / cub.mmap->block_s);
@@ -84,11 +85,7 @@ t_line	get_vert(t_cub cub, float pa)
 		if (pos_y < cub.mmap->nb_line && pos_y >= 0
 			&& pos_x >= 0 && pos_x < (int)ft_strlen(cub.mmap->map[pos_y])
 			&& cub.mmap->map[pos_y][pos_x] == 'O' && !door.cross_door)
-		{
-			door.cross_door = 1;
-			door.x = pos_x;
-			door.y = pos_y;
-		}
+			door = cross_door(cub, line.p_a.x, line.p_a.y, 0);
 		line.p_a.x += line.x_step;
 		line.p_a.y += line.y_step;
 	}
@@ -96,11 +93,7 @@ t_line	get_vert(t_cub cub, float pa)
 	if (pos_y < cub.mmap->nb_line && pos_y >= 0
 		&& pos_x >= 0 && pos_x < (int)ft_strlen(cub.mmap->map[pos_y])
 		&& cub.mmap->map[pos_y][pos_x] == 'C' && !door.cross_door)
-	{
-		door.x = pos_x;
-		door.y = pos_y;
-		door.hit_door=1;
-	}
+		door = cross_door(cub, line.p_b.x, line.p_b.y, 1);
 	line.door = door;
 	return (line);
 }

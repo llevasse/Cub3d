@@ -6,7 +6,7 @@
 /*   By: tdutel <tdutel@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/18 21:52:44 by llevasse          #+#    #+#             */
-/*   Updated: 2023/12/20 16:07:21 by llevasse         ###   ########.fr       */
+/*   Updated: 2023/12/21 19:02:55 by llevasse         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -63,6 +63,9 @@ typedef struct s_point
 
 typedef struct s_door
 {
+	float				r_x;
+	float				r_y;
+	float				dist;
 	int					x;
 	int					y;
 	int					hit_door;
