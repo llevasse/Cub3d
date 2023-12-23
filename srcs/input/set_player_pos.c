@@ -6,7 +6,7 @@
 /*   By: llevasse <llevasse@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/22 00:36:13 by llevasse          #+#    #+#             */
-/*   Updated: 2023/12/20 15:03:35 by llevasse         ###   ########.fr       */
+/*   Updated: 2023/12/23 23:03:34 by llevasse         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -36,9 +36,11 @@ void	check_collision(t_cub *cub, int angle, float offset)
 	if (y < 0 || y >= cub->mmap->nb_line
 		|| x < 0 || x >= (int)ft_strlen(cub->mmap->map[y]))
 		return ;
-	if (ft_is_in_str("NSWE0O", cub->mmap->map[(int)cub->player.py / block_s][x]))
+	if (ft_is_in_str("NSWE0O",
+			cub->mmap->map[(int)cub->player.py / block_s][x]))
 		cub->player.px = new_p.x;
-	if (ft_is_in_str("NSWE0O", cub->mmap->map[y][(int)cub->player.px / block_s]))
+	if (ft_is_in_str("NSWE0O",
+			cub->mmap->map[y][(int)cub->player.px / block_s]))
 		cub->player.py = new_p.y;
 }
 
