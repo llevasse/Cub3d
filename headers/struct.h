@@ -6,7 +6,7 @@
 /*   By: tdutel <tdutel@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/18 21:52:44 by llevasse          #+#    #+#             */
-/*   Updated: 2023/12/21 19:02:55 by llevasse         ###   ########.fr       */
+/*   Updated: 2023/12/23 20:07:20 by llevasse         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -129,4 +129,6 @@ t_garbage	*ft_new_garbage(void *address);
 void		ft_add_garbage(t_garbage **lst, void *addr);
 void		malloc_failed(t_garbage *garbage);
 void		free_garbage(t_garbage	*garbage);
+int			garbage_size(t_garbage *lst);
+void		free_one_addr(t_garbage **lst, void *addr);
 #endif
