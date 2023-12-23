@@ -6,7 +6,7 @@
 /*   By: llevasse <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/25 21:58:31 by llevasse          #+#    #+#             */
-/*   Updated: 2023/12/21 19:26:25 by llevasse         ###   ########.fr       */
+/*   Updated: 2023/12/23 21:50:44 by llevasse         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -62,6 +62,12 @@ static void	get_wall_percent(t_cub cub, t_line *line, float pa, int dof)
 	line->stop = (WINDOW_H + line->height) / 2;
 }
 
+int is_pos_valid(t_cub cub, int x, int y)
+{
+	return (y < cub.mmap->nb_line && y >= 0
+		&& x >= 0 && x < (int)ft_strlen(cub.mmap->map[y]));
+}
+
 t_line	get_horr(t_cub cub, float pa)
 {
 	t_line	line;
@@ -78,21 +84,15 @@ t_line	get_horr(t_cub cub, float pa)
 	{
 		pos_x = (line.p_a.x / cub.mmap->block_s);
 		pos_y = (line.p_a.y / cub.mmap->block_s);
-		if (pos_y >= cub.mmap->nb_line || pos_y < 0
-			|| pos_x < 0 || pos_x >= (int)ft_strlen(cub.mmap->map[pos_y])
-			|| !ft_is_in_str("NSEW0O", cub.mmap->map[pos_y][pos_x]))
+		if (!is_pos_valid(cub, pos_x, pos_y) || !ft_is_in_str("NSEW0O", cub.mmap->map[pos_y][pos_x]))
 			break ;
-		if (pos_y < cub.mmap->nb_line && pos_y >= 0
-			&& pos_x >= 0 && pos_x < (int)ft_strlen(cub.mmap->map[pos_y])
-			&& cub.mmap->map[pos_y][pos_x] == 'O' && !door.cross_door)
+		if (is_pos_valid(cub, pos_x, pos_y) && cub.mmap->map[pos_y][pos_x] == 'O' && !door.cross_door)
 			door = cross_door(cub, line.p_a.x, line.p_a.y, 0);
 		line.p_a.x += line.x_step;
 		line.p_a.y -= line.y_step;
 	}
 	get_wall_percent(cub, &line, pa, dof);
-	if (pos_y < cub.mmap->nb_line && pos_y >= 0
-		&& pos_x >= 0 && pos_x < (int)ft_strlen(cub.mmap->map[pos_y])
-		&& cub.mmap->map[pos_y][pos_x] == 'C' && !door.cross_door)
+	if (is_pos_valid(cub, pos_x, pos_y) && cub.mmap->map[pos_y][pos_x] == 'C' && !door.cross_door)
 		door = cross_door(cub, line.p_b.x, line.p_b.y, 1);
 	line.door = door;
 	return (line);
