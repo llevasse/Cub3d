@@ -6,7 +6,7 @@
 /*   By: llevasse <llevasse@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/19 12:01:04 by llevasse          #+#    #+#             */
-/*   Updated: 2023/12/23 21:21:26 by llevasse         ###   ########.fr       */
+/*   Updated: 2023/12/23 21:30:16 by llevasse         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -52,7 +52,7 @@ int	valid_line(char *str)
 	i = 0;
 	while (str[i])
 	{
-		if (!ft_is_in_str("NSEW01CO", str[i]))
+		if (!ft_is_in_str("NSEW01CO\n\t \r", str[i]))
 			return ((ft_putstr_fd(INVALID_MAP_LINE, 2)), 0);
 		i++;
 	}

@@ -6,7 +6,7 @@
 /*   By: llevasse <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/18 21:50:20 by llevasse          #+#    #+#             */
-/*   Updated: 2023/12/17 22:21:29 by llevasse         ###   ########.fr       */
+/*   Updated: 2023/12/23 21:24:01 by llevasse         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,18 +15,20 @@
 t_map	*parse(int map_fd, t_cub *cub)
 {
 	int		element_got;
+	int		max_element;
 	t_map	*map;
 
 	element_got = 0;
+	max_element = 6;
 	if (map_fd == -1)
 		return ((void)ft_putstr_fd(CUB_OPEN_ERR, 2), NULL);
 	map = malloc(sizeof(struct s_map));
 	ft_add_garbage(&cub->garbage, map);
 	set_map_null(map);
 	map->garbage = cub->garbage;
-	while (element_got < 6 && get_wall(map_fd, map, cub) == 1)
+	while (element_got < max_element && get_wall(map_fd, map, cub, &max_element) == 1)
 		element_got++;
-	if (element_got != 6 || !get_map(map_fd, map, cub))
+	if (element_got != max_element || !get_map(map_fd, map, cub))
 		return (close_walls(cub, map), free_garbage(map->garbage),
 			close(map_fd), NULL);
 	close(map_fd);

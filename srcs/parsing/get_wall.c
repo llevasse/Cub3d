@@ -6,7 +6,7 @@
 /*   By: llevasse <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/18 23:48:52 by llevasse          #+#    #+#             */
-/*   Updated: 2023/12/18 16:32:09 by llevasse         ###   ########.fr       */
+/*   Updated: 2023/12/23 21:31:06 by llevasse         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -52,6 +52,8 @@ static int	do_open(char *s, t_img *img, int face, t_cub *cub)
 		return ((void)ft_putstr_fd(W_WALL_OPEN_ERR, 2), 0);
 	if (img->mlx_img == NULL && face == 3)
 		return ((void)ft_putstr_fd(E_WALL_OPEN_ERR, 2), 0);
+	if (img->mlx_img == NULL && face == 4)
+		return ((void)ft_putstr_fd(DOOR_OPEN_ERR, 2), 0);
 	img->width = w;
 	img->height = h;
 	return (1);
@@ -79,7 +81,7 @@ static char	*get_str_line(int map_fd, t_map *map)
 	return (NULL);
 }
 
-int	get_wall(int map_fd, t_map *map, t_cub *cub)
+int	get_wall(int map_fd, t_map *map, t_cub *cub, int *max)
 {
 	char	*str;
 	char	*id;
@@ -100,5 +102,10 @@ int	get_wall(int map_fd, t_map *map, t_cub *cub)
 		return (get_rgb_value(str, &map->f_rgb, F_ERR));
 	if (!ft_strcmp("C", id) && map->c_rgb == -1)
 		return (get_rgb_value(str, &map->c_rgb, C_ERR));
+	if (!ft_strcmp("DOOR", id) && *max == 6 && map->door_img.mlx_img == 0)	//get error if door is last texture passed
+	{
+		*max = 7;
+		return (do_open(str, &map->door_img, 4, cub));
+	}
 	return ((void)ft_putstr_fd(INVALID_CUB, 2), 0);
 }

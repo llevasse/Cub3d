@@ -6,7 +6,7 @@
 /*   By: llevasse <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/18 23:42:30 by llevasse          #+#    #+#             */
-/*   Updated: 2023/12/23 21:21:03 by llevasse         ###   ########.fr       */
+/*   Updated: 2023/12/23 21:26:54 by llevasse         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,6 +21,7 @@
 # define S_WALL_OPEN_ERR "Error\nError in opening south wall texture file.\n"
 # define E_WALL_OPEN_ERR "Error\nError in opening east wall texture file.\n"
 # define W_WALL_OPEN_ERR "Error\nError in opening west wall texture file.\n"
+# define DOOR_OPEN_ERR "Error\nError in opening door texture file.\n"
 # define F_ERR "Error\nInvalid floor colour.\n"
 # define C_ERR "Error\nInvalid floor colour.\n"
 # define CUB_OPEN_ERR "Error\nError in opening cub file.\n"
