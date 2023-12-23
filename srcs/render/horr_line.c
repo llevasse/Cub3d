@@ -6,7 +6,7 @@
 /*   By: llevasse <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/25 21:58:31 by llevasse          #+#    #+#             */
-/*   Updated: 2023/12/23 21:50:44 by llevasse         ###   ########.fr       */
+/*   Updated: 2023/12/23 22:06:26 by llevasse         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -62,6 +62,23 @@ static void	get_wall_percent(t_cub cub, t_line *line, float pa, int dof)
 	line->stop = (WINDOW_H + line->height) / 2;
 }
 
+static void	get_door_percent(t_cub cub, t_line *line, float pa, int dof)
+{
+	*line = get_line(get_player_point(cub.player.px, cub.player.py), line->p_a);
+	line->dist *= cos((cub.player.pa - pa) * RADIAN);
+	if (dof <= -42)
+		line->dist = 0x7fffffff + 0.0;
+	line->wall = &cub.map->door_img;
+	line->wall_percent = ((int)line->p_b.x % line->wall->width);
+	if (pa > 0 && pa < 180)
+		line->wall_percent = ((line->wall->width - 1) - line->wall_percent);
+	line->height = WINDOW_H;
+	if (line->dist >= 1)
+		line->height = ((cub.mmap->block_s * WINDOW_H) / line->dist);
+	line->start = (WINDOW_H - line->height) / 2;
+	line->stop = (WINDOW_H + line->height) / 2;
+}
+
 int is_pos_valid(t_cub cub, int x, int y)
 {
 	return (y < cub.mmap->nb_line && y >= 0
@@ -91,9 +108,13 @@ t_line	get_horr(t_cub cub, float pa)
 		line.p_a.x += line.x_step;
 		line.p_a.y -= line.y_step;
 	}
-	get_wall_percent(cub, &line, pa, dof);
 	if (is_pos_valid(cub, pos_x, pos_y) && cub.mmap->map[pos_y][pos_x] == 'C' && !door.cross_door)
+	{
+		get_door_percent(cub, &line, pa, dof);
 		door = cross_door(cub, line.p_b.x, line.p_b.y, 1);
+	}
+	else
+		get_wall_percent(cub, &line, pa, dof);
 	line.door = door;
 	return (line);
 }
