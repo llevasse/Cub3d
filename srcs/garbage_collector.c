@@ -6,7 +6,7 @@
 /*   By: llevasse <llevasse@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/07/11 18:05:40 by llevasse          #+#    #+#             */
-/*   Updated: 2023/12/23 20:10:38 by llevasse         ###   ########.fr       */
+/*   Updated: 2023/12/23 22:57:08 by llevasse         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -50,13 +50,14 @@ void	free_one_addr(t_garbage **lst, void *addr)
 {
 	t_garbage	*tmp;
 	t_garbage	*remove;
-	
+
 	tmp = *lst;
 	if (!addr)
 		return ;
 	while (tmp)
 	{
-		if (tmp->next->addr == addr){
+		if (tmp->next->addr == addr)
+		{
 			remove = tmp->next;
 			tmp->next = tmp->next->next;
 			free(addr);
@@ -65,20 +66,6 @@ void	free_one_addr(t_garbage **lst, void *addr)
 		}
 		tmp = tmp->next;
 	}
-}
-
-int		garbage_size(t_garbage *lst)
-{
-	int			i;
-	t_garbage	*tmp;
-	i = 0;
-	tmp = lst;
-	while (tmp)
-	{
-		i++;
-		tmp = tmp->next;
-	}
-	return (i);
 }
 
 void	ft_add_garbage(t_garbage **lst, void *addr)
