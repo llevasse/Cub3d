@@ -6,7 +6,7 @@
 /*   By: llevasse <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/25 21:58:31 by llevasse          #+#    #+#             */
-/*   Updated: 2023/12/23 22:06:26 by llevasse         ###   ########.fr       */
+/*   Updated: 2023/12/23 22:11:22 by llevasse         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -77,12 +77,6 @@ static void	get_door_percent(t_cub cub, t_line *line, float pa, int dof)
 		line->height = ((cub.mmap->block_s * WINDOW_H) / line->dist);
 	line->start = (WINDOW_H - line->height) / 2;
 	line->stop = (WINDOW_H + line->height) / 2;
-}
-
-int is_pos_valid(t_cub cub, int x, int y)
-{
-	return (y < cub.mmap->nb_line && y >= 0
-		&& x >= 0 && x < (int)ft_strlen(cub.mmap->map[y]));
 }
 
 t_line	get_horr(t_cub cub, float pa)
