@@ -6,7 +6,7 @@
 /*   By: llevasse <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/22 22:13:25 by llevasse          #+#    #+#             */
-/*   Updated: 2023/12/23 21:27:57 by llevasse         ###   ########.fr       */
+/*   Updated: 2023/12/23 22:15:28 by llevasse         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -29,4 +29,4 @@ t_map	*parse(int map_fd, t_cub *cub);
 void	close_walls(t_cub *cub, t_map *map);
 int		is_line_empty(char *str);
 void	set_map_null(t_map *map);
-void	get_side_data_addrs(t_map *map);
+void	get_side_data_addrs(t_map *map, int max);

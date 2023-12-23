@@ -6,7 +6,7 @@
 /*   By: llevasse <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/18 21:50:20 by llevasse          #+#    #+#             */
-/*   Updated: 2023/12/23 22:08:16 by llevasse         ###   ########.fr       */
+/*   Updated: 2023/12/23 22:15:38 by llevasse         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -32,11 +32,11 @@ t_map	*parse(int map_fd, t_cub *cub)
 		return (close_walls(cub, map), free_garbage(map->garbage),
 			close(map_fd), NULL);
 	close(map_fd);
-	get_side_data_addrs(map);
+	get_side_data_addrs(map, max_element);
 	return (map);
 }
 
-void	get_side_data_addrs(t_map *map)
+void	get_side_data_addrs(t_map *map, int max)
 {
 	map->north_img.addr = mlx_get_data_addr(map->north_img.mlx_img,
 			&map->north_img.bpp, &map->north_img.line_len,
@@ -50,7 +50,8 @@ void	get_side_data_addrs(t_map *map)
 	map->east_img.addr = mlx_get_data_addr(map->east_img.mlx_img,
 			&map->east_img.bpp, &map->east_img.line_len,
 			&map->east_img.endian);
-	map->door_img.addr = mlx_get_data_addr(map->door_img.mlx_img,
+	if (max == 7)
+		map->door_img.addr = mlx_get_data_addr(map->door_img.mlx_img,
 			&map->door_img.bpp, &map->door_img.line_len,
 			&map->door_img.endian);
 }
