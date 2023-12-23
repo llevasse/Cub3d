@@ -6,40 +6,43 @@
 /*   By: llevasse <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/20 00:40:14 by llevasse          #+#    #+#             */
-/*   Updated: 2023/12/23 20:48:13 by llevasse         ###   ########.fr       */
+/*   Updated: 2023/12/23 22:32:43 by llevasse         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "cub3d.h"
+
 int		is_in_range(float nb, int min, int max);
 
 int	render(t_cub *cub)
 {
 	int		x;
 	float	ca;
-	float	gained_angle;
+	float	done;
 
 	ca = no_higher(cub->player.pa - (PLAYER_FOV / 2), 360, 0);
 	x = 0;
-	gained_angle = 0;
+	done = 0;
 	cub->door = NULL;
-	while (gained_angle < PLAYER_FOV)
+	while (done < PLAYER_FOV)
 	{
-		if (is_in_range(gained_angle, (PLAYER_FOV / 2) - 1, (PLAYER_FOV / 2) + 1) && !cub->door)
+		if (is_in_range(done, (PLAYER_FOV / 2) - 1, (PLAYER_FOV / 2) + 1)
+			&& !cub->door)
 			cub->door = cast(cub, get_cast_data(cub, ca, 1), x++);
 		else
 			cast(cub, get_cast_data(cub, ca, 0), x++);
-		gained_angle += cub->field_step;
+		done += cub->field_step;
 		ca = no_higher(ca + cub->field_step, 360, 0);
 	}
 	draw_minimap(cub);
 	mlx_put_image_to_window(cub->mlx_ptr, cub->win_ptr, cub->img.mlx_img, 0, 0);
 	if (cub->door)
-		mlx_string_put(cub->mlx_ptr, cub->win_ptr, WINDOW_W / 2, WINDOW_H / 2, 0xFF0000, "Press 'E'");
+		mlx_string_put(cub->mlx_ptr, cub->win_ptr, WINDOW_W / 2, WINDOW_H / 2,
+			0xFF0000, "Press 'E'");
 	return (0);
 }
 
-int		is_in_range(float nb, int min, int max)
+int	is_in_range(float nb, int min, int max)
 {
 	return (nb >= min && nb <= max);
 }

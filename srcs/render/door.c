@@ -6,13 +6,13 @@
 /*   By: llevasse <llevasse@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/12/21 19:05:18 by llevasse          #+#    #+#             */
-/*   Updated: 2023/12/21 19:29:04 by llevasse         ###   ########.fr       */
+/*   Updated: 2023/12/23 22:33:09 by llevasse         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "cub3d.h"
 
-t_door cross_door(t_cub cub, float r_x, float r_y, int hit_door)
+t_door	cross_door(t_cub cub, float r_x, float r_y, int hit_door)
 {
 	t_door	door;
 	float	d_x;
