@@ -6,7 +6,7 @@
 /*   By: llevasse <llevasse@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/12/21 19:05:18 by llevasse          #+#    #+#             */
-/*   Updated: 2023/12/23 22:44:34 by llevasse         ###   ########.fr       */
+/*   Updated: 2023/12/23 22:55:31 by llevasse         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -32,9 +32,9 @@ t_door	cross_door(t_cub cub, float r_x, float r_y, int hit_door)
 	return (door);
 }
 
-t_door	init_door()
+t_door	init_door(void)
 {
-	t_door door;
+	t_door	door;
 
 	door.cross_door = 0;
 	door.hit_door = 0;

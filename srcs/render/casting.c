@@ -6,7 +6,7 @@
 /*   By: llevasse <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/24 22:25:17 by llevasse          #+#    #+#             */
-/*   Updated: 2023/12/23 22:11:34 by llevasse         ###   ########.fr       */
+/*   Updated: 2023/12/23 22:56:12 by llevasse         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,9 +23,9 @@ t_cast	get_cast_data(t_cub *cub, float ca, int check_door)
 	else
 		cast.line = cast.v;
 	if (cast.h.door.dist > cast.v.door.dist && !cast.v.dist)
-	   cast.line.door = cast.h.door;
+		cast.line.door = cast.h.door;
 	else if (cast.h.door.dist < cast.v.door.dist && !cast.h.dist)
-	   cast.line.door = cast.v.door;
+		cast.line.door = cast.v.door;
 	if (!check_door)
 	{
 		cast.line.door.cross_door = 0;
@@ -75,7 +75,7 @@ t_door	*cast(t_cub *cub, t_cast c, int x)
 	return (door);
 }
 
-int is_pos_valid(t_cub cub, int x, int y)
+int	is_pos_valid(t_cub cub, int x, int y)
 {
 	return (y < cub.mmap->nb_line && y >= 0
 		&& x >= 0 && x < (int)ft_strlen(cub.mmap->map[y]));
