@@ -6,11 +6,13 @@
 /*   By: llevasse <llevasse@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/19 12:01:04 by llevasse          #+#    #+#             */
-/*   Updated: 2023/12/17 22:21:47 by llevasse         ###   ########.fr       */
+/*   Updated: 2023/12/23 21:21:26 by llevasse         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "cub3d.h"
+
+int	valid_line(char *str);
 
 int	get_map(int map_fd, t_map *map, t_cub *cub)
 {
@@ -22,11 +24,15 @@ int	get_map(int map_fd, t_map *map, t_cub *cub)
 	while (tmp)
 	{
 		ft_add_garbage(&map->garbage, tmp);
+		if (!valid_line(tmp))
+			return (0);
 		while (tmp && is_line_empty(tmp))
 		{
 			tmp = get_next_line(map_fd);
 			if (tmp)
 				ft_add_garbage(&map->garbage, tmp);
+			if (tmp && !valid_line(tmp))
+				return (0);
 		}
 		if (!tmp)
 			break ;
@@ -36,6 +42,20 @@ int	get_map(int map_fd, t_map *map, t_cub *cub)
 	}
 	if (!search_player_presence(map, cub, str))
 		return (0);
+	return (1);
+}
+
+int	valid_line(char *str)
+{
+	int	i;
+
+	i = 0;
+	while (str[i])
+	{
+		if (!ft_is_in_str("NSEW01CO", str[i]))
+			return ((ft_putstr_fd(INVALID_MAP_LINE, 2)), 0);
+		i++;
+	}
 	return (1);
 }
 
