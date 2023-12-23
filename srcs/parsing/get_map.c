@@ -6,7 +6,7 @@
 /*   By: llevasse <llevasse@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/19 12:01:04 by llevasse          #+#    #+#             */
-/*   Updated: 2023/12/23 21:30:16 by llevasse         ###   ########.fr       */
+/*   Updated: 2023/12/23 23:00:28 by llevasse         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,15 +24,11 @@ int	get_map(int map_fd, t_map *map, t_cub *cub)
 	while (tmp)
 	{
 		ft_add_garbage(&map->garbage, tmp);
-		if (!valid_line(tmp))
-			return (0);
 		while (tmp && is_line_empty(tmp))
 		{
 			tmp = get_next_line(map_fd);
 			if (tmp)
 				ft_add_garbage(&map->garbage, tmp);
-			if (tmp && !valid_line(tmp))
-				return (0);
 		}
 		if (!tmp)
 			break ;
@@ -40,7 +36,7 @@ int	get_map(int map_fd, t_map *map, t_cub *cub)
 		ft_add_garbage(&map->garbage, str);
 		tmp = get_next_line(map_fd);
 	}
-	if (!search_player_presence(map, cub, str))
+	if (!search_player_presence(map, cub, str) || !valid_line(str))
 		return (0);
 	return (1);
 }
