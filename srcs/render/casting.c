@@ -6,7 +6,7 @@
 /*   By: llevasse <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/24 22:25:17 by llevasse          #+#    #+#             */
-/*   Updated: 2023/12/21 19:36:12 by llevasse         ###   ########.fr       */
+/*   Updated: 2023/12/23 19:59:42 by llevasse         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -43,9 +43,10 @@ int	get_texture_colour(t_line line, int height)
 	return (*(int *)(line.wall->addr + y + x));
 }
 
-t_door	cast(t_cub *cub, t_cast c, int x)
+t_door	*cast(t_cub *cub, t_cast c, int x)
 {
 	int		current;
+	t_door	*door;
 
 	current = 0;
 	while (current < c.line.start)
@@ -63,5 +64,10 @@ t_door	cast(t_cub *cub, t_cast c, int x)
 	current = c.line.stop;
 	while (current < WINDOW_H)
 		img_pix_put(&cub->img, x, current++, cub->map->f_rgb);
-	return (c.line.door);
+	if (!c.line.door.cross_door && !c.line.door.hit_door)
+		return (NULL);
+	door = malloc(sizeof(t_door));
+	ft_add_garbage(&cub->garbage, door);
+	*door = c.line.door;
+	return (door);
 }

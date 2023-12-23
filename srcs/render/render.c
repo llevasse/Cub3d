@@ -6,7 +6,7 @@
 /*   By: llevasse <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/20 00:40:14 by llevasse          #+#    #+#             */
-/*   Updated: 2023/12/21 18:48:42 by llevasse         ###   ########.fr       */
+/*   Updated: 2023/12/23 20:00:17 by llevasse         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,7 +18,6 @@ int	render(t_cub *cub)
 	float	x;
 	float	ca;
 	float	gained_angle;
-	t_door	door;
 
 	ca = no_higher(cub->player.pa - (PLAYER_FOV / 2), 360, 0);
 	x = 0;
@@ -27,11 +26,7 @@ int	render(t_cub *cub)
 	while (gained_angle < PLAYER_FOV)
 	{
 		if (is_in_range(gained_angle, (PLAYER_FOV / 2) - 1, (PLAYER_FOV / 2) + 1) && !cub->door)
-			{
-				door = cast(cub, get_cast_data(cub, ca), x++);
-				if (door.cross_door || door.hit_door)
-					cub->door = &door;
-			}
+				cub->door = cast(cub, get_cast_data(cub, ca), x++);
 		else
 			cast(cub, get_cast_data(cub, ca), x++);
 		gained_angle += cub->field_step;
