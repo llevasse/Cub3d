@@ -6,7 +6,7 @@
 /*   By: llevasse <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/18 21:50:20 by llevasse          #+#    #+#             */
-/*   Updated: 2023/12/23 21:24:01 by llevasse         ###   ########.fr       */
+/*   Updated: 2023/12/23 21:55:01 by llevasse         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -76,6 +76,8 @@ void	close_walls(t_cub *cub, t_map *map)
 		mlx_destroy_image(cub->mlx_ptr, map->east_img.mlx_img);
 	if (map->west_img.mlx_img)
 		mlx_destroy_image(cub->mlx_ptr, map->west_img.mlx_img);
+	if (map->door_img.mlx_img)
+		mlx_destroy_image(cub->mlx_ptr, map->door_img.mlx_img);
 }
 
 void	set_map_null(t_map *map)
@@ -84,6 +86,7 @@ void	set_map_null(t_map *map)
 	map->south_img.mlx_img = NULL;
 	map->east_img.mlx_img = NULL;
 	map->west_img.mlx_img = NULL;
+	map->door_img.mlx_img = NULL;
 	map->f_rgb = -1;
 	map->c_rgb = -1;
 	map->player_rotation = -1;
