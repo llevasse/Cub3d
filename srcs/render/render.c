@@ -6,7 +6,7 @@
 /*   By: llevasse <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/20 00:40:14 by llevasse          #+#    #+#             */
-/*   Updated: 2023/12/23 20:00:17 by llevasse         ###   ########.fr       */
+/*   Updated: 2023/12/23 20:48:13 by llevasse         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,7 +15,7 @@ int		is_in_range(float nb, int min, int max);
 
 int	render(t_cub *cub)
 {
-	float	x;
+	int		x;
 	float	ca;
 	float	gained_angle;
 
@@ -26,9 +26,9 @@ int	render(t_cub *cub)
 	while (gained_angle < PLAYER_FOV)
 	{
 		if (is_in_range(gained_angle, (PLAYER_FOV / 2) - 1, (PLAYER_FOV / 2) + 1) && !cub->door)
-				cub->door = cast(cub, get_cast_data(cub, ca), x++);
+			cub->door = cast(cub, get_cast_data(cub, ca, 1), x++);
 		else
-			cast(cub, get_cast_data(cub, ca), x++);
+			cast(cub, get_cast_data(cub, ca, 0), x++);
 		gained_angle += cub->field_step;
 		ca = no_higher(ca + cub->field_step, 360, 0);
 	}

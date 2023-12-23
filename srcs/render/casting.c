@@ -6,13 +6,13 @@
 /*   By: llevasse <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/24 22:25:17 by llevasse          #+#    #+#             */
-/*   Updated: 2023/12/23 19:59:42 by llevasse         ###   ########.fr       */
+/*   Updated: 2023/12/23 20:45:55 by llevasse         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "cub3d.h"
 
-t_cast	get_cast_data(t_cub *cub, float ca)
+t_cast	get_cast_data(t_cub *cub, float ca, int check_door)
 {
 	t_cast	cast;
 
@@ -26,6 +26,11 @@ t_cast	get_cast_data(t_cub *cub, float ca)
 	   cast.line.door = cast.h.door;
 	else if (cast.h.door.dist < cast.v.door.dist && !cast.h.dist)
 	   cast.line.door = cast.v.door;
+	if (!check_door)
+	{
+		cast.line.door.cross_door = 0;
+		cast.line.door.hit_door = 0;
+	}
 	cast.dist = cast.line.dist;
 	return (cast);
 }

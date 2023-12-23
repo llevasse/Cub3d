@@ -6,7 +6,7 @@
 /*   By: llevasse <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/22 22:05:00 by llevasse          #+#    #+#             */
-/*   Updated: 2023/12/23 19:59:57 by llevasse         ###   ########.fr       */
+/*   Updated: 2023/12/23 20:43:11 by llevasse         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -39,7 +39,7 @@ void	draw_minimap(t_cub *cub);
 void	draw_fov(t_cub *cub);
 
 //srcs/render/casting.c
-t_cast	get_cast_data(t_cub *cub, float ca);
+t_cast	get_cast_data(t_cub *cub, float ca, int check_door);
 t_door	*cast(t_cub *cub, t_cast c, int x);
 
 //srcs/render/door.c
