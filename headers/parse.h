@@ -6,7 +6,7 @@
 /*   By: llevasse <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/22 22:13:25 by llevasse          #+#    #+#             */
-/*   Updated: 2023/12/24 15:48:47 by llevasse         ###   ########.fr       */
+/*   Updated: 2023/12/24 16:25:31 by llevasse         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,6 +15,10 @@
 //srcs/parsing/get_map.c
 int		get_map(int map_fd, t_map *map, t_cub *cub, int elements);
 int		search_player_presence(t_map *map, t_cub *cub, char *s);
+
+//srcs/parsing/get_map_helper.c
+int		valid_line(char *str);
+int		search_door(t_cub *cub, t_map *map, char *s);
 
 //srcs/parsing/get_wall.c
 int		get_wall(int map_fd, t_map *map, t_cub *cub, int *max);

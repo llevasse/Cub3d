@@ -21,6 +21,7 @@ SRC				=	srcs/main.c \
 					srcs/parsing/parse.c \
 					srcs/garbage_collector.c \
 					srcs/parsing/get_map.c \
+					srcs/parsing/get_map_helper.c \
 					srcs/parsing/is_map_closed.c \
 					srcs/parsing/get_wall.c	\
 					srcs/render/render.c \

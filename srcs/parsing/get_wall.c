@@ -6,7 +6,7 @@
 /*   By: llevasse <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/18 23:48:52 by llevasse          #+#    #+#             */
-/*   Updated: 2023/12/24 16:12:08 by llevasse         ###   ########.fr       */
+/*   Updated: 2023/12/24 16:26:30 by llevasse         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -102,7 +102,7 @@ int	get_wall(int map_fd, t_map *map, t_cub *cub, int *max)
 		return (get_rgb_value(str, &map->f_rgb, F_ERR));
 	if (!ft_strcmp("C", id) && map->c_rgb == -1)
 		return (get_rgb_value(str, &map->c_rgb, C_ERR));
-	if (!ft_strcmp("DOOR", id) && *max == 6 && map->door_img.mlx_img == 0)	//get error if door is last texture passed
+	if (!ft_strcmp("DOOR", id) && *max == 6 && map->door_img.mlx_img == 0)
 	{
 		*max = 7;
 		return (do_open(str, &map->door_img, 4, cub));
