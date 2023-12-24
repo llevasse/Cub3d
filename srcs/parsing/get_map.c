@@ -6,7 +6,7 @@
 /*   By: llevasse <llevasse@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/19 12:01:04 by llevasse          #+#    #+#             */
-/*   Updated: 2023/12/24 22:31:43 by llevasse         ###   ########.fr       */
+/*   Updated: 2023/12/24 23:03:15 by llevasse         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,15 +22,13 @@ char	*pass_space(char *s)
 	return (str);
 }
 
-int	get_map(int map_fd, t_map *map, t_cub *cub, int elements)
+int	get_map(int map_fd, t_map *map, t_cub *cub)
 {
 	char	*str;
 	char	*tmp;
-	int		i;
 
 	str = "";
 	tmp = get_next_line(map_fd);
-	i = 0;
 	while (tmp)
 	{
 		ft_add_garbage(&map->garbage, tmp);
@@ -42,10 +40,9 @@ int	get_map(int map_fd, t_map *map, t_cub *cub, int elements)
 		}
 		if (!tmp)
 			break ;
-		if (i == 0 && elements == 6 && map->door_img.mlx_img == 0
-			&& !ft_strncmp("DOOR", pass_space(tmp), 4))
+		if (is_texture_line(tmp))
 		{
-			if (!search_door(cub, map, tmp))
+			if (!get_wall(tmp, map, cub))
 				return (0);
 		}
 		else
@@ -54,7 +51,6 @@ int	get_map(int map_fd, t_map *map, t_cub *cub, int elements)
 			ft_add_garbage(&map->garbage, str);
 		}
 		tmp = get_next_line(map_fd);
-		i++;
 	}
 	if (!search_player_presence(map, cub, str) || !valid_line(str, map))
 		return (0);

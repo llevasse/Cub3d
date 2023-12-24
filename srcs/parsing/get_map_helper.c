@@ -6,7 +6,7 @@
 /*   By: llevasse <llevasse@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/12/24 16:18:35 by llevasse          #+#    #+#             */
-/*   Updated: 2023/12/24 22:31:19 by llevasse         ###   ########.fr       */
+/*   Updated: 2023/12/24 23:06:30 by llevasse         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -28,15 +28,26 @@ int	valid_line(char *str, t_map *map)
 	return (1);
 }
 
-int	search_door(t_cub *cub, t_map *map, char *s)
+int	is_texture_line(char *str)
 {
-	ft_strsep(&s, " \t");
-	if (!do_open(s, &map->door_img, 4, cub))
-		return (0);
-	map->door_img.addr = mlx_get_data_addr(map->door_img.mlx_img,
-			&map->door_img.bpp, &map->door_img.line_len,
-			&map->door_img.endian);
-	return (1);
+	char	*id;
+
+	id = pass_space(str);
+	if (!ft_strncmp("NO", id, 2))
+		return (1);
+	if (!ft_strncmp("SO", id, 2))
+		return (1);
+	if (!ft_strncmp("WE", id, 2))
+		return (1);
+	if (!ft_strncmp("EA", id, 2))
+		return (1);
+	if (!ft_strncmp("DOOR", id, 4))
+		return (1);
+	if (!ft_strncmp("F", id, 1))
+		return (1);
+	if (!ft_strncmp("C", id, 1))
+		return (1);
+	return (0);
 }
 
 int	check_player_in_string(t_point *p, int y, int x, char *str)

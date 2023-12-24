@@ -6,7 +6,7 @@
 /*   By: llevasse <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/18 23:48:52 by llevasse          #+#    #+#             */
-/*   Updated: 2023/12/24 16:26:30 by llevasse         ###   ########.fr       */
+/*   Updated: 2023/12/24 23:03:28 by llevasse         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -59,36 +59,12 @@ int	do_open(char *s, t_img *img, int face, t_cub *cub)
 	return (1);
 }
 
-static char	*get_str_line(int map_fd, t_map *map)
+int	get_wall(char *str, t_map *map, t_cub *cub)
 {
-	char	*str;
-
-	str = get_next_line(map_fd);
-	if (!str)
-		return (0);
-	ft_add_garbage(&map->garbage, str);
-	while (str && is_line_empty(str))
-	{
-		str = get_next_line(map_fd);
-		ft_add_garbage(&map->garbage, str);
-	}
-	if (!str)
-		return (0);
-	while (*str && ft_isspace(*str))
-		str++;
-	if (*str)
-		return (str);
-	return (NULL);
-}
-
-int	get_wall(int map_fd, t_map *map, t_cub *cub, int *max)
-{
-	char	*str;
 	char	*id;
 
-	str = get_str_line(map_fd, map);
-	if (!str)
-		return (0);
+
+	str = pass_space(str);
 	id = ft_strsep(&str, " \t");
 	if (!ft_strcmp("NO", id) && map->north_img.mlx_img == 0)
 		return (do_open(str, &map->north_img, 0, cub));
@@ -102,10 +78,7 @@ int	get_wall(int map_fd, t_map *map, t_cub *cub, int *max)
 		return (get_rgb_value(str, &map->f_rgb, F_ERR));
 	if (!ft_strcmp("C", id) && map->c_rgb == -1)
 		return (get_rgb_value(str, &map->c_rgb, C_ERR));
-	if (!ft_strcmp("DOOR", id) && *max == 6 && map->door_img.mlx_img == 0)
-	{
-		*max = 7;
+	if (!ft_strcmp("DOOR", id) && map->door_img.mlx_img == 0)
 		return (do_open(str, &map->door_img, 4, cub));
-	}
 	return ((void)ft_putstr_fd(INVALID_CUB, 2), 0);
 }

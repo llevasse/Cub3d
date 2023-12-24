@@ -5,6 +5,7 @@ F	123,55,87
 NO          ./assets/textures/wall_2.xpm  
        SO             ./assets/textures/wall_3.xpm                    
 WE            ./assets/textures/wall_4.xpm       
+DOOR ./assets/textures/door/dark_oak_door.xpm
 
 11111111111111111
 10000000000000001
