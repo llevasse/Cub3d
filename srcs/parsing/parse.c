@@ -6,7 +6,7 @@
 /*   By: llevasse <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/18 21:50:20 by llevasse          #+#    #+#             */
-/*   Updated: 2023/12/23 23:02:25 by llevasse         ###   ########.fr       */
+/*   Updated: 2023/12/24 15:53:32 by llevasse         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -29,7 +29,7 @@ t_map	*parse(int map_fd, t_cub *cub)
 	while (element_got < max_element
 		&& get_wall(map_fd, map, cub, &max_element) == 1)
 		element_got++;
-	if (element_got != max_element || !get_map(map_fd, map, cub))
+	if (element_got != max_element || !get_map(map_fd, map, cub, element_got))
 		return (close_walls(cub, map), free_garbage(map->garbage),
 			close(map_fd), NULL);
 	close(map_fd);

@@ -1,10 +1,10 @@
 C		  42, 			231,227
 F	123,55,42
-DOOR ./assets/textures/door/dark_oak_door.xpm
 EA ./assets/textures/stone_brick.xpm
 NO ./assets/textures/stone_brick.xpm
 SO ./assets/textures/stone_brick.xpm
 WE ./assets/textures/stone_brick.xpm
+DOOR ./assets/textures/door/dark_oak_door.xpm
 
 
 11111111111

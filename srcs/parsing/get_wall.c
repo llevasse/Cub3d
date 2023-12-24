@@ -6,7 +6,7 @@
 /*   By: llevasse <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/18 23:48:52 by llevasse          #+#    #+#             */
-/*   Updated: 2023/12/23 21:31:06 by llevasse         ###   ########.fr       */
+/*   Updated: 2023/12/24 16:12:08 by llevasse         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -35,7 +35,7 @@ static int	get_rgb_value(char *s, int *value, char *err)
 	return (1);
 }
 
-static int	do_open(char *s, t_img *img, int face, t_cub *cub)
+int	do_open(char *s, t_img *img, int face, t_cub *cub)
 {
 	int	w;
 	int	h;

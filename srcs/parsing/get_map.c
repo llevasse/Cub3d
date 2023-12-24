@@ -6,21 +6,34 @@
 /*   By: llevasse <llevasse@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/19 12:01:04 by llevasse          #+#    #+#             */
-/*   Updated: 2023/12/23 23:00:28 by llevasse         ###   ########.fr       */
+/*   Updated: 2023/12/24 16:16:33 by llevasse         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "cub3d.h"
 
 int	valid_line(char *str);
+static int	search_door(t_cub *cub, t_map *map, char *s);
 
-int	get_map(int map_fd, t_map *map, t_cub *cub)
+char *pass_space(char *s)
+{
+	char *str;
+
+	str = s;
+	while (*str && (*str == ' ' || *str == '\t'))
+		str++;
+	return (str);
+}
+
+int	get_map(int map_fd, t_map *map, t_cub *cub, int elements)
 {
 	char	*str;
 	char	*tmp;
+	int		i;
 
 	str = "";
 	tmp = get_next_line(map_fd);
+	i = 0;
 	while (tmp)
 	{
 		ft_add_garbage(&map->garbage, tmp);
@@ -32,9 +45,19 @@ int	get_map(int map_fd, t_map *map, t_cub *cub)
 		}
 		if (!tmp)
 			break ;
-		str = ft_strjoin(str, tmp);
-		ft_add_garbage(&map->garbage, str);
+		if (i == 0 && elements == 6 && map->door_img.mlx_img == 0
+			&& !ft_strncmp("DOOR", pass_space(tmp), 4))
+		{
+			if (!search_door(cub, map, tmp))
+				return (0);
+		}
+		else
+		{
+			str = ft_strjoin(str, tmp);
+			ft_add_garbage(&map->garbage, str);
+		}
 		tmp = get_next_line(map_fd);
+		i++;
 	}
 	if (!search_player_presence(map, cub, str) || !valid_line(str))
 		return (0);
@@ -52,6 +75,17 @@ int	valid_line(char *str)
 			return ((ft_putstr_fd(INVALID_MAP_LINE, 2)), 0);
 		i++;
 	}
+	return (1);
+}
+
+static int	search_door(t_cub *cub, t_map *map, char *s)
+{
+	ft_strsep(&s, " \t");
+	if (!do_open(s, &map->door_img, 4, cub))
+		return (0);
+	map->door_img.addr = mlx_get_data_addr(map->door_img.mlx_img,
+		&map->door_img.bpp, &map->door_img.line_len,
+		&map->door_img.endian);
 	return (1);
 }
 

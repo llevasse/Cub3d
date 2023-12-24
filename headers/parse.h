@@ -6,18 +6,19 @@
 /*   By: llevasse <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/22 22:13:25 by llevasse          #+#    #+#             */
-/*   Updated: 2023/12/23 22:15:28 by llevasse         ###   ########.fr       */
+/*   Updated: 2023/12/24 15:48:47 by llevasse         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "cub3d.h"
 
 //srcs/parsing/get_map.c
-int		get_map(int map_fd, t_map *map, t_cub *cub);
+int		get_map(int map_fd, t_map *map, t_cub *cub, int elements);
 int		search_player_presence(t_map *map, t_cub *cub, char *s);
 
 //srcs/parsing/get_wall.c
 int		get_wall(int map_fd, t_map *map, t_cub *cub, int *max);
+int		do_open(char *s, t_img *img, int face, t_cub *cub);
 
 //srcs/parsing/is_map_closed.c
 int		check_closed(t_cub *cub, int x, int y);
