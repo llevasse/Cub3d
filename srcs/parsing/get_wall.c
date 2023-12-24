@@ -6,7 +6,7 @@
 /*   By: llevasse <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/18 23:48:52 by llevasse          #+#    #+#             */
-/*   Updated: 2023/12/24 23:03:28 by llevasse         ###   ########.fr       */
+/*   Updated: 2023/12/24 23:13:48 by llevasse         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -62,7 +62,6 @@ int	do_open(char *s, t_img *img, int face, t_cub *cub)
 int	get_wall(char *str, t_map *map, t_cub *cub)
 {
 	char	*id;
-
 
 	str = pass_space(str);
 	id = ft_strsep(&str, " \t");
