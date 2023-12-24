@@ -6,7 +6,7 @@
 /*   By: llevasse <llevasse@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/19 12:01:04 by llevasse          #+#    #+#             */
-/*   Updated: 2023/12/24 16:25:40 by llevasse         ###   ########.fr       */
+/*   Updated: 2023/12/24 22:31:43 by llevasse         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -56,7 +56,7 @@ int	get_map(int map_fd, t_map *map, t_cub *cub, int elements)
 		tmp = get_next_line(map_fd);
 		i++;
 	}
-	if (!search_player_presence(map, cub, str) || !valid_line(str))
+	if (!search_player_presence(map, cub, str) || !valid_line(str, map))
 		return (0);
 	return (1);
 }
