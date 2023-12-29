@@ -6,7 +6,7 @@
 /*   By: tdutel <tdutel@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/19 22:29:27 by llevasse          #+#    #+#             */
-/*   Updated: 2023/12/29 16:53:39 by llevasse         ###   ########.fr       */
+/*   Updated: 2023/12/21 19:39:15 by llevasse         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -63,15 +63,7 @@ void	init_minimap(t_cub *cub)
 	cub->mmap->dof = cub->mmap->map_width;
 	if (cub->mmap->map_width < cub->mmap->nb_line)
 		cub->mmap->dof = cub->mmap->nb_line;
-	cub->avg_block_s = (cub->map->north_img.width + cub->map->south_img.width + cub->map->east_img.width + cub->map->west_img.width) / 4;
-	cub->avg_v_block_s = (cub->map->east_img.width + cub->map->west_img.width) / 2;
-	cub->avg_h_block_s = (cub->map->north_img.width + cub->map->south_img.width) / 2;
-	if (cub->map->door_img.mlx_img)
-	{
-		cub->avg_block_s = (cub->map->north_img.width + cub->map->south_img.width + cub->map->east_img.width + cub->map->west_img.width + cub->map->door_img.width) / 5;
-		cub->avg_v_block_s = (cub->map->east_img.width + cub->map->west_img.width + cub->map->door_img.width) / 3;
-		cub->avg_h_block_s = (cub->map->north_img.width + cub->map->south_img.width + cub->map->door_img.width) / 3;
-	}
+	cub->mmap->block_s = cub->map->north_img.width;
 }
 
 void	init_map_value(t_cub *cub)
