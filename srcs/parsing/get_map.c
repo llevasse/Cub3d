@@ -6,7 +6,7 @@
 /*   By: llevasse <llevasse@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/19 12:01:04 by llevasse          #+#    #+#             */
-/*   Updated: 2023/12/29 17:54:13 by llevasse         ###   ########.fr       */
+/*   Updated: 2023/12/29 18:14:31 by llevasse         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -33,7 +33,7 @@ char	*skip_empty_line(int fd, t_map *map, char *str)
 	return (str);
 }
 
-int		valid_resolution(t_map *map)
+int	valid_resolution(t_map *map)
 {
 	if (map->north_img.width != map->south_img.width)
 		return ((void)ft_putstr_fd(UNEQUAL_RESOLUTION, 2), 0);

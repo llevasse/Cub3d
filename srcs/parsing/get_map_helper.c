@@ -6,7 +6,7 @@
 /*   By: llevasse <llevasse@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/12/24 16:18:35 by llevasse          #+#    #+#             */
-/*   Updated: 2023/12/24 23:06:30 by llevasse         ###   ########.fr       */
+/*   Updated: 2023/12/29 18:14:00 by llevasse         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,7 +21,8 @@ int	valid_line(char *str, t_map *map)
 	{
 		if (!map->door_img.mlx_img && !ft_is_in_str("NSEW01\n\t \r", str[i]))
 			return ((ft_putstr_fd(INVALID_MAP_LINE, 2)), 0);
-		else if (map->door_img.mlx_img && !ft_is_in_str("NSEW01CO\n\t \r", str[i]))
+		else if (map->door_img.mlx_img
+			&& !ft_is_in_str("NSEW01CO\n\t \r", str[i]))
 			return ((ft_putstr_fd(INVALID_MAP_LINE, 2)), 0);
 		i++;
 	}
