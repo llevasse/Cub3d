@@ -1,10 +1,10 @@
 C		  42, 			231,227
 F	123,55,42
-EA ./assets/textures/stone_brick.xpm
-NO ./assets/textures/stone_brick.xpm
-SO ./assets/textures/stone_brick.xpm
-WE ./assets/textures/stone_brick.xpm
-DOOR ./assets/textures/door/dark_oak_door.xpm
+EA ./assets/textures/block_16x16/white_wool.xpm
+WE ./assets/textures/block_16x16/white_wool.xpm
+NO ./assets/textures/block_16x16/blue_wool.xpm
+SO ./assets/textures/block_16x16/red_wool.xpm
+DOOR ./assets/textures/block_16x16/dark_oak_trapdoor.xpm
 
 
 11111111111
