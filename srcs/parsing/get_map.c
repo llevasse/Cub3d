@@ -6,7 +6,7 @@
 /*   By: llevasse <llevasse@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/19 12:01:04 by llevasse          #+#    #+#             */
-/*   Updated: 2023/12/24 23:20:28 by llevasse         ###   ########.fr       */
+/*   Updated: 2023/12/29 17:54:13 by llevasse         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -33,6 +33,19 @@ char	*skip_empty_line(int fd, t_map *map, char *str)
 	return (str);
 }
 
+int		valid_resolution(t_map *map)
+{
+	if (map->north_img.width != map->south_img.width)
+		return ((void)ft_putstr_fd(UNEQUAL_RESOLUTION, 2), 0);
+	if (map->north_img.width != map->east_img.width)
+		return ((void)ft_putstr_fd(UNEQUAL_RESOLUTION, 2), 0);
+	if (map->west_img.width != map->south_img.width)
+		return ((void)ft_putstr_fd(UNEQUAL_RESOLUTION, 2), 0);
+	if (map->door_img.mlx_img && map->north_img.width != map->door_img.width)
+		return ((void)ft_putstr_fd(UNEQUAL_RESOLUTION, 2), 0);
+	return (1);
+}
+
 int	get_map(int map_fd, t_map *map, t_cub *cub)
 {
 	char	*str;
@@ -55,7 +68,8 @@ int	get_map(int map_fd, t_map *map, t_cub *cub)
 			return (0);
 		tmp = get_next_line(map_fd);
 	}
-	if (!search_player_presence(map, cub, str) || !valid_line(str, map))
+	if (!search_player_presence(map, cub, str) || !valid_line(str, map)
+		|| !valid_resolution(map))
 		return (0);
 	return (1);
 }

@@ -6,7 +6,7 @@
 /*   By: llevasse <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/18 21:50:20 by llevasse          #+#    #+#             */
-/*   Updated: 2023/12/29 17:29:00 by llevasse         ###   ########.fr       */
+/*   Updated: 2023/12/29 17:50:00 by llevasse         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -27,9 +27,6 @@ t_map	*parse(int map_fd, t_cub *cub)
 			close(map_fd), NULL);
 	close(map_fd);
 	get_side_data_addrs(map);
-	if (map->north_img.width != map->south_img.width || map->north_img.width != map->east_img.width || map->west_img.width != map->south_img.width)
-		return (close_walls(cub, map), free_garbage(map->garbage),
-			close(map_fd), NULL);
 	return (map);
 }
 
