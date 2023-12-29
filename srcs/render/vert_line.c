@@ -6,7 +6,7 @@
 /*   By: llevasse <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/25 21:58:31 by llevasse          #+#    #+#             */
-/*   Updated: 2023/12/23 22:49:36 by llevasse         ###   ########.fr       */
+/*   Updated: 2023/12/29 17:17:00 by llevasse         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,14 +21,15 @@ int	init_vert(t_cub cub, float pa, t_line *line)
 	int		width;
 
 	tan_v = tan(pa * RADIAN);
-	width = cub.mmap->block_s;
 	if (pa > 90 && pa < 270)
 	{
+		width = cub.map->west_img.width;
 		line->x_step = -width;
 		line->p_a.x = (((int)cub.player.px / width) * width) - 0.001;
 	}
 	else if ((pa > 270 && pa < 360) || (pa < 90 && pa > 0))
 	{
+		width = cub.map->east_img.width;
 		line->x_step = width;
 		line->p_a.x = (((int)cub.player.px / width) * width) + width;
 	}
@@ -57,7 +58,7 @@ static void	get_wall_percent(t_cub cub, t_line *line, float pa, int dof)
 		line->wall_percent = ((line->wall->width - 1) - line->wall_percent);
 	line->height = WINDOW_H;
 	if (line->dist >= 1)
-		line->height = ((cub.mmap->block_s * WINDOW_H) / line->dist);
+		line->height = ((cub.avg_block_s * WINDOW_H) / line->dist);
 	line->start = (WINDOW_H - line->height) / 2;
 	line->stop = (WINDOW_H + line->height) / 2;
 }
@@ -70,7 +71,7 @@ static void	get_door_percent(t_cub cub, t_line *line, float pa, t_door *door)
 		line->wall_percent = ((line->wall->width - 1) - line->wall_percent);
 	line->height = WINDOW_H;
 	if (line->dist >= 1)
-		line->height = ((cub.mmap->block_s * WINDOW_H) / line->dist);
+		line->height = ((cub.avg_block_s * WINDOW_H) / line->dist);
 	line->start = (WINDOW_H - line->height) / 2;
 	line->stop = (WINDOW_H + line->height) / 2;
 	*door = cross_door(cub, line->p_b.x, line->p_b.y, 1);
@@ -88,8 +89,8 @@ t_line	get_vert(t_cub cub, float pa)
 	d = init_door();
 	while (dof-- > 0)
 	{
-		x = (line.p_a.x / cub.mmap->block_s);
-		y = (line.p_a.y / cub.mmap->block_s);
+		x = (line.p_a.x / cub.avg_v_block_s);
+		y = (line.p_a.y / cub.avg_v_block_s);
 		if (!is_pos_valid(cub, x, y)
 			|| !ft_is_in_str("NSEW0O", cub.mmap->map[y][x]))
 			break ;

@@ -6,7 +6,7 @@
 /*   By: llevasse <llevasse@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/12/21 19:05:18 by llevasse          #+#    #+#             */
-/*   Updated: 2023/12/23 22:55:31 by llevasse         ###   ########.fr       */
+/*   Updated: 2023/12/29 17:17:45 by llevasse         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,8 +22,8 @@ t_door	cross_door(t_cub cub, float r_x, float r_y, int hit_door)
 	door.hit_door = 0;
 	if (hit_door)
 		door.hit_door = 1;
-	door.x = r_x / cub.mmap->block_s;
-	door.y = r_y / cub.mmap->block_s;
+	door.x = r_x / cub.avg_block_s;
+	door.y = r_y / cub.avg_block_s;
 	door.r_x = r_x;
 	door.r_y = r_y;
 	d_x = r_x - cub.player.px;

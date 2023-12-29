@@ -6,7 +6,7 @@
 /*   By: llevasse <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/20 00:28:00 by llevasse          #+#    #+#             */
-/*   Updated: 2023/12/20 14:49:12 by llevasse         ###   ########.fr       */
+/*   Updated: 2023/12/29 17:18:16 by llevasse         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -44,8 +44,8 @@ static void	init_points(t_cub *cub, t_point *p, t_point *print, t_point *tmp)
 			img_pix_put(&cub->img, x++, y, MMAP_W_RGB);
 		y++;
 	}
-	tmp->y = (int)(cub->player.py / cub->mmap->block_s) - MMAP_RANGE;
-	tmp->x = (int)(cub->player.px / cub->mmap->block_s) - MMAP_RANGE;
+	tmp->y = (int)(cub->player.py / cub->avg_v_block_s) - MMAP_RANGE;
+	tmp->x = (int)(cub->player.px / cub->avg_h_block_s) - MMAP_RANGE;
 	p->y = tmp->y;
 	print->y = 1;
 }

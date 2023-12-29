@@ -6,7 +6,7 @@
 /*   By: llevasse <llevasse@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/22 11:37:45 by llevasse          #+#    #+#             */
-/*   Updated: 2023/12/16 17:10:54 by llevasse         ###   ########.fr       */
+/*   Updated: 2023/12/29 16:55:53 by llevasse         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -29,14 +29,14 @@ void	init_player(t_cub *cub)
 			{
 				cub->player.pa = get_player_start_orientation(
 						cub->mmap->map[i][j - 1]);
-				cub->player.px = ((j - 1) * cub->mmap->block_s);
-				cub->player.py = (i * cub->mmap->block_s);
+				cub->player.px = ((j - 1) * cub->avg_h_block_s);
+				cub->player.py = (i * cub->avg_v_block_s);
 			}
 		}
 		i++;
 	}
-	cub->player.px += cub->mmap->block_s / 2;
-	cub->player.py += cub->mmap->block_s / 2;
+	cub->player.px += cub->avg_h_block_s / 2;
+	cub->player.py += cub->avg_v_block_s / 2;
 }
 
 int	get_player_start_orientation(char c)
