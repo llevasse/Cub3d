@@ -6,7 +6,7 @@
 /*   By: llevasse <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/18 23:42:30 by llevasse          #+#    #+#             */
-/*   Updated: 2023/12/29 17:53:11 by llevasse         ###   ########.fr       */
+/*   Updated: 2024/01/01 13:21:28 by llevasse         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -32,6 +32,7 @@
 # define NO_PLAYER "Error\nThere is no player in the map file.\n"
 # define ISLAND_MAP "Error\nThere is an unreachable section in the map file.\n"
 # define INVALID_MAP_LINE "Error\nThere is an invalid character in a map.\n"
-# define UNEQUAL_RESOLUTION "Error\nThe wall's textures resolution are not equal.\n"
+# define UNEQUAL_RESOLUTION "Error\nThe wall's textures \
+resolution are not equal.\n"
 
 #endif

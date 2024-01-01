@@ -6,7 +6,7 @@
 /*   By: tdutel <tdutel@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/18 21:43:29 by llevasse          #+#    #+#             */
-/*   Updated: 2023/12/23 20:21:33 by llevasse         ###   ########.fr       */
+/*   Updated: 2024/01/01 13:19:43 by llevasse         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -45,8 +45,6 @@
 # include <fcntl.h>
 # include <math.h>
 # include <errno.h>
-
-
 
 # include <stdio.h>
 #endif

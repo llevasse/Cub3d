@@ -6,7 +6,7 @@
 /*   By: llevasse <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/22 22:05:00 by llevasse          #+#    #+#             */
-/*   Updated: 2023/12/23 22:44:51 by llevasse         ###   ########.fr       */
+/*   Updated: 2024/01/01 13:19:55 by llevasse         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -45,6 +45,6 @@ int		is_pos_valid(t_cub cub, int x, int y);
 
 //srcs/render/door.c
 t_door	cross_door(t_cub cub, float r_x, float r_y, int hit_door);
-t_door	init_door();
+t_door	init_door(void);
 
 #endif
