@@ -6,7 +6,7 @@
 /*   By: tdutel <tdutel@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/19 22:29:27 by llevasse          #+#    #+#             */
-/*   Updated: 2024/01/05 22:51:07 by llevasse         ###   ########.fr       */
+/*   Updated: 2024/01/05 23:06:00 by llevasse         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,11 +18,6 @@ void	init_cub(t_cub *cub, char **argv)
 	cub->door = NULL;
 	cub->win_ptr = NULL;
 	cub->img.mlx_img = NULL;
-	cub->north_img.mlx_img = NULL;
-	cub->south_img.mlx_img = NULL;
-	cub->east_img.mlx_img = NULL;
-	cub->west_img.mlx_img = NULL;
-	cub->door_img.mlx_img = NULL;
 	cub->mlx_ptr = mlx_init();
 	if (!cub->mlx_ptr)
 		return (ft_putstr_fd(MLX_ERR, 2), exit(1));

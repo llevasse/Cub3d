@@ -6,7 +6,7 @@
 /*   By: llevasse <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/18 21:50:20 by llevasse          #+#    #+#             */
-/*   Updated: 2024/01/05 22:49:14 by llevasse         ###   ########.fr       */
+/*   Updated: 2024/01/05 22:56:38 by llevasse         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,6 +14,11 @@
 
 int parse(int map_fd, t_cub *cub)
 {
+	cub->north_img.mlx_img = NULL;
+	cub->south_img.mlx_img = NULL;
+	cub->east_img.mlx_img = NULL;
+	cub->west_img.mlx_img = NULL;
+	cub->door_img.mlx_img = NULL;
 	cub->f_rgb = -1;
 	cub->c_rgb = -1;
 	cub->player_rotation = -1;
