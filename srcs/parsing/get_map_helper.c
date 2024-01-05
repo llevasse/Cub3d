@@ -6,7 +6,7 @@
 /*   By: llevasse <llevasse@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/12/24 16:18:35 by llevasse          #+#    #+#             */
-/*   Updated: 2023/12/29 18:14:00 by llevasse         ###   ########.fr       */
+/*   Updated: 2024/01/05 22:11:55 by llevasse         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -71,12 +71,12 @@ int	search_player_presence(t_map *map, t_cub *cub, char *s)
 	char	**split;
 
 	split = ft_split(s, '\n');
-	ft_add_garbage(&map->garbage, split);
+	ft_add_garbage(&map->garbage, split, cub);
 	y = 0;
 	nb = 0;
 	while (y < get_tab_len(split))
 	{
-		ft_add_garbage(&map->garbage, split[y]);
+		ft_add_garbage(&map->garbage, split[y], cub);
 		x = 0;
 		while (split[y][x])
 			nb += check_player_in_string(&p, y, x++, split[y]);

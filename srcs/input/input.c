@@ -6,7 +6,7 @@
 /*   By: tdutel <tdutel@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/19 23:04:28 by llevasse          #+#    #+#             */
-/*   Updated: 2023/12/24 23:14:35 by llevasse         ###   ########.fr       */
+/*   Updated: 2024/01/05 22:23:33 by llevasse         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -31,7 +31,7 @@ int	handle_input(int keysym, t_cub *cub)
 	if (keysym == XK_e)
 		check_door(cub);
 	if (keysym == XK_Escape)
-		return (close_window(cub), 0);
+		return (close_window(cub, 0), 0);
 	if (keysym == XK_Left)
 		cub->player.pa -= PLAYER_R_OFFSET;
 	if (keysym == XK_Right)
@@ -52,13 +52,16 @@ void	check_door(t_cub *cub)
 	}
 }
 
-int	close_window(t_cub *cub)
+int	close_window(t_cub *cub, int status)
 {
-	mlx_destroy_window(cub->mlx_ptr, cub->win_ptr);
-	close_walls(cub, cub->map);
+	if (cub->win_ptr)
+		mlx_destroy_window(cub->mlx_ptr, cub->win_ptr);
+	if (cub->map)
+		close_walls(cub, cub->map);
 	if (cub->img.mlx_img)
 		mlx_destroy_image(cub->mlx_ptr, cub->img.mlx_img);
 	mlx_destroy_display(cub->mlx_ptr);
+	free(cub->mlx_ptr);
 	free_garbage(cub->garbage);
-	exit(0);
+	exit(status);
 }

@@ -6,7 +6,7 @@
 /*   By: tdutel <tdutel@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/18 21:52:44 by llevasse          #+#    #+#             */
-/*   Updated: 2023/12/23 21:25:40 by llevasse         ###   ########.fr       */
+/*   Updated: 2024/01/05 22:10:28 by llevasse         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -127,8 +127,8 @@ typedef struct s_cast
 }				t_cast;
 
 t_garbage	*ft_new_garbage(void *address);
-void		ft_add_garbage(t_garbage **lst, void *addr);
-void		malloc_failed(t_garbage *garbage);
+void		ft_add_garbage(t_garbage **lst, void *addr, t_cub *cub);
+void		malloc_failed(t_cub *cub);
 void		free_garbage(t_garbage	*garbage);
 int			garbage_size(t_garbage *lst);
 void		free_one_addr(t_garbage **lst, void *addr);

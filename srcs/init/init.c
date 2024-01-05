@@ -6,7 +6,7 @@
 /*   By: tdutel <tdutel@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/19 22:29:27 by llevasse          #+#    #+#             */
-/*   Updated: 2023/12/21 19:39:15 by llevasse         ###   ########.fr       */
+/*   Updated: 2024/01/05 22:20:13 by llevasse         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,24 +16,24 @@ void	init_cub(t_cub *cub, char **argv)
 {
 	cub->garbage = 0x0;
 	cub->door = NULL;
+	cub->win_ptr = NULL;
+	cub->map = NULL;
+	cub->img.mlx_img = NULL;
 	cub->mmap = malloc(sizeof(struct s_minimap));
-	ft_add_garbage(&cub->garbage, cub->mmap);
+	ft_add_garbage(&cub->garbage, cub->mmap, cub);
 	cub->mlx_ptr = mlx_init();
 	if (!cub->mlx_ptr)
 		return ((void)(free_garbage(cub->garbage), ft_putstr_fd(MLX_ERR, 2)));
 	cub->map = parse(open(argv[1], O_RDONLY), cub);
-	if (!cub->map)
-	{
-		mlx_destroy_display(cub->mlx_ptr);
-		free(cub->mlx_ptr);
-		exit(1);
+	if (!cub->map){
+		close_window(cub, 1);
 	}
 	init_minimap(cub);
 	init_player(cub);
-	ft_add_garbage(&cub->garbage, cub->mlx_ptr);
+	ft_add_garbage(&cub->garbage, cub->mlx_ptr, cub);
 	cub->win_ptr = mlx_new_window(cub->mlx_ptr, WINDOW_W, WINDOW_H, "cub3D");
 	if (!cub->win_ptr)
-		ft_add_garbage(&cub->garbage, NULL);
+		close_window(cub, 1);
 	init_images(cub);
 	cub->field_step = ((float)(PLAYER_FOV - 1) / WINDOW_W);
 }
@@ -72,7 +72,7 @@ void	init_map_value(t_cub *cub)
 
 	i = 0;
 	cub->mmap->mapx = malloc(sizeof(int) * (cub->mmap->nb_line));
-	ft_add_garbage(&cub->garbage, cub->mmap->mapx);
+	ft_add_garbage(&cub->garbage, cub->mmap->mapx, cub);
 	cub->mmap->maps = 0;
 	while (i < cub->mmap->nb_line)
 	{

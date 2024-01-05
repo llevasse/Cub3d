@@ -6,7 +6,7 @@
 /*   By: llevasse <llevasse@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/19 12:01:04 by llevasse          #+#    #+#             */
-/*   Updated: 2023/12/29 18:14:31 by llevasse         ###   ########.fr       */
+/*   Updated: 2024/01/05 22:11:16 by llevasse         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,13 +22,13 @@ char	*pass_space(char *s)
 	return (str);
 }
 
-char	*skip_empty_line(int fd, t_map *map, char *str)
+char	*skip_empty_line(int fd, t_map *map, char *str, t_cub *cub)
 {
 	while (str && is_line_empty(str))
 	{
 		str = get_next_line(fd);
 		if (str)
-			ft_add_garbage(&map->garbage, str);
+			ft_add_garbage(&map->garbage, str, cub);
 	}
 	return (str);
 }
@@ -55,14 +55,14 @@ int	get_map(int map_fd, t_map *map, t_cub *cub)
 	tmp = get_next_line(map_fd);
 	while (tmp)
 	{
-		ft_add_garbage(&map->garbage, tmp);
-		tmp = skip_empty_line(map_fd, map, tmp);
+		ft_add_garbage(&map->garbage, tmp, cub);
+		tmp = skip_empty_line(map_fd, map, tmp, cub);
 		if (!tmp)
 			break ;
 		if (!is_texture_line(tmp))
 		{
 			str = ft_strjoin(str, tmp);
-			ft_add_garbage(&map->garbage, str);
+			ft_add_garbage(&map->garbage, str, cub);
 		}
 		else if (!get_wall(tmp, map, cub))
 			return (0);

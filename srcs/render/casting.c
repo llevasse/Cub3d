@@ -6,7 +6,7 @@
 /*   By: llevasse <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/24 22:25:17 by llevasse          #+#    #+#             */
-/*   Updated: 2023/12/23 22:56:12 by llevasse         ###   ########.fr       */
+/*   Updated: 2024/01/05 22:12:30 by llevasse         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -70,7 +70,7 @@ t_door	*cast(t_cub *cub, t_cast c, int x)
 	if (!c.line.door.cross_door && !c.line.door.hit_door)
 		return (NULL);
 	door = malloc(sizeof(t_door));
-	ft_add_garbage(&cub->garbage, door);
+	ft_add_garbage(&cub->garbage, door, cub);
 	*door = c.line.door;
 	return (door);
 }

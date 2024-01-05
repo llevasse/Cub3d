@@ -6,7 +6,7 @@
 /*   By: llevasse <llevasse@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/07/11 18:05:40 by llevasse          #+#    #+#             */
-/*   Updated: 2023/12/23 22:57:08 by llevasse         ###   ########.fr       */
+/*   Updated: 2024/01/05 22:11:04 by llevasse         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -40,9 +40,9 @@ t_garbage	*ft_new_garbage(void *address)
 	return (new);
 }
 
-void	malloc_failed(t_garbage *garbage)
+void	malloc_failed(t_cub *cub)
 {
-	free_garbage(garbage);
+	close_window(cub, 12);
 	exit(12);
 }
 
@@ -68,16 +68,16 @@ void	free_one_addr(t_garbage **lst, void *addr)
 	}
 }
 
-void	ft_add_garbage(t_garbage **lst, void *addr)
+void	ft_add_garbage(t_garbage **lst, void *addr, t_cub *cub)
 {
 	t_garbage	*temp;
 	t_garbage	*new;
 
 	if (!addr)
-		malloc_failed(*lst);
+		malloc_failed(cub);
 	new = ft_new_garbage(addr);
 	if (!new)
-		malloc_failed(*lst);
+		malloc_failed(cub);
 	if (*lst)
 	{
 		temp = *lst;

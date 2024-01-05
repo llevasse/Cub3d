@@ -6,7 +6,7 @@
 /*   By: llevasse <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/22 22:22:53 by llevasse          #+#    #+#             */
-/*   Updated: 2023/12/17 21:51:38 by llevasse         ###   ########.fr       */
+/*   Updated: 2024/01/05 22:09:04 by llevasse         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,7 +14,7 @@
 
 //srcs/input/input.c:
 int			handle_input(int keysym, t_cub *cub);
-int			close_window(t_cub *cub);
+int			close_window(t_cub *cub, int status);
 int			rotate_input(int keysym, t_cub *cub);
 
 //srcs/input/set_player_pos.c:

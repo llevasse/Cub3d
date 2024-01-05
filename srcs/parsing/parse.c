@@ -6,7 +6,7 @@
 /*   By: llevasse <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/18 21:50:20 by llevasse          #+#    #+#             */
-/*   Updated: 2023/12/29 17:50:00 by llevasse         ###   ########.fr       */
+/*   Updated: 2024/01/05 22:21:06 by llevasse         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,12 +19,14 @@ t_map	*parse(int map_fd, t_cub *cub)
 	if (map_fd == -1)
 		return ((void)ft_putstr_fd(CUB_OPEN_ERR, 2), NULL);
 	map = malloc(sizeof(struct s_map));
-	ft_add_garbage(&cub->garbage, map);
+	ft_add_garbage(&cub->garbage, map, cub);
+	ft_add_garbage(&cub->garbage, NULL, cub);
 	set_map_null(map);
 	map->garbage = cub->garbage;
-	if (!get_map(map_fd, map, cub))
-		return (close_walls(cub, map), free_garbage(map->garbage),
-			close(map_fd), NULL);
+	if (!get_map(map_fd, map, cub)){
+		close(map_fd);
+		return (NULL);
+	}
 	close(map_fd);
 	get_side_data_addrs(map);
 	return (map);
