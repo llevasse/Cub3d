@@ -6,7 +6,7 @@
 /*   By: tdutel <tdutel@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/18 21:52:44 by llevasse          #+#    #+#             */
-/*   Updated: 2024/01/05 22:42:27 by llevasse         ###   ########.fr       */
+/*   Updated: 2024/01/05 22:47:41 by llevasse         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -31,14 +31,6 @@ typedef struct s_img
 	int					width;
 	int					height;
 }				t_img;
-
-typedef struct s_map
-{
-	int					f_rgb;
-	int					c_rgb;
-	float				player_rotation;
-	struct s_garbage	*garbage;
-}				t_map;
 
 typedef struct s_minimap
 {
@@ -108,7 +100,9 @@ typedef struct s_cub
 	struct s_img		east_img;
 	struct s_img		west_img;
 	struct s_img		door_img;
-	struct s_map		*map;
+	int					f_rgb;
+	int					c_rgb;
+	float				player_rotation;
 	struct s_img		img;
 	struct s_minimap	*mmap;
 	struct s_garbage	*garbage;

@@ -6,7 +6,7 @@
 /*   By: llevasse <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/24 22:25:17 by llevasse          #+#    #+#             */
-/*   Updated: 2024/01/05 22:12:30 by llevasse         ###   ########.fr       */
+/*   Updated: 2024/01/05 22:54:14 by llevasse         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -53,7 +53,7 @@ t_door	*cast(t_cub *cub, t_cast c, int x)
 
 	current = 0;
 	while (current < c.line.start)
-		img_pix_put(&cub->img, x, current++, cub->map->c_rgb);
+		img_pix_put(&cub->img, x, current++, cub->c_rgb);
 	current = 0;
 	if (c.line.start < 0)
 		current += -c.line.start;
@@ -66,7 +66,7 @@ t_door	*cast(t_cub *cub, t_cast c, int x)
 	}
 	current = c.line.stop;
 	while (current < WINDOW_H)
-		img_pix_put(&cub->img, x, current++, cub->map->f_rgb);
+		img_pix_put(&cub->img, x, current++, cub->f_rgb);
 	if (!c.line.door.cross_door && !c.line.door.hit_door)
 		return (NULL);
 	door = malloc(sizeof(t_door));

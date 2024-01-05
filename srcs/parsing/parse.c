@@ -6,29 +6,26 @@
 /*   By: llevasse <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/18 21:50:20 by llevasse          #+#    #+#             */
-/*   Updated: 2024/01/05 22:42:55 by llevasse         ###   ########.fr       */
+/*   Updated: 2024/01/05 22:49:14 by llevasse         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "cub3d.h"
 
-t_map	*parse(int map_fd, t_cub *cub)
+int parse(int map_fd, t_cub *cub)
 {
-	t_map	*map;
-
+	cub->f_rgb = -1;
+	cub->c_rgb = -1;
+	cub->player_rotation = -1;
 	if (map_fd == -1)
-		return ((void)ft_putstr_fd(CUB_OPEN_ERR, 2), NULL);
-	map = malloc(sizeof(struct s_map));
-	ft_add_garbage(&cub->garbage, map, cub);
-	set_map_null(map);
-	map->garbage = cub->garbage;
-	if (!get_map(map_fd, map, cub)){
+		return ((void)ft_putstr_fd(CUB_OPEN_ERR, 2), 0);
+	if (!get_map(map_fd, cub)){
 		close(map_fd);
-		return (NULL);
+		return (0);
 	}
 	close(map_fd);
 	get_side_data_addrs(cub);
-	return (map);
+	return (1);
 }
 
 void	get_side_data_addrs(t_cub *cub)
@@ -77,11 +74,4 @@ void	close_walls(t_cub *cub)
 		mlx_destroy_image(cub->mlx_ptr, cub->west_img.mlx_img);
 	if (cub->door_img.mlx_img)
 		mlx_destroy_image(cub->mlx_ptr, cub->door_img.mlx_img);
-}
-
-void	set_map_null(t_map *map)
-{
-	map->f_rgb = -1;
-	map->c_rgb = -1;
-	map->player_rotation = -1;
 }

@@ -6,7 +6,7 @@
 /*   By: llevasse <llevasse@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/19 12:01:04 by llevasse          #+#    #+#             */
-/*   Updated: 2024/01/05 22:45:43 by llevasse         ###   ########.fr       */
+/*   Updated: 2024/01/05 22:52:31 by llevasse         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,13 +22,13 @@ char	*pass_space(char *s)
 	return (str);
 }
 
-char	*skip_empty_line(int fd, t_map *map, char *str, t_cub *cub)
+char	*skip_empty_line(int fd, char *str, t_cub *cub)
 {
 	while (str && is_line_empty(str))
 	{
 		str = get_next_line(fd);
 		if (str)
-			ft_add_garbage(&map->garbage, str, cub);
+			ft_add_garbage(&cub->garbage, str, cub);
 	}
 	return (str);
 }
@@ -46,7 +46,7 @@ int	valid_resolution(t_cub *cub)
 	return (1);
 }
 
-int	get_map(int map_fd, t_map *map, t_cub *cub)
+int	get_map(int map_fd, t_cub *cub)
 {
 	char	*str;
 	char	*tmp;
@@ -55,20 +55,20 @@ int	get_map(int map_fd, t_map *map, t_cub *cub)
 	tmp = get_next_line(map_fd);
 	while (tmp)
 	{
-		ft_add_garbage(&map->garbage, tmp, cub);
-		tmp = skip_empty_line(map_fd, map, tmp, cub);
+		ft_add_garbage(&cub->garbage, tmp, cub);
+		tmp = skip_empty_line(map_fd, tmp, cub);
 		if (!tmp)
 			break ;
 		if (!is_texture_line(tmp))
 		{
 			str = ft_strjoin(str, tmp);
-			ft_add_garbage(&map->garbage, str, cub);
+			ft_add_garbage(&cub->garbage, str, cub);
 		}
-		else if (!get_wall(tmp, map, cub))
+		else if (!get_wall(tmp, cub))
 			return (0);
 		tmp = get_next_line(map_fd);
 	}
-	if (!search_player_presence(map, cub, str) || !valid_line(str, cub)
+	if (!search_player_presence(cub, str) || !valid_line(str, cub)
 		|| !valid_resolution(cub))
 		return (0);
 	return (1);
