@@ -6,7 +6,7 @@
 /*   By: llevasse <llevasse@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/19 12:01:04 by llevasse          #+#    #+#             */
-/*   Updated: 2024/01/05 22:11:16 by llevasse         ###   ########.fr       */
+/*   Updated: 2024/01/05 22:45:43 by llevasse         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -33,15 +33,15 @@ char	*skip_empty_line(int fd, t_map *map, char *str, t_cub *cub)
 	return (str);
 }
 
-int	valid_resolution(t_map *map)
+int	valid_resolution(t_cub *cub)
 {
-	if (map->north_img.width != map->south_img.width)
+	if (cub->north_img.width != cub->south_img.width)
 		return ((void)ft_putstr_fd(UNEQUAL_RESOLUTION, 2), 0);
-	if (map->north_img.width != map->east_img.width)
+	if (cub->north_img.width != cub->east_img.width)
 		return ((void)ft_putstr_fd(UNEQUAL_RESOLUTION, 2), 0);
-	if (map->west_img.width != map->south_img.width)
+	if (cub->west_img.width != cub->south_img.width)
 		return ((void)ft_putstr_fd(UNEQUAL_RESOLUTION, 2), 0);
-	if (map->door_img.mlx_img && map->north_img.width != map->door_img.width)
+	if (cub->door_img.mlx_img && cub->north_img.width != cub->door_img.width)
 		return ((void)ft_putstr_fd(UNEQUAL_RESOLUTION, 2), 0);
 	return (1);
 }
@@ -68,8 +68,8 @@ int	get_map(int map_fd, t_map *map, t_cub *cub)
 			return (0);
 		tmp = get_next_line(map_fd);
 	}
-	if (!search_player_presence(map, cub, str) || !valid_line(str, map)
-		|| !valid_resolution(map))
+	if (!search_player_presence(map, cub, str) || !valid_line(str, cub)
+		|| !valid_resolution(cub))
 		return (0);
 	return (1);
 }

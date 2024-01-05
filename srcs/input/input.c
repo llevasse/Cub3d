@@ -6,7 +6,7 @@
 /*   By: tdutel <tdutel@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/19 23:04:28 by llevasse          #+#    #+#             */
-/*   Updated: 2024/01/05 22:23:33 by llevasse         ###   ########.fr       */
+/*   Updated: 2024/01/05 22:46:03 by llevasse         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -56,8 +56,7 @@ int	close_window(t_cub *cub, int status)
 {
 	if (cub->win_ptr)
 		mlx_destroy_window(cub->mlx_ptr, cub->win_ptr);
-	if (cub->map)
-		close_walls(cub, cub->map);
+	close_walls(cub);
 	if (cub->img.mlx_img)
 		mlx_destroy_image(cub->mlx_ptr, cub->img.mlx_img);
 	mlx_destroy_display(cub->mlx_ptr);

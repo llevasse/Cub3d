@@ -6,7 +6,7 @@
 /*   By: llevasse <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/18 23:48:52 by llevasse          #+#    #+#             */
-/*   Updated: 2023/12/24 23:13:48 by llevasse         ###   ########.fr       */
+/*   Updated: 2024/01/05 22:38:28 by llevasse         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -65,19 +65,19 @@ int	get_wall(char *str, t_map *map, t_cub *cub)
 
 	str = pass_space(str);
 	id = ft_strsep(&str, " \t");
-	if (!ft_strcmp("NO", id) && map->north_img.mlx_img == 0)
-		return (do_open(str, &map->north_img, 0, cub));
-	if (!ft_strcmp("SO", id) && map->south_img.mlx_img == 0)
-		return (do_open(str, &map->south_img, 1, cub));
-	if (!ft_strcmp("WE", id) && map->west_img.mlx_img == 0)
-		return (do_open(str, &map->west_img, 2, cub));
-	if (!ft_strcmp("EA", id) && map->east_img.mlx_img == 0)
-		return (do_open(str, &map->east_img, 3, cub));
+	if (!ft_strcmp("NO", id) && cub->north_img.mlx_img == 0)
+		return (do_open(str, &cub->north_img, 0, cub));
+	if (!ft_strcmp("SO", id) && cub->south_img.mlx_img == 0)
+		return (do_open(str, &cub->south_img, 1, cub));
+	if (!ft_strcmp("WE", id) && cub->west_img.mlx_img == 0)
+		return (do_open(str, &cub->west_img, 2, cub));
+	if (!ft_strcmp("EA", id) && cub->east_img.mlx_img == 0)
+		return (do_open(str, &cub->east_img, 3, cub));
 	if (!ft_strcmp("F", id) && map->f_rgb == -1)
 		return (get_rgb_value(str, &map->f_rgb, F_ERR));
 	if (!ft_strcmp("C", id) && map->c_rgb == -1)
 		return (get_rgb_value(str, &map->c_rgb, C_ERR));
-	if (!ft_strcmp("DOOR", id) && map->door_img.mlx_img == 0)
-		return (do_open(str, &map->door_img, 4, cub));
+	if (!ft_strcmp("DOOR", id) && cub->door_img.mlx_img == 0)
+		return (do_open(str, &cub->door_img, 4, cub));
 	return ((void)ft_putstr_fd(INVALID_CUB, 2), 0);
 }

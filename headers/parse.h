@@ -6,7 +6,7 @@
 /*   By: llevasse <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/22 22:13:25 by llevasse          #+#    #+#             */
-/*   Updated: 2023/12/24 22:58:52 by llevasse         ###   ########.fr       */
+/*   Updated: 2024/01/05 22:45:19 by llevasse         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,7 +18,7 @@ int		search_player_presence(t_map *map, t_cub *cub, char *s);
 char	*pass_space(char *s);
 
 //srcs/parsing/get_map_helper.c
-int		valid_line(char *str, t_map *map);
+int		valid_line(char *str, t_cub *cub);
 int		search_door(t_cub *cub, t_map *map, char *s);
 int		is_texture_line(char *str);
 
@@ -33,7 +33,7 @@ int		get_tab_len(char **tab);
 
 //srcs/parsing/parce.c
 t_map	*parse(int map_fd, t_cub *cub);
-void	close_walls(t_cub *cub, t_map *map);
+void	close_walls(t_cub *cub);
 int		is_line_empty(char *str);
 void	set_map_null(t_map *map);
-void	get_side_data_addrs(t_map *map);
+void	get_side_data_addrs(t_cub *cub);

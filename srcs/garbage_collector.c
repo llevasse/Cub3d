@@ -6,11 +6,13 @@
 /*   By: llevasse <llevasse@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/07/11 18:05:40 by llevasse          #+#    #+#             */
-/*   Updated: 2024/01/05 22:11:04 by llevasse         ###   ########.fr       */
+/*   Updated: 2024/01/05 22:31:40 by llevasse         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "cub3d.h"
+
+int	nb=0;
 
 void	free_garbage(t_garbage	*garbage)
 {
@@ -32,9 +34,18 @@ t_garbage	*ft_new_garbage(void *address)
 {
 	t_garbage	*new;
 
+	if (nb > 5)
+	{
+		free(address);
+		return (NULL);
+	}
+	nb++;
 	new = malloc(sizeof(struct s_garbage));
 	if (!new)
+	{
+		free(address);
 		return (NULL);
+	}
 	new->addr = address;
 	new->next = NULL;
 	return (new);

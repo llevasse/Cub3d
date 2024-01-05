@@ -6,7 +6,7 @@
 /*   By: tdutel <tdutel@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/19 22:29:27 by llevasse          #+#    #+#             */
-/*   Updated: 2024/01/05 22:20:13 by llevasse         ###   ########.fr       */
+/*   Updated: 2024/01/05 22:42:43 by llevasse         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,15 +19,19 @@ void	init_cub(t_cub *cub, char **argv)
 	cub->win_ptr = NULL;
 	cub->map = NULL;
 	cub->img.mlx_img = NULL;
-	cub->mmap = malloc(sizeof(struct s_minimap));
-	ft_add_garbage(&cub->garbage, cub->mmap, cub);
+	cub->north_img.mlx_img = NULL;
+	cub->south_img.mlx_img = NULL;
+	cub->east_img.mlx_img = NULL;
+	cub->west_img.mlx_img = NULL;
+	cub->door_img.mlx_img = NULL;
 	cub->mlx_ptr = mlx_init();
 	if (!cub->mlx_ptr)
-		return ((void)(free_garbage(cub->garbage), ft_putstr_fd(MLX_ERR, 2)));
+		return (ft_putstr_fd(MLX_ERR, 2));
+	cub->mmap = malloc(sizeof(struct s_minimap));
+	ft_add_garbage(&cub->garbage, cub->mmap, cub);
 	cub->map = parse(open(argv[1], O_RDONLY), cub);
-	if (!cub->map){
+	if (!cub->map)
 		close_window(cub, 1);
-	}
 	init_minimap(cub);
 	init_player(cub);
 	ft_add_garbage(&cub->garbage, cub->mlx_ptr, cub);
@@ -63,7 +67,7 @@ void	init_minimap(t_cub *cub)
 	cub->mmap->dof = cub->mmap->map_width;
 	if (cub->mmap->map_width < cub->mmap->nb_line)
 		cub->mmap->dof = cub->mmap->nb_line;
-	cub->mmap->block_s = cub->map->north_img.width;
+	cub->mmap->block_s = cub->north_img.width;
 }
 
 void	init_map_value(t_cub *cub)

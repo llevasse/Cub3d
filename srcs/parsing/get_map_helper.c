@@ -6,22 +6,22 @@
 /*   By: llevasse <llevasse@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/12/24 16:18:35 by llevasse          #+#    #+#             */
-/*   Updated: 2024/01/05 22:11:55 by llevasse         ###   ########.fr       */
+/*   Updated: 2024/01/05 22:44:53 by llevasse         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "cub3d.h"
 
-int	valid_line(char *str, t_map *map)
+int	valid_line(char *str, t_cub *cub)
 {
 	int	i;
 
 	i = 0;
 	while (str[i])
 	{
-		if (!map->door_img.mlx_img && !ft_is_in_str("NSEW01\n\t \r", str[i]))
+		if (!cub->door_img.mlx_img && !ft_is_in_str("NSEW01\n\t \r", str[i]))
 			return ((ft_putstr_fd(INVALID_MAP_LINE, 2)), 0);
-		else if (map->door_img.mlx_img
+		else if (cub->door_img.mlx_img
 			&& !ft_is_in_str("NSEW01CO\n\t \r", str[i]))
 			return ((ft_putstr_fd(INVALID_MAP_LINE, 2)), 0);
 		i++;

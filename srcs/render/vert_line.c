@@ -6,7 +6,7 @@
 /*   By: llevasse <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/25 21:58:31 by llevasse          #+#    #+#             */
-/*   Updated: 2023/12/23 22:49:36 by llevasse         ###   ########.fr       */
+/*   Updated: 2024/01/05 22:39:54 by llevasse         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -49,9 +49,9 @@ static void	get_wall_percent(t_cub cub, t_line *line, float pa, int dof)
 	line->dist *= cos((cub.player.pa - pa) * RADIAN);
 	if (dof <= -42)
 		line->dist = 0x7fffffff + 0.0;
-	line->wall = &cub.map->east_img;
+	line->wall = &cub.east_img;
 	if (pa > 90 && pa < 270)
-		line->wall = &cub.map->west_img;
+		line->wall = &cub.west_img;
 	line->wall_percent = ((int)line->p_b.y % line->wall->width);
 	if (pa > 90 && pa < 270)
 		line->wall_percent = ((line->wall->width - 1) - line->wall_percent);
@@ -64,7 +64,7 @@ static void	get_wall_percent(t_cub cub, t_line *line, float pa, int dof)
 
 static void	get_door_percent(t_cub cub, t_line *line, float pa, t_door *door)
 {
-	line->wall = &cub.map->door_img;
+	line->wall = &cub.door_img;
 	line->wall_percent = ((int)line->p_b.y % line->wall->width);
 	if (pa > 90 && pa < 270)
 		line->wall_percent = ((line->wall->width - 1) - line->wall_percent);
