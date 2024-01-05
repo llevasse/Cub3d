@@ -1,13 +1,13 @@
 C 255,255,255
 F   43, 052, 62
 
-EA ./assets/textures/wall/M1.xpm
+EA ./textures/block_16x16/grass_block_side.xpm
 
-NO ./assets/textures/wall/M3.xpm
+NO ./textures/block_16x16/stone.xpm
 
-SO ./assets/textures/wall/M5.xpm
+SO ./textures/block_16x16/diamond_ore.xpm
 
-WE ./assets/textures/wall/M2.xpm
+WE ./textures/block_16x16/oak_planks.xpm
 111111111111111111111111
 100000000000000000110001
 10000000000000000110001

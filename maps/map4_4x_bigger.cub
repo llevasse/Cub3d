@@ -1,10 +1,13 @@
 C		  10, 			231 ,227 						
 F	123,55,87	
 
-   EA             ./assets/textures/wall_1.xpm  
-NO          ./assets/textures/wall_2.xpm  
-       SO             ./assets/textures/wall_3.xpm                    
-WE            ./assets/textures/wall_4.xpm       
+EA ./textures/block_16x16/bookshelf.xpm
+
+NO ./textures/block_16x16/bookshelf.xpm
+
+SO ./textures/block_16x16/bookshelf.xpm
+
+WE ./textures/block_16x16/bookshelf.xpm
 
 11111111111111111111111111111111111111111111111111111111111111111111111111111
 10000000000000000000000000000000000000000000000000000000000000000000000000001
