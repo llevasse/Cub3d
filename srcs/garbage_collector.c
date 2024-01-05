@@ -6,7 +6,7 @@
 /*   By: llevasse <llevasse@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/07/11 18:05:40 by llevasse          #+#    #+#             */
-/*   Updated: 2024/01/05 22:54:33 by llevasse         ###   ########.fr       */
+/*   Updated: 2024/01/05 23:15:04 by llevasse         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -45,7 +45,8 @@ t_garbage	*ft_new_garbage(void *address)
 
 void	malloc_failed(t_cub *cub)
 {
-	close_window(cub, 12);
+	if (cub)
+		close_window(cub, 12);
 	exit(12);
 }
 

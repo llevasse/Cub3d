@@ -6,21 +6,27 @@
 /*   By: tdutel <tdutel@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/19 22:29:27 by llevasse          #+#    #+#             */
-/*   Updated: 2024/01/05 23:06:00 by llevasse         ###   ########.fr       */
+/*   Updated: 2024/01/05 23:15:18 by llevasse         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "cub3d.h"
 
-void	init_cub(t_cub *cub, char **argv)
+t_cub *init_cub(char **argv)
 {
+	t_cub *cub;
+
+	cub = malloc(sizeof(struct s_cub));
+	if (!cub)
+		exit(1);
 	cub->garbage = 0x0;
+	ft_add_garbage(&cub->garbage, cub, cub);
 	cub->door = NULL;
 	cub->win_ptr = NULL;
 	cub->img.mlx_img = NULL;
 	cub->mlx_ptr = mlx_init();
 	if (!cub->mlx_ptr)
-		return (ft_putstr_fd(MLX_ERR, 2), exit(1));
+		return (ft_putstr_fd(MLX_ERR, 2), exit(1), NULL);
 	cub->mmap = malloc(sizeof(struct s_minimap));
 	ft_add_garbage(&cub->garbage, cub->mmap, cub);
 	if (!parse(open(argv[1], O_RDONLY), cub))
@@ -33,6 +39,7 @@ void	init_cub(t_cub *cub, char **argv)
 		close_window(cub, 1);
 	init_images(cub);
 	cub->field_step = ((float)(PLAYER_FOV - 1) / WINDOW_W);
+	return (cub);
 }
 
 void	init_images(t_cub *cub)
