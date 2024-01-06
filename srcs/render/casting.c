@@ -6,7 +6,7 @@
 /*   By: llevasse <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/24 22:25:17 by llevasse          #+#    #+#             */
-/*   Updated: 2024/01/06 14:27:44 by llevasse         ###   ########.fr       */
+/*   Updated: 2024/01/06 14:40:56 by llevasse         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,14 +18,10 @@ t_cast	get_cast_data(t_cub *cub, float ca, int check_door)
 
 	cast.h = get_horr(cub, ca);
 	cast.v = get_vert(cub, ca);
-	if (cast.h.dist < cast.v.dist){
+	if (cast.h.dist < cast.v.dist)
 		cast.line = cast.h;
-		printf("h\n");
-	}
-	else{
+	else
 		cast.line = cast.v;
-		printf("v\n");
-	}
 	if (cast.h.door.dist > cast.v.door.dist && !cast.v.dist)
 		cast.line.door = cast.h.door;
 	else if (cast.h.door.dist < cast.v.door.dist && !cast.h.dist)
