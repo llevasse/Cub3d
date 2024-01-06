@@ -6,7 +6,7 @@
 /*   By: llevasse <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/25 21:58:31 by llevasse          #+#    #+#             */
-/*   Updated: 2024/01/05 22:39:54 by llevasse         ###   ########.fr       */
+/*   Updated: 2024/01/06 14:30:10 by llevasse         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -43,40 +43,40 @@ int	init_vert(t_cub cub, float pa, t_line *line)
 	return (cub.mmap->dof);
 }
 
-static void	get_wall_percent(t_cub cub, t_line *line, float pa, int dof)
+static void	get_wall_percent(t_cub *cub, t_line *line, float pa, int dof)
 {
-	*line = get_line(get_player_point(cub.player.px, cub.player.py), line->p_a);
-	line->dist *= cos((cub.player.pa - pa) * RADIAN);
+	*line = get_line(get_player_point(cub->player.px, cub->player.py), line->p_a);
+	line->dist *= cos((cub->player.pa - pa) * RADIAN);
 	if (dof <= -42)
 		line->dist = 0x7fffffff + 0.0;
-	line->wall = &cub.east_img;
+	line->wall = &cub->east_img;
 	if (pa > 90 && pa < 270)
-		line->wall = &cub.west_img;
+		line->wall = &cub->west_img;
 	line->wall_percent = ((int)line->p_b.y % line->wall->width);
 	if (pa > 90 && pa < 270)
 		line->wall_percent = ((line->wall->width - 1) - line->wall_percent);
 	line->height = WINDOW_H;
 	if (line->dist >= 1)
-		line->height = ((cub.mmap->block_s * WINDOW_H) / line->dist);
+		line->height = ((cub->mmap->block_s * WINDOW_H) / line->dist);
 	line->start = (WINDOW_H - line->height) / 2;
 	line->stop = (WINDOW_H + line->height) / 2;
 }
 
-static void	get_door_percent(t_cub cub, t_line *line, float pa, t_door *door)
+static void	get_door_percent(t_cub *cub, t_line *line, float pa, t_door *door)
 {
-	line->wall = &cub.door_img;
+	line->wall = &cub->door_img;
 	line->wall_percent = ((int)line->p_b.y % line->wall->width);
 	if (pa > 90 && pa < 270)
 		line->wall_percent = ((line->wall->width - 1) - line->wall_percent);
 	line->height = WINDOW_H;
 	if (line->dist >= 1)
-		line->height = ((cub.mmap->block_s * WINDOW_H) / line->dist);
+		line->height = ((cub->mmap->block_s * WINDOW_H) / line->dist);
 	line->start = (WINDOW_H - line->height) / 2;
 	line->stop = (WINDOW_H + line->height) / 2;
-	*door = cross_door(cub, line->p_b.x, line->p_b.y, 1);
+	*door = cross_door(*cub, line->p_b.x, line->p_b.y, 1);
 }
 
-t_line	get_vert(t_cub cub, float pa)
+t_line	get_vert(t_cub *cub, float pa)
 {
 	t_line	line;
 	int		x;
@@ -84,22 +84,22 @@ t_line	get_vert(t_cub cub, float pa)
 	int		dof;
 	t_door	d;
 
-	dof = init_vert(cub, pa, &line);
+	dof = init_vert(*cub, pa, &line);
 	d = init_door();
 	while (dof-- > 0)
 	{
-		x = (line.p_a.x / cub.mmap->block_s);
-		y = (line.p_a.y / cub.mmap->block_s);
-		if (!is_pos_valid(cub, x, y)
-			|| !ft_is_in_str("NSEW0O", cub.mmap->map[y][x]))
+		x = (line.p_a.x / cub->mmap->block_s);
+		y = (line.p_a.y / cub->mmap->block_s);
+		if (!is_pos_valid(*cub, x, y)
+			|| !ft_is_in_str("NSEW0O", cub->mmap->map[y][x]))
 			break ;
-		if (cub.mmap->map[y][x] == 'O' && !d.cross_door)
-			d = cross_door(cub, line.p_a.x, line.p_a.y, 0);
+		if (cub->mmap->map[y][x] == 'O' && !d.cross_door)
+			d = cross_door(*cub, line.p_a.x, line.p_a.y, 0);
 		line.p_a.x += line.x_step;
 		line.p_a.y += line.y_step;
 	}
 	get_wall_percent(cub, &line, pa, dof);
-	if (is_pos_valid(cub, x, y) && cub.mmap->map[y][x] == 'C' && !d.cross_door)
+	if (is_pos_valid(*cub, x, y) && cub->mmap->map[y][x] == 'C' && !d.cross_door)
 		get_door_percent(cub, &line, pa, &d);
 	line.door = d;
 	return (line);
