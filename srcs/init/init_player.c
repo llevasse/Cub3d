@@ -6,7 +6,7 @@
 /*   By: llevasse <llevasse@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/22 11:37:45 by llevasse          #+#    #+#             */
-/*   Updated: 2023/12/16 17:10:54 by llevasse         ###   ########.fr       */
+/*   Updated: 2024/01/06 17:41:53 by llevasse         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -37,6 +37,7 @@ void	init_player(t_cub *cub)
 	}
 	cub->player.px += cub->mmap->block_s / 2;
 	cub->player.py += cub->mmap->block_s / 2;
+	cub->field_step = ((float)(PLAYER_FOV - 1) / WINDOW_W);
 }
 
 int	get_player_start_orientation(char c)

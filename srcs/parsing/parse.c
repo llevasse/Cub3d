@@ -6,13 +6,13 @@
 /*   By: llevasse <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/18 21:50:20 by llevasse          #+#    #+#             */
-/*   Updated: 2024/01/06 14:15:37 by llevasse         ###   ########.fr       */
+/*   Updated: 2024/01/06 17:42:40 by llevasse         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "cub3d.h"
 
-int parse(int map_fd, t_cub *cub)
+int	parse(int map_fd, t_cub *cub)
 {
 	cub->north_img.mlx_img = NULL;
 	cub->south_img.mlx_img = NULL;
@@ -24,7 +24,8 @@ int parse(int map_fd, t_cub *cub)
 	cub->player_rotation = -1;
 	if (map_fd == -1)
 		return ((void)ft_putstr_fd(CUB_OPEN_ERR, 2), 0);
-	if (!get_map(map_fd, cub)){
+	if (!get_map(map_fd, cub))
+	{
 		close(map_fd);
 		return (0);
 	}

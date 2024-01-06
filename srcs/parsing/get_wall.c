@@ -6,7 +6,7 @@
 /*   By: llevasse <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/18 23:48:52 by llevasse          #+#    #+#             */
-/*   Updated: 2024/01/06 14:16:54 by llevasse         ###   ########.fr       */
+/*   Updated: 2024/01/06 17:43:21 by llevasse         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -56,7 +56,8 @@ int	do_open(char *s, t_img *img, int face, t_cub *cub)
 		return ((void)ft_putstr_fd(DOOR_OPEN_ERR, 2), 0);
 	img->width = w;
 	img->height = h;
-	img->addr = mlx_get_data_addr(img->mlx_img, &img->bpp, &img->line_len, &img->endian);
+	img->addr = mlx_get_data_addr(img->mlx_img, &img->bpp,
+			&img->line_len, &img->endian);
 	return (1);
 }
 
