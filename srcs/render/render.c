@@ -6,7 +6,7 @@
 /*   By: llevasse <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/20 00:40:14 by llevasse          #+#    #+#             */
-/*   Updated: 2023/12/23 22:32:43 by llevasse         ###   ########.fr       */
+/*   Updated: 2024/01/06 14:15:14 by llevasse         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -39,6 +39,7 @@ int	render(t_cub *cub)
 	if (cub->door)
 		mlx_string_put(cub->mlx_ptr, cub->win_ptr, WINDOW_W / 2, WINDOW_H / 2,
 			0xFF0000, "Press 'E'");
+//	close_window(cub, 0);
 	return (0);
 }
 
