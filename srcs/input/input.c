@@ -6,7 +6,7 @@
 /*   By: tdutel <tdutel@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/19 23:04:28 by llevasse          #+#    #+#             */
-/*   Updated: 2024/01/07 21:52:06 by llevasse         ###   ########.fr       */
+/*   Updated: 2024/01/07 21:54:46 by llevasse         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -29,9 +29,9 @@ int	press_input(int keysym, t_cub *cub)
 	if (keysym == XK_Escape)
 		return (close_window(cub, 0), 0);
 	if (keysym == XK_Left)
-		cub->player.pa -= PLAYER_R_OFFSET;
+		cub->r_left = 1;
 	if (keysym == XK_Right)
-		cub->player.pa += PLAYER_R_OFFSET;
+		cub->r_right = 1;
 	return (0);
 }
 
@@ -45,6 +45,10 @@ int	release_input(int keysym, t_cub *cub)
 		cub->backward = 0;
 	if (keysym == XK_a)
 		cub->left = 0;
+	if (keysym == XK_Left)
+		cub->r_left = 0;
+	if (keysym == XK_Right)
+		cub->r_right = 0;
 	return (0);
 }
 
@@ -57,6 +61,10 @@ int	move(t_cub *cub){
 		check_collision(cub, 0, -cub->move_offset);
 	if (cub->left)
 		check_collision(cub, 90, -cub->move_offset);
+	if (cub->r_left)
+		cub->player.pa -= PLAYER_R_OFFSET;
+	if (cub->r_right)
+		cub->player.pa += PLAYER_R_OFFSET;
 	return (0);
 }
 

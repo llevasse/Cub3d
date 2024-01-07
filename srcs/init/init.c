@@ -6,7 +6,7 @@
 /*   By: tdutel <tdutel@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/19 22:29:27 by llevasse          #+#    #+#             */
-/*   Updated: 2024/01/07 21:46:11 by llevasse         ###   ########.fr       */
+/*   Updated: 2024/01/07 21:53:27 by llevasse         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -28,6 +28,8 @@ t_cub	*init_cub(char **argv)
 	cub->backward = 0;
 	cub->left = 0;
 	cub->right = 0;
+	cub->r_left = 0;
+	cub->r_right = 0;
 	if (!cub->mlx_ptr)
 		return (ft_putstr_fd(MLX_ERR, 2), exit(1), NULL);
 	cub->mmap = malloc(sizeof(struct s_minimap));
