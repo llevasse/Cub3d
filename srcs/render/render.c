@@ -6,7 +6,7 @@
 /*   By: llevasse <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/20 00:40:14 by llevasse          #+#    #+#             */
-/*   Updated: 2024/01/06 17:39:52 by llevasse         ###   ########.fr       */
+/*   Updated: 2024/01/07 21:49:24 by llevasse         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,6 +20,7 @@ int	render(t_cub *cub)
 	float	ca;
 	float	done;
 
+	move(cub);
 	ca = no_higher(cub->player.pa - (PLAYER_FOV / 2), 360, 0);
 	x = 0;
 	done = 0;

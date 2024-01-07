@@ -6,7 +6,7 @@
 /*   By: tdutel <tdutel@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/18 21:52:44 by llevasse          #+#    #+#             */
-/*   Updated: 2024/01/05 22:47:41 by llevasse         ###   ########.fr       */
+/*   Updated: 2024/01/07 21:43:04 by llevasse         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -109,6 +109,11 @@ typedef struct s_cub
 	float				field_step;
 	t_door				*door;
 	t_player			player;
+	float				move_offset;
+	int					forward;
+	int					backward;
+	int					left;
+	int					right;
 }				t_cub;
 
 typedef struct s_cast
