@@ -6,7 +6,7 @@
 /*   By: llevasse <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/25 21:58:31 by llevasse          #+#    #+#             */
-/*   Updated: 2024/01/06 17:50:28 by llevasse         ###   ########.fr       */
+/*   Updated: 2024/01/07 22:12:39 by llevasse         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -46,8 +46,7 @@ int	init_vert(t_cub cub, float pa, t_line *line)
 static void	get_wall_percent(t_cub *cub, t_line *line, float pa, int dof)
 {
 	*line = get_line(
-			get_player_point(cub->player.px, cub->player.py), line->p_a);
-	line->dist *= cos((cub->player.pa - pa) * RADIAN);
+			get_player_point(cub->player.px, cub->player.py), line->p_a, cub, pa);
 	if (dof <= -42)
 		line->dist = 0x7fffffff + 0.0;
 	line->wall = &cub->east_img;

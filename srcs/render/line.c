@@ -6,13 +6,13 @@
 /*   By: llevasse <llevasse@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/19 23:04:28 by llevasse          #+#    #+#             */
-/*   Updated: 2023/12/20 15:51:27 by llevasse         ###   ########.fr       */
+/*   Updated: 2024/01/07 22:11:19 by llevasse         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "cub3d.h"
 
-t_line	get_line(t_point p_a, t_point p_b)
+t_line	get_line(t_point p_a, t_point p_b, t_cub *cub, float pa)
 {
 	t_line	line;
 
@@ -26,6 +26,7 @@ t_line	get_line(t_point p_a, t_point p_b)
 	line.x_step = line.dx / line.steps;
 	line.y_step = line.dy / line.steps;
 	line.dist = sqrt(pow(line.dy, 2) + pow(line.dx, 2));
+	line.dist *= cos((cub->player.pa - pa) * RADIAN);
 	return (line);
 }
 
