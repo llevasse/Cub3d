@@ -6,7 +6,7 @@
 /*   By: tdutel <tdutel@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/19 23:04:28 by llevasse          #+#    #+#             */
-/*   Updated: 2024/01/07 21:54:46 by llevasse         ###   ########.fr       */
+/*   Updated: 2024/01/07 21:58:30 by llevasse         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -52,7 +52,8 @@ int	release_input(int keysym, t_cub *cub)
 	return (0);
 }
 
-int	move(t_cub *cub){
+int	move(t_cub *cub)
+{
 	if (cub->forward)
 		check_collision(cub, 0, cub->move_offset);
 	if (cub->right)
