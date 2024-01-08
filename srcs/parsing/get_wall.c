@@ -6,7 +6,7 @@
 /*   By: llevasse <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/18 23:48:52 by llevasse          #+#    #+#             */
-/*   Updated: 2024/01/06 17:43:21 by llevasse         ###   ########.fr       */
+/*   Updated: 2024/01/08 12:59:02 by llevasse         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,15 +20,15 @@ static int	get_rgb_value(char *s, int *value, char *err)
 	char	*tmp;
 
 	tmp = ft_strsep(&s, ", \t");
-	if (tmp[0] == '\n')
+	if (!ft_isdigit(*tmp))
 		return ((void)ft_putstr_fd(err, 2), 0);
 	r = no_higher(ft_atoi(tmp), 255, 0);
 	tmp = ft_strsep(&s, ", \t");
-	if (tmp[0] == '\n')
+	if (!ft_isdigit(*tmp))
 		return ((void)ft_putstr_fd(err, 2), 0);
 	g = no_higher(ft_atoi(tmp), 255, 0);
 	tmp = ft_strsep(&s, ", \t");
-	if (tmp[0] == '\n')
+	if (!ft_isdigit(*tmp))
 		return ((void)ft_putstr_fd(err, 2), 0);
 	b = no_higher(ft_atoi(tmp), 255, 0);
 	*value = (r * 256 * 256) + (g * 256) + b;
