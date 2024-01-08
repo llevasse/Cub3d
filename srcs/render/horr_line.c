@@ -6,7 +6,7 @@
 /*   By: llevasse <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/25 21:58:31 by llevasse          #+#    #+#             */
-/*   Updated: 2024/01/07 22:10:43 by llevasse         ###   ########.fr       */
+/*   Updated: 2024/01/08 16:16:25 by llevasse         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,7 +25,7 @@ int	init_horr(t_cub cub, float pa, t_line *line)
 	if (pa > 180 && pa < 360)
 	{
 		line->y_step = width;
-		line->p_a.y = (((int)cub.player.py / width) * width) - 0.001;
+		line->p_a.y = (((int)cub.player.py / width) * width) - 0.0001;
 	}
 	else if (pa > 0 && pa < 180)
 	{
@@ -45,8 +45,8 @@ int	init_horr(t_cub cub, float pa, t_line *line)
 
 static void	get_wall_percent(t_cub *cub, t_line *line, float pa, int dof)
 {
-	*line = get_line(
-			get_player_point(cub->player.px, cub->player.py), line->p_a, cub, pa);
+	*line = get_line(get_player_point(cub->player.px, cub->player.py),
+			line->p_a, cub, pa);
 	if (dof <= -42)
 		line->dist = 0x7fffffff + 0.0;
 	line->wall = &cub->south_img;
