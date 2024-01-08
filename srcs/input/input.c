@@ -6,7 +6,7 @@
 /*   By: tdutel <tdutel@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/19 23:04:28 by llevasse          #+#    #+#             */
-/*   Updated: 2024/01/07 21:58:30 by llevasse         ###   ########.fr       */
+/*   Updated: 2024/01/08 16:55:16 by llevasse         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,6 +16,8 @@ void	check_door(t_cub *cub);
 
 int	press_input(int keysym, t_cub *cub)
 {
+	if (keysym == XK_Shift_L || keysym == XK_Shift_R)
+		cub->shift = 2;
 	if (keysym == XK_w || keysym == XK_Up)
 		cub->forward = 1;
 	if (keysym == XK_d)
@@ -37,6 +39,8 @@ int	press_input(int keysym, t_cub *cub)
 
 int	release_input(int keysym, t_cub *cub)
 {
+	if (keysym == XK_Shift_L || keysym == XK_Shift_R)
+		cub->shift = 1;
 	if (keysym == XK_w || keysym == XK_Up)
 		cub->forward = 0;
 	if (keysym == XK_d)
@@ -55,17 +59,17 @@ int	release_input(int keysym, t_cub *cub)
 int	move(t_cub *cub)
 {
 	if (cub->forward)
-		check_collision(cub, 0, cub->move_offset);
+		check_collision(cub, 0, cub->move_offset * cub->shift);
 	if (cub->right)
-		check_collision(cub, 90, cub->move_offset);
+		check_collision(cub, 90, cub->move_offset * cub->shift);
 	if (cub->backward)
-		check_collision(cub, 0, -cub->move_offset);
+		check_collision(cub, 0, -cub->move_offset * cub->shift);
 	if (cub->left)
-		check_collision(cub, 90, -cub->move_offset);
+		check_collision(cub, 90, -cub->move_offset * cub->shift);
 	if (cub->r_left)
-		cub->player.pa -= PLAYER_R_OFFSET;
+		cub->player.pa -= PLAYER_R_OFFSET * cub->shift;
 	if (cub->r_right)
-		cub->player.pa += PLAYER_R_OFFSET;
+		cub->player.pa += PLAYER_R_OFFSET * cub->shift;
 	return (0);
 }
 

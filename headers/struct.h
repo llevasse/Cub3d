@@ -6,7 +6,7 @@
 /*   By: tdutel <tdutel@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/18 21:52:44 by llevasse          #+#    #+#             */
-/*   Updated: 2024/01/07 21:53:17 by llevasse         ###   ########.fr       */
+/*   Updated: 2024/01/08 16:51:31 by llevasse         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -116,6 +116,7 @@ typedef struct s_cub
 	int					right;
 	int					r_left;
 	int					r_right;
+	int					shift;
 }				t_cub;
 
 typedef struct s_cast
