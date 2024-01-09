@@ -6,7 +6,7 @@
 /*   By: tdutel <tdutel@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/18 22:02:47 by llevasse          #+#    #+#             */
-/*   Updated: 2024/01/09 15:08:03 by llevasse         ###   ########.fr       */
+/*   Updated: 2024/01/09 15:08:35 by llevasse         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,5 +25,4 @@ int	main(int argc, char **argv)
 	mlx_hook(cub->win_ptr, KeyRelease, KeyReleaseMask, &release_input, cub);
 	mlx_hook(cub->win_ptr, 17, 0, &close_window, cub);
 	mlx_loop(cub->mlx_ptr);
-	free_garbage(cub->garbage);
 }

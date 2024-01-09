@@ -6,11 +6,15 @@
 /*   By: llevasse <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/18 23:48:52 by llevasse          #+#    #+#             */
-/*   Updated: 2024/01/08 12:59:02 by llevasse         ###   ########.fr       */
+/*   Updated: 2024/01/09 15:20:40 by llevasse         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "cub3d.h"
+
+static int	in_range(int nb, int min, int max){
+	return (nb >= min && nb <= max);
+}
 
 static int	get_rgb_value(char *s, int *value, char *err)
 {
@@ -20,17 +24,17 @@ static int	get_rgb_value(char *s, int *value, char *err)
 	char	*tmp;
 
 	tmp = ft_strsep(&s, ", \t");
-	if (!ft_isdigit(*tmp))
+	if (!ft_isdigit(*tmp) || !in_range(ft_atoi(tmp), 0, 255))
 		return ((void)ft_putstr_fd(err, 2), 0);
-	r = no_higher(ft_atoi(tmp), 255, 0);
+	r = ft_atoi(tmp);
 	tmp = ft_strsep(&s, ", \t");
-	if (!ft_isdigit(*tmp))
+	if (!ft_isdigit(*tmp) || !in_range(ft_atoi(tmp), 0, 255))
 		return ((void)ft_putstr_fd(err, 2), 0);
-	g = no_higher(ft_atoi(tmp), 255, 0);
+	g = ft_atoi(tmp);
 	tmp = ft_strsep(&s, ", \t");
-	if (!ft_isdigit(*tmp))
+	if (!ft_isdigit(*tmp) || !in_range(ft_atoi(tmp), 0, 255))
 		return ((void)ft_putstr_fd(err, 2), 0);
-	b = no_higher(ft_atoi(tmp), 255, 0);
+	b = ft_atoi(tmp);
 	*value = (r * 256 * 256) + (g * 256) + b;
 	return (1);
 }
@@ -75,9 +79,9 @@ int	get_wall(char *str, t_cub *cub)
 		return (do_open(str, &cub->west_img, 2, cub));
 	if (!ft_strcmp("EA", id) && cub->east_img.mlx_img == 0)
 		return (do_open(str, &cub->east_img, 3, cub));
-	if (!ft_strcmp("F", id) && cub->f_rgb == -1)
+	if (!ft_strcmp("F", id) && cub->f_rgb == 0x7fffffff)
 		return (get_rgb_value(str, &cub->f_rgb, F_ERR));
-	if (!ft_strcmp("C", id) && cub->c_rgb == -1)
+	if (!ft_strcmp("C", id) && cub->c_rgb == 0x7fffffff)
 		return (get_rgb_value(str, &cub->c_rgb, C_ERR));
 	if (!ft_strcmp("DOOR", id) && cub->door_img.mlx_img == 0)
 		return (do_open(str, &cub->door_img, 4, cub));

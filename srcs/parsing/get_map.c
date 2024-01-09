@@ -6,7 +6,7 @@
 /*   By: llevasse <llevasse@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/19 12:01:04 by llevasse          #+#    #+#             */
-/*   Updated: 2024/01/05 22:52:31 by llevasse         ###   ########.fr       */
+/*   Updated: 2024/01/09 15:13:51 by llevasse         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -43,6 +43,10 @@ int	valid_resolution(t_cub *cub)
 		return ((void)ft_putstr_fd(UNEQUAL_RESOLUTION, 2), 0);
 	if (cub->door_img.mlx_img && cub->north_img.width != cub->door_img.width)
 		return ((void)ft_putstr_fd(UNEQUAL_RESOLUTION, 2), 0);
+	if (cub->f_rgb > 0xffffff)
+		return ((void)ft_putstr_fd(F_ERR, 2), 0);
+	if (cub->c_rgb > 0xffffff)
+		return ((void)ft_putstr_fd(C_ERR, 2), 0);
 	return (1);
 }
 
