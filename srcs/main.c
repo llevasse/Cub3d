@@ -6,7 +6,7 @@
 /*   By: tdutel <tdutel@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/18 22:02:47 by llevasse          #+#    #+#             */
-/*   Updated: 2024/01/09 15:06:27 by llevasse         ###   ########.fr       */
+/*   Updated: 2024/01/09 15:08:03 by llevasse         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,9 +16,8 @@ int	main(int argc, char **argv)
 {
 	t_cub	*cub;
 
-	if (argc != 2)
-		return (1);
-	if (!ft_strcmp(argv[1] + (ft_strlen(argv[1]) - 5 ), ".cub"))
+	(void)argc;
+	if (ft_strcmp(argv[1] + (ft_strlen(argv[1]) - 4 ), ".cub"))
 		return ((void)ft_putstr_fd(MISS_F, 2), 1);
 	cub = init_cub(argv);
 	mlx_loop_hook(cub->mlx_ptr, &render, cub);
