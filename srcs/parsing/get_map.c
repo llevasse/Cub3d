@@ -6,7 +6,7 @@
 /*   By: llevasse <llevasse@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/19 12:01:04 by llevasse          #+#    #+#             */
-/*   Updated: 2024/01/09 15:13:51 by llevasse         ###   ########.fr       */
+/*   Updated: 2024/01/09 15:31:54 by llevasse         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -31,6 +31,19 @@ char	*skip_empty_line(int fd, char *str, t_cub *cub)
 			ft_add_garbage(&cub->garbage, str, cub);
 	}
 	return (str);
+}
+
+int	check_textures(t_cub *cub)
+{
+	if (!cub->north_img.mlx_img)
+		return ((void)ft_putstr_fd(N_WALL_MISSING, 2), 0);
+	if (!cub->south_img.mlx_img)
+		return ((void)ft_putstr_fd(S_WALL_MISSING, 2), 0);
+	if (!cub->east_img.mlx_img)
+		return ((void)ft_putstr_fd(E_WALL_MISSING, 2), 0);
+	if (!cub->west_img.mlx_img)
+		return ((void)ft_putstr_fd(W_WALL_MISSING, 2), 0);
+	return (1);
 }
 
 int	valid_resolution(t_cub *cub)
@@ -72,8 +85,8 @@ int	get_map(int map_fd, t_cub *cub)
 			return (0);
 		tmp = get_next_line(map_fd);
 	}
-	if (!search_player_presence(cub, str) || !valid_line(str, cub)
-		|| !valid_resolution(cub))
+	if (!check_textures(cub) || !valid_resolution(cub)
+		|| !search_player_presence(cub, str) || !valid_line(str, cub))
 		return (0);
 	return (1);
 }
