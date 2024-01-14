@@ -6,7 +6,7 @@
 /*   By: llevasse <llevasse@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/19 23:04:28 by llevasse          #+#    #+#             */
-/*   Updated: 2024/01/08 16:41:00 by llevasse         ###   ########.fr       */
+/*   Updated: 2024/01/14 18:13:50 by llevasse         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,7 +26,9 @@ t_line	get_line(t_point p_a, t_point p_b, t_cub *cub, float pa)
 	line.x_step = line.dx / line.steps;
 	line.y_step = line.dy / line.steps;
 	line.dist = sqrt(pow(line.dy, 2) + pow(line.dx, 2));
-	line.dist *= cos((cub->player.pa - pa) * -RADIAN);
+	line.dist *= cos((cub->player.pa - pa) * RADIAN);
+	(void)pa;
+	(void)cub;
 	return (line);
 }
 
