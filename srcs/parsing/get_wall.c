@@ -6,13 +6,14 @@
 /*   By: llevasse <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/18 23:48:52 by llevasse          #+#    #+#             */
-/*   Updated: 2024/01/09 15:20:40 by llevasse         ###   ########.fr       */
+/*   Updated: 2024/01/14 18:06:55 by llevasse         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "cub3d.h"
 
-static int	in_range(int nb, int min, int max){
+static int	in_range(int nb, int min, int max)
+{
 	return (nb >= min && nb <= max);
 }
 
