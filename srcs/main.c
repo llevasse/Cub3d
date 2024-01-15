@@ -6,7 +6,7 @@
 /*   By: tdutel <tdutel@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/18 22:02:47 by llevasse          #+#    #+#             */
-/*   Updated: 2024/01/14 18:06:31 by llevasse         ###   ########.fr       */
+/*   Updated: 2024/01/15 13:35:32 by tdutel           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,7 +16,8 @@ int	main(int argc, char **argv)
 {
 	t_cub	*cub;
 
-	(void)argc;
+	if (argc == 1)
+		return ((void)ft_putstr_fd(MISS_F, 2), 1);
 	if (ft_strcmp(argv[1] + (ft_strlen(argv[1]) - 4), ".cub"))
 		return ((void)ft_putstr_fd(MISS_F, 2), 1);
 	cub = init_cub(argv);
