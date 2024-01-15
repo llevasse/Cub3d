@@ -6,7 +6,7 @@
 /*   By: tdutel <tdutel@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/19 22:29:27 by llevasse          #+#    #+#             */
-/*   Updated: 2024/01/15 22:02:24 by llevasse         ###   ########.fr       */
+/*   Updated: 2024/01/15 22:10:47 by llevasse         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,7 +20,6 @@ t_cub	*init_cub(char **argv)
 	if (!cub)
 		exit(1);
 	init_null(cub);
-	return (ft_putstr_fd(MLX_ERR, 2), close_window(cub, 1), NULL);
 	cub->mlx_ptr = mlx_init();
 	if (!cub->mlx_ptr)
 		return (ft_putstr_fd(MLX_ERR, 2), close_window(cub, 1), NULL);
@@ -31,7 +30,6 @@ t_cub	*init_cub(char **argv)
 		close_window(cub, 1);
 	init_minimap(cub);
 	init_player(cub);
-	ft_add_garbage(&cub->garbage, cub->mlx_ptr, cub);
 	cub->win_ptr = mlx_new_window(cub->mlx_ptr, WINDOW_W, WINDOW_H, "cub3D");
 	if (!cub->win_ptr)
 		close_window(cub, 1);
@@ -64,6 +62,8 @@ void	init_null(t_cub *cub)
 void	init_images(t_cub *cub)
 {
 	cub->img.mlx_img = mlx_new_image(cub->mlx_ptr, WINDOW_W, WINDOW_H);
+	if (!cub->img.mlx_img)
+		close_window(cub, 1);
 	cub->img.width = WINDOW_W;
 	cub->img.height = WINDOW_H;
 	cub->img.addr = mlx_get_data_addr(cub->img.mlx_img,
