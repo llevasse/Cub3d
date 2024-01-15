@@ -6,7 +6,7 @@
 /*   By: llevasse <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/22 22:13:25 by llevasse          #+#    #+#             */
-/*   Updated: 2024/01/15 18:24:56 by llevasse         ###   ########.fr       */
+/*   Updated: 2024/01/15 19:07:56 by llevasse         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -33,7 +33,7 @@ int		fload(t_cub *cub, int x, int y);
 int		get_tab_len(char **tab);
 
 //srcs/parsing/parce.c
-int		parse(int map_fd, t_cub *cub);
+int		parse(char *path, t_cub *cub);
 void	close_walls(t_cub *cub);
 int		is_line_empty(char *str);
 void	get_side_data_addrs(t_cub *cub);
