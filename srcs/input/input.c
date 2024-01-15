@@ -6,7 +6,7 @@
 /*   By: tdutel <tdutel@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/19 23:04:28 by llevasse          #+#    #+#             */
-/*   Updated: 2024/01/15 22:00:46 by llevasse         ###   ########.fr       */
+/*   Updated: 2024/01/16 00:10:36 by llevasse         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -95,6 +95,10 @@ int	close_window(t_cub *cub, int status)
 		mlx_destroy_image(cub->mlx_ptr, cub->img.mlx_img);
 	if (cub->mlx_ptr)
 		mlx_destroy_display(cub->mlx_ptr);
+	if (cub->h)
+		free(cub->h);
+	if (cub->v)
+		free(cub->v);
 	free_garbage(cub->garbage);
 	exit(status);
 }

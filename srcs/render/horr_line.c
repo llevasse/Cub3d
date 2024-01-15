@@ -6,7 +6,7 @@
 /*   By: llevasse <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/25 21:58:31 by llevasse          #+#    #+#             */
-/*   Updated: 2024/01/16 00:03:41 by llevasse         ###   ########.fr       */
+/*   Updated: 2024/01/16 00:09:04 by llevasse         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -78,13 +78,8 @@ static void	get_door_percent(t_cub *cub, t_line *line, float pa, t_door *door)
 		*door = cross_door(*cub, line->p_b.x, line->p_b.y, 1);
 }
 
-t_ray	*get_horr(t_cub *cub, float pa)
+void	progress_horr_line(t_cub *cub, t_ray *r)
 {
-	t_ray	*r;
-
-	r = malloc(sizeof(t_ray));
-	*r = init_horr(*cub, pa);
-	r->d = init_door();
 	while (r->dof-- > 0)
 	{
 		r->p.x = (int)(r->line.p_a.x / cub->mmap->block_s);
@@ -98,6 +93,19 @@ t_ray	*get_horr(t_cub *cub, float pa)
 		r->line.p_a.x += r->line.x_step;
 		r->line.p_a.y -= r->line.y_step;
 	}
+}
+
+t_ray	*get_horr(t_cub *cub, float pa)
+{
+	t_ray	*r;
+
+	r = malloc(sizeof(t_ray));
+	cub->h = r;
+	if (!r)
+		close_window(cub, 12);
+	*r = init_horr(*cub, pa);
+	r->d = init_door();
+	progress_horr_line(cub, r);
 	get_wall_percent(cub, &r->line, pa, r->dof);
 	if (is_pos_valid(*cub, (int)r->p.x, (int)r->p.y)
 		&& cub->mmap->map[(int)r->p.y][(int)r->p.x] == 'C')

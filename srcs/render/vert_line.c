@@ -6,7 +6,7 @@
 /*   By: llevasse <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/25 21:58:31 by llevasse          #+#    #+#             */
-/*   Updated: 2024/01/16 00:03:50 by llevasse         ###   ########.fr       */
+/*   Updated: 2024/01/16 00:11:43 by llevasse         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -100,6 +100,9 @@ t_ray	*get_vert(t_cub *cub, float pa)
 	t_ray	*r;
 
 	r = malloc(sizeof(t_ray));
+	cub->v = r;
+	if (!r)
+		close_window(cub, 12);
 	*r = init_vert(*cub, pa);
 	r->d = init_door();
 	progress_vert_line(cub, r);

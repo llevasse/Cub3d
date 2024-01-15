@@ -6,7 +6,7 @@
 /*   By: tdutel <tdutel@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/18 21:52:44 by llevasse          #+#    #+#             */
-/*   Updated: 2024/01/15 23:19:58 by llevasse         ###   ########.fr       */
+/*   Updated: 2024/01/16 00:10:01 by llevasse         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -91,6 +91,26 @@ typedef struct s_player
 	struct s_point	p;
 }				t_player;
 
+typedef struct s_ray
+{
+	t_line	line;
+	t_point	p;
+	t_point	prev_p;
+	t_door	d;
+	int		dof;
+	float	tan_v;
+	int		width;
+}				t_ray;
+
+typedef struct s_cast
+{
+	t_line	line;
+	t_ray	*h;
+	t_ray	*v;
+	float	y_ratio;
+	float	dist;
+}				t_cast;
+
 typedef struct s_cub
 {
 	void				*mlx_ptr;
@@ -117,27 +137,9 @@ typedef struct s_cub
 	int					r_left;
 	int					r_right;
 	int					shift;
+	t_ray				*h;
+	t_ray				*v;
 }				t_cub;
-
-typedef struct s_ray
-{
-	t_line	line;
-	t_point	p;
-	t_point	prev_p;
-	t_door	d;
-	int		dof;
-	float	tan_v;
-	int		width;
-}				t_ray;
-
-typedef struct s_cast
-{
-	t_line	line;
-	t_ray	*h;
-	t_ray	*v;
-	float	y_ratio;
-	float	dist;
-}				t_cast;
 
 t_garbage	*ft_new_garbage(void *address);
 void		ft_add_garbage(t_garbage **lst, void *addr, t_cub *cub);

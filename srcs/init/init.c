@@ -6,7 +6,7 @@
 /*   By: tdutel <tdutel@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/19 22:29:27 by llevasse          #+#    #+#             */
-/*   Updated: 2024/01/15 22:10:47 by llevasse         ###   ########.fr       */
+/*   Updated: 2024/01/16 00:10:57 by llevasse         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -52,6 +52,8 @@ void	init_null(t_cub *cub)
 	cub->r_left = 0;
 	cub->r_right = 0;
 	cub->shift = 1;
+	cub->h = NULL;
+	cub->v = NULL;
 	cub->north_img.mlx_img = NULL;
 	cub->south_img.mlx_img = NULL;
 	cub->east_img.mlx_img = NULL;
