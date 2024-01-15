@@ -6,7 +6,7 @@
 /*   By: llevasse <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/22 22:13:25 by llevasse          #+#    #+#             */
-/*   Updated: 2024/01/15 19:07:56 by llevasse         ###   ########.fr       */
+/*   Updated: 2024/01/15 21:50:54 by llevasse         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,7 +19,7 @@ char	*pass_space(char *s);
 
 //srcs/parsing/get_map_helper.c
 int		valid_line(char *str, t_cub *cub);
-char	 *trim_end(char *str);
+char	*trim_end(char *str);
 int		search_door(t_cub *cub, char *s);
 int		is_texture_line(char *str);
 
