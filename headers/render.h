@@ -6,7 +6,7 @@
 /*   By: llevasse <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/22 22:05:00 by llevasse          #+#    #+#             */
-/*   Updated: 2024/01/07 22:10:37 by llevasse         ###   ########.fr       */
+/*   Updated: 2024/01/15 22:50:31 by llevasse         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,7 +23,7 @@ t_line	get_line(t_point p_a, t_point p_b, t_cub *cub, float pa);
 t_point	get_player_point(float x, float y);
 
 //srcs/render/horr_line.c
-int		init_horr(t_cub cub, float pa, t_line *line);
+t_ray	init_horr(t_cub cub, float pa);
 t_line	get_horr(t_cub *cub, float pa);
 
 //srcs/render/vert_line.c
