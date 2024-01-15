@@ -6,7 +6,7 @@
 /*   By: llevasse <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/20 00:28:00 by llevasse          #+#    #+#             */
-/*   Updated: 2023/12/20 14:49:12 by llevasse         ###   ########.fr       */
+/*   Updated: 2024/01/15 18:15:20 by llevasse         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -59,8 +59,7 @@ static void	draw_row(t_cub *cub, t_point *p, t_point *print, t_point *tmp)
 			&& ft_is_in_str("0NSEWO", cub->mmap->map[(int)p->y][(int)p->x]))
 			draw_square(cub, print->x * MMAP_BLOCK_S,
 				print->y * MMAP_BLOCK_S, MMAP_RGB);
-		else if (p->x >= 0
-			&& cub->mmap->map[(int)p->y][(int)p->x] == '1')
+		else if (p->x >= 0)
 			draw_square(cub, print->x * MMAP_BLOCK_S,
 				print->y * MMAP_BLOCK_S, MMAP_W_RGB);
 		if (p->x >= 0

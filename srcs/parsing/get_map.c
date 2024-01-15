@@ -6,7 +6,7 @@
 /*   By: llevasse <llevasse@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/19 12:01:04 by llevasse          #+#    #+#             */
-/*   Updated: 2024/01/09 15:31:54 by llevasse         ###   ########.fr       */
+/*   Updated: 2024/01/15 18:25:13 by llevasse         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -78,7 +78,7 @@ int	get_map(int map_fd, t_cub *cub)
 			break ;
 		if (!is_texture_line(tmp))
 		{
-			str = ft_strjoin(str, tmp);
+			str = ft_strjoin(str, trim_end(tmp));
 			ft_add_garbage(&cub->garbage, str, cub);
 		}
 		else if (!get_wall(tmp, cub))

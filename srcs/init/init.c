@@ -6,7 +6,7 @@
 /*   By: tdutel <tdutel@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/19 22:29:27 by llevasse          #+#    #+#             */
-/*   Updated: 2024/01/08 16:54:17 by llevasse         ###   ########.fr       */
+/*   Updated: 2024/01/15 19:03:24 by llevasse         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,6 +23,7 @@ t_cub	*init_cub(char **argv)
 	cub->mlx_ptr = mlx_init();
 	if (!cub->mlx_ptr)
 		return (ft_putstr_fd(MLX_ERR, 2), exit(1), NULL);
+	ft_add_garbage(&cub->garbage, cub->mlx_ptr, cub);
 	cub->mmap = malloc(sizeof(struct s_minimap));
 	ft_add_garbage(&cub->garbage, cub->mmap, cub);
 	if (!parse(open(argv[1], O_RDONLY), cub))
@@ -43,6 +44,7 @@ void	init_null(t_cub *cub)
 	cub->garbage = 0x0;
 	ft_add_garbage(&cub->garbage, cub, cub);
 	cub->win_ptr = NULL;
+	cub->mlx_ptr = NULL;
 	cub->img.mlx_img = NULL;
 	cub->forward = 0;
 	cub->backward = 0;

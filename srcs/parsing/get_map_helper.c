@@ -6,7 +6,7 @@
 /*   By: llevasse <llevasse@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/12/24 16:18:35 by llevasse          #+#    #+#             */
-/*   Updated: 2024/01/05 22:53:05 by llevasse         ###   ########.fr       */
+/*   Updated: 2024/01/15 18:28:14 by llevasse         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,14 +19,29 @@ int	valid_line(char *str, t_cub *cub)
 	i = 0;
 	while (str[i])
 	{
-		if (!cub->door_img.mlx_img && !ft_is_in_str("NSEW01\n\t \r", str[i]))
+		if (!cub->door_img.mlx_img && !ft_is_in_str("NSEW01\n \r", str[i]))
 			return ((ft_putstr_fd(INVALID_MAP_LINE, 2)), 0);
 		else if (cub->door_img.mlx_img
-			&& !ft_is_in_str("NSEW01CO\n\t \r", str[i]))
+			&& !ft_is_in_str("NSEW01CO\n \r", str[i]))
 			return ((ft_putstr_fd(INVALID_MAP_LINE, 2)), 0);
 		i++;
 	}
 	return (1);
+}
+
+char *trim_end(char *str)
+{
+	int	i;
+
+	i = ft_strlen(str);
+	while (i >= 0)
+	{
+		if (str[i] != '\t' && str[i] != ' ' && str[i])
+			break ;
+		str[i] = 0;
+		i--;
+	}
+	return (str);
 }
 
 int	is_texture_line(char *str)
