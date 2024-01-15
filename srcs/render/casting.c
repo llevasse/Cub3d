@@ -6,7 +6,7 @@
 /*   By: llevasse <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/24 22:25:17 by llevasse          #+#    #+#             */
-/*   Updated: 2024/01/15 23:52:33 by llevasse         ###   ########.fr       */
+/*   Updated: 2024/01/15 23:56:38 by llevasse         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,25 +14,25 @@
 
 t_cast	get_cast_data(t_cub *cub, float ca, int check_door)
 {
-	t_cast	cast;
+	t_cast	c;
 
-	cast.h = get_horr(cub, ca);
-	cast.v = get_vert(cub, ca);
-	if (cast.h->line.dist < cast.v->line.dist)
-		cast.line = cast.h->line;
+	c.h = get_horr(cub, ca);
+	c.v = get_vert(cub, ca);
+	if (c.h->line.dist < c.v->line.dist)
+		c.line = c.h->line;
 	else
-		cast.line = cast.v->line;
-	if (cast.h->line.door.dist > cast.v->line.door.dist && !cast.v->line.dist)
-		cast.line.door = cast.h->line.door;
-	else if (cast.h->line.door.dist < cast.v->line.door.dist && !cast.h->line.dist)
-		cast.line.door = cast.v->line.door;
+		c.line = c.v->line;
+	if (c.h->line.door.dist > c.v->line.door.dist && !c.v->line.dist)
+		c.line.door = c.h->line.door;
+	else if (c.h->line.door.dist < c.v->line.door.dist && !c.h->line.dist)
+		c.line.door = c.v->line.door;
 	if (!check_door)
 	{
-		cast.line.door.cross_door = 0;
-		cast.line.door.hit_door = 0;
+		c.line.door.cross_door = 0;
+		c.line.door.hit_door = 0;
 	}
-	cast.dist = cast.line.dist;
-	return (cast);
+	c.dist = c.line.dist;
+	return (c);
 }
 
 int	get_texture_colour(t_line line, int height)

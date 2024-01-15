@@ -6,7 +6,7 @@
 /*   By: llevasse <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/25 21:58:31 by llevasse          #+#    #+#             */
-/*   Updated: 2024/01/15 23:23:13 by llevasse         ###   ########.fr       */
+/*   Updated: 2024/01/15 23:55:04 by llevasse         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -80,7 +80,7 @@ static void	get_door_percent(t_cub *cub, t_line *line, float pa, t_door *door)
 t_ray	*get_horr(t_cub *cub, float pa)
 {
 	t_ray	*r;
-	
+
 	r = malloc(sizeof(t_ray));
 	*r = init_horr(*cub, pa);
 	r->d = init_door();
@@ -89,7 +89,8 @@ t_ray	*get_horr(t_cub *cub, float pa)
 		r->p.x = (int)(r->line.p_a.x / cub->mmap->block_s);
 		r->p.y = (int)(r->line.p_a.y / cub->mmap->block_s);
 		if (!is_pos_valid(*cub, (int)r->p.x, (int)r->p.y)
-			|| !ft_is_in_str("NSEW0O", cub->mmap->map[(int)r->p.y][(int)r->p.x]))
+			|| !ft_is_in_str("NSEW0O",
+				cub->mmap->map[(int)r->p.y][(int)r->p.x]))
 			break ;
 		if (cub->mmap->map[(int)r->p.y][(int)r->p.x] == 'O' && !r->d.cross_door)
 			r->d = cross_door(*cub, r->line.p_a.x, r->line.p_a.y, 0);
