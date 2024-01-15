@@ -6,7 +6,7 @@
 /*   By: llevasse <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/18 21:50:20 by llevasse          #+#    #+#             */
-/*   Updated: 2024/01/15 19:08:44 by llevasse         ###   ########.fr       */
+/*   Updated: 2024/01/15 21:35:20 by llevasse         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -34,12 +34,8 @@ int	parse(char *path, t_cub *cub)
 	if (map_fd == -1)
 		return ((void)ft_putstr_fd(CUB_OPEN_ERR, 2), 0);
 	if (!get_map(map_fd, cub))
-	{
-		close(map_fd);
-		return (0);
-	}
-	close(map_fd);
-	return (1);
+		return (close(map_fd));
+	return (!close(map_fd));
 }
 
 int	is_line_empty(char *str)

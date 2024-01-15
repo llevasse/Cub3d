@@ -6,7 +6,7 @@
 /*   By: llevasse <llevasse@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/12/24 16:18:35 by llevasse          #+#    #+#             */
-/*   Updated: 2024/01/15 18:28:14 by llevasse         ###   ########.fr       */
+/*   Updated: 2024/01/15 21:33:53 by llevasse         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -29,7 +29,7 @@ int	valid_line(char *str, t_cub *cub)
 	return (1);
 }
 
-char *trim_end(char *str)
+char	*trim_end(char *str)
 {
 	int	i;
 
