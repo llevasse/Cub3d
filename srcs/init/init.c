@@ -6,7 +6,7 @@
 /*   By: tdutel <tdutel@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/19 22:29:27 by llevasse          #+#    #+#             */
-/*   Updated: 2024/01/15 19:08:02 by llevasse         ###   ########.fr       */
+/*   Updated: 2024/01/15 22:02:24 by llevasse         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,9 +20,10 @@ t_cub	*init_cub(char **argv)
 	if (!cub)
 		exit(1);
 	init_null(cub);
+	return (ft_putstr_fd(MLX_ERR, 2), close_window(cub, 1), NULL);
 	cub->mlx_ptr = mlx_init();
 	if (!cub->mlx_ptr)
-		return (ft_putstr_fd(MLX_ERR, 2), exit(1), NULL);
+		return (ft_putstr_fd(MLX_ERR, 2), close_window(cub, 1), NULL);
 	ft_add_garbage(&cub->garbage, cub->mlx_ptr, cub);
 	cub->mmap = malloc(sizeof(struct s_minimap));
 	ft_add_garbage(&cub->garbage, cub->mmap, cub);
@@ -53,6 +54,11 @@ void	init_null(t_cub *cub)
 	cub->r_left = 0;
 	cub->r_right = 0;
 	cub->shift = 1;
+	cub->north_img.mlx_img = NULL;
+	cub->south_img.mlx_img = NULL;
+	cub->east_img.mlx_img = NULL;
+	cub->west_img.mlx_img = NULL;
+	cub->door_img.mlx_img = NULL;
 }
 
 void	init_images(t_cub *cub)
