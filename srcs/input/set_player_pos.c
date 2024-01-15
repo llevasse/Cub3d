@@ -6,7 +6,7 @@
 /*   By: llevasse <llevasse@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/22 00:36:13 by llevasse          #+#    #+#             */
-/*   Updated: 2024/01/14 18:30:40 by llevasse         ###   ########.fr       */
+/*   Updated: 2024/01/15 09:34:31 by llevasse         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -50,6 +50,7 @@ int	check_nearby_vertical(t_cub *cub, float y)
 		return (0);
 	return (1);
 }
+
 // return 1 if player collides with wall
 void	check_collision(t_cub *cub, int angle, float offset)
 {

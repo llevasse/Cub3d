@@ -6,7 +6,7 @@
 /*   By: llevasse <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/20 00:40:14 by llevasse          #+#    #+#             */
-/*   Updated: 2024/01/07 21:49:24 by llevasse         ###   ########.fr       */
+/*   Updated: 2024/01/15 09:34:17 by llevasse         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -27,7 +27,7 @@ int	render(t_cub *cub)
 	cub->door = NULL;
 	while (done < PLAYER_FOV)
 	{
-		if (is_in_range(done, (PLAYER_FOV / 2) - 1, (PLAYER_FOV / 2) + 1)
+		if (done >= (PLAYER_FOV / 2) - 1 && done <= (PLAYER_FOV / 2) + 1
 			&& !cub->door)
 			cub->door = cast(cub, get_cast_data(cub, ca, 1), x++);
 		else
@@ -41,11 +41,6 @@ int	render(t_cub *cub)
 		mlx_string_put(cub->mlx_ptr, cub->win_ptr, WINDOW_W / 2, WINDOW_H / 2,
 			0xFF0000, "Press 'E'");
 	return (0);
-}
-
-int	is_in_range(float nb, int min, int max)
-{
-	return (nb >= min && nb <= max);
 }
 
 void	img_pix_put(t_img *img, int x, int y, int colour)

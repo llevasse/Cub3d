@@ -56,7 +56,7 @@ MLX_A			=	$(MLX_PATH)/libmlx_Linux.a
 MLX_LIB			=	-L $(MLX_PATH) -l mlx_Linux
 
 # ----
-FLAGS			=	-Wall -Werror -Wextra -g3
+FLAGS			=	-Wall -Werror -Wextra -g3 -O2
 INCLUDES		=	$(MLX_INCLUDES) $(BASE_INCLUDE) $(LIBFT_INCLUDE)
 LIBS			=	$(MLX_LIB) $(LIBFT_LIB) $(MLX_FLAGS)
 

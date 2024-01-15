@@ -6,15 +6,15 @@
 /*   By: tdutel <tdutel@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/18 21:43:29 by llevasse          #+#    #+#             */
-/*   Updated: 2024/01/08 16:44:54 by llevasse         ###   ########.fr       */
+/*   Updated: 2024/01/15 09:30:09 by llevasse         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #ifndef CUB3D_H
 # define CUB3D_H
 
-# define WINDOW_W	1920 //640
-# define WINDOW_H	1200 //400
+# define WINDOW_W	3200//1920 //640
+# define WINDOW_H	2000//1200 //400
 
 # define MMAP_W_RGB		0x000000
 # define MMAP_RGB		0xffffff
