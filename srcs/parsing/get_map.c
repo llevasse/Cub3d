@@ -6,7 +6,7 @@
 /*   By: llevasse <llevasse@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/19 12:01:04 by llevasse          #+#    #+#             */
-/*   Updated: 2024/01/15 18:25:13 by llevasse         ###   ########.fr       */
+/*   Updated: 2024/01/15 19:30:14 by llevasse         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -67,9 +67,11 @@ int	get_map(int map_fd, t_cub *cub)
 {
 	char	*str;
 	char	*tmp;
+	int		map_start;
 
 	str = "";
 	tmp = get_next_line(map_fd);
+	map_start = 0;
 	while (tmp)
 	{
 		ft_add_garbage(&cub->garbage, tmp, cub);
@@ -78,10 +80,11 @@ int	get_map(int map_fd, t_cub *cub)
 			break ;
 		if (!is_texture_line(tmp))
 		{
+			map_start = 1;
 			str = ft_strjoin(str, trim_end(tmp));
 			ft_add_garbage(&cub->garbage, str, cub);
 		}
-		else if (!get_wall(tmp, cub))
+		else if (!map_start && !get_wall(tmp, cub))
 			return (0);
 		tmp = get_next_line(map_fd);
 	}
