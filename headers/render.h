@@ -6,7 +6,7 @@
 /*   By: llevasse <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/22 22:05:00 by llevasse          #+#    #+#             */
-/*   Updated: 2024/01/15 22:50:31 by llevasse         ###   ########.fr       */
+/*   Updated: 2024/01/15 23:22:18 by llevasse         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,11 +24,11 @@ t_point	get_player_point(float x, float y);
 
 //srcs/render/horr_line.c
 t_ray	init_horr(t_cub cub, float pa);
-t_line	get_horr(t_cub *cub, float pa);
+t_ray	*get_horr(t_cub *cub, float pa);
 
 //srcs/render/vert_line.c
-int		init_vert(t_cub cub, float pa, t_line *line);
-t_line	get_vert(t_cub *cub, float pa);
+t_ray	init_vert(t_cub cub, float pa);
+t_ray	*get_vert(t_cub *cub, float pa);
 
 //srcs/render/minimap.c:
 void	draw_square(t_cub *cub, int x, int y, int colour);

@@ -6,7 +6,7 @@
 /*   By: llevasse <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/25 21:58:31 by llevasse          #+#    #+#             */
-/*   Updated: 2024/01/08 16:16:30 by llevasse         ###   ########.fr       */
+/*   Updated: 2024/01/15 23:51:49 by llevasse         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,32 +15,33 @@
 // ray facing left pa > 90 && pa < 270
 // ray facing right pa < 270 || pa < 90
 //if ray is facing string left or right (pa == 90 || pa == 270)
-int	init_vert(t_cub cub, float pa, t_line *line)
+t_ray	init_vert(t_cub cub, float pa)
 {
-	float	tan_v;
-	int		width;
+	t_ray	r;
 
-	tan_v = tan(pa * RADIAN);
-	width = cub.mmap->block_s;
+	r.tan_v = tan(pa * RADIAN);
+	r.width = cub.mmap->block_s;
+	r.dof = cub.mmap->dof;
 	if (pa > 90 && pa < 270)
 	{
-		line->x_step = -width;
-		line->p_a.x = (((int)cub.player.px / width) * width) - 0.0001;
+		r.line.x_step = -r.width;
+		r.line.p_a.x = (((int)cub.player.px / r.width) * r.width) - 0.0001;
 	}
 	else if ((pa > 270 && pa < 360) || (pa < 90 && pa > 0))
 	{
-		line->x_step = width;
-		line->p_a.x = (((int)cub.player.px / width) * width) + width;
+		r.line.x_step = r.width;
+		r.line.p_a.x = (((int)cub.player.px / r.width) * r.width) + r.width;
 	}
 	else
 	{
-		line->p_a.x = cub.player.px;
-		line->p_a.y = cub.player.py;
-		return (-42);
+		r.line.p_a.x = cub.player.px;
+		r.line.p_a.y = cub.player.py;
+		r.dof = -42;
 	}
-	line->p_a.y = ((cub.player.px - line->p_a.x) * -tan_v) + cub.player.py;
-	line->y_step = -line->x_step * -tan_v;
-	return (cub.mmap->dof);
+	r.line.p_a.y = ((cub.player.px - r.line.p_a.x)
+			* -r.tan_v) + cub.player.py;
+	r.line.y_step = -r.line.x_step * -r.tan_v;
+	return (r);
 }
 
 static void	get_wall_percent(t_cub *cub, t_line *line, float pa, int dof)
@@ -76,31 +77,29 @@ static void	get_door_percent(t_cub *cub, t_line *line, float pa, t_door *door)
 	*door = cross_door(*cub, line->p_b.x, line->p_b.y, 1);
 }
 
-t_line	get_vert(t_cub *cub, float pa)
+t_ray	*get_vert(t_cub *cub, float pa)
 {
-	t_line	line;
-	t_point	p;
-	int		dof;
-	t_door	d;
+	t_ray *r;
 
-	dof = init_vert(*cub, pa, &line);
-	d = init_door();
-	while (dof-- > 0)
+	r = malloc(sizeof(t_ray));
+	*r = init_vert(*cub, pa);
+	r->d = init_door();
+	while (r->dof-- > 0)
 	{
-		p.x = (int)(line.p_a.x / cub->mmap->block_s);
-		p.y = (int)(line.p_a.y / cub->mmap->block_s);
-		if (!is_pos_valid(*cub, (int)p.x, (int)p.y)
-			|| !ft_is_in_str("NSEW0O", cub->mmap->map[(int)p.y][(int)p.x]))
+		r->p.x = (int)(r->line.p_a.x / cub->mmap->block_s);
+		r->p.y = (int)(r->line.p_a.y / cub->mmap->block_s);
+		if (!is_pos_valid(*cub, (int)r->p.x, (int)r->p.y)
+			|| !ft_is_in_str("NSEW0O", cub->mmap->map[(int)r->p.y][(int)r->p.x]))
 			break ;
-		if (cub->mmap->map[(int)p.y][(int)p.x] == 'O' && !d.cross_door)
-			d = cross_door(*cub, line.p_a.x, line.p_a.y, 0);
-		line.p_a.x += line.x_step;
-		line.p_a.y += line.y_step;
+		if (cub->mmap->map[(int)r->p.y][(int)r->p.x] == 'O' && !r->d.cross_door)
+			r->d = cross_door(*cub, r->line.p_a.x, r->line.p_a.y, 0);
+		r->line.p_a.x += r->line.x_step;
+		r->line.p_a.y += r->line.y_step;
 	}
-	get_wall_percent(cub, &line, pa, dof);
-	if (is_pos_valid(*cub, (int)p.x, (int)p.y)
-		&& cub->mmap->map[(int)p.y][(int)p.x] == 'C' && !d.cross_door)
-		get_door_percent(cub, &line, pa, &d);
-	line.door = d;
-	return (line);
+	get_wall_percent(cub, &r->line, pa, r->dof);
+	if (r->dof > 0 && is_pos_valid(*cub, (int)r->p.x, (int)r->p.y)
+		&& cub->mmap->map[(int)r->p.y][(int)r->p.x] == 'C' && !r->d.cross_door)
+		get_door_percent(cub, &r->line, pa, &r->d);
+	r->line.door = r->d;
+	return (r);
 }

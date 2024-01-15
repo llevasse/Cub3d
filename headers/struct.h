@@ -6,7 +6,7 @@
 /*   By: tdutel <tdutel@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/18 21:52:44 by llevasse          #+#    #+#             */
-/*   Updated: 2024/01/15 22:50:08 by llevasse         ###   ########.fr       */
+/*   Updated: 2024/01/15 23:19:58 by llevasse         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -126,13 +126,15 @@ typedef struct s_ray
 	t_point	prev_p;
 	t_door	d;
 	int		dof;
+	float	tan_v;
+	int		width;
 }				t_ray;
 
 typedef struct s_cast
 {
 	t_line	line;
-	t_line	h;
-	t_line	v;
+	t_ray	*h;
+	t_ray	*v;
 	float	y_ratio;
 	float	dist;
 }				t_cast;
