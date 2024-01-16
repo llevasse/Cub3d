@@ -6,7 +6,7 @@
 /*   By: llevasse <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/24 22:25:17 by llevasse          #+#    #+#             */
-/*   Updated: 2024/01/15 23:56:38 by llevasse         ###   ########.fr       */
+/*   Updated: 2024/01/16 09:40:35 by llevasse         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -46,12 +46,14 @@ int	get_texture_colour(t_line line, int height)
 	return (*(int *)(line.wall->addr + y + x));
 }
 
-void	free_cast(t_cast cast)
+void	free_cast(t_cast cast, t_cub *cub)
 {
 	free(cast.h);
 	cast.h = NULL;
+	cub->h = NULL;
 	free(cast.v);
-	cast.h = NULL;
+	cast.v = NULL;
+	cub->v = NULL;
 }
 
 t_door	*cast(t_cub *cub, t_cast c, int x)
@@ -76,11 +78,11 @@ t_door	*cast(t_cub *cub, t_cast c, int x)
 	while (current < WINDOW_H)
 		img_pix_put(&cub->img, x, current++, cub->f_rgb);
 	if (!c.line.door.cross_door && !c.line.door.hit_door)
-		return (free_cast(c), NULL);
+		return (free_cast(c, cub), NULL);
 	door = malloc(sizeof(t_door));
 	ft_add_garbage(&cub->garbage, door, cub);
 	*door = c.line.door;
-	return (free_cast(c), door);
+	return (free_cast(c, cub), door);
 }
 
 int	is_pos_valid(t_cub cub, int x, int y)
